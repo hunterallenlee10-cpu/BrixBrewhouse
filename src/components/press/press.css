@@ -87,20 +87,3 @@
     transform: none !important;
   }
 }
-
-/* "They said it." is set so big that the full stop and half the T run off the
-   right edge. "They said it." measures 4.676em; the visible run is sized to ~4.33em
-   of the space right of the .wrap gutter at every width. */
-.press-title {
-  font-size: 22.2vw; /* gutter 4vw */
-}
-@media (min-width: 1200px) {
-  .press-title {
-    font-size: calc(23.1vw - 11px); /* gutter 48px */
-  }
-}
-@media (min-width: 1400px) {
-  .press-title {
-    font-size: calc(11.55vw + 150px); /* .wrap centres at 1400px */
-  }
-}
