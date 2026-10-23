@@ -59,10 +59,7 @@ export function DispatchBoard() {
             <p className="t-serif mt-3 text-[clamp(1.5rem,2.6vw,2.1rem)] text-mortar">Pool, cornhole and the firemen&rsquo;s own table.</p>
           </div>
           <div className="lg:col-span-8">
-            <div className="flex items-baseline justify-between gap-4">
-              <p className="t-display text-[clamp(1.8rem,3.4vw,2.8rem)] text-foam">The original shuffleboard</p>
-              <p className="t-mono hidden text-[0.6875rem] text-text-3 sm:block">Still in play</p>
-            </div>
+            <p className="t-display text-[clamp(1.8rem,3.4vw,2.8rem)] text-foam">The original shuffleboard</p>
             <p className="mt-2 max-w-[52ch] text-text-2">The table the firemen played on is still here, and it&rsquo;s still in play.</p>
             <div className="mt-7 pb-3">
               <Shuffleboard />
