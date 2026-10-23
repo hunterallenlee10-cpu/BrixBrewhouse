@@ -20,7 +20,7 @@ OWN-WORLD: Brix Black ground at page scale; Pour Gold is the only light source (
 
 STORY: A visitor arrives at a closed door, is let in, watches the place pour, learns why it's called Brix three ways, builds a flight, finds Lindsay's caps, Eli's woodwork and Chef John's kitchen, sees what's on the run board, and leaves knowing exactly when it's open and how to get there.
 
-FIRST VIEWPORT: Full-bleed canvas (bay door at dusk). Giant BRIX in Big Shoulders cropped by both viewport edges, mono line under it, Brix Gauge on the right edge, live status pill + "Pour One With Us" in the nav. Before that: the age gate as BAY 00 over the same closed door.
+FIRST VIEWPORT: Full-bleed canvas (bay door at dusk). White "Brix Brewhouse" wordmark in Big Shoulders, centred low over the door with a mono location line above it, Brix Gauge on the right edge, live status pill + "Pour One With Us" in the nav. Before that: the age gate as BAY 00 over the same closed door.
 
 FORM: brief-pinned "The Firehouse Is Pouring Again" (concept roll skipped: direction pinned by the brief). Signature interactions: scroll-scrubbed bay-door sequence, brick-built BRIX, the flight builder pour, cap flips under a moving glare.
 
