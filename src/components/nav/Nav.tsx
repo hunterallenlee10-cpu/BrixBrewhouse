@@ -31,7 +31,7 @@ export function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 transition-[background-color,border-color,backdrop-filter] duration-500 ${
-        solid ? "border-b border-line bg-black/85 backdrop-blur-md" : "border-b border-transparent bg-gradient-to-b from-black/70 to-transparent"
+        solid ? "border-b border-line bg-black/95 backdrop-blur-md md:bg-black/85" : "border-b border-transparent bg-gradient-to-b from-black/70 to-transparent"
       }`}
       style={{ zIndex: "var(--z-nav)" as unknown as number, height: "var(--nav-h)" }}
     >

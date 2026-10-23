@@ -1,6 +1,7 @@
 /* ---------- the field: caps under glass ---------- */
 .bt-field {
   position: relative;
+  overflow-x: clip; /* the flick rail bleeds to the edges; never past them */
   margin-top: clamp(2.5rem, 6vw, 4.5rem);
   padding-block: clamp(3rem, 7vw, 6rem) clamp(4rem, 8vw, 6.5rem);
   isolation: isolate;

@@ -39,6 +39,7 @@ export function BrixGauge() {
         if (fill.current) fill.current.style.transform = `scaleY(${self.progress.toFixed(4)})`;
       },
       onRefresh: measure,
+      refreshPriority: -10, // after the pinned rooms have added their spacing
     });
     measure();
     const triggers = ROOMS.map((r) =>
@@ -46,10 +47,16 @@ export function BrixGauge() {
         trigger: `#${r.id}`,
         start: "top 55%",
         end: "bottom 55%",
+        refreshPriority: -10,
         onToggle: (self) => self.isActive && setActive(r.id),
       }),
     );
+    // pinned rooms mount after the gauge: re-measure once everything is laid out
+    const settle = () => ScrollTrigger.refresh();
+    if (document.readyState === "complete") requestAnimationFrame(settle);
+    else window.addEventListener("load", settle, { once: true });
     return () => {
+      window.removeEventListener("load", settle);
       st.kill();
       triggers.forEach((t) => t.kill());
     };

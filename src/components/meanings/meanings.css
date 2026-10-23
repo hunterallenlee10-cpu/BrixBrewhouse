@@ -48,7 +48,8 @@
   position: absolute;
   inset: 0;
   opacity: var(--enamel);
-  filter: drop-shadow(0 0 calc(var(--u) * 0.66) rgb(234 3 34 / 0.35));
+  /* enamel, not neon: a tight dark lift instead of a red halo */
+  filter: drop-shadow(0 calc(var(--u) * 0.18) calc(var(--u) * 0.22) rgb(0 0 0 / 0.55));
 }
 
 /* outer span positions (and is never animated); inner .brk-plate is the plate GSAP moves */

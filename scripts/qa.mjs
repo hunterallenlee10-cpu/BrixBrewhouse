@@ -70,6 +70,42 @@ for (const kind of ["desktop", "mobile"]) {
   await ctx.close();
 }
 
+// 2b. flight builder (desktop + touch) and bar-top caps
+for (const kind of ["desktop", "mobile"]) {
+  const { ctx, page } = await newPage(kind);
+  await page.goto(base, { waitUntil: "networkidle" });
+  await scrollToSel(page, "#on-tap", 200);
+  const taps = page.locator('.flt-rail button[aria-label^="Pour "]');
+  const n = await taps.count();
+  for (let i = 0; i < 4; i++) {
+    const t = taps.nth(i);
+    await t.scrollIntoViewIfNeeded();
+    if (kind === "mobile") await t.tap();
+    else await t.click();
+    await page.waitForTimeout(1300);
+  }
+  const card = page.locator("#flight-card-title");
+  ok(`${kind} full flight of 4 poured (${n} taps)`, (await card.count()) > 0);
+  if (await card.count()) await card.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(500);
+  await page.screenshot({ path: `${out}/${kind}-06-flight-full.png` });
+
+  await scrollToSel(page, "#bar-top", 300);
+  const caps = page.locator("#bar-top button[aria-pressed]");
+  let flipped = 0;
+  for (let i = 0; i < 3; i++) {
+    const c = caps.nth(i);
+    await c.scrollIntoViewIfNeeded();
+    if (kind === "mobile") await c.tap();
+    else await c.click();
+    await page.waitForTimeout(700);
+    if ((await c.getAttribute("aria-pressed")) === "true") flipped++;
+  }
+  ok(`${kind} flipped 3 caps`, flipped === 3, `${flipped}/3`);
+  await page.screenshot({ path: `${out}/${kind}-07-caps-flipped.png` });
+  await ctx.close();
+}
+
 // 3. modal tabs
 for (const kind of ["desktop", "mobile"]) {
   const { ctx, page } = await newPage(kind);

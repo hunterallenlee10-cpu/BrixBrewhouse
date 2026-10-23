@@ -128,8 +128,8 @@
   }
 }
 
-/* mobile: event + day on one line, status underneath; explicit roles keep the table semantics */
-@media (max-width: 767px) {
+/* phones + tablets: day, event and status stack; explicit roles keep the table semantics */
+@media (max-width: 1023px) {
   .dsp-table thead {
     position: absolute;
     width: 1px;
