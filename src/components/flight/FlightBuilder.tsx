@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowCounterClockwise, CaretRight } from "@phosphor-icons/react";
+import { ArrowCounterClockwise } from "@phosphor-icons/react";
 import { useSite } from "@/components/providers/SiteProvider";
 import { BayLabel, Confirm, Illustrative } from "@/components/ui/primitives";
 import { TAPS, type Beer } from "@/lib/data";
@@ -9,6 +9,7 @@ import { TapRail } from "./TapRail";
 import { Paddle, type PaddleHandle } from "./Paddle";
 import { FlightCard } from "./FlightCard";
 import { Loops } from "./Loops";
+import { TapList } from "./TapList";
 
 const SIZE = TAPS.flightSize; // 4
 const ALL = [...TAPS.beers, TAPS.nonAlcoholic];
@@ -35,6 +36,7 @@ export function FlightBuilder() {
   const filled = slots.filter(Boolean).length;
   const full = filled === SIZE;
   const flight = slots.map((id) => (id ? byId(id)! : null));
+  const counts = slots.reduce<Record<string, number>>((acc, id) => (id ? { ...acc, [id]: (acc[id] ?? 0) + 1 } : acc), {});
 
   // shared link: #flight=a,b,c,d restores the same flight
   const restore = useCallback(() => {
@@ -159,7 +161,9 @@ export function FlightBuilder() {
           </div>
         ) : null}
 
-        {/* the rest of the bar: footnotes under the tap rail, not more cards */}
+        <TapList beers={beers} counts={counts} onAdd={pour} />
+
+        {/* the rest of the bar: footnotes under the tap list, not more cards */}
         <dl className="flt-notes mt-14 grid gap-x-10 gap-y-5 border-t border-gold/35 pt-6 md:grid-cols-3">
           <div>
             <dt className="t-mono text-[0.72rem] text-gold"><span aria-hidden>*&nbsp;</span>Guest taps</dt>
@@ -176,36 +180,6 @@ export function FlightBuilder() {
             </dd>
           </div>
         </dl>
-
-        <details className="group mt-8">
-          <summary className="t-mono inline-flex min-h-11 cursor-pointer list-none items-center gap-2 text-[0.7rem] text-foam hover:text-gold-hi">
-            <CaretRight size={14} aria-hidden className="transition-transform group-open:rotate-90" /> Read the tap list as text
-          </summary>
-          <ul className="mt-4 grid gap-x-10 md:grid-cols-2">
-            {beers.map((b) => (
-              <li key={b.id} className="flex items-start justify-between gap-4 border-b border-line py-4">
-                <div>
-                  <p className="t-mono text-[0.6875rem] text-gold">{b.tap ? `Tap ${pad(b.tap)}` : "Non-alcoholic"}</p>
-                  <p className="text-foam">
-                    {b.name}{" "}
-                    <span className="tabular text-text-2">
-                      {b.kind === "na" ? "· 0%" : b.abv != null ? `· ${b.abv}% · IBU ${b.ibu}` : "· stats to come"}
-                    </span>
-                  </p>
-                  <p className="mt-1 text-sm text-text-2">{b.description}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => pour(b)}
-                  className="t-mono h-11 shrink-0 border border-line-strong px-3 text-[0.6875rem] text-foam hover:border-gold-hi hover:text-gold-hi"
-                  aria-label={`Add ${b.name} to your flight`}
-                >
-                  Add
-                </button>
-              </li>
-            ))}
-          </ul>
-        </details>
       </div>
     </section>
   );
