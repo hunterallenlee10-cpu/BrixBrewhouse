@@ -22,6 +22,6 @@ STORY: A visitor arrives at a closed door, is let in, watches the place pour, le
 
 FIRST VIEWPORT: Full-bleed canvas (bay door at dusk). White "Brix Brewhouse" wordmark in Big Shoulders, centred low over the door with a mono location line above it, Brix Gauge on the right edge, live status pill + "Pour One With Us" in the nav. Before that: the age gate as BAY 00 over the same closed door.
 
-FORM: brief-pinned "The Firehouse Is Pouring Again" (concept roll skipped: direction pinned by the brief). Signature interactions: scroll-scrubbed bay-door sequence, brick-built BRIX, the flight builder pour, cap flips under a moving glare.
+FORM: brief-pinned "The Firehouse Is Pouring Again" (concept roll skipped: direction pinned by the brief). Signature interactions: scroll-scrubbed bay-door sequence, the flight builder pour, cap flips under a moving glare.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

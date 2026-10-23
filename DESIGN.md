@@ -114,7 +114,7 @@ A blackout palette with one warm light and one enamel red, plus the building's o
 - **Pour Gold** and **Pour Gold High**: the beer, the light and the glow. Used for bay labels, focus rings (`--focus`), the Brix Gauge fill, live status dots, hover pour-lines, active filters, and selection. Gold High is the text-safe tint on black.
 
 ### Secondary
-- **Fire Red** (logo-sampled) and **Fire Red Deep**: the primary CTA ("Pour One With Us"), the gate's "Yes", enamel signage (the house-rules placard, the brick outlines in BRIX), and its pressed/hover state.
+- **Fire Red** (logo-sampled) and **Fire Red Deep**: the primary CTA ("Pour One With Us"), the gate's "Yes", enamel signage (the house-rules placard, the Firehouse strip in Three Meanings), and its pressed/hover state.
 
 ### Tertiary (materials)
 - **Brick**, **Mortar**, **Walnut**, **Stainless**: the building's materials. They appear mostly as raster textures (`/tex/*`); the flat values back those textures, tint scrollbars, and set mortar-warm secondary text.
