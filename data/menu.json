@@ -1,0 +1,50 @@
+{
+  "_note": "Prices in US dollars. 'pairsWith' is a house suggestion we added for the concept; owners should confirm or delete it.",
+  "kitchenName": "John's Chef Table",
+  "chef": { "name": "John Kiley", "years": 24, "knownFor": "his soups" },
+  "kitchenHours": "{{CONFIRM}}",
+  "kitchenHoursNote": "Their site lists 12-3 and 5-8 in one place and full menu until 8 PM daily in another.",
+  "allDay": "Pretzels and hotdogs served all day.",
+  "fanFavorite": { "beer": "Pale Ale", "dish": "Maryland crabcake pretzel", "confirm": true },
+  "categories": [
+    { "id": "beer-bites", "name": "Beer Bites", "items": [
+      { "name": "Beer Cheese Pretzel Board", "price": 20, "detail": "Garlic Twisted Pretzel, Smoked Cheddar, Pepper Jack, Smoked Kielbasa, Pickles, Grapes, Candied Walnuts, Beer Cheese, Brown Mustard", "pairsWith": "amber-ale", "image": "F1" },
+      { "name": "Apple Ridge Farm Pretzel", "price": 6 },
+      { "name": "Beer Cheese", "price": 1 },
+      { "name": "Pickle on a Stick", "price": 3 },
+      { "name": "Sausage Stuffed Mushrooms", "price": 7 }
+    ]},
+    { "id": "big-bites", "name": "Big Bites", "items": [
+      { "name": "House Salad", "price": 6 },
+      { "name": "Arugula Salad", "price": 12, "detail": "Arugula, Pears, Candied Walnuts, Goat Cheese, Balsamic" },
+      { "name": "Caesar Salad", "price": 12 },
+      { "name": "Add Smoked Chicken", "price": 5, "addon": true },
+      { "name": "House Made Chili and Cheese", "price": 6 },
+      { "name": "Mac and Cheese", "price": 5 },
+      { "name": "Soup of the Day", "price": 6 },
+      { "name": "Soup and House Salad", "price": 11 }
+    ]},
+    { "id": "bigger-bites", "name": "Bigger Bites", "items": [
+      { "name": "Smoked BBQ Pork Sandwich", "price": 14, "detail": "With Beer Cheese, Side and Pickle", "pairsWith": "brown-ale", "image": "F3" },
+      { "name": "Smoked Chicken Sandwich", "price": 14, "detail": "Roasted Red Pepper, Provolone, Garlic Pesto, Side/Pickle" },
+      { "name": "BBQ Chicken Bacon Flatbread", "price": 12 }
+    ]},
+    { "id": "nachos", "name": "Nachos", "items": [
+      { "name": "Nachos and Cheese", "price": 6 },
+      { "name": "Beef Chili Nachos and Cheese", "price": 10, "pairsWith": "session-ipa", "image": "F4" },
+      { "name": "Pulled Pork Nachos and Cheese", "price": 10 }
+    ]},
+    { "id": "hot-dogs", "name": "Hot Dogs", "items": [
+      { "name": "Plain Hot Dog", "price": 3.5 },
+      { "name": "Chili Cheese Dog", "price": 5 },
+      { "name": "Pork Cheese Dog", "price": 5 }
+    ]},
+    { "id": "kids", "name": "Kids", "items": [
+      { "name": "Hot Dog and Mac and Cheese", "price": 7 }
+    ]},
+    { "id": "dessert", "name": "Dessert", "items": [
+      { "name": "Birch Beer Float", "price": 8, "detail": "Kids $6", "image": "F2" },
+      { "name": "Warm Apple Crisp with Ice Cream", "price": 9 }
+    ]}
+  ]
+}

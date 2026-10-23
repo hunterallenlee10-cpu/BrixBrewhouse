@@ -1,0 +1,13 @@
+{
+  "_note": "The dispatch board. Only Taco Tuesday has a confirmed day. Set 'day' to MON-SUN and 'status' when the owners confirm a schedule.",
+  "rows": [
+    { "event": "Taco Tuesday", "day": "TUE", "status": "CONFIRMED", "confirmed": true },
+    { "event": "Live Music", "day": null, "status": "SEE FACEBOOK", "confirmed": false },
+    { "event": "Trivia", "day": null, "status": "SEE FACEBOOK", "confirmed": false },
+    { "event": "Karaoke", "day": null, "status": "SEE FACEBOOK", "confirmed": false },
+    { "event": "Open Mic", "day": null, "status": "SEE FACEBOOK", "confirmed": false },
+    { "event": "Watch Parties", "day": null, "status": "SEE FACEBOOK", "confirmed": false },
+    { "event": "Seasonal Events", "day": null, "status": "SEE FACEBOOK", "confirmed": false }
+  ],
+  "play": ["Pool tables", "Cornhole", "The firemen's original shuffleboard"]
+}

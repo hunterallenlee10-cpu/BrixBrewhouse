@@ -1,6 +1,6 @@
 # Brix Brewhouse — Higgsfield Asset Plan
 
-**Status: waiting for approval. No credits spent yet.**
+**Status: approved 2026-10-23 and generated. Phase 0 spend: ≈ 235 credits (see log).**
 Balance at planning time (2026-10-23): **1,210 credits** (Plus plan).
 All prices below are live quotes from Higgsfield's `get_cost` preflight, not guesses. Quotes were taken without reference images attached; I re-quote each job with its real inputs before submitting and stop if any price differs from this sheet.
 
@@ -177,8 +177,43 @@ Optional upgrade not counted above: hero clips on Cinema Studio Video 3.0 at 65 
 
 ## 7. Generation log
 
-*(Filled in during Phase 0: asset ID, model, final prompt, settings, job ID, credits charged, kept/rejected.)*
+All jobs ran on 2026-10-23. Job records report the image model as `nano_banana_2` even though `nano_banana_pro` was requested; transactions bill them as "Nano Banana Pro" at 2 cr. Kling 4.0 won the bake-off against Kling 3.0 Pro (smoother final settle, 5 cr vs 8.75), so all hero clips and loops use Kling 4.0.
 
-| Asset | Model | Settings | Job ID | Credits | Kept? |
-|---|---|---|---|---|---|
-| — | — | — | — | — | — |
+> Account note: during this session the account balance also dropped by ≈ 153 credits from jobs this session did **not** submit (Bytedance Image Upscale, Nano Banana 2.1, three Kling v3.0 jobs at 17.5/17.5/7.5, Kling 4.0 at 2.5 and 10). Something else is using the same Higgsfield account. Balance after Phase 0: 821.75.
+
+### Kept assets
+
+| Asset | File(s) on site | Source job | Model / settings | Cr |
+|---|---|---|---|---|
+| H4 pint (16:9) | hero frames end, `/img/pint-h4` | 18153a7e-4231-4488-831f-1d159d0caf00 | nano_banana_pro 2K | 2 |
+| H3 tap pour (16:9, ref H4) | hero frames | 55798b0e-cc3f-4a66-9584-37e44b21b1d5 | nano_banana_pro 2K + ref | 2 |
+| H2 open bay (16:9, ref H3) | hero frames | 79813efd-2f80-4c88-9b11-bb7368cacc85 | nano_banana_pro 2K + ref | 2 |
+| H1 closed door (16:9, ref H2) | gate + hero poster | 7bc19dc4-5a33-4eca-986d-f28902703e0f | nano_banana_pro 2K + ref | 2 |
+| H4p / H3p / H2p / H1p (9:16) | mobile hero frames | 5809d64c… / 4236f789… / 4498c41e… / d066d291-dc4b-48be-b505-0e86885e906d | nano_banana_pro 2K + ref | 8 |
+| HC1 door opens (16:9) | `/frames/desktop` 1-90 | 46554bb1-b12e-4f98-b1ea-ad3e4abf75c3 | kling4_0 i2v 1080p 5s, start H1 end H2 | 5 |
+| HC2 dolly (16:9) | `/frames/desktop` 91-180 | 9aefeffd-fefb-482a-a113-f26d0945ff4e | kling4_0 i2v 1080p 5s, start H2 end H3 | 5 |
+| HC3 pour fills (16:9) | `/frames/desktop` 181-271 | ae0a361d-4b3e-474f-9556-4ea4184c7b19 | kling4_0 i2v 1080p 5s, start H3 end H4 | 5 |
+| HC1p / HC2p / HC3p (9:16) | `/frames/mobile` | c81f4cf2-2479-4390-a8db-1514572e873f / 7c8c46c9-e133-4ef1-bf56-68254628aedc / 6c63397a-5ab3-4ea3-bf3c-29aed67081ee | kling4_0 i2v 1080p 5s | 15 |
+| P1 bubbles | `/video/bubbles.*` | still 99b1af8b…, loop 49d5a1d9-ad79-4b10-9938-2cd2eb43c935 | kling4_0 8s, start = end frame | 2 + 8 |
+| P2 cascade | `/video/cascade.*` | still 6b522331…, loop 46434209-89a6-45f8-8634-c246ecd46005 | kling4_0 8s, start = end | 2 + 8 |
+| P3 pour | `/video/pour.*` | still 3ed23cc2…, loop 10d81b44-5563-4527-8552-cfc9e367310e | kling4_0 8s, start = end | 2 + 8 |
+| V1 Pocono ridge | `/video/ridge.*` | still c8c1c0a0…, loop 156487c5-a944-488a-8c69-55815a572624 | kling4_0 10s, start = end | 2 + 10 |
+| T1 brick (tileable, period crop) | `/tex/brick.*` | d2296869-1f05-46fc-b19d-e30ce2f4d97a | nano_banana_pro 2K 1:1 | 2 |
+| T2 stainless (tileable) | `/tex/stainless.*` | 8f386bb6-19c7-4589-a4d4-630f48dacac4 | nano_banana_pro 2K | 2 |
+| T3 walnut (cover only) | `/tex/walnut.*` | 22b157dc-9def-4226-8e60-e6585a7d7ef9 | nano_banana_pro 2K | 2 |
+| T4 chalkboard (tileable) | `/tex/chalk.*` | 611c29ec-ba32-4d87-8a16-b7cb8437e5cf | nano_banana_pro 2K | 2 |
+| T5 caps under glass (cover only) | `/tex/caps.*` | 3098c647-154f-4996-a783-8f80e0e883fb | nano_banana_pro 2K | 2 |
+| F1-F4 food | `/img/food-*` | a4b02d51… / 3599869a… / 405476d0… / 029be1d8… | nano_banana_pro 2K 4:5 | 8 |
+| N1 night exterior | `/img/night-exterior*` | 0b056841… (16:9), 6ce13bb4… (9:16) | nano_banana_pro 2K | 4 |
+| A1 taproom audio | `/audio/taproom.*` | 6fac8429-f1c8-41ce-a793-f08951c5ee62 | kling3_0 pro 10s sound on; video discarded, audio low-passed at 2.8 kHz (no intelligible speech), forward+reverse crossfade loop, -30 LUFS | 25 |
+
+### Rejected drafts (paid, not shipped)
+
+H4 a/c, H3 a/c, H2 a/c, H1 a/b, H4p a, H3p a, H2p b, H1p b, T1 b, T2 b, T3 a (two-tone band), T4 b, T5 a (perspective), P1 a, P2 b, P3 b, V1 a, F1 b, F2 b, F3 b, F4 b, N1 b (five doors: too close to the real building), N1 c; Kling 3.0 Pro HC3 bake-off clip (1cc7208d…); A1 a (0fcc254c…). Total for rejects ≈ 82 cr.
+
+### Processing notes
+
+- Hero: 3 clips per orientation joined at 18 fps, duplicate seam frames dropped → 271 frames each. Desktop 1920×1072 WebP q44 = 15.2 MiB; mobile 720×1290 WebP q42 = 8.4 MiB. Posters, final frames and all-keyframe MP4 fallbacks (1280w, `-g 1`) beside them.
+- Loops: last frame trimmed (it duplicates frame 0); H.264 + VP9 all ≤ 2.4 MB.
+- Textures: brick tiles by its measured period (129 × 293 px); stainless and chalk by feathered half-offset blend; caps and walnut ghosted under blending, so they ship as cover images instead.
+- U1 (logo upscale) skipped: the original PNG traced cleanly (0.03% silhouette mismatch), so no upscale was needed.

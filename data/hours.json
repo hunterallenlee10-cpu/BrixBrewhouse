@@ -1,0 +1,14 @@
+{
+  "_note": "24-hour times, America/New_York. 0 = Sunday. Close times past midnight would use values over 24:00 (e.g. 25:00 = 1 AM).",
+  "timezone": "America/New_York",
+  "holidayNote": "Holiday hours may vary.",
+  "days": [
+    { "day": 0, "label": "Sunday", "open": "12:00", "close": "21:00" },
+    { "day": 1, "label": "Monday", "open": "12:00", "close": "21:00" },
+    { "day": 2, "label": "Tuesday", "open": "12:00", "close": "21:00" },
+    { "day": 3, "label": "Wednesday", "open": "12:00", "close": "21:00" },
+    { "day": 4, "label": "Thursday", "open": "12:00", "close": "21:00" },
+    { "day": 5, "label": "Friday", "open": "12:00", "close": "23:00" },
+    { "day": 6, "label": "Saturday", "open": "12:00", "close": "23:00" }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "_note": "Answers adapted from the FAQ on brixbrewhouse.com. {{CONFIRM}} marks a conflict the owners need to settle.",
+  "items": [
+    { "q": "Where is Brix Brewhouse located?", "a": "128 PA-715 in Brodheadsville, PA, at the old West End Firehouse. We've turned this local landmark into a brewery where great beer and great company come together." },
+    { "q": "What are your hours?", "a": "Sunday to Thursday, 12 PM to 9 PM. Friday and Saturday, 12 PM to 11 PM. Hours are subject to change on major holidays." },
+    { "q": "Do you brew your own beer?", "a": "Yes. Brix beer is brewed in-house by our brewmaster. The tap list rotates regularly, so there's always something new next to your favorites. We also pour guest taps from Pennsylvania favorite Weyerbacher." },
+    { "q": "Do you serve food?", "a": "Yes. John's Chef Table serves sandwiches, shareables, snacks, soups and rotating specials. Pretzels and hotdogs are served all day. Kitchen hours: {{CONFIRM}}." },
+    { "q": "Do you have non-alcoholic drinks?", "a": "We do. Besides water, soda, tea and lemonade, we make our own Birch Beer, which has become a local favorite. We also have wine, canned beverages and other non-beer options." },
+    { "q": "Do you offer flights?", "a": "Yes. A flight is four beers, so you can sample a few before you pick a favorite." },
+    { "q": "Can I fill a growler?", "a": "Yes. Growler fills are available on many of our beers, depending on what's on tap. We also do crowlers." },
+    { "q": "Are kids welcome?", "a": "Absolutely. Brix is family-friendly, with a kids menu, and we love seeing families here together." },
+    { "q": "Are dogs allowed?", "a": "Not at this time, inside or outside. We hope to host dog-friendly events in the future, so stay tuned." },
+    { "q": "Do you have outdoor seating?", "a": "Yes, when the weather cooperates." },
+    { "q": "Do you host live music and events?", "a": "Every week. Live music, trivia, karaoke, open mic nights, watch parties and seasonal events. Taco Tuesday, too." },
+    { "q": "Can I book a private party?", "a": "Yes. Eli's Lounge seats 50 and can be rented for celebrations, team nights, fundraisers and group gatherings. Get in touch to talk dates and options." },
+    { "q": "Do you take reservations?", "a": "We're mostly first-come, first-served. If you have a large group, call ahead and we'll do our best to make room." },
+    { "q": "Do you sell gift cards?", "a": "Yes, in the brewery. They make a great gift for the beer lover in your life." },
+    { "q": "Is the brewery wheelchair accessible?", "a": "Yes. Brix is wheelchair accessible." },
+    { "q": "Do you have Wi-Fi?", "a": "Yes. Free Wi-Fi for guests." },
+    { "q": "Can I buy merch?", "a": "Yes. Brix shirts, hats, glassware and more. Stop in to see what's available." },
+    { "q": "How do I stay up to date?", "a": "Follow us on Facebook and Instagram for live music, food specials, beer releases and community events." },
+    { "q": "Who do I contact with a question?", "a": "Stop in, call (570) 213-9298, or email info@brixbrewhouse.com. We're always happy to help." }
+  ]
+}

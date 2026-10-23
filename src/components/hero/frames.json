@@ -1,0 +1,4 @@
+{
+  "desktop": { "count": 271, "width": 1920, "height": 1072, "dir": "/frames/desktop" },
+  "mobile": { "count": 271, "width": 720, "height": 1290, "dir": "/frames/mobile" }
+}
