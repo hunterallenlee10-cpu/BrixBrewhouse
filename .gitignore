@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+.vercel/
+.env*
+/assets/raw/
+*.log
+.DS_Store
+coverage/
+test-results/
+playwright-report/
