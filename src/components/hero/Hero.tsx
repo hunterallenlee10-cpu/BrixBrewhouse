@@ -117,18 +117,9 @@ export function Hero() {
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_40%,transparent_40%,rgb(11_12_13/0.75))]" />
         <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
 
-        {/* 0-25%: BRIX, wider than the viewport and sunk below the bottom edge: cropped on three sides on purpose */}
-        <div ref={brixRef} className="absolute inset-x-0 bottom-[calc(56px+env(safe-area-inset-bottom))] will-change-transform md:bottom-0">
-          {/* the whole block sinks below the fold in em units of the word, so the mono line stays attached */}
-          <div className="relative bottom-[-0.1em] flex flex-col items-center text-[66vw] md:bottom-[-0.27em] md:text-[73vw]">
-            <p className="t-mono mb-[0.035em] text-center text-[0.68rem] text-foam/90 [text-shadow:0_2px_12px_rgb(0_0_0/0.8)] md:text-[0.8rem]">
-              Brewhouse · Brodheadsville, PA · Est. 2026
-            </p>
-            <h1 className="wait-font t-display flex w-[100vw] justify-center overflow-x-clip whitespace-nowrap text-[1em] leading-[0.74] text-foam [text-shadow:0_-10px_80px_rgb(0_0_0/0.5)]">
-              <span className="shrink-0 tracking-[-0.02em]">BRIX</span>
-              <span className="sr-only"> Brewhouse</span>
-            </h1>
-          </div>
+        {/* 0-25%: the wordmark, white and centred low over the door */}
+        <div ref={brixRef} className="absolute inset-x-0 bottom-[calc(56px+env(safe-area-inset-bottom)+8svh)] will-change-transform md:bottom-[12svh]">
+          <Wordmark animated />
         </div>
 
         {/* 25-55%: the firehouse */}
@@ -172,7 +163,7 @@ export function Hero() {
 }
 
 function StaticHero() {
-  // reduced motion: the same first viewport, held still. The bay door stands open, BRIX bleeds off the edges.
+  // reduced motion: the same first viewport, held still. The bay door stands open, the wordmark sits under the copy.
   return (
     <section id="top" aria-label="Brix Brewhouse" className="relative min-h-[100svh] overflow-hidden bg-black">
       <picture>
@@ -184,7 +175,7 @@ function StaticHero() {
         />
       </picture>
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 to-black/70" />
-      {/* copy on top, BRIX below it in flow: it can never cover the CTA. Desktop: exactly one viewport, BRIX sized to the space left */}
+      {/* copy on top, the wordmark below it in flow: it can never cover the CTA */}
       <div className="relative flex min-h-[100svh] flex-col md:h-[100svh]">
       <div className="wrap relative flex flex-col gap-5 pt-[calc(var(--nav-h)+3rem)] md:shrink-0">
         <p className="t-serif max-w-[18ch] text-[clamp(2rem,5vw,4.2rem)] text-foam [text-shadow:0_4px_30px_rgb(0_0_0/0.7)]">
@@ -202,17 +193,28 @@ function StaticHero() {
         </div>
         <p className="t-mono text-[0.72rem] text-foam/85">{hoursLine}</p>
       </div>
-      <div className="relative mt-auto overflow-hidden pt-8 pb-[calc(56px+env(safe-area-inset-bottom))] md:mt-[clamp(1rem,3vh,2.5rem)] md:flex md:min-h-0 md:flex-1 md:flex-col md:justify-end md:pt-0 md:pb-0 md:[container-type:size]">
-        <div className="relative bottom-[-0.1em] flex flex-col items-center text-[66vw] md:bottom-[-0.02em] md:text-[min(73vw,calc((100cqh-3rem)/0.74))]">
-          <p className="t-mono mb-[0.035em] text-center text-[0.6875rem] text-foam/90 md:text-[0.8rem]">Brewhouse · Brodheadsville, PA · Est. 2026</p>
-          <h1 className="t-display flex w-[100vw] justify-center overflow-x-clip whitespace-nowrap text-[1em] leading-[0.74] text-foam">
-            <span className="shrink-0 tracking-[-0.02em]">BRIX</span>
-            <span className="sr-only"> Brewhouse</span>
-          </h1>
-        </div>
+      <div className="relative mt-auto pt-12 pb-[calc(56px+env(safe-area-inset-bottom)+2rem)] md:pb-[clamp(2rem,7vh,4.5rem)]">
+        <Wordmark align="start" />
       </div>
       </div>
       <Illustrative className="absolute right-4 top-[calc(var(--nav-h)+10px)] [text-shadow:0_1px_6px_rgb(0_0_0/0.9)]" />
     </section>
+  );
+}
+
+/** "Brix Brewhouse" in white, sized to sit inside the frame rather than fill it. */
+function Wordmark({ animated = false, align = "center" }: { animated?: boolean; align?: "center" | "start" }) {
+  return (
+    <div className={`wrap flex flex-col ${align === "center" ? "items-center text-center" : "items-start"}`}>
+      <p className="t-mono mb-4 text-[0.6875rem] text-foam/90 [text-shadow:0_1px_8px_rgb(0_0_0/0.9)] md:mb-5 md:text-[0.8rem]">
+        Brodheadsville, PA · Est. 2026
+      </p>
+      <h1
+        className={`${animated ? "wait-font " : ""}t-display text-[clamp(3.5rem,15vw,5.5rem)] leading-[0.9] tracking-[0.01em] text-foam [text-shadow:0_4px_40px_rgb(0_0_0/0.6)] md:text-[clamp(5rem,8vw,8.5rem)]`}
+      >
+        Brix <span className="block md:inline">Brewhouse</span>
+      </h1>
+      <span aria-hidden className="mt-5 block h-px w-16 bg-gold-hi/80 md:mt-6 md:w-24" />
+    </div>
   );
 }

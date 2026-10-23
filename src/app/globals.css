@@ -1,6 +1,5 @@
 @import "tailwindcss";
 /* room styles: one stylesheet, so code-split rooms don't add render-blocking CSS requests */
-@import "../components/meanings/meanings.css";
 @import "../components/flight/flight.css";
 @import "../components/bartop/bartop.css";
 @import "../components/kitchen/kitchen.css";
@@ -379,6 +378,7 @@ html.fonts-ready .wait-font {
 
 /* ---------- render rooms only as you approach them ----------
    Rooms below Three Meanings skip layout and paint until near the viewport
+   (Three Meanings itself stays out: the nav's ScrollTrigger measures it)
    (they use IntersectionObserver, not ScrollTrigger, so estimated sizes are safe).
    `auto` remembers each room's real size once it has rendered. */
 #main > section:not(#top, #brix),

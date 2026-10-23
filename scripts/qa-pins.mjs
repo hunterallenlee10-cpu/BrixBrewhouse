@@ -1,4 +1,4 @@
-// Screens inside the pinned Three Meanings section + the real page footer.
+// Screens through the Three Meanings section + the real page footer.
 import { chromium } from "@playwright/test";
 const out = process.argv[2];
 const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
