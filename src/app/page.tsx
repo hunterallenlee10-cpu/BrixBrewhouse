@@ -6,7 +6,10 @@ import { BrixGauge } from "@/components/nav/BrixGauge";
 import { MobileBar } from "@/components/nav/MobileBar";
 import { CapCursor } from "@/components/ui/CapCursor";
 import { Hero } from "@/components/hero/Hero";
-import { PourModal } from "@/components/cta/PourModal";
+import { ThreeMeanings } from "@/components/meanings/ThreeMeanings";
+import { FlightBuilder } from "@/components/flight/FlightBuilder";
+import { BarTop } from "@/components/bartop/BarTop";
+import { Kitchen } from "@/components/kitchen/Kitchen";
 import { ElisLounge } from "@/components/lounge/ElisLounge";
 import { DispatchBoard } from "@/components/dispatch/DispatchBoard";
 import { Press } from "@/components/press/Press";
@@ -14,7 +17,9 @@ import { Visit } from "@/components/visit/Visit";
 import { Faq } from "@/components/faq/Faq";
 import { FinalCta } from "@/components/cta/FinalCta";
 import { Footer } from "@/components/footer/Footer";
+import { PourModal } from "@/components/cta/PourModal";
 
+/** The building, room by room: door, bay 01-08, the street out front. */
 export default function Page() {
   return (
     <SiteProvider>
@@ -26,9 +31,10 @@ export default function Page() {
       <BrixGauge />
       <main id="main">
         <Hero />
-        <section id="brix" className="section">
-          <div className="wrap h-[100vh]" />
-        </section>
+        <ThreeMeanings />
+        <FlightBuilder />
+        <BarTop />
+        <Kitchen />
         <ElisLounge />
         <DispatchBoard />
         <Press />
