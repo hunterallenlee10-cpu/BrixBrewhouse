@@ -96,7 +96,9 @@ export function BrixGauge() {
               <span className={`mr-[3px] block h-[3px] w-[13px] transition-colors ${active === m.id ? "bg-red" : "bg-foam/0 group-hover:bg-foam/70"}`} />
               <span
                 className={`t-mono pointer-events-none absolute right-14 whitespace-nowrap bg-black/80 px-2 py-1 text-[0.62rem] transition-opacity ${
-                  active === m.id ? "text-gold-hi opacity-100" : "text-foam opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  active === m.id
+                    ? "text-gold-hi opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 min-[1600px]:opacity-100"
+                    : "text-foam opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
                 }`}
               >
                 {m.label}
