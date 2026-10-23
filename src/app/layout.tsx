@@ -5,12 +5,12 @@ import { HOURS } from "@/lib/hours";
 import { FAQ, MENU } from "@/lib/data";
 import "./globals.css";
 
-const bigShoulders = Big_Shoulders({ subsets: ["latin"], axes: ["opsz"], variable: "--font-big-shoulders", display: "swap", adjustFontFallback: false });
-const stencil = Big_Shoulders_Stencil({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-stencil", display: "swap", adjustFontFallback: false });
-const fraunces = Fraunces({ subsets: ["latin"], style: ["italic"], axes: ["SOFT", "WONK", "opsz"], variable: "--font-fraunces", display: "swap" });
+const bigShoulders = Big_Shoulders({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-big-shoulders", display: "swap", adjustFontFallback: false });
+const stencil = Big_Shoulders_Stencil({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-stencil", display: "swap", adjustFontFallback: false, preload: false });
+const fraunces = Fraunces({ subsets: ["latin"], style: ["italic"], axes: ["SOFT", "WONK", "opsz"], variable: "--font-fraunces", display: "swap", preload: false });
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
-const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-jetbrains", display: "swap" });
-const caveat = Caveat({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-caveat", display: "swap" });
+const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-jetbrains", display: "swap", preload: false });
+const caveat = Caveat({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-caveat", display: "swap", preload: false });
 
 const TITLE = "Brix Brewhouse | Craft Brewery in a Historic Firehouse | Brodheadsville, PA";
 const DESCRIPTION =
@@ -112,6 +112,8 @@ const jsonLd = [
   },
 ];
 
+const fontsReadyScript = `(function(){var d=document.documentElement,done=function(){d.classList.add('fonts-ready')};try{var f=getComputedStyle(d).getPropertyValue('--font-big-shoulders');if(!document.fonts||!f){done();return}document.fonts.load('800 100px '+f).then(done,done);setTimeout(done,2500)}catch(e){done()}})()`;
+
 // Runs before first paint: skip the gate for returning guests, flag reduced motion.
 const bootScript = `try{if(sessionStorage.getItem('brix-21')==='yes'){document.documentElement.dataset.gate='passed'}}catch(e){}`;
 
@@ -128,7 +130,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" as="image" href="/frames/mobile/poster.jpg" media="(max-width: 767px)" fetchPriority="high" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* reveal display type only once Big Shoulders is in: no fallback-to-webfont layout shift */}
+        <script dangerouslySetInnerHTML={{ __html: fontsReadyScript }} />
+      </body>
     </html>
   );
 }

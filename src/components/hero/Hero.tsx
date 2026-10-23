@@ -25,12 +25,19 @@ const hoursLine = weekSummary()
   .join(" · ");
 
 export function Hero() {
-  const { reducedMotion } = useSite();
+  const { reducedMotion, gatePassed } = useSite();
   const section = useRef<HTMLElement>(null);
   const seq = useRef<SequenceHandle>(null);
   const overlays = useRef<Record<string, HTMLDivElement | null>>({});
   const [ready, setReady] = useState(false);
   const onReady = useCallback(() => setReady(true), []);
+
+  // the gate asks for frames as soon as the visitor reaches for "Yes"
+  useEffect(() => {
+    const prime = () => seq.current?.prime();
+    window.addEventListener("brix:prime", prime);
+    return () => window.removeEventListener("brix:prime", prime);
+  }, []);
 
   // scroll -> sequence target
   useEffect(() => {
@@ -48,9 +55,12 @@ export function Hero() {
   useEffect(() => {
     if (reducedMotion) return;
     let raf = 0;
+    let last = -1;
     const loop = () => {
       raf = requestAnimationFrame(loop);
       const p = seq.current?.getProgress() ?? 0;
+      if (Math.abs(p - last) < 0.0002) return; // nothing moved: no style writes
+      last = p;
       for (const [key, [a, b, c, d]] of Object.entries(RANGES)) {
         const el = overlays.current[key];
         if (!el) continue;
@@ -90,6 +100,7 @@ export function Hero() {
         </picture>
         <SequenceCanvas
           ref={seq}
+          armed={gatePassed}
           onReady={onReady}
           label="Illustrative render: a red firehouse bay door rolls up at dusk, the camera moves through steam past stainless tanks to a brass tap that pours a golden pint."
           className="absolute inset-0 h-full w-full"
@@ -105,7 +116,7 @@ export function Hero() {
             <p className="t-mono mb-[0.035em] text-center text-[0.68rem] text-foam/90 [text-shadow:0_2px_12px_rgb(0_0_0/0.8)] md:text-[0.8rem]">
               Brewhouse · Brodheadsville, PA · Est. 2026
             </p>
-            <h1 className="t-display flex w-[100vw] justify-center overflow-x-clip whitespace-nowrap text-[1em] leading-[0.74] text-foam [text-shadow:0_-10px_80px_rgb(0_0_0/0.5)]">
+            <h1 className="wait-font t-display flex w-[100vw] justify-center overflow-x-clip whitespace-nowrap text-[1em] leading-[0.74] text-foam [text-shadow:0_-10px_80px_rgb(0_0_0/0.5)]">
               <span className="shrink-0 tracking-[-0.02em]">BRIX</span>
               <span className="sr-only"> Brewhouse</span>
             </h1>

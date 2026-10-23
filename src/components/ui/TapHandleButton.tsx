@@ -18,7 +18,8 @@ export function TapHandleButton({
   className?: string;
 }) {
   const { openPour } = useSite();
-  const pad = size === "lg" ? "h-16 pl-5 pr-8 text-[1.35rem]" : size === "sm" ? "h-11 pl-3 pr-4 text-[1rem]" : "h-14 pl-4 pr-6 text-[1.15rem]";
+  // labels stay >= 18.7px bold: white on the logo red (4.13:1) only passes AA as large text
+  const pad = size === "lg" ? "h-16 pl-5 pr-8 text-[1.4rem]" : size === "sm" ? "h-11 pl-3 pr-4 text-[1.2rem]" : "h-14 pl-4 pr-6 text-[1.25rem]";
   return (
     <button
       type="button"

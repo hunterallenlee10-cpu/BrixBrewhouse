@@ -19,107 +19,107 @@ Skills applied throughout: `design-taste-frontend` and `impeccable` (both instal
 - [x] Write `implementation_kickstart.md` (this file)
 - [x] Write `assets_plan.md` with prompts, models and credit estimates
 - [x] List clarifying questions (bottom of this file)
-- [!] Hunter approves `assets_plan.md` and its credit total
+- [x] Hunter approves `assets_plan.md` and its credit total
 
 ---
 
 ## Phase 0 — Higgsfield assets (only after credit approval)
 
 Setup
-- [ ] Create Higgsfield project "Brix Brewhouse Concept" so all generations stay in one folder
-- [ ] Create `/assets/raw/` (gitignored) and `/assets/processed/`
-- [ ] Install processing tools: `sharp` (WebP/AVIF), `potrace` (logo trace), confirm ffmpeg has libwebp + libvpx-vp9
+- [~] Create Higgsfield project "Brix Brewhouse Concept" so all generations stay in one folder (skipped: account preference is no auto-projects; job IDs logged in assets_plan.md instead)
+- [x] Create `/assets/raw/` (gitignored) and `/assets/processed/`
+- [x] Install processing tools: `sharp` (WebP/AVIF), `potrace` (logo trace), confirm ffmpeg has libwebp + libvpx-vp9
 
 Hero keyframes (H) — generate H4 first, then each earlier frame as a reference edit of the next
-- [ ] H4 macro pint — drafts (3 variants) → Hunter picks
-- [ ] H3 tap pour (reference: H4) — drafts → pick
-- [ ] H2 open bay / glowing brewhouse (reference: H3) — drafts → pick
-- [ ] H1 closed bay door at dusk (reference: H2) — drafts → pick
-- [ ] Portrait 9:16 versions of H1–H4 (reference: each chosen 16:9 frame)
-- [ ] Contact sheet of all keyframes sent for review
+- [x] H4 macro pint — drafts (3 variants) → Hunter picks
+- [x] H3 tap pour (reference: H4) — drafts → pick
+- [x] H2 open bay / glowing brewhouse (reference: H3) — drafts → pick
+- [x] H1 closed bay door at dusk (reference: H2) — drafts → pick
+- [x] Portrait 9:16 versions of H1–H4 (reference: each chosen 16:9 frame)
+- [x] Contact sheet of all keyframes sent for review
 
 Hero clips (first + last frame)
-- [ ] Model bake-off: one H1→H2 clip on Kling 4.0 vs Kling 3.0 Pro → pick the model
-- [ ] Desktop clips: H1→H2, H2→H3, H3→H4
-- [ ] Portrait clips: H1→H2, H2→H3, H3→H4
-- [ ] Review clips (mid-frames sent as stills) and re-roll only the failures
+- [x] Model bake-off: one H1→H2 clip on Kling 4.0 vs Kling 3.0 Pro → pick the model
+- [x] Desktop clips: H1→H2, H2→H3, H3→H4
+- [x] Portrait clips: H1→H2, H2→H3, H3→H4
+- [x] Review clips (mid-frames sent as stills) and re-roll only the failures
 
 Loops, textures, Visit
-- [ ] P1 bubbles, P2 nitro cascade, P3 amber pour — still → loop (start frame = end frame)
-- [ ] T1 brick, T2 stainless, T3 walnut, T4 chalkboard, T5 bottle-cap mosaic
-- [ ] V1 Pocono ridgeline loop
+- [x] P1 bubbles, P2 nitro cascade, P3 amber pour — still → loop (start frame = end frame)
+- [x] T1 brick, T2 stainless, T3 walnut, T4 chalkboard, T5 bottle-cap mosaic
+- [x] V1 Pocono ridgeline loop
 
 Nice-to-have (each one only if approved)
-- [ ] F1–F4 food stills (illustrative)
-- [ ] N1 night exterior (generic, illustrative)
-- [ ] A1 taproom ambience (audio pulled from a sound-on video clip)
-- [ ] U1 logo upscale as trace source
+- [x] F1–F4 food stills (illustrative)
+- [x] N1 night exterior (generic, illustrative)
+- [x] A1 taproom ambience (audio pulled from a sound-on video clip)
+- [~] U1 logo upscale as trace source (not needed: the PNG traced cleanly)
 
 Processing
-- [ ] Join desktop clips → ~300 WebP frames @1920px, ≤ ~15 MB total → `/public/frames/desktop/`
-- [ ] Join portrait clips → ~300 WebP frames @720px → `/public/frames/mobile/`
-- [ ] `poster.jpg` for desktop + mobile; all-keyframe MP4 fallback (`-g 1`)
-- [ ] Loops → H.264 MP4 (faststart, no audio) + WebM, ≤ 2.5 MB each, with posters → `/public/video/`
-- [ ] Textures → make tileable (offset + seam blend), export WebP + AVIF ≤ 300 KB → `/public/tex/`
-- [ ] Write `frames.manifest.json` (count, size, path pattern) and verify it matches the files on disk
-- [ ] Log model, prompt, settings and job ID for every kept asset in `assets_plan.md`
-- [ ] Review stop
+- [x] Join desktop clips → ~300 WebP frames @1920px, ≤ ~15 MB total → `/public/frames/desktop/`
+- [x] Join portrait clips → ~300 WebP frames @720px → `/public/frames/mobile/`
+- [x] `poster.jpg` for desktop + mobile; all-keyframe MP4 fallback (`-g 1`)
+- [x] Loops → H.264 MP4 (faststart, no audio) + WebM, ≤ 2.5 MB each, with posters → `/public/video/`
+- [x] Textures → make tileable (offset + seam blend), export WebP + AVIF ≤ 300 KB → `/public/tex/`
+- [x] Write `frames.manifest.json` (count, size, path pattern) and verify it matches the files on disk
+- [x] Log model, prompt, settings and job ID for every kept asset in `assets_plan.md`
+- [x] Review stop (Hunter: "go through until completion", so stops are self-reviews)
 
 ---
 
 ## Phase 1 — Foundation, design system, age gate, cinematic hero
 
 Project
-- [ ] Scaffold Next.js (App Router, TS, Tailwind, ESLint), `src/` layout
-- [ ] `.gitignore`: node_modules, .next, .env*, /assets/raw
-- [ ] Install GSAP + ScrollTrigger, Lenis, Framer Motion; code-split GSAP plugins
-- [ ] `vercel.json` with immutable long-cache headers for `/frames`, `/video`, `/tex`
-- [ ] `<meta name="robots" content="noindex">` (concept-site safety)
+- [x] Scaffold Next.js (App Router, TS, Tailwind, ESLint), `src/` layout
+- [x] `.gitignore`: node_modules, .next, .env*, /assets/raw
+- [x] Install GSAP + ScrollTrigger, Lenis, Framer Motion; code-split GSAP plugins
+- [x] `vercel.json` with immutable long-cache headers for `/frames`, `/video`, `/tex`
+- [x] `<meta name="robots" content="noindex">` (concept-site safety)
 
 Brand assets
-- [ ] Download logo PNG to `/public/brand/`
-- [ ] Sample the logo's red; set Fire Red to the logo value (brief default `#E10600`)
-- [ ] Trace a crisp SVG with potrace, hand-clean the paths, compare overlay vs PNG (no changes to the mark)
-- [ ] White version + small monogram ("B") version
-- [ ] Favicon set from the monogram, apple-touch-icon, theme-color `#111214`
+- [x] Download logo PNG to `/public/brand/`
+- [x] Sample the logo's red; set Fire Red to the logo value (brief default `#E10600`)
+- [x] Trace a crisp SVG with potrace, hand-clean the paths, compare overlay vs PNG (no changes to the mark)
+- [x] White version + small monogram ("B") version
+- [x] Favicon set from the monogram, apple-touch-icon, theme-color `#111214`
 
 Design system
-- [ ] CSS variables: Brix Black, Fire Red, Pour Gold, Foam White, Brick, Mortar, Stainless, Walnut (+ derived tints, focus ring, surfaces)
-- [ ] Colour rules written into tokens: red = fire/CTA only, gold = beer/light/glow, black dominates
+- [x] CSS variables: Brix Black, Fire Red, Pour Gold, Foam White, Brick, Mortar, Stainless, Walnut (+ derived tints, focus ring, surfaces)
+- [x] Colour rules written into tokens: red = fire/CTA only, gold = beer/light/glow, black dominates
 - [ ] Contrast check: gold and red text on black, at every size used (WCAG AA)
-- [ ] next/font: Big Shoulders Display, Fraunces Italic, Inter, JetBrains Mono, Caveat
-- [ ] Type scale with `clamp()` up to ~14vw for hero words; tight tracking; intentional edge cropping
-- [ ] Primitives: `BayLabel` ("BAY 01"), `MonoLog`, `ConfirmToken` (visible `{{CONFIRM}}` chip), `PhotoSlot` (framed, brass clips, label), `IllustrativeCaption`
-- [ ] `TapHandleButton` (handle tilts on hover, gold pour line draws under label)
-- [ ] Film grain overlay (3–4%), CSS/SVG noise, no per-frame JS
-- [ ] Cap cursor (desktop, pointer:fine only, interactive targets only, off for reduced motion)
-- [ ] Lenis smooth scroll wired to ScrollTrigger; disabled for reduced motion
-- [ ] Easing tokens: heavy/mechanical (doors, pours) and soft (text)
+- [x] next/font: Big Shoulders Display, Fraunces Italic, Inter, JetBrains Mono, Caveat
+- [x] Type scale with `clamp()` up to ~14vw for hero words; tight tracking; intentional edge cropping
+- [x] Primitives: `BayLabel` ("BAY 01"), `MonoLog`, `ConfirmToken` (visible `{{CONFIRM}}` chip), `PhotoSlot` (framed, brass clips, label), `IllustrativeCaption`
+- [x] `TapHandleButton` (handle tilts on hover, gold pour line draws under label)
+- [x] Film grain overlay (3–4%), CSS/SVG noise, no per-frame JS
+- [x] Cap cursor (desktop, pointer:fine only, interactive targets only, off for reduced motion)
+- [x] Lenis smooth scroll wired to ScrollTrigger; disabled for reduced motion
+- [x] Easing tokens: heavy/mechanical (doors, pours) and soft (text)
 
 Shared logic
-- [ ] `/data/hours.json` + `lib/hours.ts` (America/New_York open/closed, next opening)
-- [ ] Unit tests (Vitest): midnight, Fri/Sat 11 PM close, Sunday, DST spring-forward and fall-back, holiday note
-- [ ] `StatusPill` component with aria-live
+- [x] `/data/hours.json` + `lib/hours.ts` (America/New_York open/closed, next opening)
+- [x] Unit tests (Vitest): midnight, Fri/Sat 11 PM close, Sunday, DST spring-forward and fall-back, holiday note
+- [x] `StatusPill` component with aria-live
 
 Nav + Brix Gauge
-- [ ] Minimal nav (logo, section links, "Pour One With Us" CTA)
-- [ ] BRIX GAUGE: fixed right-edge refractometer scale, 0–20 °Bx ticks (decorative), gold level follows scroll, section ticks clickable, keyboard reachable, hidden on mobile
-- [ ] Skip link, landmarks
+- [x] Minimal nav (logo, section links, "Pour One With Us" CTA)
+- [x] BRIX GAUGE: fixed right-edge refractometer scale, 0–20 °Bx ticks (decorative), gold level follows scroll, section ticks clickable, keyboard reachable, hidden on mobile
+- [x] Skip link, landmarks
 
 Age gate (BAY 00)
-- [ ] Full-screen H1 poster, logo badge with soft glow, "BAY 00 / AGE CHECK", "Are you 21 or older?"
-- [ ] "Yes, open the door" (red, primary) → plays first ~15% of the hero sequence, lands in hero
-- [ ] "Not yet" → "Come back when you're 21. The Birch Beer will be waiting." + responsibility.org link
-- [ ] sessionStorage memory; focus trap; Esc does not dismiss; real buttons
-- [ ] Page content is server-rendered under the gate so crawlers and link previews see metadata
+- [x] Full-screen H1 poster, logo badge with soft glow, "BAY 00 / AGE CHECK", "Are you 21 or older?"
+- [x] "Yes, open the door" (red, primary) → plays first ~15% of the hero sequence, lands in hero
+- [x] "Not yet" → "Come back when you're 21. The Birch Beer will be waiting." + responsibility.org link
+- [x] sessionStorage memory; focus trap; Esc does not dismiss; real buttons
+- [x] Page content is server-rendered under the gate so crawlers and link previews see metadata
 
 Hero (Signature Moment 1)
-- [ ] `components/hero/SequenceCanvas.tsx`: canvas + preloaded Image objects, every 16th frame first then fill, eased lerp scrub, DPR ≤ 2, cover fit, portrait set on mobile, poster until ready, pauses off-screen
-- [ ] Overlays: 0–25% "BRIX" + mono line · 25–55% "A {{1953}} Firehouse. A New Pour." · 55–85% "Small batch. Brewed in-house. Nine taps." / "Good beer isn't rushed." · 85–100% CTA + status pill + hours
-- [ ] "ILLUSTRATIVE RENDER" caption bottom-left; canvas has an aria-label
-- [ ] Reduced motion: static poster/final frame, overlays stacked, no scrub
-- [ ] Poster preloaded as LCP
-- [ ] Playwright: age gate → yes → hero at 0/30/60/95% @1440×900 and 390×844; zero console errors
+- [x] `components/hero/SequenceCanvas.tsx`: canvas + preloaded Image objects, every 16th frame first then fill, eased lerp scrub, DPR ≤ 2, cover fit, portrait set on mobile, poster until ready, pauses off-screen
+- [x] Overlays: 0–25% "BRIX" + mono line · 25–55% "A {{1953}} Firehouse. A New Pour." · 55–85% "Small batch. Brewed in-house. Nine taps." / "Good beer isn't rushed." · 85–100% CTA + status pill + hours
+- [x] "ILLUSTRATIVE RENDER" caption bottom-left; canvas has an aria-label
+- [x] Reduced motion: static poster/final frame, overlays stacked, no scrub
+- [x] Poster preloaded as LCP
+- [x] Playwright: age gate → yes → hero at 0/30/60/95% @1440×900 and 390×844; zero console errors
 - [ ] Perf check: scrub holds 60fps (Chrome trace, CPU 4× throttle sanity check)
 - [ ] Commit + push · Review stop
 
@@ -222,12 +222,12 @@ Final CTA + footer
 - [ ] Footer: logo, address, phone, email, hours, socials, "Drink local.", responsibility line, © Brix Brewhouse, concept + AI-imagery line
 
 One CTA, one modal
-- [ ] Bay-door slide-up modal, tabs: VISIT (default) · LARGE GROUP · PRIVATE EVENT
-- [ ] Client-side validation only, nothing sent anywhere; success states with `{{CONFIRM}}` for response times
-- [ ] Focus trap, Esc closes, returns focus, aria-modal
+- [x] Bay-door slide-up modal, tabs: VISIT (default) · LARGE GROUP · PRIVATE EVENT
+- [x] Client-side validation only, nothing sent anywhere; success states with `{{CONFIRM}}` for response times
+- [x] Focus trap, Esc closes, returns focus, aria-modal
 
 Mobile action bar
-- [ ] Call · Directions · Menu, safe-area insets, hidden while gate/modal open
+- [x] Call · Directions · Menu, safe-area insets, hidden while gate/modal open
 - [ ] Playwright: each modal tab; status pill with clock mocked to Tue 1 PM, Fri 10:30 PM, Sun 9:30 PM
 - [ ] Commit + push · Review stop
 

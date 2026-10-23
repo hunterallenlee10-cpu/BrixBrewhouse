@@ -26,24 +26,31 @@ export function CapCursor() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!fine || reduce || !el.current) return;
     const node = el.current;
-    let x = -100, y = -100, cx = -100, cy = -100, on = false, raf = 0;
+    let x = -100, y = -100, cx = -100, cy = -100, on = false, raf = 0, running = false;
     const move = (e: PointerEvent) => {
       x = e.clientX;
       y = e.clientY;
+      if (!running) {
+        running = true;
+        raf = requestAnimationFrame(loop);
+      }
       const hit = (e.target as Element | null)?.closest?.(SEL);
       if (!!hit !== on) {
         on = !!hit;
         node.dataset.on = String(on);
       }
     };
-    const loop = () => {
+    function loop() {
       cx += (x - cx) * 0.28;
       cy += (y - cy) * 0.28;
       node.style.transform = `translate3d(${cx}px, ${cy}px, 0) scale(${on ? 1 : 0.6})`;
+      if (Math.abs(x - cx) + Math.abs(y - cy) < 0.3) {
+        running = false; // sleep until the pointer moves again
+        return;
+      }
       raf = requestAnimationFrame(loop);
-    };
+    }
     window.addEventListener("pointermove", move, { passive: true });
-    raf = requestAnimationFrame(loop);
     return () => {
       window.removeEventListener("pointermove", move);
       cancelAnimationFrame(raf);

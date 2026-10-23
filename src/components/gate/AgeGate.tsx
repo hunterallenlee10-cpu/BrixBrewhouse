@@ -8,7 +8,7 @@ import { SITE } from "@/lib/site";
  * BAY 00. The age check is the closed bay door. "Yes" rolls the panel up and
  * carries the visitor ~15% into the hero sequence (the door starts opening).
  */
-export function AgeGate() {
+export function AgeGate({ logo }: { logo: React.ReactNode }) {
   const { gatePassed, passGate, scrollTo, reducedMotion } = useSite();
   const [phase, setPhase] = useState<"ask" | "under" | "opening" | "gone">("ask");
   const dialog = useRef<HTMLDivElement>(null);
@@ -38,7 +38,10 @@ export function AgeGate() {
     return () => document.removeEventListener("keydown", onKey);
   }, [phase, hidden]);
 
+  const prime = () => window.dispatchEvent(new Event("brix:prime"));
+
   const openDoor = () => {
+    prime();
     passGate();
     if (reducedMotion) {
       setPhase("gone");
@@ -78,13 +81,9 @@ export function AgeGate() {
       <div aria-hidden className="absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-r from-transparent via-gold-hi to-transparent opacity-80 shadow-[0_0_30px_6px_rgb(240_191_69/0.45)]" />
 
       <div className="relative flex h-full flex-col items-center justify-center px-5 text-center">
-        <img
-          src="/brand/brix-logo.svg"
-          alt="Brix Brewhouse"
-          width={168}
-          height={164}
-          className="h-[clamp(120px,22vw,176px)] w-auto [filter:drop-shadow(0_0_28px_rgb(214_158_20/0.45))_drop-shadow(0_10px_30px_rgb(0_0_0/0.7))]"
-        />
+        <div className="h-[clamp(120px,22vw,176px)] [filter:drop-shadow(0_0_28px_rgb(214_158_20/0.45))_drop-shadow(0_10px_30px_rgb(0_0_0/0.7))]">
+          {logo}
+        </div>
         <p className="mt-8 flex items-baseline gap-3 text-gold">
           <span className="t-stencil text-[1.25rem] leading-none tracking-[0.12em]">BAY 00</span>
           <span aria-hidden className="h-px w-8 translate-y-[-0.3em] bg-current opacity-60" />
@@ -105,6 +104,8 @@ export function AgeGate() {
                 type="button"
                 data-cursor="cap"
                 onClick={openDoor}
+                onPointerEnter={prime}
+                onFocus={prime}
                 className="h-14 bg-red px-7 font-display text-[1.2rem] font-extrabold uppercase tracking-[0.04em] text-foam shadow-[0_14px_34px_-12px_rgb(234_3_34/0.7)] transition-colors hover:bg-red-deep"
               >
                 Yes, open the door

@@ -347,3 +347,12 @@ html[data-gate="passed"] .age-gate {
 @keyframes cap-spin {
   to { transform: rotate(360deg); }
 }
+
+/* big display words wait for their face (prevents a giant fallback-font layout shift) */
+.wait-font {
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-soft);
+}
+html.fonts-ready .wait-font {
+  opacity: 1;
+}

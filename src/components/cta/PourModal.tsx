@@ -146,7 +146,7 @@ function VisitTab() {
           <span className="t-mono mt-1 block text-[0.66rem] text-text-3">{SITE.formerly}</span>
         </address>
         <div className="flex flex-col gap-2 sm:flex-row md:flex-col">
-          <a href={SITE.directions} target="_blank" rel="noopener noreferrer" className="flex h-13 min-h-12 items-center justify-center gap-2 bg-red px-5 font-display text-lg font-extrabold uppercase text-foam hover:bg-red-deep">
+          <a href={SITE.directions} target="_blank" rel="noopener noreferrer" className="flex h-13 min-h-12 items-center justify-center gap-2 bg-red px-5 font-display text-[1.2rem] font-extrabold uppercase text-foam hover:bg-red-deep">
             <MapPin size={20} aria-hidden /> Get directions
           </a>
           <a href={SITE.phoneHref} className="flex min-h-12 items-center justify-center gap-2 border border-line-strong px-5 font-display text-lg font-bold uppercase text-foam hover:border-foam">
@@ -285,7 +285,7 @@ function GroupForm() {
         </Field>
       </div>
       <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
-        <button type="submit" className="h-13 min-h-12 bg-red px-7 font-display text-lg font-extrabold uppercase text-foam hover:bg-red-deep">
+        <button type="submit" className="h-13 min-h-12 bg-red px-7 font-display text-[1.2rem] font-extrabold uppercase text-foam hover:bg-red-deep">
           Send the heads-up
         </button>
         <a href={SITE.phoneHref} className="t-mono text-[0.68rem] text-text-2 underline hover:text-foam">
@@ -357,7 +357,7 @@ function EventForm() {
         </Field>
       </div>
       <div className="sm:col-span-2">
-        <button type="submit" className="h-13 min-h-12 bg-red px-7 font-display text-lg font-extrabold uppercase text-foam hover:bg-red-deep">
+        <button type="submit" className="h-13 min-h-12 bg-red px-7 font-display text-[1.2rem] font-extrabold uppercase text-foam hover:bg-red-deep">
           Ask about the lounge
         </button>
       </div>

@@ -22,7 +22,7 @@ def trace(mask):
     plist = bm.trace(turdsize=8, turnpolicy=potrace.POTRACE_TURNPOLICY_MINORITY,
                      alphamax=1.0, opticurve=True, opttolerance=0.2)
     parts = []
-    f = lambda p: f"{p.x / SS:.2f},{p.y / SS:.2f}"
+    f = lambda p: f"{p.x / SS:.1f},{p.y / SS:.1f}"
     for curve in plist:
         parts.append(f"M{f(curve.start_point)}")
         for seg in curve.segments:
