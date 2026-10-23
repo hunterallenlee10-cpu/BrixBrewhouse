@@ -1,0 +1,18 @@
+/* Height animation without measuring: 0fr -> 1fr grid rows. */
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.55s var(--ease-door),
+    opacity 0.4s var(--ease-soft);
+}
+.faq-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-panel {
+    transition: none;
+  }
+}

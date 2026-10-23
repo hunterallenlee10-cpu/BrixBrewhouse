@@ -1,0 +1,97 @@
+/* Framed newspaper clippings: newsprint objects sitting on the dark ground. */
+.press-frame {
+  position: relative;
+  padding: clamp(10px, 1.4vw, 18px);
+  background: #0b0c0d;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.06) inset,
+    0 40px 80px -40px rgb(0 0 0 / 0.95),
+    0 18px 30px -18px rgb(0 0 0 / 0.8);
+  transition: transform 0.7s var(--ease-soft);
+}
+.press-frame:hover {
+  transform: rotate(0deg) translateY(-4px) !important;
+}
+.press-paper {
+  position: relative;
+  color: #16130f;
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgb(255 255 255 / 0.35), transparent 60%),
+    repeating-linear-gradient(0deg, rgb(0 0 0 / 0.018) 0 1px, transparent 1px 3px),
+    #e6dfcf;
+  /* deckled bottom edge, clean top cut */
+  clip-path: polygon(
+    0 0, 100% 0, 100% 97.4%, 96% 98.6%, 92% 97.6%, 87% 99%, 82% 97.8%, 76% 98.9%, 70% 97.5%,
+    64% 99.2%, 58% 97.9%, 52% 98.8%, 46% 97.6%, 40% 99.1%, 34% 97.9%, 28% 98.7%, 22% 97.6%,
+    16% 99%, 10% 97.8%, 5% 98.8%, 0 97.6%
+  );
+}
+.press-paper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .28  0 0 0 0 .2  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.press-rule {
+  height: 3px;
+  background: #16130f;
+  box-shadow: 0 5px 0 -4px #16130f;
+}
+.press-headline {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 48;
+  text-wrap: balance;
+}
+.press-link {
+  text-decoration: none;
+  color: #16130f;
+}
+.press-link:hover .press-arrow,
+.press-link:focus-visible .press-arrow {
+  transform: translateX(6px);
+}
+.press-arrow {
+  transition: transform 0.4s var(--ease-soft);
+}
+.press-link:focus-visible {
+  outline: 2px solid #8a5d00;
+  outline-offset: 4px;
+}
+.press-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+.press-play {
+  display: grid;
+  place-items: center;
+  width: clamp(72px, 9vw, 112px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: var(--pour-gold);
+  color: var(--brix-black);
+  box-shadow: 0 0 0 10px rgb(214 158 20 / 0.18), 0 20px 50px -10px rgb(0 0 0 / 0.8);
+  transition: transform 0.5s var(--ease-soft), box-shadow 0.5s var(--ease-soft);
+}
+.press-videoBtn:hover .press-play,
+.press-videoBtn:focus-visible .press-play {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 16px rgb(214 158 20 / 0.22), 0 20px 50px -10px rgb(0 0 0 / 0.8);
+}
+@media (prefers-reduced-motion: reduce) {
+  .press-frame,
+  .press-frame:hover,
+  .press-play,
+  .press-arrow {
+    transition: none;
+    transform: none !important;
+  }
+}
