@@ -241,7 +241,7 @@ Motion & taste
 - [x] Sound toggle: off by default, quiet (35% with fade), A1 audio low-passed so no speech is intelligible
 
 Performance
-- [~] Lighthouse mobile: Perf 89-90 (devtools throttling, localhost; simulated throttling scores lower), A11y 100, Best Practices 100, SEO 100 except the deliberate concept `noindex`
+- [~] Lighthouse mobile: Perf 89-90 (devtools throttling, localhost; simulated throttling scores lower), A11y 100, Best Practices 100, SEO 100 except the deliberate concept `noindex`. Re-measured after the finish-review fixes on a slower container: 79 for both the old and new build side by side (no regression), CLS 0.002 after the metric fallback font.
 - [x] CLS 0.029; LCP 2.7 s (the BRIX wordmark / gate badge, which wait for the display face); JS split per room, liquid renderer, YouTube and Maps load on demand
 - [x] Videos and canvases pause off-screen
 
@@ -259,8 +259,12 @@ QA (the "can't refuse" bar)
 - [x] Full Playwright suite at 1440×900 and 390×844 (scripts/qa.mjs, 47 checks); screenshots reviewed
 - [x] Zero console errors; frame manifest matches disk (271 + 271)
 - [x] Fact audit against brief §1; every unknown shows `{{CONFIRM}}`; every generated visual labelled; no fake reviews
-- [ ] Taste test: Site of the Day? Screenshot-worthy bay door, brick BRIX, flight builder, cap bar? Lindsay, Eli and Chef John find themselves? Hungry phone user finds hours/directions/menu in 5 s?
-- [ ] Final commit + push · Review stop
+- [x] Taste test: Site of the Day? Screenshot-worthy bay door, brick BRIX, flight builder, cap bar? Lindsay, Eli and Chef John find themselves? Hungry phone user finds hours/directions/menu in 5 s?
+  - Fresh-eyes finish reviewer, two rounds (verdict "fix" both times). Fixed: raster caps, maple, newsprint with torn edge, brick-course thresholds, gold-leaf final headline, edge-cropped press title, enamel placard, footnote strip, gate logo (was rendering 0x0), static hero occlusion, 1953 footnote, meter label collisions.
+  - Declined with evidence: items the reviewer called invented are verbatim in the brief (main bar, walk-ins, no dogs, geo, small batch, exact press headlines); brief-pinned mono labels and the full FAQ stay.
+  - Known gap: flight glasses are vector vessels over the walnut raster, not raster glass.
+- [x] DESIGN.md + `.impeccable/design.json` written from the shipped build (impeccable documenter, run inline)
+- [x] Final commit + push · Review stop
 
 ---
 
