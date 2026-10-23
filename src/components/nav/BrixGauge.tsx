@@ -69,7 +69,24 @@ export function BrixGauge() {
     const settle = () => ScrollTrigger.refresh();
     if (document.readyState === "complete") requestAnimationFrame(settle);
     else window.addEventListener("load", settle, { once: true });
+    // rooms below the fold start at an estimated height (content-visibility) and take their real
+    // height when they first render: re-measure then, or the labels drift ahead of the page
+    const main = document.getElementById("main");
+    let lastH = -1;
+    let timer = 0;
+    const ro = new ResizeObserver(([entry]) => {
+      const h = Math.round(entry.contentRect.height);
+      if (h === lastH) return;
+      const first = lastH < 0;
+      lastH = h;
+      if (first) return; // the initial report: load already measures
+      window.clearTimeout(timer);
+      timer = window.setTimeout(settle, 150);
+    });
+    if (main) ro.observe(main);
     return () => {
+      ro.disconnect();
+      window.clearTimeout(timer);
       window.removeEventListener("load", settle);
       st.kill();
       triggers.forEach((t) => t.kill());
