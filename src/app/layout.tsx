@@ -16,8 +16,13 @@ const TITLE = "Brix Brewhouse | Craft Brewery in a Historic Firehouse | Brodhead
 const DESCRIPTION =
   "A locally owned craft brewery inside the restored West End Firehouse on Route 715. Nine taps, flights of four, John's Chef Table kitchen and Eli's Lounge. Come pour one with us.";
 
+// Link previews must resolve the OG image on whatever host serves this build:
+// the concept deployment (Vercel sets VERCEL_URL), or brixbrewhouse.com once it goes live.
+const host = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+const BASE = host ? `https://${host}` : SITE.url;
+
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE.url),
+  metadataBase: new URL(BASE),
   title: TITLE,
   description: DESCRIPTION,
   // Concept preview: keep out of search until the owners sign off.
