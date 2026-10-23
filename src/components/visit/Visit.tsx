@@ -61,7 +61,7 @@ export function Visit() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="cap"
-                className="group flex min-h-16 items-center justify-between gap-4 bg-red px-6 font-display text-[1.45rem] font-extrabold uppercase tracking-[0.02em] text-foam shadow-[0_14px_34px_-14px_rgb(234_3_34/0.7)] transition-colors hover:bg-red-deep"
+                className="group flex min-h-16 items-center justify-between gap-4 bg-red px-6 font-display text-[1.45rem] font-extrabold uppercase tracking-[0.02em] text-foam shadow-[0_14px_30px_-14px_rgb(0_0_0/0.85)] transition-colors hover:bg-red-deep"
               >
                 <span className="flex items-center gap-3">
                   <MapPin aria-hidden size={24} weight="bold" /> Get directions
@@ -117,11 +117,11 @@ export function Visit() {
         <div className="mt-[clamp(4rem,8vw,6rem)] grid gap-4 md:grid-cols-2">
           {[0, 1].map((i) => (
             <figure key={i} className={`visit-sample p-6 md:p-8`} aria-label="Sample review placeholder">
-              <p className="t-mono text-[0.62rem] text-gold">Sample: replace with a real guest review</p>
+              <p className="t-mono text-[0.6875rem] text-gold">Sample: replace with a real guest review</p>
               <blockquote className="t-serif mt-4 text-[clamp(1.4rem,2.4vw,1.9rem)] text-text-3">
                 [A real guest review goes here: two or three lines, quoted with permission.]
               </blockquote>
-              <figcaption className="t-mono mt-5 text-[0.62rem] text-text-3">[Guest name] · [Google or Facebook]</figcaption>
+              <figcaption className="t-mono mt-5 text-[0.6875rem] text-text-3">[Guest name] · [Google or Facebook]</figcaption>
             </figure>
           ))}
         </div>

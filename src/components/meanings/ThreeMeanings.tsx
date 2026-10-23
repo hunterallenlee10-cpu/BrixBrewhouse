@@ -135,7 +135,7 @@ export function ThreeMeanings() {
                   {Array.from({ length: 11 }, (_, i) => (
                     <span key={i} className="brk-tick" style={{ bottom: `${i * 10}%`, width: i % 5 === 0 ? "100%" : "55%" }} />
                   ))}
-                  <span className="t-mono absolute -top-6 left-0 text-[0.6rem] text-gold-hi">°Bx</span>
+                  <span className="t-mono absolute -top-6 left-0 text-[0.6875rem] text-gold-hi">°Bx</span>
                 </div>
                 {/* bay plates for the firehouse */}
                 {word.letters.map((l, i) => (
@@ -164,7 +164,7 @@ export function ThreeMeanings() {
           </Panel>
           <Panel i={1} title="Brick">
             <span className="block">Saylorsburg, home to both owners, was the biggest supplier of brick in the country in 1894.</span>
-            <span className={`brk-ledger t-mono mt-4 block max-w-md text-[0.66rem] text-mortar`}>
+            <span className={`brk-ledger t-mono mt-4 block max-w-md text-[0.6875rem] text-mortar`}>
               {LEDGER.map(([k, v]) => (
                 <span key={k} data-ledger-row className="brk-ledgerRow">
                   <span>{k}</span>

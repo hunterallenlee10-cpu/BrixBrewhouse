@@ -26,7 +26,7 @@ export function Confirm({ label, title }: { label?: string; title?: string }) {
 /** Tiny mono caption on every AI-generated visual. */
 export function Illustrative({ children = "Illustrative render", className = "" }: { children?: ReactNode; className?: string }) {
   return (
-    <span className={`t-mono pointer-events-none select-none text-[0.62rem] tracking-[0.14em] text-foam/70 ${className}`}>
+    <span className={`t-mono pointer-events-none select-none text-[0.6875rem] tracking-[0.14em] text-foam/70 ${className}`}>
       {children}
     </span>
   );
@@ -64,7 +64,7 @@ export function PhotoSlot({
         <div className="px-4 text-center">
           <Camera aria-hidden weight="light" className="mx-auto mb-3 h-7 w-7 text-gold/80" />
           <figcaption className="t-mono text-[0.7rem] leading-relaxed text-foam/90">Photo: {label}</figcaption>
-          <p className="mt-1 text-[0.72rem] text-text-3">{note}</p>
+          <p className="mt-1 text-[0.75rem] text-text-2">{note}</p>
         </div>
       </div>
       {/* brass corner clips */}

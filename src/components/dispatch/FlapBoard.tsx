@@ -119,7 +119,7 @@ export function FlapBoard() {
                   <td role="cell" className="dsp-cEvent px-3 py-3 align-middle">
                     <span className="flex flex-wrap items-center gap-3">
                       <Flap text={r.event} run={run} delay={row * 90 + 120} small />
-                      {isToday ? <span className="t-mono bg-gold px-2 py-1 text-[0.62rem] font-bold text-black">Today</span> : null}
+                      {isToday ? <span className="t-mono bg-gold px-2 py-1 text-[0.6875rem] font-bold text-black">Today</span> : null}
                     </span>
                   </td>
                   <td role="cell" className="dsp-cStatus px-3 py-3 align-middle">

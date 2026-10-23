@@ -3,7 +3,7 @@ import { FacebookLogo, InstagramLogo } from "@phosphor-icons/react/dist/ssr";
 import { HOURS, weekSummary } from "@/lib/hours";
 import { SITE } from "@/lib/site";
 
-const label = "t-mono text-[0.64rem] text-text-3";
+const label = "t-mono text-[0.6875rem] text-text-3";
 const link = "inline-flex min-h-11 items-center text-foam underline-offset-4 transition-colors hover:text-gold-hi hover:underline";
 
 export function Footer() {

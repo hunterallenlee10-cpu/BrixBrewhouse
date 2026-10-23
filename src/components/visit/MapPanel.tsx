@@ -26,14 +26,14 @@ export function MapPanel() {
         )}
       </div>
       <figcaption className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-4 py-3">
-        <span className="t-mono text-[0.62rem] text-text-3">{live ? "Map data © Google" : "Stylized, not to scale"}</span>
+        <span className="t-mono text-[0.6875rem] text-text-3">{live ? "Map data © Google" : "Stylized, not to scale"}</span>
         <span className="flex flex-wrap gap-2">
           {!live ? (
             <button
               type="button"
               onClick={() => setLive(true)}
               data-cursor="cap"
-              className="t-mono inline-flex min-h-11 items-center gap-2 border border-line-strong px-3 text-[0.66rem] text-foam transition-colors hover:border-gold-hi hover:text-gold-hi"
+              className="t-mono inline-flex min-h-11 items-center gap-2 border border-line-strong px-3 text-[0.6875rem] text-foam transition-colors hover:border-gold-hi hover:text-gold-hi"
             >
               <MapTrifold aria-hidden size={16} /> Load Google Map
             </button>
@@ -42,7 +42,7 @@ export function MapPanel() {
             href={SITE.directions}
             target="_blank"
             rel="noopener noreferrer"
-            className="t-mono inline-flex min-h-11 items-center gap-2 px-2 text-[0.66rem] text-text-2 underline underline-offset-4 hover:text-foam"
+            className="t-mono inline-flex min-h-11 items-center gap-2 px-2 text-[0.6875rem] text-text-2 underline underline-offset-4 hover:text-foam"
           >
             Open in Google Maps <ArrowUpRight aria-hidden size={14} />
           </a>

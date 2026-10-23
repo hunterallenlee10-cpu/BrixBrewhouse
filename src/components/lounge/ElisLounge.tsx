@@ -35,7 +35,7 @@ export function ElisLounge() {
             {USES.map((u) => (
               <li key={u.name} className="flex items-baseline justify-between gap-6 py-3.5">
                 <span className="t-display text-[clamp(1.7rem,3.4vw,2.6rem)] leading-none text-foam">{u.name}</span>
-                <span className="t-mono shrink-0 text-[0.66rem] text-text-2">{u.note}</span>
+                <span className="t-mono shrink-0 text-[0.6875rem] text-text-2">{u.note}</span>
               </li>
             ))}
           </ul>
@@ -43,14 +43,14 @@ export function ElisLounge() {
             <p className="t-serif text-[1.35rem] leading-snug text-foam/90">
               &ldquo;We&rsquo;ll champion local causes, host fundraisers, and make sure everyone feels welcome from day one.&rdquo;
             </p>
-            <footer className="t-mono mt-2 text-[0.62rem] text-text-3">Brix Brewhouse</footer>
+            <footer className="t-mono mt-2 text-[0.6875rem] text-text-3">Brix Brewhouse</footer>
           </blockquote>
         </div>
 
         {/* the board: 107 days, one stroke each */}
         <div className="lg:col-span-5 lg:pt-24">
           <figure className="elx-board px-7 pb-8 pt-7 sm:px-9">
-            <figcaption className="t-mono text-[0.66rem] text-gold-hi">Log: 107 days / carpentry / E. Elias</figcaption>
+            <figcaption className="t-mono text-[0.6875rem] text-gold-hi">Log: 107 days / carpentry / E. Elias</figcaption>
             <p className="mt-4 flex items-end gap-4">
               <span className="t-display text-[clamp(7rem,16vw,12rem)] leading-[0.78] text-foam">107</span>
               <span className="t-serif pb-2 text-[clamp(1.4rem,2.6vw,2rem)] text-mortar">
@@ -65,11 +65,11 @@ export function ElisLounge() {
             <p className="sr-only">107 tally marks, one for each day Eli Elias spent building the room.</p>
             <dl className="mt-9 grid grid-cols-2 gap-px border-t border-foam/15 pt-5">
               <div>
-                <dt className="t-mono text-[0.62rem] text-text-3">Seats</dt>
+                <dt className="t-mono text-[0.6875rem] text-text-3">Seats</dt>
                 <dd className="t-display mt-1 text-4xl text-foam">50</dd>
               </div>
               <div>
-                <dt className="t-mono text-[0.62rem] text-text-3">Carpenter</dt>
+                <dt className="t-mono text-[0.6875rem] text-text-3">Carpenter</dt>
                 <dd className="mt-1 text-lg text-foam">Eli Elias, age 75</dd>
               </div>
             </dl>
@@ -79,7 +79,7 @@ export function ElisLounge() {
           <div className="mt-10 flex flex-col gap-6">
             <TapHandleButton tab="event" size="lg" className="self-start" />
             <div>
-              <p className="t-mono text-[0.66rem] text-text-2">Large group? Call ahead.</p>
+              <p className="t-mono text-[0.6875rem] text-text-2">Large group? Call ahead.</p>
               <a
                 href={SITE.phoneHref}
                 className="mt-1 inline-flex min-h-11 items-center gap-2 text-xl text-foam underline decoration-gold/60 underline-offset-[0.3em] transition-colors hover:text-gold-hi"

@@ -98,11 +98,11 @@ export function BrixGauge() {
           />
         ))}
         {[0, 5, 10, 15, 20].map((t) => (
-          <span key={t} className="t-mono absolute right-5 translate-y-1/2 text-[0.55rem] text-foam/45" style={{ bottom: `${(t / 20) * 100}%` }}>
+          <span key={t} className="t-mono absolute right-5 translate-y-1/2 text-[0.6875rem] text-foam/45" style={{ bottom: `${(t / 20) * 100}%` }}>
             {t}
           </span>
         ))}
-        <span className="t-mono absolute -top-6 right-0 text-[0.55rem] text-foam/45">°Bx</span>
+        <span className="t-mono absolute -top-6 right-0 text-[0.6875rem] text-foam/45">°Bx</span>
       </div>
       {/* room notches (top of page = bottom of scale, like a rising level) */}
       <ul className="absolute bottom-0 right-0 top-0 w-full">
@@ -116,7 +116,7 @@ export function BrixGauge() {
             >
               <span className={`mr-[3px] block h-[3px] w-[13px] transition-colors ${active === m.id ? "bg-red" : "bg-foam/0 group-hover:bg-foam/70"}`} />
               <span
-                className={`t-mono pointer-events-none absolute right-14 whitespace-nowrap bg-black/80 px-2 py-1 text-[0.62rem] transition-opacity ${
+                className={`t-mono pointer-events-none absolute right-14 whitespace-nowrap bg-black/80 px-2 py-1 text-[0.6875rem] transition-opacity ${
                   active === m.id
                     ? "text-gold-hi opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 min-[1600px]:opacity-100"
                     : "text-foam opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"

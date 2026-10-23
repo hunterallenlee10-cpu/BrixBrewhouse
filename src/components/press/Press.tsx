@@ -19,7 +19,7 @@ function Clipping({ clip, tilt, size }: { clip: Clip; tilt: number; size: "lg" |
           >
             {clip.outlet}
           </p>
-          <time dateTime={clip.iso} className="t-mono shrink-0 pb-1 text-right text-[0.66rem] text-[#3b342a]">
+          <time dateTime={clip.iso} className="t-mono shrink-0 pb-1 text-right text-[0.6875rem] text-[#3b342a]">
             {clip.date}
           </time>
         </header>
@@ -27,7 +27,7 @@ function Clipping({ clip, tilt, size }: { clip: Clip; tilt: number; size: "lg" |
         <h3 className={`press-headline mt-5 ${big ? "text-[clamp(1.7rem,3.3vw,3rem)]" : "text-[clamp(1.5rem,2.5vw,2.25rem)]"}`}>
           {clip.headline}
         </h3>
-        <p className="t-mono mt-4 text-[0.64rem] text-[#3b342a]">Reported by {clip.byline}</p>
+        <p className="t-mono mt-4 text-[0.6875rem] text-[#3b342a]">Reported by {clip.byline}</p>
         <p className="mt-4 max-w-[46ch] font-serif text-[1.08rem] italic leading-snug text-[#2a241c] md:text-[1.18rem]">{clip.summary}</p>
         <a
           href={clip.url}

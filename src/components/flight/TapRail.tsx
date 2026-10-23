@@ -109,11 +109,20 @@ function TapHandle({ beer, full, onPour, onFocusBeer }: { beer: Beer; full: bool
           <span className="flt-ferrule" />
         </span>
       </span>
-      <span className={`flt-label t-mono text-[0.62rem] tracking-[0.06em]`}>
+      <span className={`flt-label t-mono text-[0.6875rem] tracking-[0.06em]`}>
         <span className="text-gold">{label}</span>
-        <span className="text-[0.66rem] font-bold text-foam">{beer.short.toUpperCase()}</span>
-        <span className="whitespace-nowrap text-[0.58rem] text-text-2">
-          {na ? "0% · NA" : `${stat(beer.abv, "%")} / IBU ${stat(beer.ibu)}`}
+        <span className="text-[0.6875rem] font-bold text-foam">{beer.short.toUpperCase()}</span>
+        <span className="text-[0.6875rem] text-text-2">
+          {na ? (
+            "0% · NA"
+          ) : (
+            <>
+              {/* phones: ABV over IBU so neighbouring handles never collide; desktop: one line */}
+              <span className="whitespace-nowrap">{stat(beer.abv, "%")}</span>
+              <span className="hidden lg:inline"> / </span>
+              <span className="block whitespace-nowrap lg:inline">IBU {stat(beer.ibu)}</span>
+            </>
+          )}
         </span>
         {!beer.confirmed ? (
           <span className="mt-1 flex flex-col items-center gap-1 normal-case">

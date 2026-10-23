@@ -143,7 +143,7 @@ function VisitTab() {
         <address className="not-italic text-text-2">
           <span className="block text-lg text-foam">{SITE.street}</span>
           {SITE.city}, {SITE.region} {SITE.zip}
-          <span className="t-mono mt-1 block text-[0.66rem] text-text-3">{SITE.formerly}</span>
+          <span className="t-mono mt-1 block text-[0.6875rem] text-text-3">{SITE.formerly}</span>
         </address>
         <div className="flex flex-col gap-2 sm:flex-row md:flex-col">
           <a href={SITE.directions} target="_blank" rel="noopener noreferrer" className="flex h-13 min-h-12 items-center justify-center gap-2 bg-red px-5 font-display text-[1.2rem] font-extrabold uppercase text-foam hover:bg-red-deep">
@@ -156,7 +156,7 @@ function VisitTab() {
       </div>
       <div>
         <table className="w-full text-left">
-          <caption className="t-mono mb-2 text-left text-[0.66rem] text-text-3">Hours · {HOURS.holidayNote}</caption>
+          <caption className="t-mono mb-2 text-left text-[0.6875rem] text-text-3">Hours · {HOURS.holidayNote}</caption>
           <tbody>
             {[1, 2, 3, 4, 5, 6, 0].map((d) => {
               const h = HOURS.days.find((x) => x.day === d)!;
@@ -165,7 +165,7 @@ function VisitTab() {
                 <tr key={d} className={on ? "bg-gold/10" : ""} aria-current={on ? "date" : undefined}>
                   <th scope="row" className={`py-1.5 pl-2 font-normal ${on ? "text-gold-hi" : "text-text-2"}`}>
                     {h.label}
-                    {on ? <span className="t-mono ml-2 text-[0.6rem]">Today</span> : null}
+                    {on ? <span className="t-mono ml-2 text-[0.6875rem]">Today</span> : null}
                   </th>
                   <td className={`tabular py-1.5 pr-2 text-right ${on ? "text-foam" : "text-text-2"}`}>
                     {formatTime(h.open)} - {formatTime(h.close)}
@@ -185,7 +185,7 @@ function VisitTab() {
 
 type Errors = Record<string, string>;
 const field = "mt-1.5 block h-12 w-full border border-line-strong bg-ink-2 px-3 text-foam placeholder:text-text-3 focus:border-gold-hi focus:outline-none";
-const labelCls = "t-mono text-[0.66rem] text-text-2";
+const labelCls = "t-mono text-[0.6875rem] text-text-2";
 
 function Field({ id, label, error, children, hint }: { id: string; label: string; error?: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -232,8 +232,8 @@ function Success({ title, body, onReset }: { title: string; body: React.ReactNod
     <div ref={ref} tabIndex={-1} role="status" className="py-6 outline-none">
       <p className="t-serif text-[clamp(1.8rem,5vw,2.6rem)] text-gold-hi">{title}</p>
       <div className="mt-3 max-w-[48ch] text-text-2">{body}</div>
-      <p className="t-mono mt-6 text-[0.62rem] text-text-3">Concept preview: this form doesn&rsquo;t send anything yet.</p>
-      <button type="button" onClick={onReset} className="t-mono mt-4 h-11 border border-line-strong px-4 text-[0.66rem] text-foam hover:border-foam">
+      <p className="t-mono mt-6 text-[0.6875rem] text-text-3">Concept preview: this form doesn&rsquo;t send anything yet.</p>
+      <button type="button" onClick={onReset} className="t-mono mt-4 h-11 border border-line-strong px-4 text-[0.6875rem] text-foam hover:border-foam">
         Start over
       </button>
     </div>

@@ -25,7 +25,7 @@ export function HoursTable() {
             <tr key={d} aria-current={on ? "date" : undefined} className={`border-b border-line last:border-b-0 ${on ? "bg-gold/[0.12]" : ""}`}>
               <th scope="row" className={`py-3 pl-3 pr-4 font-normal ${on ? "text-gold-hi" : "text-text-2"}`}>
                 <span className="font-display text-[1.25rem] font-bold uppercase tracking-[0.02em]">{h.label}</span>
-                {on ? <span className="t-mono ml-3 align-[0.2em] text-[0.6rem] text-gold-hi">Today</span> : null}
+                {on ? <span className="t-mono ml-3 align-[0.2em] text-[0.6875rem] text-gold-hi">Today</span> : null}
               </th>
               <td className={`tabular py-3 pr-3 text-right font-mono text-[0.95rem] ${on ? "text-foam" : "text-text-2"}`}>
                 {formatTime(h.open)} - {formatTime(h.close)}

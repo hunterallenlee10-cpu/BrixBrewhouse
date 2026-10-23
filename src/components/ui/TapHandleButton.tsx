@@ -25,7 +25,7 @@ export function TapHandleButton({
       type="button"
       data-cursor="cap"
       onClick={(e) => openPour(tab, e.currentTarget)}
-      className={`tap-btn group relative inline-flex select-none items-center gap-3 bg-red font-display font-extrabold uppercase tracking-[0.04em] text-foam shadow-[0_12px_30px_-12px_rgb(234_3_34/0.65)] transition-[background-color,transform] duration-300 hover:bg-red-deep active:translate-y-px ${pad} ${className}`}
+      className={`tap-btn group relative inline-flex select-none items-center gap-3 bg-red font-display font-extrabold uppercase tracking-[0.04em] text-foam shadow-[0_14px_30px_-14px_rgb(0_0_0/0.85)] transition-[background-color,transform] duration-300 hover:bg-red-deep active:translate-y-px ${pad} ${className}`}
     >
       <span aria-hidden className="tap-handle relative block h-[1.55em] w-[0.62em]">
         {/* knob */}

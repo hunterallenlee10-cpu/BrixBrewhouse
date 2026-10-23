@@ -79,7 +79,7 @@ export const Paddle = forwardRef<
               <canvas ref={(el) => void (canvases.current[i] = el)} aria-hidden />
               <GlassSvg />
             </div>
-            <p className="t-mono mt-2 min-h-[2.2em] text-center text-[0.58rem] leading-tight text-foam/90 md:text-[0.64rem]">
+            <p className="t-mono mt-2 min-h-[2.2em] text-center text-[0.6875rem] leading-tight text-foam/90 md:text-[0.6875rem]">
               {b ? b.short.toUpperCase() : <span className="text-foam/45">Empty</span>}
             </p>
             {b ? (

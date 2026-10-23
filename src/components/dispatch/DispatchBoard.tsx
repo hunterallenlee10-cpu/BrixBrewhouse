@@ -45,7 +45,7 @@ export function DispatchBoard() {
         </header>
         <div className="mt-14">
           <FlapBoard />
-          <p className="t-mono mt-4 text-[0.62rem] text-text-3">
+          <p className="t-mono mt-4 text-[0.6875rem] text-text-3">
             Days marked {"{{CONFIRM}}"} are waiting on the owners. This board reads from one file they can edit.
           </p>
         </div>
@@ -61,7 +61,7 @@ export function DispatchBoard() {
           <div className="lg:col-span-8">
             <div className="flex items-baseline justify-between gap-4">
               <p className="t-display text-[clamp(1.8rem,3.4vw,2.8rem)] text-foam">The original shuffleboard</p>
-              <p className="t-mono hidden text-[0.64rem] text-text-3 sm:block">Still in play</p>
+              <p className="t-mono hidden text-[0.6875rem] text-text-3 sm:block">Still in play</p>
             </div>
             <p className="mt-2 max-w-[52ch] text-text-2">The table the firemen played on is still here, and it&rsquo;s still in play.</p>
             <div className="mt-7 pb-3">

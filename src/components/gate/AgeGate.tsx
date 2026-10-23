@@ -106,7 +106,7 @@ export function AgeGate({ logo }: { logo: React.ReactNode }) {
                 onClick={openDoor}
                 onPointerEnter={prime}
                 onFocus={prime}
-                className="h-14 bg-red px-7 font-display text-[1.2rem] font-extrabold uppercase tracking-[0.04em] text-foam shadow-[0_14px_34px_-12px_rgb(234_3_34/0.7)] transition-colors hover:bg-red-deep"
+                className="h-14 bg-red px-7 font-display text-[1.2rem] font-extrabold uppercase tracking-[0.04em] text-foam shadow-[0_14px_30px_-14px_rgb(0_0_0/0.85)] transition-colors hover:bg-red-deep"
               >
                 Yes, open the door
               </button>
@@ -145,7 +145,7 @@ export function AgeGate({ logo }: { logo: React.ReactNode }) {
           </>
         )}
       </div>
-      <span className="t-mono absolute bottom-3 left-4 text-[0.62rem] tracking-[0.14em] text-foam/70">Illustrative render</span>
+      <span className="t-mono absolute bottom-3 left-4 text-[0.6875rem] tracking-[0.14em] text-foam/70">Illustrative render</span>
     </div>
   );
 }

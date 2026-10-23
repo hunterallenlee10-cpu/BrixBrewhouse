@@ -8,7 +8,7 @@ import { SITE } from "@/lib/site";
 export function MobileBar() {
   const { gatePassed, pour, scrollTo } = useSite();
   const hidden = !gatePassed || pour.open;
-  const item = "flex min-h-14 flex-1 flex-col items-center justify-center gap-1 t-mono text-[0.62rem] text-foam active:bg-foam/5";
+  const item = "flex min-h-14 flex-1 flex-col items-center justify-center gap-1 t-mono text-[0.6875rem] text-foam active:bg-foam/5";
   return (
     <nav
       aria-label="Quick actions"

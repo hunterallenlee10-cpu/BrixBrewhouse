@@ -266,7 +266,7 @@ textarea {
   align-items: center;
   gap: 0.35em;
   font-family: var(--font-mono);
-  font-size: min(0.68em, 0.8rem);
+  font-size: clamp(0.6875rem, 0.68em, 0.8rem);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: none;

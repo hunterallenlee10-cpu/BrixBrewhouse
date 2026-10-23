@@ -139,7 +139,7 @@ export function FlightBuilder() {
                 type="button"
                 onClick={reset}
                 disabled={!filled}
-                className="t-mono inline-flex h-11 items-center gap-2 px-2 text-[0.66rem] text-text-2 transition-colors hover:text-foam disabled:opacity-40"
+                className="t-mono inline-flex h-11 items-center gap-2 px-2 text-[0.6875rem] text-text-2 transition-colors hover:text-foam disabled:opacity-40"
               >
                 <ArrowCounterClockwise size={16} aria-hidden /> Start over
               </button>
@@ -188,7 +188,7 @@ export function FlightBuilder() {
             {beers.map((b) => (
               <li key={b.id} className="flex items-start justify-between gap-4 border-b border-line py-4">
                 <div>
-                  <p className="t-mono text-[0.62rem] text-gold">{b.tap ? `Tap ${pad(b.tap)}` : "Non-alcoholic"}</p>
+                  <p className="t-mono text-[0.6875rem] text-gold">{b.tap ? `Tap ${pad(b.tap)}` : "Non-alcoholic"}</p>
                   <p className="text-foam">
                     {b.name}{" "}
                     <span className="tabular text-text-2">
@@ -200,7 +200,7 @@ export function FlightBuilder() {
                 <button
                   type="button"
                   onClick={() => pour(b)}
-                  className="t-mono h-11 shrink-0 border border-line-strong px-3 text-[0.62rem] text-foam hover:border-gold-hi hover:text-gold-hi"
+                  className="t-mono h-11 shrink-0 border border-line-strong px-3 text-[0.6875rem] text-foam hover:border-gold-hi hover:text-gold-hi"
                   aria-label={`Add ${b.name} to your flight`}
                 >
                   Add
@@ -218,9 +218,9 @@ function BeerDetail({ beer }: { beer: Beer }) {
   const na = beer.kind === "na";
   return (
     <aside aria-label="About this beer" className="flex flex-col border-t border-line pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-2">
-      <p className="t-mono text-[0.66rem] text-gold">{beer.tap ? `Tap ${pad(beer.tap)} / ${beer.style}` : `Non-alcoholic / ${beer.style}`}</p>
+      <p className="t-mono text-[0.6875rem] text-gold">{beer.tap ? `Tap ${pad(beer.tap)} / ${beer.style}` : `Non-alcoholic / ${beer.style}`}</p>
       <p className="t-display mt-2 text-[clamp(2.4rem,4vw,3.4rem)] text-foam">{beer.name}</p>
-      <dl className="t-mono mt-5 grid grid-cols-3 gap-3 text-[0.62rem]">
+      <dl className="t-mono mt-5 grid grid-cols-3 gap-3 text-[0.6875rem]">
         {(
           [
             ["ABV", na ? "0%" : beer.abv != null ? `${beer.abv}%` : "—"],
