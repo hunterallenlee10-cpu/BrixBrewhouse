@@ -144,7 +144,7 @@ A blackout palette with one warm light and one enamel red, plus the building's o
 **Character:** Civic fire-service signage at poster scale, softened by a warm, slightly wonky italic for the people's stories, and grounded by brew-sheet mono for every number.
 
 ### Hierarchy
-- **Display** (800, uppercase, 0.86 leading, -0.01em): room titles and the hero wordmark. Room titles run `clamp(3.6rem, 11vw, 10rem)`. The hero wordmark ("Brix Brewhouse", white, centred low over the door) runs `clamp(5rem, 8vw, 8.5rem)` on desktop and stacks to two lines on phones; it sits inside the frame, never cropped. Only "They said it." in Press is allowed to crop off the viewport, by the full stop only.
+- **Display** (800, uppercase, 0.86 leading, -0.01em): room titles and the hero wordmark. Room titles run `clamp(3.6rem, 11vw, 10rem)`. The hero wordmark ("Brix Brewhouse", white, centred low over the door) runs `clamp(5rem, 8vw, 8.5rem)` on desktop and stacks to two lines on phones; it sits inside the frame, never cropped. "They said it." in Press uses the room-title size; no headline runs off the viewport.
 - **Stencil** (700, uppercase, 0.1em): "BAY 0n" numerals that open each room, and the enamel placard heading.
 - **Serif** (Fraunces italic 400, SOFT 100, WONK 1): human moments: the founders' story, room subtitles, "Come pour one with us."
 - **Body** (Manrope 400, 1rem/1.6, max ~62ch): all explanatory copy.

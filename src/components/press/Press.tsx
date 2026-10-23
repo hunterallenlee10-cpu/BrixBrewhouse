@@ -14,7 +14,7 @@ function Clipping({ clip, tilt, size }: { clip: Clip; tilt: number; size: "lg" |
         <header className="flex items-end justify-between gap-4">
           <p
             className={`font-display font-extrabold uppercase leading-[0.86] tracking-[-0.01em] ${
-              big ? "text-[clamp(3.6rem,8.6vw,8.2rem)]" : "text-[clamp(3rem,6.4vw,6rem)]"
+              big ? "text-[clamp(2.8rem,5.6vw,5.4rem)]" : "text-[clamp(2.6rem,4.4vw,4.2rem)]"
             }`}
           >
             {clip.outlet}
@@ -24,7 +24,7 @@ function Clipping({ clip, tilt, size }: { clip: Clip; tilt: number; size: "lg" |
           </time>
         </header>
         <div className={`press-rule mt-3`} />
-        <h3 className={`press-headline mt-5 ${big ? "text-[clamp(1.7rem,3.3vw,3rem)]" : "text-[clamp(1.5rem,2.5vw,2.25rem)]"}`}>
+        <h3 className={`press-headline mt-5 ${big ? "text-[clamp(1.6rem,2.6vw,2.5rem)]" : "text-[clamp(1.4rem,2vw,1.9rem)]"}`}>
           {clip.headline}
         </h3>
         <p className="t-mono mt-4 text-[0.6875rem] text-[#3b342a]">Reported by {clip.byline}</p>
@@ -50,7 +50,7 @@ export function Press() {
     <section id="press" aria-labelledby="press-title" className="section overflow-hidden bg-black">
       <div className="wrap">
         <BayLabel n="07">Press</BayLabel>
-        <h2 id="press-title" className="press-title t-display mt-5 whitespace-nowrap leading-[0.8] text-foam">
+        <h2 id="press-title" className="t-display mt-5 text-[clamp(3.6rem,11vw,10rem)] text-foam">
           They said it.
         </h2>
 
@@ -58,7 +58,7 @@ export function Press() {
           <div className="md:col-span-7">
             <Clipping clip={times} tilt={-1.4} size="lg" />
           </div>
-          <div className="md:col-span-5 md:mt-40">
+          <div className="md:col-span-5 md:mt-28">
             <Clipping clip={wnep} tilt={1.8} size="md" />
           </div>
         </div>
