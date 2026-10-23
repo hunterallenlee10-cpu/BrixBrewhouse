@@ -10,6 +10,16 @@
 @import "../components/visit/visit.css";
 @import "../components/faq/faq.css";
 
+/* metric fallback for Big Shoulders: next/font has no override data for it, so a
+   bold Arial scaled to its measured width (0.70x across our headlines) keeps line
+   wraps identical before and after the web font swaps in (no layout shift) */
+@font-face {
+  font-family: "Big Shoulders Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold"), local("Arial"), local("Liberation Sans");
+  font-weight: 700 800;
+  size-adjust: 70%;
+}
+
 /* ------------------------------------------------------------------
    Brix Brewhouse design tokens
    Rules: black dominates. Gold is the beer, the light, the glow.
@@ -74,8 +84,8 @@
   --color-text-3: var(--text-3);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
-  --font-display: var(--font-big-shoulders), "Arial Narrow", sans-serif;
-  --font-stencil: var(--font-stencil), var(--font-big-shoulders), sans-serif;
+  --font-display: var(--font-big-shoulders), "Big Shoulders Fallback", "Arial Narrow", sans-serif;
+  --font-stencil: var(--font-stencil), var(--font-big-shoulders), "Big Shoulders Fallback", sans-serif;
   --font-serif: var(--font-fraunces), Georgia, serif;
   --font-sans: var(--font-manrope), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;

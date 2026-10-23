@@ -16,7 +16,7 @@ export function Shuffleboard() {
     const w = wrap.current;
     if (!l || !w) return;
     // ResizeObserver reports the lane width asynchronously (no forced layout at mount)
-    const ro = new ResizeObserver(([entry]) => setTravel(Math.max(0, entry.contentRect.width * 0.94 - 40)));
+    const ro = new ResizeObserver(([entry]) => setTravel(Math.max(0, entry.contentRect.width * 0.925 - 40)));
     ro.observe(l);
     const io = new IntersectionObserver(
       ([e]) => {
@@ -40,7 +40,7 @@ export function Shuffleboard() {
     if (!w || window.matchMedia("(prefers-reduced-motion: reduce)").matches)
       return;
     w.classList.remove("dsp-slid");
-    const puck = w.querySelector<HTMLElement>(`.dsp-puck`);
+    const puck = w.querySelector<HTMLElement>(`.dsp-puck:not(.dsp-puck-red)`);
     if (puck) {
       puck.style.transition = "none";
       void puck.offsetWidth;
@@ -58,19 +58,23 @@ export function Shuffleboard() {
     >
       <div aria-hidden className="dsp-gutter">
         <div ref={lane} className="dsp-lane">
+          {/* scoring is painted at both ends of a real table: 3-2-1 . . . 1-2-3 */}
           {[
-            { n: "1", left: "64%" },
-            { n: "2", left: "76%" },
-            { n: "3", left: "88%" },
+            { n: "3", left: "0%", end: "near" },
+            { n: "2", left: "9%", end: "near" },
+            { n: "1", left: "18%", end: "near" },
+            { n: "1", left: "73%", end: "far" },
+            { n: "2", left: "82%", end: "far" },
+            { n: "3", left: "91%", end: "far" },
           ].map((z) => (
-            <span
-              key={z.n}
-              className="dsp-zone"
-              style={{ left: z.left, width: "12%" }}
-            >
+            <span key={z.end + z.n} className={`dsp-zone dsp-zone-${z.end}`} style={{ left: z.left, width: "9%" }}>
               {z.n}
             </span>
           ))}
+          <span className="dsp-foul" style={{ left: "27%" }} />
+          <span className="dsp-foul" style={{ left: "73%" }} />
+          {/* the other team's weight, already sitting in the 2 */}
+          <span className="dsp-puck dsp-puck-red" style={{ left: "84.5%" }} />
           <span className="dsp-puck" />
         </div>
       </div>

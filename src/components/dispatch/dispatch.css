@@ -183,13 +183,29 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  border-left: 2px solid rgb(17 18 20 / 0.55);
   display: grid;
   place-items: center;
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.6rem;
-  color: rgb(17 18 20 / 0.6);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: rgb(70 35 12 / 0.55);
+}
+/* painted scoring lines: thin and slightly worn, not cell dividers */
+.dsp-zone-far {
+  border-left: 1.5px solid rgb(70 35 12 / 0.5);
+}
+.dsp-zone-near {
+  border-right: 1.5px solid rgb(70 35 12 / 0.5);
+}
+.dsp-zone-near:first-child {
+  border-left: 0;
+}
+.dsp-foul {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  width: 0;
+  border-left: 1.5px dashed rgb(70 35 12 / 0.4);
 }
 .dsp-puck {
   position: absolute;
@@ -214,7 +230,14 @@
   background: radial-gradient(circle at 40% 35%, var(--pour-gold-hi), var(--pour-gold) 70%);
   box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.35);
 }
-.dsp-slid .dsp-puck {
+.dsp-puck-red {
+  margin-left: -22px;
+  transition: none;
+}
+.dsp-puck-red::after {
+  background: radial-gradient(circle at 40% 35%, #ff5a5f, var(--fire-red-deep) 70%);
+}
+.dsp-slid .dsp-puck:not(.dsp-puck-red) {
   transform: translateX(var(--travel));
 }
 

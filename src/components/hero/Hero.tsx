@@ -135,11 +135,10 @@ export function Hero() {
         <div ref={firehouseRef} className="invisible absolute inset-x-0 bottom-[12svh] opacity-0 will-change-transform">
           <div className="wrap">
             <p className="t-serif max-w-[16ch] text-[clamp(2.6rem,7.4vw,7rem)] text-foam [text-shadow:0_4px_40px_rgb(0_0_0/0.6)]">
-              A{" "}
-              <span className="whitespace-nowrap">
-                1953<sup className="ml-1 align-super text-[0.4em]"><Confirm title="Their site says 1953; a listing says 1932, when the fire company was chartered." /></sup>
-              </span>{" "}
-              Firehouse. <span className="text-gold-hi">A New Pour.</span>
+              A <span className="decoration-gold underline decoration-dashed decoration-[0.035em] underline-offset-[0.12em]">1953</span><span aria-hidden className="text-gold-hi">*</span> Firehouse. <span className="text-gold-hi">A New Pour.</span>
+            </p>
+            <p className="t-mono mt-3 flex flex-wrap items-center gap-2 text-[0.6875rem] text-foam/85 [text-shadow:0_1px_6px_rgb(0_0_0/0.9)]">
+              <span aria-hidden className="text-gold-hi">*</span> 1953 <Confirm /> their site says 1953; a listing says 1932.
             </p>
             <p className="mt-6 max-w-[38ch] text-lg text-foam/90 md:text-xl">The walls hold stories. The taps pour something new.</p>
           </div>
@@ -158,9 +157,6 @@ export function Hero() {
         {/* 85-100%: the door's open */}
         <div ref={ctaRef} className="invisible absolute inset-x-0 bottom-[11svh] opacity-0 will-change-transform">
           <div className="wrap flex flex-col items-start gap-5">
-            <p className="t-serif text-[clamp(2.2rem,5.6vw,5rem)] text-foam [text-shadow:0_4px_40px_rgb(0_0_0/0.6)]">
-              Drink local.
-            </p>
             <div className="flex flex-wrap items-center gap-4">
               <TapHandleButton size="lg" />
               <StatusPill tone="glass" />
@@ -188,14 +184,15 @@ function StaticHero() {
         />
       </picture>
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 to-black/70" />
-      <div className="wrap relative flex flex-col gap-5 pt-[calc(var(--nav-h)+3rem)]">
+      {/* desktop: one viewport, copy on top and BRIX filling what is left (cropped at the bottom edge) */}
+      <div className="relative md:flex md:h-[100svh] md:flex-col">
+      <div className="wrap relative flex flex-col gap-5 pt-[calc(var(--nav-h)+3rem)] md:shrink-0">
         <p className="t-serif max-w-[18ch] text-[clamp(2rem,5vw,4.2rem)] text-foam [text-shadow:0_4px_30px_rgb(0_0_0/0.7)]">
-          A 1953
-          <sup className="ml-1 align-super text-[0.4em]">
-            <Confirm title="Their site says 1953; a listing says 1932, when the fire company was chartered." />
-          </sup>{" "}
-          Firehouse. <span className="text-gold-hi">A New Pour.</span>
+          A <span className="decoration-gold underline decoration-dashed decoration-[0.035em] underline-offset-[0.12em]">1953</span><span aria-hidden className="text-gold-hi">*</span> Firehouse. <span className="text-gold-hi">A New Pour.</span>
         </p>
+        <p className="t-mono -mt-2 flex flex-wrap items-center gap-2 text-[0.6875rem] text-foam/85 [text-shadow:0_1px_6px_rgb(0_0_0/0.9)]">
+              <span aria-hidden className="text-gold-hi">*</span> 1953 <Confirm /> their site says 1953; a listing says 1932.
+            </p>
         <p className="max-w-[44ch] text-lg text-foam/90">
           The walls hold stories. The taps pour something new. Small batch, brewed in-house, nine taps. Good beer isn&rsquo;t rushed.
         </p>
@@ -205,14 +202,15 @@ function StaticHero() {
         </div>
         <p className="t-mono text-[0.72rem] text-foam/85">{hoursLine}</p>
       </div>
-      <div className="absolute inset-x-0 bottom-[calc(56px+env(safe-area-inset-bottom))] md:bottom-0">
-        <div className="relative bottom-[-0.1em] flex flex-col items-center text-[66vw] md:bottom-[-0.27em] md:text-[73vw]">
+      <div className="absolute inset-x-0 bottom-[calc(56px+env(safe-area-inset-bottom))] md:relative md:bottom-auto md:mt-[clamp(1rem,3vh,2.5rem)] md:flex md:min-h-0 md:flex-1 md:flex-col md:justify-end md:overflow-hidden md:[container-type:size]">
+        <div className="relative bottom-[-0.1em] flex flex-col items-center text-[66vw] md:bottom-[-0.02em] md:text-[min(73vw,calc((100cqh-3rem)/0.74))]">
           <p className="t-mono mb-[0.035em] text-center text-[0.6875rem] text-foam/90 md:text-[0.8rem]">Brewhouse · Brodheadsville, PA · Est. 2026</p>
           <h1 className="t-display flex w-[100vw] justify-center overflow-x-clip whitespace-nowrap text-[1em] leading-[0.74] text-foam">
             <span className="shrink-0 tracking-[-0.02em]">BRIX</span>
             <span className="sr-only"> Brewhouse</span>
           </h1>
         </div>
+      </div>
       </div>
       <Illustrative className="absolute right-4 top-[calc(var(--nav-h)+10px)] [text-shadow:0_1px_6px_rgb(0_0_0/0.9)]" />
     </section>

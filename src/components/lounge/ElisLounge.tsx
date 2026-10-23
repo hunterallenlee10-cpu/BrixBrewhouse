@@ -39,12 +39,10 @@ export function ElisLounge() {
               </li>
             ))}
           </ul>
-          <blockquote className="mt-6 max-w-xl border-l border-gold/50 pl-4">
-            <p className="t-serif text-[1.35rem] leading-snug text-foam/90">
-              &ldquo;We&rsquo;ll champion local causes, host fundraisers, and make sure everyone feels welcome from day one.&rdquo;
-            </p>
-            <footer className="t-mono mt-2 text-[0.6875rem] text-text-3">Brix Brewhouse</footer>
-          </blockquote>
+          {/* paraphrased from their site, not a quote */}
+          <p className="t-serif mt-6 max-w-xl border-l border-gold/50 pl-4 text-[1.35rem] leading-snug text-foam/90">
+            Brix has said it will champion local causes and host fundraisers here.
+          </p>
         </div>
 
         {/* the board: 107 days, one stroke each */}

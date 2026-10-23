@@ -93,9 +93,8 @@ export function ThreeMeanings() {
       tl.fromTo("[data-ledger-row]", { autoAlpha: 0, x: -16 }, { autoAlpha: 1, x: 0, duration: 0.35, stagger: 0.12 }, 7.2);
       tl.to("[data-panel='1']", { autoAlpha: 0, y: -30, duration: 0.5 }, 8.7);
 
-      // 4. THE FIREHOUSE: red enamel edge + stencilled bay plates
+      // 4. THE FIREHOUSE: the red enamel edge
       tl.fromTo(w, { "--enamel": 0 }, { "--enamel": 1, duration: 0.8 }, 8.9);
-      tl.fromTo("[data-plate]", { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.12 }, 9.1);
       tl.fromTo("[data-panel='2']", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.6 }, 9.2);
       tl.to({}, { duration: 1.2 }, 9.8); // hold before release
     }, stage);
@@ -137,14 +136,6 @@ export function ThreeMeanings() {
                   ))}
                   <span className="t-mono absolute -top-6 left-0 text-[0.6875rem] text-gold-hi">°Bx</span>
                 </div>
-                {/* one stencil plate: this room is bay 01 (the building has five bays, so no per-letter numbering) */}
-                {word.letters.slice(0, 1).map((l, i) => (
-                  <span key={i} aria-hidden className={`brk-plate-pos ${l.above ? "brk-plate-above" : ""}`} style={{ left: `${l.x}%`, top: `${l.y}%` }}>
-                    <span data-plate className={`brk-plate ${reducedMotion ? "" : "invisible opacity-0"}`}>
-                      BAY 01
-                    </span>
-                  </span>
-                ))}
               </div>
             </div>
           </div>

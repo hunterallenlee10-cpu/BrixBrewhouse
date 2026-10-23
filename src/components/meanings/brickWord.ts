@@ -34,8 +34,6 @@ export type BrickWord = {
   cols: number;
   rows: number;
   bricks: Brick[];
-  /** centre-x and y (in % of the word box) of each letter's plate; above = plate sits over the letter */
-  letters: { x: number; y: number; above: boolean }[];
 };
 
 function mulberry(seed: number) {
@@ -102,18 +100,5 @@ export function buildBricks(layout: Layout = "one"): BrickWord {
     }
   }
 
-  // plates hang under the last line; on a stacked word the first line's plates sit above it
-  const letters: { x: number; y: number; above: boolean }[] = [];
-  lines.forEach((word, li) => {
-    const top = li * (LETTER_H + LINE_GAP);
-    const above = li < lines.length - 1;
-    word.split("").forEach((_, i) => {
-      letters.push({
-        x: ((i * (LETTER_W + LETTER_GAP) + LETTER_W / 2) / cols) * 100,
-        y: ((above ? top : top + LETTER_H) / rows) * 100,
-        above,
-      });
-    });
-  });
-  return { cols, rows, bricks, letters };
+  return { cols, rows, bricks };
 }
