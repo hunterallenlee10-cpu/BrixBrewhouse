@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -33,23 +33,28 @@ export const useSite = () => {
 /** Heavy, weighted ease for doors (matches --ease-door). */
 export const doorEase = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
+/* gate flag lives on <html data-gate> (set before paint for returning guests) */
+const GATE_EVENT = "brix:gate";
+const subscribeGate = (cb: () => void) => {
+  window.addEventListener(GATE_EVENT, cb);
+  return () => window.removeEventListener(GATE_EVENT, cb);
+};
+const readGate = () => document.documentElement.dataset.gate === "passed";
+const MOTION_Q = "(prefers-reduced-motion: reduce)";
+const subscribeMotion = (cb: () => void) => {
+  const mq = window.matchMedia(MOTION_Q);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+};
+const readMotion = () => window.matchMedia(MOTION_Q).matches;
+
 export function SiteProvider({ children }: { children: React.ReactNode }) {
-  const [gatePassed, setGatePassed] = useState(false);
+  const gatePassed = useSyncExternalStore(subscribeGate, readGate, () => false);
   const [pour, setPour] = useState<{ open: boolean; tab: PourTab }>({ open: false, tab: "visit" });
-  const [reducedMotion, setReduced] = useState(false);
+  const reducedMotion = useSyncExternalStore(subscribeMotion, readMotion, () => false);
   const [sound, setSoundState] = useState(false);
   const lenis = useRef<Lenis | null>(null);
   const opener = useRef<HTMLElement | null>(null);
-
-  // returning guest (boot script already hid the gate before paint)
-  useEffect(() => {
-    if (document.documentElement.dataset.gate === "passed") setGatePassed(true);
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setReduced(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
 
   // Lenis smooth scroll driven by GSAP's ticker so ScrollTrigger stays in lockstep.
   useEffect(() => {
@@ -85,7 +90,7 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
       sessionStorage.setItem("brix-21", "yes");
     } catch {}
     document.documentElement.dataset.gate = "passed";
-    setGatePassed(true);
+    window.dispatchEvent(new Event(GATE_EVENT));
   }, []);
 
   const openPour = useCallback((tab: PourTab = "visit", el?: HTMLElement | null) => {

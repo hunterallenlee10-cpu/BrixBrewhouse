@@ -16,20 +16,19 @@ const TABS: { id: PourTab; label: string }[] = [
 
 export function PourModal() {
   const { pour, closePour, openPour } = useSite();
-  const [mounted, setMounted] = useState(false);
   const [shown, setShown] = useState(false);
   const panel = useRef<HTMLDivElement>(null);
   const titleId = useId();
+  const mounted = pour.open || shown;
+  const raised = pour.open && shown;
 
-  // mount -> next frame slide up; close -> slide down -> unmount
+  // open: mount, then raise on the next frame. close: lower, then unmount after the door has dropped.
   useEffect(() => {
     if (pour.open) {
-      setMounted(true);
       const r = requestAnimationFrame(() => requestAnimationFrame(() => setShown(true)));
       return () => cancelAnimationFrame(r);
     }
-    setShown(false);
-    const t = window.setTimeout(() => setMounted(false), 700);
+    const t = window.setTimeout(() => setShown(false), 700);
     return () => window.clearTimeout(t);
   }, [pour.open]);
 
@@ -45,8 +44,13 @@ export function PourModal() {
         (el) => el.offsetParent !== null,
       );
       const [a, z] = [els[0], els[els.length - 1]];
-      if (e.shiftKey && document.activeElement === a) (e.preventDefault(), z.focus());
-      else if (!e.shiftKey && document.activeElement === z) (e.preventDefault(), a.focus());
+      if (e.shiftKey && document.activeElement === a) {
+        e.preventDefault();
+        z.focus();
+      } else if (!e.shiftKey && document.activeElement === z) {
+        e.preventDefault();
+        a.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
@@ -67,7 +71,7 @@ export function PourModal() {
       <div
         aria-hidden
         onClick={closePour}
-        className={`absolute inset-0 bg-black/75 backdrop-blur-[2px] transition-opacity duration-500 ${shown ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 bg-black/75 backdrop-blur-[2px] transition-opacity duration-500 ${raised ? "opacity-100" : "opacity-0"}`}
       />
       <div
         ref={panel}
@@ -76,7 +80,7 @@ export function PourModal() {
         aria-labelledby={titleId}
         className="absolute inset-x-0 bottom-0 mx-auto flex max-h-[92svh] w-full max-w-3xl flex-col border-x border-t border-line-strong bg-ink-1 shadow-[0_-30px_80px_-20px_rgb(0_0_0/0.9)]"
         style={{
-          transform: shown ? "translate3d(0,0,0)" : "translate3d(0,104%,0)",
+          transform: raised ? "translate3d(0,0,0)" : "translate3d(0,104%,0)",
           transition: "transform 0.75s var(--ease-door)",
           paddingBottom: "env(safe-area-inset-bottom)",
         }}
@@ -130,8 +134,8 @@ export function PourModal() {
 }
 
 function VisitTab() {
-  const [today, setToday] = useState(-1);
-  useEffect(() => setToday(zonedNow(new Date()).day), []);
+  // the modal only ever renders on the client, after a click
+  const [today] = useState(() => zonedNow(new Date()).day);
   return (
     <div role="tabpanel" id="panel-visit" aria-labelledby="tab-visit" className="grid gap-6 md:grid-cols-[1fr_1.1fr]">
       <div className="flex flex-col gap-4">

@@ -68,9 +68,10 @@ export function Hero() {
     return () => cancelAnimationFrame(raf);
   }, [reducedMotion]);
 
-  const reg = (k: string) => (el: HTMLDivElement | null) => {
-    overlays.current[k] = el;
-  };
+  const brixRef = useCallback((el: HTMLDivElement | null) => void (overlays.current.brix = el), []);
+  const firehouseRef = useCallback((el: HTMLDivElement | null) => void (overlays.current.firehouse = el), []);
+  const batchRef = useCallback((el: HTMLDivElement | null) => void (overlays.current.batch = el), []);
+  const ctaRef = useCallback((el: HTMLDivElement | null) => void (overlays.current.cta = el), []);
 
   if (reducedMotion) return <StaticHero />;
 
@@ -98,7 +99,7 @@ export function Hero() {
         <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
 
         {/* 0-25%: BRIX, wider than the viewport and sunk below the bottom edge: cropped on three sides on purpose */}
-        <div ref={reg("brix")} className="absolute inset-x-0 bottom-[calc(56px+env(safe-area-inset-bottom))] will-change-transform md:bottom-0">
+        <div ref={brixRef} className="absolute inset-x-0 bottom-[calc(56px+env(safe-area-inset-bottom))] will-change-transform md:bottom-0">
           {/* the whole block sinks below the fold in em units of the word, so the mono line stays attached */}
           <div className="relative bottom-[-0.1em] flex flex-col items-center text-[66vw] md:bottom-[-0.27em] md:text-[73vw]">
             <p className="t-mono mb-[0.035em] text-center text-[0.68rem] text-foam/90 [text-shadow:0_2px_12px_rgb(0_0_0/0.8)] md:text-[0.8rem]">
@@ -112,7 +113,7 @@ export function Hero() {
         </div>
 
         {/* 25-55%: the firehouse */}
-        <div ref={reg("firehouse")} className="invisible absolute inset-x-0 bottom-[12svh] opacity-0 will-change-transform">
+        <div ref={firehouseRef} className="invisible absolute inset-x-0 bottom-[12svh] opacity-0 will-change-transform">
           <div className="wrap">
             <p className="t-serif max-w-[16ch] text-[clamp(2.6rem,7.4vw,7rem)] text-foam [text-shadow:0_4px_40px_rgb(0_0_0/0.6)]">
               A{" "}
@@ -126,7 +127,7 @@ export function Hero() {
         </div>
 
         {/* 55-85%: the brewing */}
-        <div ref={reg("batch")} className="invisible absolute inset-x-0 bottom-[12svh] opacity-0 will-change-transform">
+        <div ref={batchRef} className="invisible absolute inset-x-0 bottom-[12svh] opacity-0 will-change-transform">
           <div className="wrap flex flex-col items-start gap-5">
             <p className="t-mono text-[0.78rem] text-gold-hi">Small batch. Brewed in-house. Nine taps.</p>
             <p className="t-display max-w-[11ch] text-[clamp(3.4rem,10vw,9.5rem)] text-foam [text-shadow:0_6px_50px_rgb(0_0_0/0.5)]">
@@ -136,7 +137,7 @@ export function Hero() {
         </div>
 
         {/* 85-100%: the door's open */}
-        <div ref={reg("cta")} className="invisible absolute inset-x-0 bottom-[11svh] opacity-0 will-change-transform">
+        <div ref={ctaRef} className="invisible absolute inset-x-0 bottom-[11svh] opacity-0 will-change-transform">
           <div className="wrap flex flex-col items-start gap-5">
             <p className="t-serif text-[clamp(2.2rem,5.6vw,5rem)] text-foam [text-shadow:0_4px_40px_rgb(0_0_0/0.6)]">
               We&rsquo;ll save you a seat.

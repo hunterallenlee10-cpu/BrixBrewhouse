@@ -14,13 +14,11 @@ export function AgeGate() {
   const dialog = useRef<HTMLDivElement>(null);
   const yesBtn = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    if (gatePassed && phase === "ask") setPhase("gone");
-  }, [gatePassed, phase]);
+  const hidden = phase === "gone" || (gatePassed && phase === "ask");
 
   // initial focus + focus trap
   useEffect(() => {
-    if (phase === "gone" || phase === "opening") return;
+    if (hidden || phase === "opening") return;
     const first = dialog.current?.querySelector<HTMLElement>("[data-autofocus]") ?? yesBtn.current;
     first?.focus({ preventScroll: true });
     const onKey = (e: KeyboardEvent) => {
@@ -28,12 +26,17 @@ export function AgeGate() {
       const els = Array.from(dialog.current.querySelectorAll<HTMLElement>("button, a[href]"));
       if (!els.length) return;
       const [a, z] = [els[0], els[els.length - 1]];
-      if (e.shiftKey && document.activeElement === a) (e.preventDefault(), z.focus());
-      else if (!e.shiftKey && document.activeElement === z) (e.preventDefault(), a.focus());
+      if (e.shiftKey && document.activeElement === a) {
+        e.preventDefault();
+        z.focus();
+      } else if (!e.shiftKey && document.activeElement === z) {
+        e.preventDefault();
+        a.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [phase]);
+  }, [phase, hidden]);
 
   const openDoor = () => {
     passGate();
@@ -50,7 +53,7 @@ export function AgeGate() {
     window.setTimeout(() => setPhase("gone"), 1400);
   };
 
-  if (phase === "gone") return null;
+  if (hidden) return null;
 
   return (
     <div

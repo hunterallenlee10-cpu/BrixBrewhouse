@@ -1,0 +1,38 @@
+import { chromium } from "@playwright/test";
+const S = process.argv[2];
+const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+const errs = [];
+for (const vp of [{ n: "d", w: 1440, h: 900 }, { n: "m", w: 390, h: 844, mobile: true }]) {
+  const ctx = await b.newContext({ viewport: { width: vp.w, height: vp.h }, isMobile: !!vp.mobile, hasTouch: !!vp.mobile });
+  await ctx.addInitScript(() => sessionStorage.setItem("brix-21", "yes"));
+  const p = await ctx.newPage();
+  p.on("pageerror", (e) => errs.push(e.message));
+  p.on("console", (m) => m.type() === "error" && errs.push(m.text()));
+  await p.goto("http://localhost:3000/", { waitUntil: "networkidle" });
+  const hero = await p.evaluate(() => document.getElementById("top").offsetHeight - innerHeight);
+  await p.evaluate((y) => scrollTo(0, y), hero);
+  await p.waitForTimeout(1500);
+  await p.locator("#top").getByRole("button", { name: "Pour One With Us" }).click();
+  await p.waitForTimeout(1000);
+  await p.screenshot({ path: `${S}/modal-${vp.n}-visit.png` });
+  await p.getByRole("tab", { name: "Large group" }).click();
+  await p.getByRole("button", { name: "Send the heads-up" }).click();
+  await p.waitForTimeout(300);
+  await p.screenshot({ path: `${S}/modal-${vp.n}-group-errors.png` });
+  await p.getByRole("tab", { name: "Private event" }).click();
+  await p.fill("#e-name", "Test"); await p.fill("#e-phone", "5702139298"); await p.fill("#e-email", "a@b.co"); await p.fill("#e-date", "2026-11-20"); await p.fill("#e-guests", "40");
+  await p.getByRole("button", { name: "Ask about the lounge" }).click();
+  await p.waitForTimeout(300);
+  await p.screenshot({ path: `${S}/modal-${vp.n}-event-ok.png` });
+  await p.keyboard.press("Escape");
+  await p.waitForTimeout(900);
+  console.log(vp.n, "modal closed:", await p.locator('[role="dialog"]').count() === 0);
+  await ctx.close();
+}
+const rctx = await b.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: "reduce" });
+await rctx.addInitScript(() => sessionStorage.setItem("brix-21", "yes"));
+const rp = await rctx.newPage();
+await rp.goto("http://localhost:3000/", { waitUntil: "networkidle" });
+await rp.screenshot({ path: `${S}/reduced-hero.png` });
+await b.close();
+console.log(errs.length ? "ERRORS " + errs.join(" | ") : "no errors");

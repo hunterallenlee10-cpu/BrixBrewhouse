@@ -19,7 +19,11 @@ function loadOrder(count: number) {
   const seen = new Set<number>();
   const order: number[] = [];
   for (const step of [16, 8, 4, 2, 1]) {
-    for (let i = 0; i < count; i += step) if (!seen.has(i)) (seen.add(i), order.push(i));
+    for (let i = 0; i < count; i += step) {
+      if (seen.has(i)) continue;
+      seen.add(i);
+      order.push(i);
+    }
   }
   if (!seen.has(count - 1)) order.push(count - 1);
   return order;
