@@ -6,7 +6,6 @@ import { SITE } from "@/lib/site";
 import { HoursTable } from "./HoursTable";
 import { MapPanel } from "./MapPanel";
 import { RidgeVideo } from "./RidgeVideo";
-import "./visit.css";
 
 const GOOD_TO_KNOW = [
   "Family-friendly",

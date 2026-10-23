@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSite } from "@/components/providers/SiteProvider";
 import { BayLabel, PhotoSlot } from "@/components/ui/primitives";
 import { buildBricks, COURSE, type Brick, type Layout } from "./brickWord";
-import "./meanings.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,25 +17,39 @@ const LEDGER: [string, string][] = [
   ["Hometown of", "Joe Elias & Chris Pohorenco"],
 ];
 
+const PHONE_Q = "(max-width: 767px)";
+const isPhone = () => window.matchMedia(PHONE_Q).matches;
+const subscribePhone = (cb: () => void) => {
+  const mq = window.matchMedia(PHONE_Q);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+};
+
 /** BAY 01: the word built brick by brick, then re-skinned three ways. */
 export function ThreeMeanings() {
-  const { reducedMotion } = useSite();
-  const [layout, setLayout] = useState<Layout>("one");
+  const { reducedMotion, gatePassed } = useSite();
+  // phones stack the word BR / IX so the bricks stay big enough to read
+  const layout = useSyncExternalStore<Layout>(subscribePhone, () => (isPhone() ? "two" : "one"), () => "one");
   const word = useMemo(() => buildBricks(layout), [layout]);
   const stage = useRef<HTMLDivElement>(null);
   const wordEl = useRef<HTMLDivElement>(null);
+  const [armed, setArmed] = useState(false);
 
-  // phones stack the word BR / IX so the bricks stay big enough to read
+  // the timeline (hundreds of bricks + a pin) is built once the gate is passed, in an idle slot:
+  // its pin spacing lands far below the fold, so nothing visible moves
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    const sync = () => setLayout(mq.matches ? "two" : "one");
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
+    if (!gatePassed || armed) return;
+    const go = () => setArmed(true);
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(go, { timeout: 1500 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const t = window.setTimeout(go, 400);
+    return () => window.clearTimeout(t);
+  }, [gatePassed, armed]);
 
   useEffect(() => {
-    if (reducedMotion || !stage.current || !wordEl.current) return;
+    if (reducedMotion || !armed || !stage.current || !wordEl.current) return;
     const ctx = gsap.context(() => {
       const els = gsap.utils.toArray<HTMLElement>("[data-brick]");
       const w = wordEl.current!;
@@ -86,8 +99,9 @@ export function ThreeMeanings() {
       tl.fromTo("[data-panel='2']", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.6 }, 9.2);
       tl.to({}, { duration: 1.2 }, 9.8); // hold before release
     }, stage);
+    ScrollTrigger.refresh();
     return () => ctx.revert();
-  }, [reducedMotion, word]);
+  }, [reducedMotion, armed, word]);
 
   const wordStyle = { aspectRatio: `${word.cols} / ${(word.rows * COURSE).toFixed(3)}` } as React.CSSProperties;
   // cqw resolves against the .word container, so --u lives on its child

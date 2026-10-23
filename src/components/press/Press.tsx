@@ -2,7 +2,6 @@ import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { BayLabel } from "@/components/ui/primitives";
 import { SITE } from "@/lib/site";
 import { LiteYouTube } from "./LiteYouTube";
-import "./press.css";
 
 type Clip = (typeof SITE.press)[number];
 

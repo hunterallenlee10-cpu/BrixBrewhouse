@@ -1,4 +1,14 @@
 @import "tailwindcss";
+/* room styles: one stylesheet, so code-split rooms don't add render-blocking CSS requests */
+@import "../components/meanings/meanings.css";
+@import "../components/flight/flight.css";
+@import "../components/bartop/bartop.css";
+@import "../components/kitchen/kitchen.css";
+@import "../components/lounge/lounge.css";
+@import "../components/dispatch/dispatch.css";
+@import "../components/press/press.css";
+@import "../components/visit/visit.css";
+@import "../components/faq/faq.css";
 
 /* ------------------------------------------------------------------
    Brix Brewhouse design tokens
@@ -355,4 +365,14 @@ html[data-gate="passed"] .age-gate {
 }
 html.fonts-ready .wait-font {
   opacity: 1;
+}
+
+/* ---------- render rooms only as you approach them ----------
+   Rooms below Three Meanings skip layout and paint until near the viewport
+   (they use IntersectionObserver, not ScrollTrigger, so estimated sizes are safe).
+   `auto` remembers each room's real size once it has rendered. */
+#main > section:nth-child(n + 3),
+body > footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1100px;
 }

@@ -21,7 +21,21 @@ export function BrixGauge() {
   const [marks, setMarks] = useState<{ id: string; label: string; at: number }[]>([]);
   const [active, setActive] = useState("top");
 
+  const [ready, setReady] = useState(false);
+  // hidden behind the gate anyway: set up after it, in an idle slot (measuring forces a full layout)
   useEffect(() => {
+    if (!gatePassed || ready) return;
+    const go = () => setReady(true);
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(go, { timeout: 2000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const t = window.setTimeout(go, 500);
+    return () => window.clearTimeout(t);
+  }, [gatePassed, ready]);
+
+  useEffect(() => {
+    if (!ready) return;
     const measure = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       if (max <= 0) return;
@@ -60,7 +74,7 @@ export function BrixGauge() {
       st.kill();
       triggers.forEach((t) => t.kill());
     };
-  }, []);
+  }, [ready]);
 
   return (
     <nav

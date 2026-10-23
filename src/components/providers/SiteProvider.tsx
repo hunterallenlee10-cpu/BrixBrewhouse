@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { whenIdle } from "@/lib/idle";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,19 +59,24 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
 
   // Lenis smooth scroll driven by GSAP's ticker so ScrollTrigger stays in lockstep.
   useEffect(() => {
-    if (reducedMotion) return;
-    const l = new Lenis({ lerp: 0.09, wheelMultiplier: 0.9, touchMultiplier: 1.2 });
-    lenis.current = l;
-    l.on("scroll", ScrollTrigger.update);
-    const tick = (t: number) => l.raf(t * 1000);
-    gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
+    if (reducedMotion || !gatePassed) return; // nothing to scroll behind the gate
+    // Lenis measures the page when it starts: do it in an idle slot, not inside hydration
+    let l: Lenis | null = null;
+    const tick = (t: number) => l?.raf(t * 1000);
+    const cancel = whenIdle(() => {
+      l = new Lenis({ lerp: 0.09, wheelMultiplier: 0.9, touchMultiplier: 1.2 });
+      lenis.current = l;
+      l.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add(tick);
+      gsap.ticker.lagSmoothing(0);
+    }, 500);
     return () => {
+      cancel();
       gsap.ticker.remove(tick);
-      l.destroy();
+      l?.destroy();
       lenis.current = null;
     };
-  }, [reducedMotion]);
+  }, [reducedMotion, gatePassed]);
 
   // Freeze scrolling while the gate or modal is up.
   const locked = !gatePassed || pour.open;
@@ -105,14 +111,29 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
   const scrollTo = useCallback<Ctx["scrollTo"]>(
     (target, opts = {}) => {
       const l = lenis.current;
+      const offset = opts.offset ?? 0;
+      const el = typeof target === "string" ? document.querySelector<HTMLElement>(target) : target;
+      // rooms below render lazily (content-visibility), so a long jump can land a little off:
+      // once there, check the real position and settle onto it
+      const missed = () => el instanceof HTMLElement && Math.abs(el.getBoundingClientRect().top + offset) > 4;
       if (l && !reducedMotion) {
-        l.scrollTo(target as never, { duration: opts.duration ?? 1.4, offset: opts.offset ?? 0, easing: opts.easing, force: true });
+        l.scrollTo(target as never, {
+          duration: opts.duration ?? 1.4,
+          offset,
+          easing: opts.easing,
+          force: true,
+          onComplete: () => {
+            if (missed()) l.scrollTo(target as never, { duration: 0.6, offset, force: true });
+          },
+        });
         return;
       }
-      const el = typeof target === "string" ? document.querySelector(target) : target;
-      const y =
-        typeof el === "number" ? el : el instanceof HTMLElement ? el.getBoundingClientRect().top + window.scrollY + (opts.offset ?? 0) : 0;
-      window.scrollTo({ top: y, behavior: "auto" });
+      const jump = () => {
+        const y = typeof el === "number" ? el : el instanceof HTMLElement ? el.getBoundingClientRect().top + window.scrollY + offset : 0;
+        window.scrollTo({ top: y, behavior: "auto" });
+      };
+      jump();
+      requestAnimationFrame(() => requestAnimationFrame(() => missed() && jump()));
     },
     [reducedMotion],
   );

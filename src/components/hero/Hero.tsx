@@ -9,6 +9,7 @@ import { TapHandleButton } from "@/components/ui/TapHandleButton";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { Confirm, Illustrative } from "@/components/ui/primitives";
 import { weekSummary } from "@/lib/hours";
+import { whenIdle } from "@/lib/idle";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,13 +43,20 @@ export function Hero() {
   // scroll -> sequence target
   useEffect(() => {
     if (reducedMotion || !section.current) return;
-    const st = ScrollTrigger.create({
-      trigger: section.current,
-      start: "top top",
-      end: "bottom bottom",
-      onUpdate: (self) => seq.current?.setTarget(self.progress),
-    });
-    return () => st.kill();
+    let st: ScrollTrigger | null = null;
+    const cancel = whenIdle(() => {
+      st = ScrollTrigger.create({
+        trigger: section.current,
+        start: "top top",
+        end: "bottom bottom",
+        onUpdate: (self) => seq.current?.setTarget(self.progress),
+      });
+      seq.current?.setTarget(st.progress);
+    }, 300);
+    return () => {
+      cancel();
+      st?.kill();
+    };
   }, [reducedMotion]);
 
   // overlays follow the eased picture, not the raw scroll, so text and image move together

@@ -159,6 +159,20 @@ for (const w of [360, 390, 768, 1024, 1440, 1920]) {
   await ctx.close();
 }
 
+// 5b. the hungry-phone test: Menu button lands on the menu
+{
+  const { ctx, page } = await newPage("mobile");
+  await page.goto(base, { waitUntil: "networkidle" });
+  await page.waitForTimeout(1500);
+  const t0 = Date.now();
+  await page.getByRole("navigation", { name: "Quick actions" }).getByRole("link", { name: "Menu" }).tap();
+  await page.waitForTimeout(3200);
+  const top = await page.evaluate(() => document.getElementById("menu")?.getBoundingClientRect().top ?? 9999);
+  ok("mobile Menu button lands on the menu", Math.abs(top - 72) < 40, `menu top ${Math.round(top)}px after ${Date.now() - t0}ms`);
+  await page.screenshot({ path: `${out}/mobile-08-menu-jump.png` });
+  await ctx.close();
+}
+
 // 6. reduced motion renders static states
 {
   const { ctx, page } = await newPage("desktop", { reduced: true });

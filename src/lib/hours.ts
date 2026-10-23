@@ -15,14 +15,18 @@ export const HOURS = hoursData as HoursConfig;
 const WEEKDAY: Record<string, number> = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
 
 /** Day of week (0 = Sunday) and minutes since local midnight in the venue's zone. */
+const FORMATTERS = new Map<string, Intl.DateTimeFormat>();
+const formatterFor = (timeZone: string) => {
+  let f = FORMATTERS.get(timeZone);
+  if (!f) {
+    f = new Intl.DateTimeFormat("en-US", { timeZone, weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+    FORMATTERS.set(timeZone, f);
+  }
+  return f;
+};
+
 export function zonedNow(now: Date, timeZone = HOURS.timezone): { day: number; minutes: number } {
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone,
-    weekday: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23",
-  }).formatToParts(now);
+  const parts = formatterFor(timeZone).formatToParts(now);
   const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "0";
   return { day: WEEKDAY[get("weekday")], minutes: Number(get("hour")) * 60 + Number(get("minute")) };
 }

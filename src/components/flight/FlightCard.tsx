@@ -4,7 +4,6 @@ import { useState } from "react";
 import { LinkSimple } from "@phosphor-icons/react";
 import { TAPS, type Beer } from "@/lib/data";
 import { TapHandleButton } from "@/components/ui/TapHandleButton";
-import "./flight.css";
 
 // range of the confirmed house beers, so the meter is built from real numbers only
 const known = TAPS.beers.filter((b) => b.abv != null && b.ibu != null);

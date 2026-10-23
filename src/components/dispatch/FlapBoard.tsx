@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Confirm } from "@/components/ui/primitives";
 import { EVENTS } from "@/lib/data";
 import { zonedNow } from "@/lib/hours";
-import "./dispatch.css";
 
 const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 const noop = () => () => {};

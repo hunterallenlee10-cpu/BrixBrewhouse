@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { SPECIALS } from "@/lib/data";
 import { zonedNow } from "@/lib/hours";
-import "./kitchen.css";
 
 const noopSubscribe = () => () => {};
 

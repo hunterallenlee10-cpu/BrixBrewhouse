@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import "./dispatch.css";
 
 /**
  * The firemen's shuffleboard, drawn as a lane. A puck slides to the far
@@ -16,9 +15,8 @@ export function Shuffleboard() {
     const l = lane.current;
     const w = wrap.current;
     if (!l || !w) return;
-    const measure = () => setTravel(Math.max(0, l.clientWidth * 0.94 - 40));
-    measure();
-    const ro = new ResizeObserver(measure);
+    // ResizeObserver reports the lane width asynchronously (no forced layout at mount)
+    const ro = new ResizeObserver(([entry]) => setTravel(Math.max(0, entry.contentRect.width * 0.94 - 40)));
     ro.observe(l);
     const io = new IntersectionObserver(
       ([e]) => {

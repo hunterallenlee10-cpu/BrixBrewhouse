@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Play } from "@phosphor-icons/react";
-import "./press.css";
 
 /** Click-to-load YouTube. Nothing from YouTube loads until the visitor asks for it. */
 export function LiteYouTube({ id, title }: { id: string; title: string }) {

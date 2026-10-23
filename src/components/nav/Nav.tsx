@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSite } from "@/components/providers/SiteProvider";
+import { whenIdle } from "@/lib/idle";
 import { TapHandleButton } from "@/components/ui/TapHandleButton";
 import { SoundToggle } from "./SoundToggle";
 import { NAV_LINKS } from "./sections";
@@ -13,13 +14,19 @@ export function Nav() {
 
   // solid once the hero hands over to the first room
   useEffect(() => {
-    const st = ScrollTrigger.create({
-      trigger: "#brix",
-      start: "top 60%",
-      end: "max",
-      onToggle: (self) => setSolid(self.isActive),
-    });
-    return () => st.kill();
+    let st: ScrollTrigger | null = null;
+    const cancel = whenIdle(() => {
+      st = ScrollTrigger.create({
+        trigger: "#brix",
+        start: "top 60%",
+        end: "max",
+        onToggle: (self) => setSolid(self.isActive),
+      });
+    }, 800);
+    return () => {
+      cancel();
+      st?.kill();
+    };
   }, []);
 
   const go = (id: string) => (e: React.MouseEvent) => {

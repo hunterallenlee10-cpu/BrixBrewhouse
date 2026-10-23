@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import "./lounge.css";
 
 const DAYS = 107;
 
@@ -16,10 +15,15 @@ export function Tally() {
   useEffect(() => {
     const el = ref.current;
     if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    // hide the marks only if they are still below the fold, so the draw-in is seen
-    if (el.getBoundingClientRect().top > window.innerHeight) el.classList.add("elx-armed");
+    // hide the marks only if they are still below the fold, so the draw-in is seen.
+    // The observer's first entry carries the position, so mount never forces a layout.
+    let first = true;
     const io = new IntersectionObserver(
       ([e]) => {
+        if (first) {
+          first = false;
+          if (!e.isIntersecting && e.boundingClientRect.top > 0) el.classList.add("elx-armed");
+        }
         if (e.isIntersecting) {
           setDrawn(true);
           io.disconnect();

@@ -5,7 +5,6 @@ import { useSite } from "@/components/providers/SiteProvider";
 import { Confirm } from "@/components/ui/primitives";
 import { MENU, beerById, price, type MenuItem } from "@/lib/data";
 import { FOOD_PHOTOS } from "./foodPhotos";
-import "./kitchen.css";
 
 function Item({ item }: { item: MenuItem }) {
   const pair = item.pairsWith ? beerById(item.pairsWith) : undefined;
@@ -75,8 +74,14 @@ export function Menu() {
     return () => io.disconnect();
   }, []);
 
-  // keep the active pill visible in the phone's horizontal bar (no page scroll)
+  // keep the active pill visible in the phone's horizontal bar (no page scroll).
+  // Skipped on mount: nothing has changed yet, and reading offsets there forces a full layout.
+  const firstActive = useRef(true);
   useEffect(() => {
+    if (firstActive.current) {
+      firstActive.current = false;
+      return;
+    }
     const b = bar.current;
     const pill = b?.querySelector<HTMLElement>(`[data-cat="${active}"]`);
     if (!b || !pill) return;

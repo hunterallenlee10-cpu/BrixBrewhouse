@@ -2,7 +2,6 @@
 
 import { Confirm } from "@/components/ui/primitives";
 import { crimpPath, type CapStory } from "./stories";
-import "./bartop.css";
 
 const CRIMP = crimpPath();
 

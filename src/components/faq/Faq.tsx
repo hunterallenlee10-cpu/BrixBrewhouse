@@ -5,7 +5,6 @@ import { Plus } from "@phosphor-icons/react";
 import { Confirm } from "@/components/ui/primitives";
 import { FAQ } from "@/lib/data";
 import { SITE } from "@/lib/site";
-import "./faq.css";
 
 /** Answers come from /data/faq.json; any {{CONFIRM}} renders as the visible token. */
 function Answer({ text }: { text: string }) {

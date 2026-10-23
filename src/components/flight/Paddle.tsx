@@ -4,7 +4,6 @@ import { forwardRef, useEffect, useId, useImperativeHandle, useRef } from "react
 import { X } from "@phosphor-icons/react";
 import type { Beer } from "@/lib/data";
 import type { FlightRenderer, Pourable } from "./liquidRenderer";
-import "./flight.css";
 
 export type PaddleHandle = {
   pour: (slot: number, b: Pourable, instant?: boolean) => void;
@@ -36,21 +35,34 @@ export const Paddle = forwardRef<
     },
   }));
 
-  // the liquid renderer is code-split: it loads when the paddle mounts
+  // the liquid renderer is code-split and only starts when the paddle comes within a screen of view
+  // (it sizes its canvases on start; doing that during hydration forced a full-page layout)
   useEffect(() => {
     let alive = true;
     let io: IntersectionObserver | null = null;
-    import("./liquidRenderer").then(({ FlightRenderer }) => {
-      if (!alive) return;
-      const r = new FlightRenderer(canvases.current.filter(Boolean) as HTMLCanvasElement[], reducedMotion);
-      renderer.current = r;
-      queue.current.splice(0).forEach((fn) => fn(r));
-      io = new IntersectionObserver(([e]) => r.setVisible(e.isIntersecting), { rootMargin: "120px" });
-      if (wrap.current) io.observe(wrap.current);
-      onReady?.();
-    });
+    const start = () => {
+      import("./liquidRenderer").then(({ FlightRenderer }) => {
+        if (!alive) return;
+        const r = new FlightRenderer(canvases.current.filter(Boolean) as HTMLCanvasElement[], reducedMotion);
+        renderer.current = r;
+        queue.current.splice(0).forEach((fn) => fn(r));
+        io = new IntersectionObserver(([e]) => r.setVisible(e.isIntersecting), { rootMargin: "120px" });
+        if (wrap.current) io.observe(wrap.current);
+        onReady?.();
+      });
+    };
+    const near = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        near.disconnect();
+        start();
+      },
+      { rootMargin: "100% 0px" },
+    );
+    if (wrap.current) near.observe(wrap.current);
     return () => {
       alive = false;
+      near.disconnect();
       io?.disconnect();
       renderer.current?.destroy();
       renderer.current = null;

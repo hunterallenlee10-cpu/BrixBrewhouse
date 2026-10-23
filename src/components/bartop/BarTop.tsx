@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { BayLabel, Illustrative, PhotoSlot } from "@/components/ui/primitives";
 import { Cap } from "./Cap";
 import { STORIES } from "./stories";
-import "./bartop.css";
 
 type OrientationCtor = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<"granted" | "denied"> };
 

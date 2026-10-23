@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import type { Beer } from "@/lib/data";
 import { Confirm } from "@/components/ui/primitives";
-import "./flight.css";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const stat = (v: number | null, unit = "") => (v == null ? "—" : `${v}${unit}`);

@@ -3,7 +3,6 @@ import { BayLabel } from "@/components/ui/primitives";
 import { TapHandleButton } from "@/components/ui/TapHandleButton";
 import { SITE } from "@/lib/site";
 import { Tally } from "./Tally";
-import "./lounge.css";
 
 const USES = [
   { name: "Birthdays", note: "Seats 50" },

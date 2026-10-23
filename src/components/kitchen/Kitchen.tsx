@@ -2,7 +2,6 @@ import { BayLabel, Confirm, PhotoSlot } from "@/components/ui/primitives";
 import { MENU } from "@/lib/data";
 import { Chalkboard } from "./Chalkboard";
 import { Menu } from "./Menu";
-import "./kitchen.css";
 
 /** BAY 04. John's Chef Table: the chef, the chalkboard, the real menu. */
 export function Kitchen() {
