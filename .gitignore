@@ -31,3 +31,6 @@ next-env.d.ts
 /.impeccable/review/
 /.impeccable/mocks/
 /assets/processed/
+
+# agent worktrees
+/.claude/worktrees/
