@@ -1,0 +1,33 @@
+/* Brick bands down the sides: the firehouse wall framing the evening view. Desktop/tablet only. */
+.visit-band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: none;
+  width: clamp(28px, 4.2vw, 64px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .visit-band {
+    display: block;
+  }
+}
+.visit-bandLeft {
+  left: 0;
+  -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent);
+  mask-image: linear-gradient(90deg, #000 30%, transparent);
+}
+.visit-bandRight {
+  right: 0;
+  -webkit-mask-image: linear-gradient(270deg, #000 30%, transparent);
+  mask-image: linear-gradient(270deg, #000 30%, transparent);
+}
+.visit-chip {
+  border: 1px solid var(--line-strong);
+  background: rgb(23 24 27 / 0.7);
+}
+.visit-sample {
+  border: 1px dashed rgb(242 242 242 / 0.22);
+  background: rgb(23 24 27 / 0.45);
+}
