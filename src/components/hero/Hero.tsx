@@ -184,8 +184,8 @@ function StaticHero() {
         />
       </picture>
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 to-black/70" />
-      {/* desktop: one viewport, copy on top and BRIX filling what is left (cropped at the bottom edge) */}
-      <div className="relative md:flex md:h-[100svh] md:flex-col">
+      {/* copy on top, BRIX below it in flow: it can never cover the CTA. Desktop: exactly one viewport, BRIX sized to the space left */}
+      <div className="relative flex min-h-[100svh] flex-col md:h-[100svh]">
       <div className="wrap relative flex flex-col gap-5 pt-[calc(var(--nav-h)+3rem)] md:shrink-0">
         <p className="t-serif max-w-[18ch] text-[clamp(2rem,5vw,4.2rem)] text-foam [text-shadow:0_4px_30px_rgb(0_0_0/0.7)]">
           A <span className="decoration-gold underline decoration-dashed decoration-[0.035em] underline-offset-[0.12em]">1953</span><span aria-hidden className="text-gold-hi">*</span> Firehouse. <span className="text-gold-hi">A New Pour.</span>
@@ -202,7 +202,7 @@ function StaticHero() {
         </div>
         <p className="t-mono text-[0.72rem] text-foam/85">{hoursLine}</p>
       </div>
-      <div className="absolute inset-x-0 bottom-[calc(56px+env(safe-area-inset-bottom))] md:relative md:bottom-auto md:mt-[clamp(1rem,3vh,2.5rem)] md:flex md:min-h-0 md:flex-1 md:flex-col md:justify-end md:overflow-hidden md:[container-type:size]">
+      <div className="relative mt-auto overflow-hidden pt-8 pb-[calc(56px+env(safe-area-inset-bottom))] md:mt-[clamp(1rem,3vh,2.5rem)] md:flex md:min-h-0 md:flex-1 md:flex-col md:justify-end md:pt-0 md:pb-0 md:[container-type:size]">
         <div className="relative bottom-[-0.1em] flex flex-col items-center text-[66vw] md:bottom-[-0.02em] md:text-[min(73vw,calc((100cqh-3rem)/0.74))]">
           <p className="t-mono mb-[0.035em] text-center text-[0.6875rem] text-foam/90 md:text-[0.8rem]">Brewhouse · Brodheadsville, PA · Est. 2026</p>
           <h1 className="t-display flex w-[100vw] justify-center overflow-x-clip whitespace-nowrap text-[1em] leading-[0.74] text-foam">
