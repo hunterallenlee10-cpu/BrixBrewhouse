@@ -7,6 +7,13 @@ import { MobileBar } from "@/components/nav/MobileBar";
 import { CapCursor } from "@/components/ui/CapCursor";
 import { Hero } from "@/components/hero/Hero";
 import { PourModal } from "@/components/cta/PourModal";
+import { ElisLounge } from "@/components/lounge/ElisLounge";
+import { DispatchBoard } from "@/components/dispatch/DispatchBoard";
+import { Press } from "@/components/press/Press";
+import { Visit } from "@/components/visit/Visit";
+import { Faq } from "@/components/faq/Faq";
+import { FinalCta } from "@/components/cta/FinalCta";
+import { Footer } from "@/components/footer/Footer";
 
 export default function Page() {
   return (
@@ -22,7 +29,14 @@ export default function Page() {
         <section id="brix" className="section">
           <div className="wrap h-[100vh]" />
         </section>
+        <ElisLounge />
+        <DispatchBoard />
+        <Press />
+        <Visit />
+        <Faq />
+        <FinalCta />
       </main>
+      <Footer />
       <MobileBar />
       <PourModal />
       <CapCursor />
