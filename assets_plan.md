@@ -205,6 +205,10 @@ All jobs ran on 2026-10-23. Job records report the image model as `nano_banana_2
 | T5 caps under glass (cover only) | `/tex/caps.*` | 3098c647-154f-4996-a783-8f80e0e883fb | nano_banana_pro 2K | 2 |
 | F1-F4 food | `/img/food-*` | a4b02d51… / 3599869a… / 405476d0… / 029be1d8… | nano_banana_pro 2K 4:5 | 8 |
 | N1 night exterior | `/img/night-exterior*` | 0b056841… (16:9), 6ce13bb4… (9:16) | nano_banana_pro 2K | 4 |
+| C1-C6 bottle caps, top-down (1:1) | `/img/caps/cap-{red,gold,silver,green,gunmetal,cream}.*` | 0a36f709-85b7-4cc4-9ee8-d1f7667623fb / a8b213f5-aac9-485a-9349-21cbd548fa94 / f0ad2c44-6777-485e-a242-9ea72e47f2c3 / d6a50e9a-9954-4f8c-bfef-b0f337f31059 / 7126229e-bd38-4fbc-b3cd-b15eff7a5881 / d132fa64-7952-42cc-ae8e-1fd4359f566a | nano_banana_pro 2K, blank caps (no printing) | 12 |
+| C7 cap underside (liner) | `/img/caps/cap-liner.*` | f0fff0d4-b053-4f30-adfc-ba30a750178f | nano_banana_pro 2K 1:1 | 2 |
+| T6 maple shuffleboard (cover only) | `/tex/maple.*` | 4aaf7d30-0e89-4684-a827-634eb74a1586 | nano_banana_pro 2K 21:9 | 2 |
+| T7 newsprint (cover only) | `/tex/newsprint.*` | 26f7c3c4-e063-447a-ad02-ad9de2f5a000 | nano_banana_pro 2K 1:1 | 2 |
 | A1 taproom audio | `/audio/taproom.*` | 6fac8429-f1c8-41ce-a793-f08951c5ee62 | kling3_0 pro 10s sound on; video discarded, audio low-passed at 2.8 kHz (no intelligible speech), forward+reverse crossfade loop, -30 LUFS | 25 |
 
 ### Rejected drafts (paid, not shipped)
@@ -216,4 +220,5 @@ H4 a/c, H3 a/c, H2 a/c, H1 a/b, H4p a, H3p a, H2p b, H1p b, T1 b, T2 b, T3 a (tw
 - Hero: 3 clips per orientation joined at 18 fps, duplicate seam frames dropped → 271 frames each. Desktop 1920×1072 WebP q44 = 15.2 MiB; mobile 720×1290 WebP q42 = 8.4 MiB. Posters, final frames and all-keyframe MP4 fallbacks (1280w, `-g 1`) beside them.
 - Loops: last frame trimmed (it duplicates frame 0); H.264 + VP9 all ≤ 2.4 MB.
 - Textures: brick tiles by its measured period (129 × 293 px); stainless and chalk by feathered half-offset blend; caps and walnut ghosted under blending, so they ship as cover images instead.
+- Finish-review pass (2026-10-23, +18 cr, all 9 kept): caps cut out of their studio backgrounds by `scripts/cut-caps.py` (outline traced ray by ray from the centre, narrow dropouts closed, 1px feather) → 480 px alpha WebP/AVIF, 15-47 KB each. Maple and newsprint ship as cover images; the clippings' torn bottom edge is a generated SVG mask (`scripts/make-torn-edge.mjs`).
 - U1 (logo upscale) skipped: the original PNG traced cleanly (0.03% silhouette mismatch), so no upscale was needed.

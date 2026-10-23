@@ -85,7 +85,7 @@ export function Visit() {
                 </a>
               </div>
               <p className="text-sm text-text-3">
-                {SITE.email} · Large group? Call ahead and we&rsquo;ll make room.
+                {SITE.email} · Large group? Call ahead and we&rsquo;ll do our best to make room.
               </p>
             </div>
 
@@ -101,16 +101,18 @@ export function Visit() {
           </div>
         </div>
 
-        {/* good to know */}
+        {/* good to know: one enamel house-rules placard, screwed to the brick */}
         <div className="mt-[clamp(4rem,8vw,6rem)]">
-          <h3 className="t-display text-[clamp(2rem,4vw,3rem)] text-foam">Good to know</h3>
-          <ul className="mt-6 flex flex-wrap gap-2.5">
-            {GOOD_TO_KNOW.map((c) => (
-              <li key={c} className={`visit-chip t-mono inline-flex min-h-11 items-center px-4 text-[0.7rem] text-foam`}>
-                {c}
-              </li>
-            ))}
-          </ul>
+          <div className="visit-placard">
+            <h3 className="t-stencil text-center text-[clamp(1.6rem,3.2vw,2.4rem)] leading-none tracking-[0.1em] text-foam">Good to know</h3>
+            <ul className="mt-5 grid gap-x-10 sm:grid-cols-2">
+              {GOOD_TO_KNOW.map((c) => (
+                <li key={c} className="visit-placard-row font-display text-[1.15rem] font-bold uppercase tracking-[0.04em] text-foam">
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* sample reviews: clearly templates, never presented as real */}

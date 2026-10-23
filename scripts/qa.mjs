@@ -43,6 +43,8 @@ for (const kind of ["desktop", "mobile"]) {
   await page.goto(base, { waitUntil: "networkidle" });
   await page.screenshot({ path: `${out}/${kind}-00-gate.png` });
   ok(`${kind} gate shows`, await page.getByRole("dialog", { name: /21 or older/i }).isVisible());
+  const logoBox = await page.locator(".age-gate svg[aria-label='Brix Brewhouse']").boundingBox();
+  ok(`${kind} gate logo renders (${logoBox ? Math.round(logoBox.width) + "x" + Math.round(logoBox.height) : "missing"})`, !!logoBox && logoBox.width > 80 && logoBox.height > 80);
   await page.getByRole("button", { name: "Yes, open the door" }).click();
   await page.waitForTimeout(3600);
   const heroH = await page.evaluate(() => document.getElementById("top").offsetHeight - innerHeight);

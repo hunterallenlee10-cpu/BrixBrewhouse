@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { LinkSimple } from "@phosphor-icons/react";
 import { TAPS, type Beer } from "@/lib/data";
+import { labelTiers } from "./meter";
 import { TapHandleButton } from "@/components/ui/TapHandleButton";
 
 // range of the confirmed house beers, so the meter is built from real numbers only
@@ -39,6 +40,9 @@ export function FlightCard({ beers }: { beers: Beer[] }) {
     }
   };
 
+  // number labels stack upward when pins sit close, so "4" and "2" never collide
+  const tiers = labelTiers(beers.map(richness));
+
   return (
     <section aria-labelledby="flight-card-title" className={`flt-sheet p-5 md:p-8`}>
       <div className="flex flex-wrap items-baseline justify-between gap-3">
@@ -69,7 +73,7 @@ export function FlightCard({ beers }: { beers: Beer[] }) {
             if (r == null) return null;
             return (
               <span key={i} className="flt-pin" style={{ left: `${4 + r * 92}%` }}>
-                <span className="t-mono text-[0.6875rem] text-foam" style={{ transform: `translateY(${(i % 2) * -18}px)` }}>
+                <span className="t-mono text-[0.6875rem] text-foam" style={{ transform: `translateY(${tiers[i] * -18}px)` }}>
                   {i + 1}
                 </span>
                 <span className="flt-pinDot" style={{ background: b.liquid }} />

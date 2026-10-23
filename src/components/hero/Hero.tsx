@@ -94,7 +94,7 @@ export function Hero() {
   if (reducedMotion) return <StaticHero />;
 
   return (
-    <section ref={section} id="top" aria-label="Brix Brewhouse, a 1953 firehouse pouring again" className="relative h-[460vh] bg-black md:h-[520vh]">
+    <section ref={section} id="top" aria-label="Brix Brewhouse, a restored firehouse pouring again" className="relative h-[460vh] bg-black md:h-[520vh]">
       <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
         {/* poster is the LCP; it hides once frames are drawing */}
         <picture>
@@ -137,7 +137,7 @@ export function Hero() {
             <p className="t-serif max-w-[16ch] text-[clamp(2.6rem,7.4vw,7rem)] text-foam [text-shadow:0_4px_40px_rgb(0_0_0/0.6)]">
               A{" "}
               <span className="whitespace-nowrap">
-                1953 <Confirm title="Their site says 1953; a listing says 1932, when the fire company was chartered." />
+                1953<sup className="ml-1 align-super text-[0.4em]"><Confirm title="Their site says 1953; a listing says 1932, when the fire company was chartered." /></sup>
               </span>{" "}
               Firehouse. <span className="text-gold-hi">A New Pour.</span>
             </p>
@@ -148,7 +148,7 @@ export function Hero() {
         {/* 55-85%: the brewing */}
         <div ref={batchRef} className="invisible absolute inset-x-0 bottom-[12svh] opacity-0 will-change-transform">
           <div className="wrap flex flex-col items-start gap-5">
-            <p className="t-mono text-[0.78rem] text-gold-hi">Small batch. Brewed in-house. Nine taps.</p>
+            <p className="t-mono bg-black/70 px-2 py-1 text-[0.78rem] text-gold-hi">Small batch. Brewed in-house. Nine taps.</p>
             <p className="t-display max-w-[11ch] text-[clamp(3.4rem,10vw,9.5rem)] text-foam [text-shadow:0_6px_50px_rgb(0_0_0/0.5)]">
               Good beer isn&rsquo;t rushed.
             </p>
@@ -159,7 +159,7 @@ export function Hero() {
         <div ref={ctaRef} className="invisible absolute inset-x-0 bottom-[11svh] opacity-0 will-change-transform">
           <div className="wrap flex flex-col items-start gap-5">
             <p className="t-serif text-[clamp(2.2rem,5.6vw,5rem)] text-foam [text-shadow:0_4px_40px_rgb(0_0_0/0.6)]">
-              We&rsquo;ll save you a seat.
+              Drink local.
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <TapHandleButton size="lg" />
@@ -176,29 +176,45 @@ export function Hero() {
 }
 
 function StaticHero() {
+  // reduced motion: the same first viewport, held still. The bay door stands open, BRIX bleeds off the edges.
   return (
     <section id="top" aria-label="Brix Brewhouse" className="relative min-h-[100svh] overflow-hidden bg-black">
       <picture>
-        <source media="(max-width: 767px)" srcSet="/frames/mobile/final.jpg" />
-        <img src="/frames/desktop/final.jpg" alt="Illustrative render: a full golden pint on a glass-topped bar in front of stainless brewing tanks." className="absolute inset-0 h-full w-full object-cover" />
+        <source media="(max-width: 767px)" srcSet="/frames/mobile/f_0090.webp" />
+        <img
+          src="/frames/desktop/f_0090.webp"
+          alt="Illustrative render: a red firehouse bay door rolled open at dusk, a glowing brewhouse inside."
+          className="absolute inset-0 h-full w-full object-cover"
+        />
       </picture>
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
-      <div className="wrap relative flex min-h-[100svh] flex-col justify-end gap-6 pb-[12svh] pt-28">
-        <h1 className="t-display text-[clamp(5rem,26vw,22rem)] leading-[0.78] text-foam">
-          BRIX<span className="sr-only"> Brewhouse</span>
-        </h1>
-        <p className="t-mono text-[0.75rem] text-foam/90">Brewhouse · Brodheadsville, PA · Est. 2026</p>
-        <p className="t-serif text-[clamp(2rem,5vw,4.2rem)] text-foam">
-          A 1953 <Confirm /> Firehouse. <span className="text-gold-hi">A New Pour.</span>
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 to-black/70" />
+      <div className="wrap relative flex flex-col gap-5 pt-[calc(var(--nav-h)+3rem)]">
+        <p className="t-serif max-w-[18ch] text-[clamp(2rem,5vw,4.2rem)] text-foam [text-shadow:0_4px_30px_rgb(0_0_0/0.7)]">
+          A 1953
+          <sup className="ml-1 align-super text-[0.4em]">
+            <Confirm title="Their site says 1953; a listing says 1932, when the fire company was chartered." />
+          </sup>{" "}
+          Firehouse. <span className="text-gold-hi">A New Pour.</span>
         </p>
-        <p className="max-w-[44ch] text-lg text-foam/90">The walls hold stories. The taps pour something new. Small batch, brewed in-house, nine taps. Good beer isn&rsquo;t rushed.</p>
+        <p className="max-w-[44ch] text-lg text-foam/90">
+          The walls hold stories. The taps pour something new. Small batch, brewed in-house, nine taps. Good beer isn&rsquo;t rushed.
+        </p>
         <div className="flex flex-wrap items-center gap-4">
           <TapHandleButton size="lg" />
           <StatusPill tone="glass" />
         </div>
         <p className="t-mono text-[0.72rem] text-foam/85">{hoursLine}</p>
-        <Illustrative className="absolute bottom-3 left-4" />
       </div>
+      <div className="absolute inset-x-0 bottom-[calc(56px+env(safe-area-inset-bottom))] md:bottom-0">
+        <div className="relative bottom-[-0.1em] flex flex-col items-center text-[66vw] md:bottom-[-0.27em] md:text-[73vw]">
+          <p className="t-mono mb-[0.035em] text-center text-[0.6875rem] text-foam/90 md:text-[0.8rem]">Brewhouse · Brodheadsville, PA · Est. 2026</p>
+          <h1 className="t-display flex w-[100vw] justify-center overflow-x-clip whitespace-nowrap text-[1em] leading-[0.74] text-foam">
+            <span className="shrink-0 tracking-[-0.02em]">BRIX</span>
+            <span className="sr-only"> Brewhouse</span>
+          </h1>
+        </div>
+      </div>
+      <Illustrative className="absolute right-4 top-[calc(var(--nav-h)+10px)] [text-shadow:0_1px_6px_rgb(0_0_0/0.9)]" />
     </section>
   );
 }

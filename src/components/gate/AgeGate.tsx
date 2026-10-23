@@ -84,7 +84,7 @@ export function AgeGate({ logo }: { logo: React.ReactNode }) {
         <div className="h-[clamp(120px,22vw,176px)] [filter:drop-shadow(0_0_28px_rgb(214_158_20/0.45))_drop-shadow(0_10px_30px_rgb(0_0_0/0.7))]">
           {logo}
         </div>
-        <p className="mt-8 flex items-baseline gap-3 text-gold">
+        <p className="mt-8 flex items-baseline gap-3 bg-black/75 px-3 py-2 text-gold">
           <span className="t-stencil text-[1.25rem] leading-none tracking-[0.12em]">BAY 00</span>
           <span aria-hidden className="h-px w-8 translate-y-[-0.3em] bg-current opacity-60" />
           <span className="t-mono text-[0.72rem]">Age check</span>

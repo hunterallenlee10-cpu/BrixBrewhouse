@@ -21,7 +21,7 @@ export function FinalCta() {
       <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-black to-transparent" />
 
       <div className="wrap pb-[clamp(5rem,12vw,9rem)]">
-        <h2 id="final-title" className="t-display text-[clamp(4.4rem,15vw,15rem)] leading-[0.82] text-foam [text-shadow:0_8px_60px_rgb(0_0_0/0.6)]">
+        <h2 id="final-title" className="gold-leaf t-display text-[clamp(4.4rem,15vw,15rem)] leading-[0.82]">
           The door&rsquo;s
           <br />
           open.

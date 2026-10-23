@@ -1,3 +1,4 @@
+import { Threshold } from "@/components/ui/Threshold";
 import dynamic from "next/dynamic";
 import { SiteProvider } from "@/components/providers/SiteProvider";
 import { AgeGate } from "@/components/gate/AgeGate";
@@ -35,12 +36,19 @@ export default function Page() {
       <main id="main">
         <Hero />
         <ThreeMeanings />
+        <Threshold />
         <FlightBuilder />
+        <Threshold />
         <BarTop />
+        <Threshold />
         <Kitchen />
+        <Threshold />
         <ElisLounge />
+        <Threshold />
         <DispatchBoard />
+        <Threshold />
         <Press />
+        <Threshold />
         <Visit />
         <Faq />
         <FinalCta />

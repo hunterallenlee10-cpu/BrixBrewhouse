@@ -6,7 +6,7 @@ export function BayLabel({ n, children, className = "", tone = "gold" }: { n: st
   const color = tone === "gold" ? "text-gold" : tone === "ink" ? "text-black" : "text-foam";
   return (
     <p className={`flex items-baseline gap-3 ${color} ${className}`}>
-      <span className="t-stencil text-[1.35rem] leading-none tracking-[0.12em]">BAY {n}</span>
+      <span className="t-stencil text-[clamp(1.7rem,2.4vw,2.25rem)] leading-none tracking-[0.1em]">BAY {n}</span>
       <span aria-hidden className="h-px w-8 translate-y-[-0.3em] bg-current opacity-60" />
       <span className="t-mono text-[0.72rem] opacity-90">{children}</span>
     </p>

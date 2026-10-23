@@ -371,8 +371,37 @@ html.fonts-ready .wait-font {
    Rooms below Three Meanings skip layout and paint until near the viewport
    (they use IntersectionObserver, not ScrollTrigger, so estimated sizes are safe).
    `auto` remembers each room's real size once it has rendered. */
-#main > section:nth-child(n + 3),
+#main > section:not(#top, #brix),
 body > footer {
   content-visibility: auto;
   contain-intrinsic-size: auto 1100px;
+}
+
+/* ---------- threshold: one brick course between rooms ----------
+   brick.webp tiles at 1758x1806 source px with a course every ~129px (14 courses),
+   first mortar line centred at y=12. At 381px wide one course is 28px. */
+.threshold {
+  position: relative;
+  z-index: 1;
+  height: 28px;
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0.35), rgb(0 0 0 / 0.1) 30%, rgb(0 0 0 / 0.1) 70%, rgb(0 0 0 / 0.45)),
+    url("/tex/brick.webp") 0 -2.6px / 381px auto repeat,
+    var(--brick);
+  box-shadow:
+    0 -1px 0 rgb(0 0 0 / 0.8),
+    0 1px 0 rgb(0 0 0 / 0.8),
+    0 10px 24px -8px rgb(0 0 0 / 0.9);
+}
+
+/* gold-leaf window lettering: flat leaf colour, a black keyline and a drop shade,
+   the way a sign painter letters a firehouse door. No gradient text. */
+.gold-leaf {
+  color: var(--pour-gold-hi);
+  -webkit-text-stroke: 0.028em #120b03;
+  paint-order: stroke fill;
+  text-shadow:
+    0.035em 0.04em 0 #4a2a08,
+    0.05em 0.06em 0 #120b03,
+    0 0.1em 0.6em rgb(0 0 0 / 0.6);
 }

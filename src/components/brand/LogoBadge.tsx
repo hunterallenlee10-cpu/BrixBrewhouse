@@ -10,6 +10,8 @@ const RAW = readFileSync(path.join(process.cwd(), "public/brand/brix-logo.svg"),
   .replace(/ role="img"| aria-labelledby="t"/g, "");
 
 export function LogoBadge({ className = "" }: { className?: string }) {
-  const svg = RAW.replace("<svg ", `<svg class="h-full w-auto" role="img" aria-label="Brix Brewhouse" `);
-  return <span className={`inline-block ${className}`} dangerouslySetInnerHTML={{ __html: svg }} />;
+  const svg = RAW.replace("<svg ", `<svg class="block h-full w-full" role="img" aria-label="Brix Brewhouse" `);
+  // the box needs its own aspect ratio: inside a shrink-to-fit flex column a bare
+  // h-full SVG resolves to 0x0 and the badge silently disappears
+  return <span className={`block h-full aspect-[1290/1260] ${className}`} dangerouslySetInnerHTML={{ __html: svg }} />;
 }

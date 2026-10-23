@@ -159,26 +159,23 @@ export function FlightBuilder() {
           </div>
         ) : null}
 
-        {/* the rest of the bar */}
-        <div className="mt-14 grid border-y border-line md:grid-cols-[1.1fr_1fr_1fr]">
-          <div className="mat-steel relative border-b border-line p-6 md:border-b-0 md:border-r">
-            <div aria-hidden className="absolute inset-0 bg-black/70" />
-            <div className="relative">
-              <p className="t-display text-[2.4rem] text-foam">{TAPS.guest.name}</p>
-              <p className="mt-1 text-text-2">{TAPS.guest.description}</p>
-            </div>
+        {/* the rest of the bar: footnotes under the tap rail, not more cards */}
+        <dl className="flt-notes mt-14 grid gap-x-10 gap-y-5 border-t border-gold/35 pt-6 md:grid-cols-3">
+          <div>
+            <dt className="t-mono text-[0.72rem] text-gold"><span aria-hidden>*&nbsp;</span>Guest taps</dt>
+            <dd className="mt-1.5 text-text-2">{TAPS.guest.description}</dd>
           </div>
-          <div className="border-b border-line p-6 md:border-b-0 md:border-r">
-            <p className="t-display text-[2.4rem] text-foam">To go</p>
-            <p className="mt-1 text-text-2">{TAPS.toGo}</p>
+          <div>
+            <dt className="t-mono text-[0.72rem] text-gold"><span aria-hidden>&dagger;&nbsp;</span>To go</dt>
+            <dd className="mt-1.5 text-text-2">{TAPS.toGo}</dd>
           </div>
-          <div className="p-6">
-            <p className="t-display text-[2.4rem] text-foam">No beer?</p>
-            <p className="mt-1 text-text-2">
-              House-made Birch Beer, a local favorite. Plus {TAPS.otherDrinks.join(", ").toLowerCase().replace(/, ([^,]*)$/, " and $1")}.
-            </p>
+          <div>
+            <dt className="t-mono text-[0.72rem] text-gold"><span aria-hidden>&Dagger;&nbsp;</span>No beer?</dt>
+            <dd className="mt-1.5 text-text-2">
+              <span className="text-foam">House-made Birch Beer,</span> a local favorite. Plus {TAPS.otherDrinks.join(", ").toLowerCase().replace(/, ([^,]*)$/, " and $1")}.
+            </dd>
           </div>
-        </div>
+        </dl>
 
         <details className="group mt-8">
           <summary className="t-mono inline-flex min-h-11 cursor-pointer list-none items-center gap-2 text-[0.7rem] text-foam hover:text-gold-hi">

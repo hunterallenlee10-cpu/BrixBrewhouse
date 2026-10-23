@@ -67,16 +67,17 @@ export function DispatchBoard() {
             <div className="mt-7 pb-3">
               <Shuffleboard />
             </div>
-            <dl className="mt-10 grid border-t border-line sm:grid-cols-2">
-              <div className="border-b border-line py-5 sm:border-b-0 sm:border-r sm:pr-8">
-                <dt className="t-display text-[clamp(1.6rem,2.8vw,2.2rem)] text-foam">Pool tables</dt>
-                <dd className="mt-1 text-text-2">Rack &rsquo;em up between rounds.</dd>
-              </div>
-              <div className="py-5 sm:pl-8">
-                <dt className="t-display text-[clamp(1.6rem,2.8vw,2.2rem)] text-foam">Cornhole</dt>
-                <dd className="mt-1 text-text-2">Boards out, beer in the other hand.</dd>
-              </div>
-            </dl>
+            <p className="t-mono mt-10 text-[0.72rem] text-gold">Also on the floor</p>
+            <ul className="mt-3 border-t border-line">
+              <li className="flex flex-wrap items-baseline gap-x-4 border-b border-line py-3">
+                <span className="t-display text-[clamp(1.4rem,2.4vw,1.9rem)] text-foam">Pool tables</span>
+                <span className="t-serif text-[1.15rem] text-mortar">Rack &rsquo;em up between rounds.</span>
+              </li>
+              <li className="flex flex-wrap items-baseline gap-x-4 border-b border-line py-3">
+                <span className="t-display text-[clamp(1.4rem,2.4vw,1.9rem)] text-foam">Cornhole</span>
+                <span className="t-serif text-[1.15rem] text-mortar">Boards out, beer in the other hand.</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

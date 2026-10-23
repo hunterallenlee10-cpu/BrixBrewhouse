@@ -50,7 +50,7 @@ export function Press() {
     <section id="press" aria-labelledby="press-title" className="section overflow-hidden bg-black">
       <div className="wrap">
         <BayLabel n="07">Press</BayLabel>
-        <h2 id="press-title" className="t-display mt-5 text-[clamp(3.6rem,11vw,10rem)] text-foam">
+        <h2 id="press-title" className="press-title t-display mt-5 whitespace-nowrap leading-[0.8] text-foam">
           They said it.
         </h2>
 

@@ -137,11 +137,11 @@ export function ThreeMeanings() {
                   ))}
                   <span className="t-mono absolute -top-6 left-0 text-[0.6875rem] text-gold-hi">°Bx</span>
                 </div>
-                {/* bay plates for the firehouse */}
-                {word.letters.map((l, i) => (
+                {/* one stencil plate: this room is bay 01 (the building has five bays, so no per-letter numbering) */}
+                {word.letters.slice(0, 1).map((l, i) => (
                   <span key={i} aria-hidden className={`brk-plate-pos ${l.above ? "brk-plate-above" : ""}`} style={{ left: `${l.x}%`, top: `${l.y}%` }}>
                     <span data-plate className={`brk-plate ${reducedMotion ? "" : "invisible opacity-0"}`}>
-                      {`BAY ${i + 1}`}
+                      BAY 01
                     </span>
                   </span>
                 ))}

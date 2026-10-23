@@ -72,7 +72,6 @@ const jsonLd = [
     logo: `${SITE.url}/brand/brix-logo.png`,
     servesCuisine: "American",
     priceRange: "$$",
-    acceptsReservations: "False",
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE.street,

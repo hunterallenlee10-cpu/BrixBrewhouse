@@ -23,9 +23,48 @@
   -webkit-mask-image: linear-gradient(270deg, #000 30%, transparent);
   mask-image: linear-gradient(270deg, #000 30%, transparent);
 }
-.visit-chip {
-  border: 1px solid var(--line-strong);
-  background: rgb(23 24 27 / 0.7);
+/* house-rules placard: red porcelain enamel, a white keyline, four screws */
+.visit-placard {
+  position: relative;
+  max-width: 46rem;
+  margin-inline: auto;
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.25rem, 3.5vw, 2.75rem);
+  border-radius: 10px;
+  background:
+    radial-gradient(120% 80% at 30% 0%, rgb(255 255 255 / 0.14), transparent 55%),
+    var(--fire-red-deep, #b80219);
+  box-shadow:
+    inset 0 0 0 6px var(--fire-red-deep, #b80219),
+    inset 0 0 0 8px rgb(242 242 242 / 0.92),
+    inset 0 1px 0 9px rgb(255 255 255 / 0.12),
+    0 30px 60px -30px rgb(0 0 0 / 0.9),
+    0 2px 0 rgb(0 0 0 / 0.5);
+}
+.visit-placard::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, #e9ecee 0 2px, #7d8287 2.5px 3.5px, transparent 4px) 0 0 / 8px 8px no-repeat,
+    radial-gradient(circle, #e9ecee 0 2px, #7d8287 2.5px 3.5px, transparent 4px) 100% 0 / 8px 8px no-repeat,
+    radial-gradient(circle, #e9ecee 0 2px, #7d8287 2.5px 3.5px, transparent 4px) 0 100% / 8px 8px no-repeat,
+    radial-gradient(circle, #e9ecee 0 2px, #7d8287 2.5px 3.5px, transparent 4px) 100% 100% / 8px 8px no-repeat;
+}
+.visit-placard-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  border-bottom: 1px solid rgb(242 242 242 / 0.28);
+}
+.visit-placard-row::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  background: var(--foam);
+  transform: rotate(45deg);
 }
 .visit-sample {
   border: 1px dashed rgb(242 242 242 / 0.22);
