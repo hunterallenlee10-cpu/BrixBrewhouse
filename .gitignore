@@ -1,11 +1,36 @@
-node_modules/
-.next/
-out/
-.vercel/
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# testing
+/coverage
+/test-results/
+/playwright-report/
+
+# next.js
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# env / secrets
 .env*
-/assets/raw/
-*.log
+*.pem
+
+# misc
 .DS_Store
-coverage/
-test-results/
-playwright-report/
+*.log
+.vercel
+
+# raw generated media (large; logged in assets_plan.md)
+/assets/raw/
+
+# impeccable scratch
+/.impeccable/review/
+/.impeccable/mocks/
+/assets/processed/
+
+# agent worktrees
+/.claude/worktrees/

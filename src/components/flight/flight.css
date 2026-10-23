@@ -1,0 +1,206 @@
+/* ---------- tap rail ---------- */
+.flt-rail {
+  position: relative;
+  display: flex;
+  gap: clamp(0.25rem, 1vw, 1rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 0.5rem 0.25rem 0;
+}
+.flt-rail::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .flt-rail {
+    justify-content: space-between;
+    overflow: visible;
+  }
+}
+/* the stainless bar the handles thread into */
+.flt-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 152px;
+  height: 18px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0) 35%, rgb(0 0 0 / 0.35)),
+    url("/tex/stainless.webp") 0 0 / 512px auto;
+  box-shadow: 0 10px 24px -8px rgb(0 0 0 / 0.8);
+  pointer-events: none;
+}
+
+.flt-handle {
+  position: relative;
+  flex: 0 0 auto;
+  width: 98px;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 0.25rem;
+  background: none;
+  color: inherit;
+  text-align: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  --pull: 0;
+}
+@media (min-width: 1024px) {
+  .flt-handle {
+    width: auto;
+    flex: 1 1 0;
+    max-width: 120px;
+  }
+}
+.flt-stage {
+  position: relative;
+  height: 160px;
+  width: 100%;
+  perspective: 520px;
+}
+.flt-lever {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  width: 30px;
+  height: 128px;
+  margin-left: -15px;
+  transform-origin: 50% 100%;
+  transform: rotateX(calc(var(--pull) * -40deg));
+  transition: transform 0.45s var(--ease-door);
+}
+.flt-handle[data-dragging="true"] .flt-lever {
+  transition: none;
+}
+.flt-body {
+  position: absolute;
+  inset: 0 0 12px 0;
+  border-radius: 15px 15px 5px 5px;
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 0.55), transparent 30%, rgb(255 255 255 / 0.12) 42%, transparent 55%, rgb(0 0 0 / 0.6)),
+    linear-gradient(180deg, #5a3824, #3b2416 60%, #24160e);
+  box-shadow: 0 14px 22px -10px rgb(0 0 0 / 0.9);
+}
+/* the colour band is the beer's own colour */
+.flt-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 26%;
+  height: 18%;
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 0.45), transparent 30%, rgb(255 255 255 / 0.3) 42%, transparent 55%, rgb(0 0 0 / 0.5)),
+    var(--beer);
+}
+.flt-ferrule {
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  bottom: 0;
+  height: 14px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #6f7378, #e4e7ea 40%, #9aa0a6 60%, #4d5156);
+}
+.flt-handle:hover .flt-lever,
+.flt-handle:focus-visible .flt-lever {
+  --pull: 0.18;
+}
+.flt-handle[data-pulled="true"] .flt-lever {
+  --pull: 1;
+}
+.flt-handle:disabled {
+  cursor: not-allowed;
+}
+
+.flt-label {
+  margin-top: 0.85rem;
+  min-height: 4.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  line-height: 1.25;
+}
+
+/* ---------- paddle ---------- */
+.flt-paddle {
+  position: relative;
+  border-radius: 18px;
+  background-image: url("/tex/walnut.webp");
+  background-size: cover;
+  background-position: center 40%;
+  box-shadow:
+    inset 0 2px 0 rgb(255 225 190 / 0.18),
+    inset 0 -6px 14px rgb(0 0 0 / 0.55),
+    0 40px 60px -30px rgb(0 0 0 / 0.95);
+}
+.flt-paddle::after {
+  /* oiled finish */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(105deg, rgb(255 230 190 / 0.1), transparent 35%, rgb(0 0 0 / 0.25));
+  pointer-events: none;
+}
+.flt-well {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  width: 78%;
+  aspect-ratio: 3 / 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.75), rgb(0 0 0 / 0.35) 70%, transparent);
+}
+.flt-glass {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 100 / 240;
+}
+.flt-glass canvas,
+.flt-glass svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.flt-shake {
+  animation: shake 0.45s var(--ease-soft);
+}
+@keyframes shake {
+  20% { transform: translateX(-6px); }
+  45% { transform: translateX(5px); }
+  70% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+/* ---------- your flight: a brew sheet ---------- */
+.flt-sheet {
+  background:
+    repeating-linear-gradient(180deg, transparent 0 calc(2.6rem - 1px), rgb(242 242 242 / 0.07) calc(2.6rem - 1px) 2.6rem),
+    var(--ink-2);
+  border: 1px solid var(--line-strong);
+}
+.flt-meter {
+  position: relative;
+  height: 4.5rem;
+  border-bottom: 1px solid var(--line-strong);
+}
+.flt-pin {
+  position: absolute;
+  bottom: -5px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+.flt-pinDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px var(--ink-2), 0 0 0 3px rgb(242 242 242 / 0.5);
+}

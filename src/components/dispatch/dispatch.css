@@ -1,0 +1,251 @@
+/* BAY 06: the run board */
+
+.dsp-frame {
+  position: relative;
+  padding: 12px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.1), rgb(0 0 0 / 0.25)),
+    url("/tex/stainless.webp") 0 0 / 512px auto;
+  box-shadow:
+    0 50px 90px -40px rgb(0 0 0 / 0.95),
+    inset 0 1px 0 rgb(255 255 255 / 0.35),
+    inset 0 -1px 0 rgb(0 0 0 / 0.5);
+}
+/* four rivets */
+.dsp-frame::before,
+.dsp-frame::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f4f4f4, #6d7176);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.35), 0 calc(100% + 0px) 0 0 transparent;
+}
+.dsp-frame::before {
+  left: 4px;
+}
+.dsp-frame::after {
+  right: 4px;
+}
+
+.dsp-panel {
+  background: radial-gradient(120% 140% at 50% 0%, #17181b, #0b0c0d 70%);
+  box-shadow: inset 0 2px 10px rgb(0 0 0 / 0.8);
+}
+
+.dsp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.dsp-table thead th {
+  border-bottom: 1px solid rgb(242 242 242 / 0.14);
+}
+.dsp-table tbody tr {
+  border-bottom: 1px solid rgb(242 242 242 / 0.07);
+  transition: background-color 0.4s var(--ease-soft);
+}
+.dsp-table tbody tr:last-child {
+  border-bottom: 0;
+}
+.dsp-today {
+  background: linear-gradient(90deg, rgb(214 158 20 / 0.18), rgb(214 158 20 / 0.04));
+}
+
+/* ---------- split-flap tiles ---------- */
+.dsp-tiles {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: var(--gap, 3px);
+}
+.dsp-tile {
+  --w: 1.62rem;
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: var(--w);
+  height: calc(var(--w) * 1.42);
+  border-radius: 2px;
+  background: linear-gradient(180deg, #2a2b30 0%, #222327 49.5%, #17181b 50.5%, #1d1e22 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.07),
+    0 1px 2px rgb(0 0 0 / 0.7);
+  color: var(--foam);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(var(--w) * 0.92);
+  line-height: 1;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+.dsp-tile::after {
+  /* the hinge seam */
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto 0;
+  height: 1px;
+  background: rgb(0 0 0 / 0.85);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.04);
+}
+.dsp-blank {
+  background: linear-gradient(180deg, #1c1d21 0%, #18191c 49.5%, #121315 50.5%, #16171a 100%);
+}
+.dsp-gold {
+  color: var(--pour-gold-hi);
+}
+.dsp-flip {
+  animation: dsp-flap 70ms linear;
+}
+@keyframes dsp-flap {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.25);
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.dsp-small .dsp-tile {
+  --w: 1rem;
+}
+.dsp-small {
+  --gap: 2px;
+}
+
+@media (min-width: 640px) {
+  .dsp-small .dsp-tile {
+    --w: 1.3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .dsp-small .dsp-tile {
+    --w: 1.62rem;
+  }
+}
+
+/* phones + tablets: day, event and status stack; explicit roles keep the table semantics */
+@media (max-width: 1023px) {
+  .dsp-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .dsp-table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "day" "event" "status";
+    gap: 8px;
+    padding: 14px 12px;
+  }
+  .dsp-table .dsp-cDay {
+    grid-area: day;
+  }
+  .dsp-table .dsp-cEvent {
+    grid-area: event;
+  }
+  .dsp-table .dsp-cStatus {
+    grid-area: status;
+  }
+  .dsp-table td {
+    padding: 0 !important;
+  }
+}
+
+/* ---------- shuffleboard lane ---------- */
+.dsp-lane {
+  position: relative;
+  height: 74px;
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgb(255 244 220 / 0.18), transparent 40%, rgb(40 20 5 / 0.18)),
+    url("/tex/maple.webp") center 78% / max(100%, 900px) auto,
+    #c79f6a;
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.35),
+    inset 0 -3px 0 rgb(0 0 0 / 0.25);
+}
+.dsp-gutter {
+  padding: 10px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #3a2416, #26170e);
+  box-shadow:
+    inset 0 2px 6px rgb(0 0 0 / 0.7),
+    0 30px 50px -30px rgb(0 0 0 / 0.9);
+}
+.dsp-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: rgb(70 35 12 / 0.55);
+}
+/* painted scoring lines: thin and slightly worn, not cell dividers */
+.dsp-zone-far {
+  border-left: 1.5px solid rgb(70 35 12 / 0.5);
+}
+.dsp-zone-near {
+  border-right: 1.5px solid rgb(70 35 12 / 0.5);
+}
+.dsp-zone-near:first-child {
+  border-left: 0;
+}
+.dsp-foul {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  width: 0;
+  border-left: 1.5px dashed rgb(70 35 12 / 0.4);
+}
+.dsp-puck {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #f3f4f5, #a9aeb3 55%, #6b7075);
+  box-shadow:
+    0 6px 10px -2px rgb(0 0 0 / 0.55),
+    inset 0 -2px 3px rgb(0 0 0 / 0.35);
+  transform: translateX(0);
+  transition: transform 1.35s cubic-bezier(0.12, 0.72, 0.18, 1);
+}
+.dsp-puck::after {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, var(--pour-gold-hi), var(--pour-gold) 70%);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.35);
+}
+.dsp-puck-red {
+  margin-left: -22px;
+  transition: none;
+}
+.dsp-puck-red::after {
+  background: radial-gradient(circle at 40% 35%, #ff5a5f, var(--fire-red-deep) 70%);
+}
+.dsp-slid .dsp-puck:not(.dsp-puck-red) {
+  transform: translateX(var(--travel));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsp-flip {
+    animation: none;
+  }
+  .dsp-puck {
+    transition: none;
+  }
+}

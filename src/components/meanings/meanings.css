@@ -1,0 +1,86 @@
+/* The word box. --u (one brick unit in px-equivalent, set inline from the layout) scales mortar,
+   bevels, the enamel rim and the plates so both layouts read the same. */
+.brk-word {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  --lvl: 0; /* liquid level in courses, driven by GSAP */
+  --enamel: 0;
+}
+
+.brk-slot {
+  position: absolute;
+  will-change: transform;
+}
+.brk-face,
+.brk-rim {
+  position: absolute;
+  inset: calc(var(--u) * 0.05);
+}
+.brk-face {
+  background-repeat: no-repeat;
+  border-radius: calc(var(--u) * 0.036);
+  overflow: hidden;
+  /* mortar joint around every brick, bevel on the face */
+  box-shadow:
+    0 0 0 calc(var(--u) * 0.055) #3d3833,
+    inset 0 calc(var(--u) * 0.025) 0 rgb(255 236 214 / 0.16),
+    inset 0 calc(var(--u) * -0.066) calc(var(--u) * 0.09) rgb(0 0 0 / 0.42);
+}
+/* hydrometer liquid: each course fills as --lvl passes it */
+.brk-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 100%;
+  transform: scaleY(clamp(0, calc(var(--lvl) - var(--up)), 1));
+  background:
+    linear-gradient(180deg, rgb(255 236 170 / 0.9) 0 7%, transparent 7%),
+    linear-gradient(180deg, #f0bf45 0%, #d69e14 55%, #a8740a 100%);
+  opacity: 0.94;
+}
+/* red enamel edge: an expanded silhouette layer behind the bricks */
+.brk-rim {
+  background: var(--fire-red);
+  box-shadow: 0 0 0 calc(var(--u) * 0.32) var(--fire-red);
+  border-radius: calc(var(--u) * 0.12);
+}
+.brk-rimLayer {
+  position: absolute;
+  inset: 0;
+  opacity: var(--enamel);
+  /* enamel, not neon: a tight dark lift instead of a red halo */
+  filter: drop-shadow(0 calc(var(--u) * 0.18) calc(var(--u) * 0.22) rgb(0 0 0 / 0.55));
+}
+
+/* ledger lines for the BRICK panel */
+.brk-ledger {
+  border-top: 1px solid rgb(207 198 186 / 0.35);
+  background-image: repeating-linear-gradient(180deg, transparent 0 calc(2.1em - 1px), rgb(207 198 186 / 0.16) calc(2.1em - 1px) 2.1em);
+}
+.brk-ledgerRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+  height: 2.1em;
+  line-height: 2.1em;
+}
+.brk-ledgerRow span:nth-child(2) {
+  flex: 1;
+  border-bottom: 1px dotted rgb(207 198 186 / 0.4);
+  transform: translateY(-0.5em);
+}
+
+/* the hydrometer scale next to the word */
+.brk-scale {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--u) * -1.1);
+  width: calc(var(--u) * 0.48);
+}
+.brk-tick {
+  position: absolute;
+  right: 0;
+  height: 1px;
+  background: rgb(242 242 242 / 0.4);
+}

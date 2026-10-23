@@ -1,0 +1,452 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-23T07:58:15+00:00",
+  "title": "Design System: Brix Brewhouse",
+  "extensions": {
+    "colorMeta": {
+      "brix-black": {
+        "role": "neutral",
+        "displayName": "Brix Black",
+        "canonical": "#111214",
+        "oklch": "oklch(18.2% 0.004 264.5)",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#232426",
+          "#3e4042",
+          "#5c5e60",
+          "#7c7d80",
+          "#9d9ea1",
+          "#c3c4c7",
+          "#edeef1"
+        ]
+      },
+      "ink-0": {
+        "role": "neutral",
+        "displayName": "Ink 0",
+        "canonical": "#0b0c0d",
+        "oklch": "oklch(15.4% 0.003 248.0)",
+        "tonalRamp": [
+          "#0a0b0c",
+          "#232425",
+          "#3f4041",
+          "#5c5e5f",
+          "#7c7d7f",
+          "#9d9ea0",
+          "#c3c4c6",
+          "#edeff0"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink 2",
+        "canonical": "#17181b",
+        "oklch": "oklch(20.9% 0.006 271.1)",
+        "tonalRamp": [
+          "#0a0b0e",
+          "#232427",
+          "#3e4043",
+          "#5c5d61",
+          "#7c7d81",
+          "#9d9ea2",
+          "#c2c4c8",
+          "#edeef3"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Ink 3",
+        "canonical": "#1f2024",
+        "oklch": "oklch(24.4% 0.008 274.6)",
+        "tonalRamp": [
+          "#0a0b0e",
+          "#232428",
+          "#3e3f44",
+          "#5c5d62",
+          "#7c7d82",
+          "#9d9ea3",
+          "#c2c4c9",
+          "#edeef4"
+        ]
+      },
+      "fire-red": {
+        "role": "secondary",
+        "displayName": "Fire Red (logo)",
+        "canonical": "#ea0322",
+        "oklch": "oklch(59.1% 0.239 25.9)",
+        "tonalRamp": [
+          "#240000",
+          "#500000",
+          "#820001",
+          "#b70009",
+          "#e4232c",
+          "#fa6961",
+          "#ffa197",
+          "#ffdbd3"
+        ]
+      },
+      "fire-red-deep": {
+        "role": "secondary",
+        "displayName": "Fire Red Deep",
+        "canonical": "#b5021a",
+        "oklch": "oklch(48.7% 0.197 25.5)",
+        "tonalRamp": [
+          "#200000",
+          "#4a0206",
+          "#780f14",
+          "#aa1f24",
+          "#d54240",
+          "#ec766e",
+          "#ffa8a0",
+          "#ffded8"
+        ]
+      },
+      "pour-gold": {
+        "role": "primary",
+        "displayName": "Pour Gold",
+        "canonical": "#d69e14",
+        "oklch": "oklch(73.3% 0.147 82.3)",
+        "tonalRamp": [
+          "#150800",
+          "#361f00",
+          "#5a3800",
+          "#815300",
+          "#a57300",
+          "#c09746",
+          "#dec087",
+          "#ffecca"
+        ]
+      },
+      "pour-gold-hi": {
+        "role": "primary",
+        "displayName": "Pour Gold High",
+        "canonical": "#f0bf45",
+        "oklch": "oklch(82.7% 0.145 86.2)",
+        "tonalRamp": [
+          "#140900",
+          "#342000",
+          "#573a00",
+          "#7d5600",
+          "#a17600",
+          "#bc9947",
+          "#dbc188",
+          "#fdedca"
+        ]
+      },
+      "foam": {
+        "role": "neutral",
+        "displayName": "Foam",
+        "canonical": "#f2f2f2",
+        "oklch": "oklch(96.1% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
+        ]
+      },
+      "text-2": {
+        "role": "neutral",
+        "displayName": "Mortar Text",
+        "canonical": "#c9c3b9",
+        "oklch": "oklch(81.9% 0.015 80.7)",
+        "tonalRamp": [
+          "#0e0a05",
+          "#28231c",
+          "#443f37",
+          "#625d54",
+          "#827c73",
+          "#a39e94",
+          "#c9c3b9",
+          "#f4eee3"
+        ]
+      },
+      "text-3": {
+        "role": "neutral",
+        "displayName": "Tertiary Text",
+        "canonical": "#8f8a83",
+        "oklch": "oklch(63.6% 0.012 76.6)",
+        "tonalRamp": [
+          "#0e0b06",
+          "#27231e",
+          "#433f39",
+          "#615d56",
+          "#817c76",
+          "#a39e96",
+          "#c9c3bc",
+          "#f3eee6"
+        ]
+      },
+      "brick": {
+        "role": "tertiary",
+        "displayName": "Brick",
+        "canonical": "#8e3b2c",
+        "oklch": "oklch(46.2% 0.116 32.1)",
+        "tonalRamp": [
+          "#180503",
+          "#3c1710",
+          "#642d23",
+          "#8e4537",
+          "#b56353",
+          "#cf8a7c",
+          "#ebb6aa",
+          "#ffe6de"
+        ]
+      },
+      "mortar": {
+        "role": "tertiary",
+        "displayName": "Mortar",
+        "canonical": "#cfc6ba",
+        "oklch": "oklch(83.1% 0.019 75.3)",
+        "tonalRamp": [
+          "#100a03",
+          "#2a231a",
+          "#463e35",
+          "#645c52",
+          "#847c71",
+          "#a69d91",
+          "#ccc3b7",
+          "#f6ede1"
+        ]
+      },
+      "stainless": {
+        "role": "tertiary",
+        "displayName": "Stainless",
+        "canonical": "#a9aeb3",
+        "oklch": "oklch(74.8% 0.009 247.9)",
+        "tonalRamp": [
+          "#080c0f",
+          "#212428",
+          "#3c4044",
+          "#5a5e63",
+          "#797e83",
+          "#9a9fa4",
+          "#c0c5ca",
+          "#eaeff4"
+        ]
+      },
+      "walnut": {
+        "role": "tertiary",
+        "displayName": "Walnut",
+        "canonical": "#4a2e1e",
+        "oklch": "oklch(33.1% 0.049 50.2)",
+        "tonalRamp": [
+          "#110906",
+          "#2e2119",
+          "#4f3b2f",
+          "#725748",
+          "#947665",
+          "#b2988a",
+          "#d3c0b5",
+          "#f8ece5"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display (Big Shoulders 800)",
+        "purpose": "Room titles and signature words; may crop at the viewport edge."
+      },
+      "stencil": {
+        "displayName": "Stencil",
+        "purpose": "BAY 0n numerals and enamel sign headings."
+      },
+      "serif": {
+        "displayName": "Human Italic (Fraunces)",
+        "purpose": "People and feeling only: founders' story, subtitles, the closing line."
+      },
+      "body": {
+        "displayName": "Body (Manrope)",
+        "purpose": "Explanatory copy, max ~62ch."
+      },
+      "label": {
+        "displayName": "Brew Sheet Mono",
+        "purpose": "Numbers, specs, captions, provenance labels; never below 11px."
+      }
+    },
+    "shadows": [
+      {
+        "name": "object-drop",
+        "value": "0 40px 80px -40px rgb(0 0 0 / 0.95), 0 18px 30px -18px rgb(0 0 0 / 0.8)",
+        "purpose": "Physical objects on the dark ground: clippings, prints, run board."
+      },
+      {
+        "name": "cap-lift",
+        "value": "drop-shadow(0 14px 18px rgb(0 0 0 / 0.65)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.5))",
+        "purpose": "Cut-out bottle caps under the bar glass (filter)."
+      },
+      {
+        "name": "cta-drop",
+        "value": "0 14px 30px -14px rgb(0 0 0 / 0.85)",
+        "purpose": "Red buttons."
+      },
+      {
+        "name": "machined-edge",
+        "value": "inset 0 1px 0 rgb(255 255 255 / 0.35), inset 0 -1px 0 rgb(0 0 0 / 0.5)",
+        "purpose": "Stainless frames."
+      },
+      {
+        "name": "door-seam",
+        "value": "0 0 30px 6px rgb(240 191 69 / 0.45)",
+        "purpose": "The gold light under the gate's bay door; the only coloured glow besides the badge halo."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-door",
+        "value": "cubic-bezier(0.77, 0, 0.18, 1)",
+        "purpose": "Heavy, weighted: the bay door, cap flips, the tap handle pull."
+      },
+      {
+        "name": "ease-pour",
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "Liquid fills and pour-lines."
+      },
+      {
+        "name": "ease-soft",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Reveals, fades, hover settles."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px (gauge rail appears)"
+      },
+      {
+        "name": "xl",
+        "value": "1400px (container stops growing)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Tap Handle Button",
+      "kind": "button",
+      "refersTo": "button-tap",
+      "description": "The one CTA, \"Pour One With Us\": a tap handle pulls forward and a gold pour-line draws on hover.",
+      "html": "<button class=\"ds-tap\"><span class=\"ds-tap-handle\" aria-hidden=\"true\"><i class=\"k\"></i><i class=\"s\"></i><i class=\"f\"></i></span><span class=\"ds-tap-label\">Pour One With Us<span class=\"ds-tap-line\"></span></span></button>",
+      "css": ".ds-tap { display: inline-flex; align-items: center; gap: 12px; height: 56px; padding: 0 24px 0 16px; border: 0; border-radius: 0; background: var(--fire-red, #ea0322); color: var(--foam, #f2f2f2); font-family: 'Big Shoulders', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.04em; box-shadow: 0 14px 30px -14px rgb(0 0 0 / 0.85); cursor: pointer; transition: background-color 0.3s; } .ds-tap:hover { background: var(--fire-red-deep, #b5021a); } .ds-tap:focus-visible { outline: 2px solid #f0bf45; outline-offset: 3px; } .ds-tap-handle { position: relative; width: 0.62em; height: 1.55em; transform-origin: 50% 100%; transition: transform 0.6s cubic-bezier(0.77,0,0.18,1); } .ds-tap:hover .ds-tap-handle, .ds-tap:focus-visible .ds-tap-handle { transform: rotate(-26deg); } .ds-tap-handle i { position: absolute; left: 50%; transform: translateX(-50%); } .ds-tap-handle .k { top: 0; width: 0.42em; height: 0.42em; border-radius: 50%; background: #f2f2f2; } .ds-tap-handle .s { top: 0.3em; bottom: 0.18em; width: 0.34em; border-radius: 2px; background: linear-gradient(#f2f2f2,#cfcfcf); } .ds-tap-handle .f { bottom: 0; width: 0.56em; height: 0.22em; background: #d69e14; } .ds-tap-label { position: relative; white-space: nowrap; line-height: 1; } .ds-tap-line { position: absolute; left: 0; bottom: -0.32em; width: 100%; height: 2px; background: #f0bf45; transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.65,0,0.35,1); } .ds-tap:hover .ds-tap-line, .ds-tap:focus-visible .ds-tap-line { transform: scaleX(1); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary choice on dark ground (\"Not yet\").",
+      "html": "<button class=\"ds-ghost\">Not yet</button>",
+      "css": ".ds-ghost { height: 56px; padding: 0 28px; border: 1px solid rgb(242 242 242 / 0.24); border-radius: 0; background: transparent; color: #f2f2f2; font-family: 'Big Shoulders', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; } .ds-ghost:hover { border-color: #f2f2f2; background: rgb(242 242 242 / 0.05); } .ds-ghost:focus-visible { outline: 2px solid #f0bf45; outline-offset: 3px; }"
+    },
+    {
+      "name": "Bay Label",
+      "kind": "custom",
+      "description": "Stencil bay numeral that opens every room; the building's wayfinding.",
+      "html": "<p class=\"ds-bay\"><span class=\"n\">BAY 03</span><span class=\"r\"></span><span class=\"t\">The bar top</span></p>",
+      "css": ".ds-bay { display: flex; align-items: baseline; gap: 12px; margin: 0; color: #d69e14; } .ds-bay .n { font-family: 'Big Shoulders Stencil', 'Big Shoulders', sans-serif; font-weight: 700; font-size: 2rem; line-height: 1; letter-spacing: 0.1em; } .ds-bay .r { width: 32px; height: 1px; background: currentColor; opacity: 0.6; transform: translateY(-0.3em); } .ds-bay .t { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Confirm Chip",
+      "kind": "chip",
+      "refersTo": "confirm-chip",
+      "description": "Visible marker on any fact the owners still need to confirm.",
+      "html": "<span class=\"ds-confirm\">{{CONFIRM}}</span>",
+      "css": ".ds-confirm { display: inline-flex; padding: 0.18em 0.45em; border: 1px dashed #d69e14; background: rgb(214 158 20 / 0.1); color: #f0bf45; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; line-height: 1.2; white-space: nowrap; }"
+    },
+    {
+      "name": "Enamel Placard",
+      "kind": "card",
+      "refersTo": "enamel-placard",
+      "description": "Red porcelain-enamel house-rules sign with a white keyline and screws.",
+      "html": "<div class=\"ds-placard\"><h3>Good to know</h3><ul><li>Family-friendly</li><li>Walk-ins welcome</li><li>No dogs (for now)</li><li>Gift cards</li></ul></div>",
+      "css": ".ds-placard { position: relative; max-width: 30rem; padding: 28px 32px; border-radius: 10px; background: radial-gradient(120% 80% at 30% 0%, rgb(255 255 255 / 0.14), transparent 55%), #b5021a; box-shadow: inset 0 0 0 6px #b5021a, inset 0 0 0 8px rgb(242 242 242 / 0.92), 0 30px 60px -30px rgb(0 0 0 / 0.9); color: #f2f2f2; } .ds-placard h3 { margin: 0 0 16px; text-align: center; font-family: 'Big Shoulders Stencil', 'Big Shoulders', sans-serif; font-size: 2rem; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1; } .ds-placard ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; } .ds-placard li { display: flex; align-items: center; gap: 12px; min-height: 44px; border-bottom: 1px solid rgb(242 242 242 / 0.28); font-family: 'Big Shoulders', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em; } .ds-placard li::before { content: ''; width: 7px; height: 7px; background: #f2f2f2; transform: rotate(45deg); }"
+    },
+    {
+      "name": "Photo Slot",
+      "kind": "card",
+      "description": "Honest placeholder print for a real photo: dark frame, brass corner clips, mono caption.",
+      "html": "<figure class=\"ds-slot\"><div class=\"in\"><svg width=\"28\" height=\"28\" viewBox=\"0 0 256 256\" fill=\"none\" stroke=\"#d69e14\" stroke-width=\"8\"><path d=\"M208 208H48a16 16 0 0 1-16-16V80a16 16 0 0 1 16-16h32l16-24h64l16 24h32a16 16 0 0 1 16 16v112a16 16 0 0 1-16 16Z\"/><circle cx=\"128\" cy=\"132\" r=\"36\"/></svg><figcaption>Photo: Eli's Lounge woodwork</figcaption><p>Real photo goes here</p></div><i class=\"c tl\"></i><i class=\"c tr\"></i><i class=\"c br\"></i><i class=\"c bl\"></i></figure>",
+      "css": ".ds-slot { position: relative; margin: 0; width: 240px; padding: 12px; background: #0d0e10; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.9); } .ds-slot .in { display: grid; place-items: center; align-content: center; gap: 8px; aspect-ratio: 4 / 5; border: 1px solid rgb(242 242 242 / 0.12); background: repeating-linear-gradient(135deg, rgb(242 242 242 / 0.025) 0 1px, transparent 1px 14px), #141518; text-align: center; padding: 0 16px; } .ds-slot figcaption { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: #f2f2f2; } .ds-slot p { margin: 0; font-family: Manrope, system-ui, sans-serif; font-size: 0.75rem; color: #c9c3b9; } .ds-slot .c { position: absolute; width: 20px; height: 20px; background: linear-gradient(135deg,#f3d48a,#b98a2c 45%,#6f4f15); clip-path: polygon(0 0,100% 0,100% 28%,28% 28%,28% 100%,0 100%); } .ds-slot .tl { left: -4px; top: -4px; } .ds-slot .tr { right: -4px; top: -4px; transform: rotate(90deg); } .ds-slot .br { right: -4px; bottom: -4px; transform: rotate(180deg); } .ds-slot .bl { left: -4px; bottom: -4px; transform: rotate(-90deg); }"
+    },
+    {
+      "name": "Mono Spec Row",
+      "kind": "custom",
+      "description": "Brew-sheet data line for a tap: number, name, ABV, IBU in tabular mono.",
+      "html": "<p class=\"ds-spec\">TAP 04 / SESSION IPA / 5.9% / IBU 22</p>",
+      "css": ".ds-spec { margin: 0; color: #d69e14; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-variant-numeric: tabular-nums; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Firehouse Is Pouring Again",
+    "overview": "The page is one building, walked room by room. You arrive at a closed bay door, are let in, and every section after that is a bay of the firehouse: the brewhouse, the bar top, the kitchen, Eli's Lounge, the run board, the street out front. Brix Black is the night the building stands in. Pour Gold is the only light: beer, Edison bulbs, active states, the glow leaking under the door. Fire Red is enamel and the single call to act. Everything else is a material the building is actually made of (brick, mortar, walnut, brushed stainless, bottle caps under glass) rendered as raster, never imitated with gradients.\n\nDensity is editorial: one idea per viewport, huge condensed civic type cropped by the viewport, long dark fields between rooms, and small mono labels carrying the data the way a brew sheet or dispatch log would. Motion is heavy and weighted, like a rolling door: things settle; they don't bounce.\n\nRejected outright: the craft-brewery default (centred beer photo over cream, three amenity cards, stock taproom gallery) and firehouse theme-park dressing (clip-art flames, Dalmatians, hose borders, grunge overload).",
+    "keyCharacteristics": [
+      "Dark ground at page scale; gold is light, red is enamel and the CTA.",
+      "Real materials as fields and objects, each a labelled illustrative raster.",
+      "Civic signage type, huge and edge-cropped; a warm italic serif for human moments; mono for data.",
+      "Square corners and 1px hairlines; round only for round things (caps, dots); 10px only for enamel signs.",
+      "Every unknown fact is a visible `{{CONFIRM}}` chip, never a guess."
+    ],
+    "rules": [
+      {
+        "name": "The One Light Rule",
+        "body": "Gold is the only light source. Glows, highlights, and active states are gold; never blue, white neon, or a second accent.",
+        "section": "colors"
+      },
+      {
+        "name": "The Enamel Red Rule",
+        "body": "Red is for fire-service enamel, real red objects in the building (a bottle cap, a shuffleboard weight), and the single CTA. If it isn't a sign, an object, a gate \"Yes\", or \"Pour One With Us\", it isn't red.",
+        "section": "colors"
+      },
+      {
+        "name": "The Real Material Rule",
+        "body": "Brick, wood, steel, paper and caps are raster textures with an \"Illustrative render\" caption. CSS gradients may shade a material; they never stand in for one.",
+        "section": "colors"
+      },
+      {
+        "name": "The Brew Sheet Rule",
+        "body": "Numbers (ABV, IBU, times, dates, prices) are set in mono with tabular figures, like a brew log.",
+        "section": "typography"
+      },
+      {
+        "name": "The Human Italic Rule",
+        "body": "The serif italic is reserved for people and feeling. It never carries data or UI labels.",
+        "section": "typography"
+      },
+      {
+        "name": "The Five-Second Rule",
+        "body": "On a phone, hours, directions and the menu are reachable in one tap from anywhere via the fixed action bar.",
+        "section": "layout"
+      },
+      {
+        "name": "The Neutral Shadow Rule",
+        "body": "Shadows are black. Coloured glow is light, and light is gold: the seam under the bay door and the halo behind the gate badge, nowhere else.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do open every room with a stencil Bay Label and give it a real material from the building.",
+      "Do caption every generated visual \"Illustrative render\" (food: \"Illustrative, not the actual dish\") in mono at 11px or larger.",
+      "Do set every number in mono with tabular figures.",
+      "Do mark any unverified fact with a visible `{{CONFIRM}}` chip.",
+      "Do let signature display words crop at the viewport edge, but never so far that the meaning changes.",
+      "Do honour reduced motion with a fully static, complete page (the hero becomes a still on the door-open frame)."
+    ],
+    "donts": [
+      "Don't use gradient text, neon, or any glow that isn't gold light.",
+      "Don't imitate a material with CSS (striped \"wood\", gradient \"steel\"); use the raster or leave it out.",
+      "Don't use red for UI beyond the gate \"Yes\" and the CTA; elsewhere it belongs to enamel signs and real red objects.",
+      "Don't round corners on UI; round only round objects, and 10px only on enamel.",
+      "Don't generate people, the real logo, Larry Meag's art, signage or text in imagery.",
+      "Don't add fire-service clip art: flames, Dalmatians, hose borders, helmet icons."
+    ]
+  }
+}

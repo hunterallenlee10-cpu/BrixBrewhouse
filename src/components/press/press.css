@@ -1,0 +1,106 @@
+/* Framed newspaper clippings: newsprint objects sitting on the dark ground. */
+.press-frame {
+  position: relative;
+  padding: clamp(10px, 1.4vw, 18px);
+  background: #0b0c0d;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.06) inset,
+    0 40px 80px -40px rgb(0 0 0 / 0.95),
+    0 18px 30px -18px rgb(0 0 0 / 0.8);
+  transition: transform 0.7s var(--ease-soft);
+}
+.press-frame:hover {
+  transform: rotate(0deg) translateY(-4px) !important;
+}
+.press-paper {
+  position: relative;
+  color: #16130f;
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgb(255 255 255 / 0.22), transparent 60%),
+    url("/tex/newsprint.webp") center / cover,
+    #e6dfcf;
+  /* clean scissor cut on top, a real hand tear along the bottom */
+  -webkit-mask:
+    linear-gradient(#000, #000) top / 100% calc(100% - 15px) no-repeat,
+    url("/tex/torn-edge.svg") bottom left / 600px 16px repeat-x;
+  mask:
+    linear-gradient(#000, #000) top / 100% calc(100% - 15px) no-repeat,
+    url("/tex/torn-edge.svg") bottom left / 600px 16px repeat-x;
+}
+.press-rule {
+  height: 3px;
+  background: #16130f;
+  box-shadow: 0 5px 0 -4px #16130f;
+}
+.press-headline {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 48;
+  text-wrap: balance;
+}
+.press-link {
+  text-decoration: none;
+  color: #16130f;
+}
+.press-link:hover .press-arrow,
+.press-link:focus-visible .press-arrow {
+  transform: translateX(6px);
+}
+.press-arrow {
+  transition: transform 0.4s var(--ease-soft);
+}
+.press-link:focus-visible {
+  outline: 2px solid #8a5d00;
+  outline-offset: 4px;
+}
+.press-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+.press-play {
+  display: grid;
+  place-items: center;
+  width: clamp(72px, 9vw, 112px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: var(--pour-gold);
+  color: var(--brix-black);
+  box-shadow: 0 0 0 10px rgb(214 158 20 / 0.18), 0 20px 50px -10px rgb(0 0 0 / 0.8);
+  transition: transform 0.5s var(--ease-soft), box-shadow 0.5s var(--ease-soft);
+}
+.press-videoBtn:hover .press-play,
+.press-videoBtn:focus-visible .press-play {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 16px rgb(214 158 20 / 0.22), 0 20px 50px -10px rgb(0 0 0 / 0.8);
+}
+@media (prefers-reduced-motion: reduce) {
+  .press-frame,
+  .press-frame:hover,
+  .press-play,
+  .press-arrow {
+    transition: none;
+    transform: none !important;
+  }
+}
+
+/* "They said it." is set so big that the full stop and half the T run off the
+   right edge. "They said it." measures 4.676em; the visible run is sized to ~4.33em
+   of the space right of the .wrap gutter at every width. */
+.press-title {
+  font-size: 22.2vw; /* gutter 4vw */
+}
+@media (min-width: 1200px) {
+  .press-title {
+    font-size: calc(23.1vw - 11px); /* gutter 48px */
+  }
+}
+@media (min-width: 1400px) {
+  .press-title {
+    font-size: calc(11.55vw + 150px); /* .wrap centres at 1400px */
+  }
+}

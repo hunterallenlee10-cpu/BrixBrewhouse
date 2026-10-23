@@ -1,0 +1,36 @@
+{
+  "_note": "Edit this file to change what's pouring. 'tap' is display order on the site, not a physical tap number. Unknown stats stay null and show as a dash. Set 'confirmed' to true once the owners verify a beer.",
+  "updated": "{{CONFIRM}}",
+  "flightSize": 4,
+  "totalTaps": 9,
+  "beers": [
+    { "id": "pilsner-lager", "tap": 1, "name": "Light Pilsner Lager", "short": "Pilsner Lager", "style": "Pilsner Lager", "abv": 5.5, "ibu": 10, "color": "Pale Gold", "liquid": "#E9C45B", "haze": 0, "kind": "house", "confirmed": true,
+      "description": "Premium pilsner malt, clean lager yeast, and restrained noble hops for a crisp, dry finish." },
+    { "id": "amber-ale", "tap": 2, "name": "Amber Ale", "short": "Amber Ale", "style": "Amber Ale", "abv": 5.8, "ibu": 27, "color": "Amber Gold", "liquid": "#C7852A", "haze": 0, "kind": "house", "confirmed": true,
+      "description": "Medium-bodied with toasty malt, light caramel character, and balanced bitterness." },
+    { "id": "american-wheat", "tap": 3, "name": "American Wheat", "short": "American Wheat", "style": "American Wheat", "abv": 5.4, "ibu": 17, "color": "Hazy Gold", "liquid": "#E3B54E", "haze": 0.7, "kind": "house", "confirmed": true,
+      "description": "Soft bready wheat character, subtle citrus notes, naturally hazy finish." },
+    { "id": "session-ipa", "tap": 4, "name": "Session IPA", "short": "Session IPA", "style": "Session IPA", "abv": 5.9, "ibu": 22, "color": "Golden Amber", "liquid": "#D69E14", "haze": 0.15, "kind": "house", "confirmed": true,
+      "description": "Bright citrus and tropical fruit notes, balanced bitterness, crisp, refreshing finish." },
+    { "id": "brown-ale", "tap": 5, "name": "Brown Ale", "short": "Brown Ale", "style": "Brown Ale", "abv": 7.0, "ibu": 21, "color": "Deep Brown", "liquid": "#4A2412", "haze": 0, "kind": "house", "confirmed": true,
+      "description": "Chocolate, toasted bread, nutty malt, smooth finish. Richer than a traditional brown." },
+    { "id": "blonde-ale", "tap": 6, "name": "Blonde Ale", "short": "Blonde Ale", "style": "Blonde Ale", "abv": 6.7, "ibu": 17, "color": "Golden", "liquid": "#E1A82B", "haze": 0, "kind": "house", "confirmed": true,
+      "description": "Balanced malt character, mild hop notes, clean approachable finish." },
+    { "id": "pale-ale", "tap": 7, "name": "Pale Ale", "short": "Pale Ale", "style": "Pale Ale", "abv": null, "ibu": null, "color": null, "liquid": "#D9A033", "haze": 0.1, "kind": "rotating", "confirmed": false,
+      "description": "Mentioned in press as a rotating pour. Ask your bartender." },
+    { "id": "hazy-ipa", "tap": 8, "name": "Hazy IPA", "short": "Hazy IPA", "style": "Hazy IPA", "abv": null, "ibu": null, "color": null, "liquid": "#E6B04A", "haze": 0.9, "kind": "rotating", "confirmed": false,
+      "description": "Mentioned in press as a rotating pour. Ask your bartender." },
+    { "id": "belgian-white", "tap": 9, "name": "Belgian White Ale", "short": "Belgian White", "style": "Belgian White Ale", "abv": null, "ibu": null, "color": null, "liquid": "#EBCB7A", "haze": 0.85, "kind": "rotating", "confirmed": false,
+      "description": "Mentioned in press as a rotating pour. Ask your bartender." }
+  ],
+  "nonAlcoholic": {
+    "id": "birch-beer", "name": "House-Made Birch Beer", "short": "Birch Beer", "style": "Non-alcoholic", "abv": 0, "ibu": null, "color": "Dark", "liquid": "#3A140C", "foam": "#E9D6C2", "haze": 0, "kind": "na", "confirmed": true,
+    "description": "A local favorite, made in-house. No alcohol, all the foam."
+  },
+  "guest": {
+    "name": "Weyerbacher",
+    "description": "Guest taps from Pennsylvania favorite Weyerbacher."
+  },
+  "toGo": "Growler and crowler fills, depending on what's on tap.",
+  "otherDrinks": ["Water", "Soda", "Tea", "Lemonade", "Wine", "Canned beverages"]
+}
