@@ -6,6 +6,8 @@ import { MobileBar } from "@/components/nav/MobileBar";
 import { CapCursor } from "@/components/ui/CapCursor";
 import { Hero } from "@/components/hero/Hero";
 import { PourModal } from "@/components/cta/PourModal";
+import { ThreeMeanings } from "@/components/meanings/ThreeMeanings";
+import { FlightBuilder } from "@/components/flight/FlightBuilder";
 
 export default function Page() {
   return (
@@ -18,9 +20,8 @@ export default function Page() {
       <BrixGauge />
       <main id="main">
         <Hero />
-        <section id="brix" className="section">
-          <div className="wrap h-[100vh]" />
-        </section>
+        <ThreeMeanings />
+        <FlightBuilder />
       </main>
       <MobileBar />
       <PourModal />
