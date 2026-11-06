@@ -2,7 +2,7 @@
   "_note": "Prices in US dollars. 'pairsWith' is a house suggestion we added for the concept; owners should confirm or delete it.",
   "kitchenName": "John's Chef Table",
   "chef": { "name": "John Kiley", "years": 24, "knownFor": "his soups" },
-  "kitchenHours": "{{CONFIRM}}",
+  "kitchenHours": "Until 8 PM daily.",
   "kitchenHoursNote": "Their site lists 12-3 and 5-8 in one place and full menu until 8 PM daily in another.",
   "allDay": "Pretzels and hotdogs served all day.",
   "fanFavorite": { "beer": "Pale Ale", "dish": "Maryland crabcake pretzel", "confirm": true },

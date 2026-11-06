@@ -1,5 +1,4 @@
 import { TapHandleButton } from "@/components/ui/TapHandleButton";
-import { Illustrative } from "@/components/ui/primitives";
 
 /** The last room: the street out front at night. The image is a generic illustration, not the real building. */
 export function FinalCta() {
@@ -31,9 +30,6 @@ export function FinalCta() {
           <TapHandleButton size="lg" />
         </div>
       </div>
-      <Illustrative className="absolute bottom-[calc(56px+env(safe-area-inset-bottom)+12px)] right-4 md:bottom-4 md:right-24">
-        Illustrative render · not the actual building
-      </Illustrative>
     </section>
   );
 }

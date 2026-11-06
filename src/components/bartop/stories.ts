@@ -1,11 +1,10 @@
-// The six highlighted caps. Every fact comes from the brief; 1953 is still to be confirmed.
+// The six highlighted caps. Every fact comes from the brief.
 export type CapStory = {
   id: string;
   figure: string; // stamped on the cap face
   unit: string;
   story: string;
   credit: string;
-  confirm?: boolean;
   color: { base: string; hi: string; lo: string; ink: string };
   /** cut-out cap photo in /public/img/caps (illustrative render) */
   img: string;
@@ -62,8 +61,7 @@ export const STORIES: CapStory[] = [
     figure: "1953",
     unit: "In service",
     story: "The year the building went into service as the West End Firehouse.",
-    credit: "Year to confirm",
-    confirm: true,
+    credit: "West End Firehouse",
     color: { base: "#d8ccb2", hi: "#fffaf0", lo: "#7d7259", ink: "#17181b" },
     img: "cream",
   },

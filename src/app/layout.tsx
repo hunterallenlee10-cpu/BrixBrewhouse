@@ -111,7 +111,7 @@ const jsonLd = [
     mainEntity: FAQ.items.map((f) => ({
       "@type": "Question",
       name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a.replace("{{CONFIRM}}", "to be confirmed") },
+      acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
   },
 ];

@@ -45,9 +45,6 @@ export function DispatchBoard() {
         </header>
         <div className="mt-14">
           <FlapBoard />
-          <p className="t-mono mt-4 text-[0.6875rem] text-text-3">
-            Days marked {"{{CONFIRM}}"} are waiting on the owners. This board reads from one file they can edit.
-          </p>
         </div>
 
         {/* PLAY */}

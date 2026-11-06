@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { Confirm } from "@/components/ui/primitives";
 import { EVENTS } from "@/lib/data";
 import { zonedNow } from "@/lib/hours";
 
@@ -111,8 +110,8 @@ export function FlapBoard() {
                     {r.day ? (
                       <Flap text={r.day} run={run} delay={row * 90} gold={isToday} />
                     ) : (
-                      <span className="inline-flex min-w-[5.2rem] items-center">
-                        <Confirm title="Day not published yet" />
+                      <span aria-label="Day not set" className="inline-flex min-w-[5.2rem] items-center text-text-3">
+                        &mdash;
                       </span>
                     )}
                   </td>

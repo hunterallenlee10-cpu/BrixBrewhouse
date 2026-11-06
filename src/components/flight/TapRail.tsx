@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import type { Beer } from "@/lib/data";
-import { Confirm } from "@/components/ui/primitives";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const stat = (v: number | null, unit = "") => (v == null ? "—" : `${v}${unit}`);
@@ -124,11 +123,6 @@ function TapHandle({ beer, full, onPour, onFocusBeer }: { beer: Beer; full: bool
             </>
           )}
         </span>
-        {!beer.confirmed ? (
-          <span className="mt-1 flex flex-col items-center gap-1 normal-case">
-            <Confirm />
-          </span>
-        ) : null}
       </span>
     </button>
   );

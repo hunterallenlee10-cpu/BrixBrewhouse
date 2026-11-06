@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowCounterClockwise } from "@phosphor-icons/react";
 import { useSite } from "@/components/providers/SiteProvider";
-import { BayLabel, Confirm, Illustrative } from "@/components/ui/primitives";
+import { BayLabel, Illustrative } from "@/components/ui/primitives";
 import { TAPS, type Beer } from "@/lib/data";
 import { TapRail } from "./TapRail";
 import { Paddle, type PaddleHandle } from "./Paddle";
@@ -107,7 +107,7 @@ export function FlightBuilder() {
           </div>
           <div className="flex flex-col items-start gap-3 md:items-end">
             <p className="t-mono text-[0.68rem] text-text-2">
-              Taps rotate. Here&rsquo;s what&rsquo;s been pouring. Updated <Confirm />
+              Taps rotate. Here&rsquo;s what&rsquo;s been pouring.
             </p>
             <button
               type="button"
@@ -208,7 +208,7 @@ function BeerDetail({ beer }: { beer: Beer }) {
       <p className="mt-5 max-w-[38ch] text-text-2">{beer.description}</p>
       {!beer.confirmed ? (
         <p className="mt-3 text-sm text-text-2">
-          Ask your bartender. <Confirm label="Stats" />
+          Ask your bartender for the stats.
         </p>
       ) : null}
       <span aria-hidden className="mt-6 h-1 w-24" style={{ background: beer.liquid }} />

@@ -231,13 +231,6 @@
   opacity: 0.92;
 }
 
-.bt-faceConfirm {
-  margin-top: calc(var(--cap) * 0.025);
-  font-size: max(11px, calc(var(--cap) * 0.06));
-}
-.bt-faceConfirm .confirm {
-  background: rgb(23 24 27 / 0.85);
-}
 .bt-liner {
   position: absolute;
   inset: 18%;
@@ -307,8 +300,4 @@
   }
 }
 
-.bt-credit .confirm {
-  background: #17181b;
-  color: var(--pour-gold-hi);
-  border-color: transparent;
-}
+
