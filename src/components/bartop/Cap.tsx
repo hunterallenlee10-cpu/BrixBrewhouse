@@ -1,6 +1,5 @@
 "use client";
 
-import { Confirm } from "@/components/ui/primitives";
 import type { CapStory } from "./stories";
 
 function CapPhoto({ name }: { name: string }) {
@@ -41,7 +40,6 @@ export function Cap({
     >
       <span className="sr-only">
         {story.figure} {story.unit}: {story.story}
-        {story.confirm ? " (year still to be confirmed by the owners)" : ""}
       </span>
       <span aria-hidden className="bt-ring" />
       <span aria-hidden className="bt-inner">
@@ -51,11 +49,6 @@ export function Cap({
           <span className="bt-stamp" style={{ color: c.ink }}>
             <span className={`t-stencil ${long ? "bt-figLong" : "bt-fig"}`}>{story.figure}</span>
             <span className={`t-mono bt-unit`}>{story.unit}</span>
-            {story.confirm ? (
-              <span className="bt-faceConfirm">
-                <Confirm />
-              </span>
-            ) : null}
           </span>
         </span>
         {/* liner side: the story, logged */}
@@ -68,7 +61,7 @@ export function Cap({
             </span>
             <span className="bt-storyText">{story.story}</span>
             <span className={`t-mono bt-credit`}>
-              {story.confirm ? <Confirm /> : story.credit}
+              {story.credit}
             </span>
           </span>
         </span>

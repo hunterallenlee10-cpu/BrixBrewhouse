@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useSite } from "@/components/providers/SiteProvider";
-import { Confirm } from "@/components/ui/primitives";
 import { MENU, beerById, price, type MenuItem } from "@/lib/data";
 import { FOOD_PHOTOS } from "./foodPhotos";
 
@@ -22,7 +21,6 @@ function Item({ item }: { item: MenuItem }) {
             Pairs with <strong>{pair.short}</strong>
           </span>
           <span className={`t-mono kit-pairNote`}>House suggestion</span>
-          <Confirm title="Our suggestion for the concept. Owners to confirm or remove." />
         </p>
       ) : null}
     </li>

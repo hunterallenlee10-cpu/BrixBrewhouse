@@ -2,24 +2,8 @@
 
 import { useId, useState } from "react";
 import { Plus } from "@phosphor-icons/react";
-import { Confirm } from "@/components/ui/primitives";
 import { FAQ } from "@/lib/data";
 import { SITE } from "@/lib/site";
-
-/** Answers come from /data/faq.json; any {{CONFIRM}} renders as the visible token. */
-function Answer({ text }: { text: string }) {
-  const parts = text.split("{{CONFIRM}}");
-  return (
-    <>
-      {parts.map((p, i) => (
-        <span key={i}>
-          {p}
-          {i < parts.length - 1 ? <Confirm /> : null}
-        </span>
-      ))}
-    </>
-  );
-}
 
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
@@ -71,7 +55,7 @@ export function Faq() {
                 <div id={panel} role="region" aria-labelledby={btn} className={`faq-panel ${isOpen ? "faq-open" : ""}`} inert={!isOpen}>
                   <div className="overflow-hidden">
                     <p className="max-w-[62ch] pb-6 pr-14 text-[1.05rem] leading-relaxed text-text-2">
-                      <Answer text={f.a} />
+                      {f.a}
                     </p>
                   </div>
                 </div>

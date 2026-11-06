@@ -4,7 +4,6 @@ import { useEffect, useId, useRef, useState } from "react";
 import { MapPin, Phone, X } from "@phosphor-icons/react";
 import { useSite, type PourTab } from "@/components/providers/SiteProvider";
 import { StatusPill } from "@/components/ui/StatusPill";
-import { Confirm } from "@/components/ui/primitives";
 import { HOURS, formatTime, zonedNow } from "@/lib/hours";
 import { SITE } from "@/lib/site";
 
@@ -257,7 +256,7 @@ function GroupForm() {
           title="We'll call to confirm."
           body={
             <>
-              Walk-ins always welcome. Expect a call back <Confirm title="Owners to set a response time" />.
+              Walk-ins always welcome. Expect a call back soon.
             </>
           }
           onReset={() => f.setDone(false)}
@@ -317,7 +316,7 @@ function EventForm() {
           title="Eli's Lounge, penciled in."
           body={
             <>
-              Thanks. We&rsquo;ll be in touch <Confirm title="Owners to set a response time" /> to talk dates and options.
+              Thanks. We&rsquo;ll be in touch soon to talk dates and options.
             </>
           }
           onReset={() => f.setDone(false)}

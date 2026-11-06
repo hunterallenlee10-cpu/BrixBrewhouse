@@ -7,7 +7,7 @@ import { SequenceCanvas, type SequenceHandle } from "./SequenceCanvas";
 import { useSite } from "@/components/providers/SiteProvider";
 import { TapHandleButton } from "@/components/ui/TapHandleButton";
 import { StatusPill } from "@/components/ui/StatusPill";
-import { Confirm, Illustrative } from "@/components/ui/primitives";
+import { Illustrative } from "@/components/ui/primitives";
 import { weekSummary } from "@/lib/hours";
 import { whenIdle } from "@/lib/idle";
 
@@ -126,10 +126,7 @@ export function Hero() {
         <div ref={firehouseRef} className="invisible absolute inset-x-0 bottom-[12svh] opacity-0 will-change-transform">
           <div className="wrap">
             <p className="t-serif max-w-[16ch] text-[clamp(2.6rem,7.4vw,7rem)] text-foam [text-shadow:0_4px_40px_rgb(0_0_0/0.6)]">
-              A <span className="decoration-gold underline decoration-dashed decoration-[0.035em] underline-offset-[0.12em]">1953</span><span aria-hidden className="text-gold-hi">*</span> Firehouse. <span className="text-gold-hi">A New Pour.</span>
-            </p>
-            <p className="t-mono mt-3 flex flex-wrap items-center gap-2 text-[0.6875rem] text-foam/85 [text-shadow:0_1px_6px_rgb(0_0_0/0.9)]">
-              <span aria-hidden className="text-gold-hi">*</span> 1953 <Confirm /> their site says 1953; a listing says 1932.
+              A 1953 Firehouse. <span className="text-gold-hi">A New Pour.</span>
             </p>
             <p className="mt-6 max-w-[38ch] text-lg text-foam/90 md:text-xl">The walls hold stories. The taps pour something new.</p>
           </div>
@@ -179,11 +176,8 @@ function StaticHero() {
       <div className="relative flex min-h-[100svh] flex-col md:h-[100svh]">
       <div className="wrap relative flex flex-col gap-5 pt-[calc(var(--nav-h)+3rem)] md:shrink-0">
         <p className="t-serif max-w-[18ch] text-[clamp(2rem,5vw,4.2rem)] text-foam [text-shadow:0_4px_30px_rgb(0_0_0/0.7)]">
-          A <span className="decoration-gold underline decoration-dashed decoration-[0.035em] underline-offset-[0.12em]">1953</span><span aria-hidden className="text-gold-hi">*</span> Firehouse. <span className="text-gold-hi">A New Pour.</span>
+          A 1953 Firehouse. <span className="text-gold-hi">A New Pour.</span>
         </p>
-        <p className="t-mono -mt-2 flex flex-wrap items-center gap-2 text-[0.6875rem] text-foam/85 [text-shadow:0_1px_6px_rgb(0_0_0/0.9)]">
-              <span aria-hidden className="text-gold-hi">*</span> 1953 <Confirm /> their site says 1953; a listing says 1932.
-            </p>
         <p className="max-w-[44ch] text-lg text-foam/90">
           The walls hold stories. The taps pour something new. Small batch, brewed in-house, nine taps. Good beer isn&rsquo;t rushed.
         </p>

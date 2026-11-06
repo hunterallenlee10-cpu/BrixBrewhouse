@@ -41,4 +41,3 @@ export const SITE = {
   ],
 } as const;
 
-export const CONFIRM = "{{CONFIRM}}";

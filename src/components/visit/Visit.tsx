@@ -1,5 +1,5 @@
 import { EnvelopeSimple, MapPin, Phone } from "@phosphor-icons/react/dist/ssr";
-import { BayLabel, Illustrative } from "@/components/ui/primitives";
+import { BayLabel } from "@/components/ui/primitives";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { HOURS } from "@/lib/hours";
 import { SITE } from "@/lib/site";
@@ -25,7 +25,6 @@ export function Visit() {
       <div aria-hidden={false} className="absolute inset-x-0 top-0 h-[78svh] min-h-[520px] overflow-hidden">
         <RidgeVideo className="absolute inset-0 h-full w-full object-cover opacity-70" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-black" />
-        <Illustrative className="absolute bottom-6 right-6 md:right-24" />
       </div>
       {/* brick side bands: the firehouse wall framing the view */}
       <div aria-hidden className={`visit-band visit-bandLeft mat-brick`} />

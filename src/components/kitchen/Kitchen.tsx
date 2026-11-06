@@ -1,4 +1,4 @@
-import { BayLabel, Confirm, PhotoSlot } from "@/components/ui/primitives";
+import { BayLabel, PhotoSlot } from "@/components/ui/primitives";
 import { MENU } from "@/lib/data";
 import { Chalkboard } from "./Chalkboard";
 import { Menu } from "./Menu";
@@ -29,10 +29,7 @@ export function Kitchen() {
             <dl className="kit-facts">
               <div>
                 <dt className="t-mono">Kitchen hours</dt>
-                <dd>
-                  <Confirm title={MENU.kitchenHoursNote} />
-                  <span className="kit-factNote">12-3 and 5-8, or the full menu until 8 PM daily?</span>
-                </dd>
+                <dd>{MENU.kitchenHours}</dd>
               </div>
               <div>
                 <dt className="t-mono">All day</dt>
@@ -54,7 +51,7 @@ export function Kitchen() {
         <aside className="kit-favorite" aria-label="Fan favorite pairing">
           <p className="t-mono text-[0.68rem] text-gold">Fan favorite pairing</p>
           <p className="t-serif mt-2 text-[clamp(1.7rem,3.6vw,2.6rem)] text-foam">
-            {MENU.fanFavorite.beer} + {MENU.fanFavorite.dish} <Confirm title="Mentioned in press coverage; owners to confirm" />
+            {MENU.fanFavorite.beer} + {MENU.fanFavorite.dish}
           </p>
           <p className="mt-2 text-sm text-text-2">A crowd favorite in the press. Ask if it&rsquo;s on today.</p>
         </aside>

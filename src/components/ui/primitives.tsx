@@ -13,16 +13,6 @@ export function BayLabel({ n, children, className = "", tone = "gold" }: { n: st
   );
 }
 
-/** Visible marker for any fact the owners still need to confirm. */
-export function Confirm({ label, title }: { label?: string; title?: string }) {
-  return (
-    <span className="confirm" title={title ?? "Owners to confirm"}>
-      {label ? <span className="opacity-80">{label}</span> : null}
-      {"{{CONFIRM}}"}
-    </span>
-  );
-}
-
 /** Tiny mono caption on every AI-generated visual. */
 export function Illustrative({ children = "Illustrative render", className = "" }: { children?: ReactNode; className?: string }) {
   return (

@@ -269,26 +269,6 @@ textarea {
   100% { transform: translate(0, 0); }
 }
 
-/* ---------- confirm token ---------- */
-.confirm {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35em;
-  font-family: var(--font-mono);
-  font-size: clamp(0.6875rem, 0.68em, 0.8rem);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: none;
-  font-style: normal;
-  line-height: 1.2;
-  padding: 0.18em 0.45em;
-  border: 1px dashed var(--pour-gold);
-  color: var(--pour-gold-hi);
-  background: rgb(214 158 20 / 0.1);
-  vertical-align: 0.15em;
-  white-space: nowrap;
-}
-
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
