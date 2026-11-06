@@ -6,8 +6,8 @@ import { useEffect, useRef } from "react";
 const ZONES = ["1", "2", "3"];
 
 /**
- * The firemen's shuffleboard, drawn as a lane seen from above. A puck slides
- * into the 3 when the lane scrolls into view, and again on hover.
+ * The firemen's shuffleboard, drawn as a lane seen from above. Once the whole
+ * lane is on screen, one puck slides into the 3 and stays there.
  */
 export function Shuffleboard() {
   const wrap = useRef<HTMLDivElement>(null);
@@ -15,6 +15,7 @@ export function Shuffleboard() {
   useEffect(() => {
     const w = wrap.current;
     if (!w) return;
+    // wait until the lane is fully in view and clear of the bottom edge, so the slide is seen
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
@@ -22,26 +23,14 @@ export function Shuffleboard() {
           io.disconnect();
         }
       },
-      { threshold: 0.4 },
+      { threshold: 1, rootMargin: "0px 0px -20% 0px" },
     );
     io.observe(w);
     return () => io.disconnect();
   }, []);
 
-  // replay: snap the puck home, then send it again
-  const replay = () => {
-    const w = wrap.current;
-    const run = w?.querySelector<HTMLElement>(".dsp-run");
-    if (!w || !run || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    w.classList.remove("dsp-slid");
-    run.style.transition = "none";
-    void run.offsetWidth;
-    run.style.transition = "";
-    requestAnimationFrame(() => w.classList.add("dsp-slid"));
-  };
-
   return (
-    <div ref={wrap} onPointerEnter={replay} className="dsp-gutter">
+    <div ref={wrap} className="dsp-gutter">
       <div aria-hidden className="dsp-lane">
         <span className="dsp-foul" />
         <span className="dsp-zones">
