@@ -66,11 +66,7 @@
   background: var(--foam);
   transform: rotate(45deg);
 }
-.visit-sample {
-  border: 1px dashed rgb(242 242 242 / 0.22);
-  background: rgb(23 24 27 / 0.45);
-}
-/* a real review: the sample card's frame, but solid, since it isn't a placeholder */
+/* a real guest review */
 .visit-review {
   border: 1px solid rgb(242 242 242 / 0.14);
   background: rgb(23 24 27 / 0.45);
