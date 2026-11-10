@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, useTransition } from "react";
 import { MapPin, Phone, X } from "@phosphor-icons/react";
 import { useSite, type PourTab } from "@/components/providers/SiteProvider";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { HOURS, formatTime, zonedNow } from "@/lib/hours";
 import { SITE } from "@/lib/site";
+import { sendInquiry } from "@/app/actions";
+import { EVENT_TYPES, validators, type Errors, type InquiryKind } from "@/lib/inquiry";
 
 const TABS: { id: PourTab; label: string }[] = [
   { id: "visit", label: "Visit" },
@@ -180,9 +182,8 @@ function VisitTab() {
   );
 }
 
-/* ---------- forms (client-side only; nothing is sent) ---------- */
+/* ---------- forms (emailed to SITE.email by the sendInquiry server action) ---------- */
 
-type Errors = Record<string, string>;
 const field = "mt-1.5 block h-12 w-full border border-line-strong bg-ink-2 px-3 text-foam placeholder:text-text-3 focus:border-gold-hi focus:outline-none";
 const labelCls = "t-mono text-[0.6875rem] text-text-2";
 
@@ -203,25 +204,62 @@ function Field({ id, label, error, children, hint }: { id: string; label: string
   );
 }
 
-const phoneOk = (v: string) => v.replace(/\D/g, "").length >= 10;
-const emailOk = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-
-function useForm(validate: (d: FormData) => Errors) {
+function useForm(kind: InquiryKind) {
   const [errors, setErrors] = useState<Errors>({});
   const [done, setDone] = useState(false);
+  const [failed, setFailed] = useState("");
+  const [pending, startTransition] = useTransition();
+  const focusFirst = (form: HTMLFormElement, errs: Errors) => {
+    const first = Object.keys(errs)[0];
+    if (first) form.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
+    return !!first;
+  };
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const errs = validate(new FormData(e.currentTarget));
+    if (pending) return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    data.set("kind", kind);
+    const errs = validators[kind](data);
     setErrors(errs);
-    const first = Object.keys(errs)[0];
-    if (first) {
-      e.currentTarget.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
-      return;
-    }
-    setDone(true);
+    setFailed("");
+    if (focusFirst(form, errs)) return;
+    startTransition(async () => {
+      try {
+        const res = await sendInquiry(data);
+        if (res.ok) return setDone(true);
+        if (res.errors) {
+          setErrors(res.errors);
+          if (focusFirst(form, res.errors)) return;
+        }
+        setFailed(res.message ?? `Sorry, that didn't send. Please call us at ${SITE.phone}.`);
+      } catch {
+        setFailed(`Sorry, that didn't send. Please refresh and try again, or call us at ${SITE.phone}.`);
+      }
+    });
   };
   const aria = (name: string) => ({ "aria-invalid": !!errors[name] || undefined, "aria-describedby": errors[name] ? `${name}-err` : undefined });
-  return { errors, done, setDone, onSubmit, aria };
+  return { errors, done, setDone, onSubmit, aria, pending, failed };
+}
+
+/** Off-screen field people never see; bots that fill it are dropped by the server. */
+function Honeypot() {
+  return (
+    <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+      <label>
+        Company
+        <input name="company" tabIndex={-1} autoComplete="off" />
+      </label>
+    </div>
+  );
+}
+
+function SendError({ message }: { message: string }) {
+  return message ? (
+    <p role="alert" className="text-sm text-[#ff6b7a] sm:col-span-2">
+      {message}
+    </p>
+  ) : null;
 }
 
 function Success({ title, body, onReset }: { title: string; body: React.ReactNode; onReset: () => void }) {
@@ -231,8 +269,7 @@ function Success({ title, body, onReset }: { title: string; body: React.ReactNod
     <div ref={ref} tabIndex={-1} role="status" className="py-6 outline-none">
       <p className="t-serif text-[clamp(1.8rem,5vw,2.6rem)] text-gold-hi">{title}</p>
       <div className="mt-3 max-w-[48ch] text-text-2">{body}</div>
-      <p className="t-mono mt-6 text-[0.6875rem] text-text-3">Concept preview: this form doesn&rsquo;t send anything yet.</p>
-      <button type="button" onClick={onReset} className="t-mono mt-4 h-11 border border-line-strong px-4 text-[0.6875rem] text-foam hover:border-foam">
+      <button type="button" onClick={onReset} className="t-mono mt-6 h-11 border border-line-strong px-4 text-[0.6875rem] text-foam hover:border-foam">
         Start over
       </button>
     </div>
@@ -240,15 +277,7 @@ function Success({ title, body, onReset }: { title: string; body: React.ReactNod
 }
 
 function GroupForm() {
-  const f = useForm((d) => {
-    const e: Errors = {};
-    if (!String(d.get("g-name")).trim()) e["g-name"] = "Add a name so we know who to ask for.";
-    if (!phoneOk(String(d.get("g-phone")))) e["g-phone"] = "Add a phone number with area code.";
-    const n = Number(d.get("g-size"));
-    if (!n || n < 2) e["g-size"] = "How many are coming?";
-    if (!d.get("g-when")) e["g-when"] = "Pick a date and time.";
-    return e;
-  });
+  const f = useForm("group");
   if (f.done)
     return (
       <div role="tabpanel" id="panel-group" aria-labelledby="tab-group">
@@ -264,7 +293,8 @@ function GroupForm() {
       </div>
     );
   return (
-    <form role="tabpanel" id="panel-group" aria-labelledby="tab-group" noValidate onSubmit={f.onSubmit} className="grid gap-4 sm:grid-cols-2">
+    <form role="tabpanel" id="panel-group" aria-labelledby="tab-group" noValidate onSubmit={f.onSubmit} className="relative grid gap-4 sm:grid-cols-2">
+      <Honeypot />
       <p className="text-text-2 sm:col-span-2">Coming with a crowd? Give us a heads-up and we&rsquo;ll do our best to make room.</p>
       <Field id="g-name" label="Name" error={f.errors["g-name"]}>
         <input id="g-name" name="g-name" autoComplete="name" className={field} {...f.aria("g-name")} />
@@ -283,9 +313,10 @@ function GroupForm() {
           <textarea id="g-notes" name="g-notes" rows={3} className={`${field} h-auto py-2`} />
         </Field>
       </div>
+      <SendError message={f.failed} />
       <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
-        <button type="submit" className="h-13 min-h-12 bg-red px-7 font-display text-[1.2rem] font-extrabold uppercase text-foam hover:bg-red-deep">
-          Send the heads-up
+        <button type="submit" disabled={f.pending} aria-busy={f.pending || undefined} className="h-13 min-h-12 bg-red px-7 font-display text-[1.2rem] font-extrabold uppercase text-foam hover:bg-red-deep disabled:cursor-wait disabled:opacity-70">
+          {f.pending ? "Sending…" : "Send the heads-up"}
         </button>
         <a href={SITE.phoneHref} className="t-mono text-[0.68rem] text-text-2 underline hover:text-foam">
           Or call {SITE.phone}
@@ -295,20 +326,8 @@ function GroupForm() {
   );
 }
 
-const EVENT_TYPES = ["Birthday", "Shower", "Team night", "Fundraiser", "Watch party", "Something else"];
-
 function EventForm() {
-  const f = useForm((d) => {
-    const e: Errors = {};
-    if (!String(d.get("e-name")).trim()) e["e-name"] = "Add a name so we know who to ask for.";
-    if (!phoneOk(String(d.get("e-phone")))) e["e-phone"] = "Add a phone number with area code.";
-    if (!emailOk(String(d.get("e-email")))) e["e-email"] = "That email doesn't look complete.";
-    if (!d.get("e-date")) e["e-date"] = "Pick a date.";
-    const n = Number(d.get("e-guests"));
-    if (!n || n < 1) e["e-guests"] = "How many guests?";
-    else if (n > 50) e["e-guests"] = "Eli's Lounge seats 50. For a bigger crowd, give us a call.";
-    return e;
-  });
+  const f = useForm("event");
   if (f.done)
     return (
       <div role="tabpanel" id="panel-event" aria-labelledby="tab-event">
@@ -324,7 +343,8 @@ function EventForm() {
       </div>
     );
   return (
-    <form role="tabpanel" id="panel-event" aria-labelledby="tab-event" noValidate onSubmit={f.onSubmit} className="grid gap-4 sm:grid-cols-2">
+    <form role="tabpanel" id="panel-event" aria-labelledby="tab-event" noValidate onSubmit={f.onSubmit} className="relative grid gap-4 sm:grid-cols-2">
+      <Honeypot />
       <p className="text-text-2 sm:col-span-2">
         Eli&rsquo;s Lounge seats 50 and was built by hand. Tell us what you&rsquo;re celebrating.
       </p>
@@ -355,9 +375,10 @@ function EventForm() {
           <textarea id="e-msg" name="e-msg" rows={3} className={`${field} h-auto py-2`} />
         </Field>
       </div>
+      <SendError message={f.failed} />
       <div className="sm:col-span-2">
-        <button type="submit" className="h-13 min-h-12 bg-red px-7 font-display text-[1.2rem] font-extrabold uppercase text-foam hover:bg-red-deep">
-          Ask about the lounge
+        <button type="submit" disabled={f.pending} aria-busy={f.pending || undefined} className="h-13 min-h-12 bg-red px-7 font-display text-[1.2rem] font-extrabold uppercase text-foam hover:bg-red-deep disabled:cursor-wait disabled:opacity-70">
+          {f.pending ? "Sending…" : "Ask about the lounge"}
         </button>
       </div>
     </form>
