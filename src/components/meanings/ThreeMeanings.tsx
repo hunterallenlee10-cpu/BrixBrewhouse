@@ -54,7 +54,16 @@ export function ThreeMeanings() {
             Joe Elias and Chris Pohorenco met picking their kids up from school. Both had made beer and wine.{" "}
             <span className="text-gold-hi">Brix is what happened next.</span>
           </blockquote>
-          <PhotoSlot label="Joe & Chris" ratio="4 / 5" tilt={1.5} className="mx-auto w-[min(100%,320px)]" />
+          <PhotoSlot
+            label="Joe & Chris"
+            ratio="4 / 5"
+            tilt={1.5}
+            className="mx-auto w-[min(100%,320px)]"
+            photos={[
+              { src: "/img/real/joe-elias", alt: "Joe Elias, co-founder, smiling in a Brix cap and a red Brix Brewhouse T-shirt", width: 752, height: 868, position: "50% 0%" },
+              { src: "/img/real/chris-pohorence", alt: "Chris Pohorenco, co-founder, hands on hips in front of the painted Brix sign", width: 900, height: 761, position: "38% 0%" },
+            ]}
+          />
         </div>
       </div>
     </section>
