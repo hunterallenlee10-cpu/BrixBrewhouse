@@ -78,7 +78,7 @@ export function Footer() {
             <span className="ml-3">© Brix Brewhouse</span>
           </p>
           <p className="max-w-[60ch] md:text-right">
-            Concept preview by Lee Enterprises Unlimited. Some imagery is AI-generated illustration. Real photos coming soon.
+            Website Built and Operated by Lee Enterprises Unlimited
           </p>
         </div>
       </div>
