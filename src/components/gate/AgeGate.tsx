@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { doorEase, useSite } from "@/components/providers/SiteProvider";
+import { useSite } from "@/components/providers/SiteProvider";
 import { SITE } from "@/lib/site";
 
 /**
@@ -9,7 +9,7 @@ import { SITE } from "@/lib/site";
  * carries the visitor ~15% into the hero sequence (the door starts opening).
  */
 export function AgeGate({ logo }: { logo: React.ReactNode }) {
-  const { gatePassed, passGate, scrollTo, reducedMotion } = useSite();
+  const { gatePassed, passGate, reducedMotion } = useSite();
   const [phase, setPhase] = useState<"ask" | "under" | "opening" | "gone">("ask");
   const dialog = useRef<HTMLDivElement>(null);
   const yesBtn = useRef<HTMLButtonElement>(null);
@@ -48,11 +48,6 @@ export function AgeGate({ logo }: { logo: React.ReactNode }) {
       return;
     }
     setPhase("opening");
-    // let Lenis start, then roll the visitor into the first stretch of the sequence
-    window.setTimeout(() => {
-      const hero = document.getElementById("top");
-      if (hero) scrollTo(Math.round((hero.offsetHeight - window.innerHeight) * 0.15), { duration: 2.8, easing: doorEase });
-    }, 380);
     window.setTimeout(() => setPhase("gone"), 1400);
   };
 

@@ -144,7 +144,7 @@ A blackout palette with one warm light and one enamel red, plus the building's o
 **Character:** Civic fire-service signage at poster scale, softened by a warm, slightly wonky italic for the people's stories, and grounded by brew-sheet mono for every number.
 
 ### Hierarchy
-- **Display** (800, uppercase, 0.86 leading, -0.01em): room titles and the hero wordmark. Room titles run `clamp(3.6rem, 11vw, 10rem)`. The hero wordmark ("Brix Brewhouse", white, centred low over the door) runs `clamp(5rem, 8vw, 8.5rem)` on desktop and stacks to two lines on phones; it sits inside the frame, never cropped. "They said it." in Press uses the room-title size; no headline runs off the viewport.
+- **Display** (800, uppercase, 0.86 leading, -0.01em): room titles and the hero wordmark. Room titles run `clamp(3.6rem, 11vw, 10rem)`. The hero wordmark ("Brix Brewhouse", white, low-left over the background video) runs `clamp(5rem, 8vw, 8.5rem)` on desktop and stacks to two lines on phones; it sits inside the frame, never cropped. "They said it." in Press uses the room-title size; no headline runs off the viewport.
 - **Stencil** (700, uppercase, 0.1em): "BAY 0n" numerals that open each room, and the enamel placard heading.
 - **Serif** (Fraunces italic 400, SOFT 100, WONK 1): human moments: the founders' story, room subtitles, "Come pour one with us."
 - **Body** (Manrope 400, 1rem/1.6, max ~62ch): all explanatory copy.
@@ -211,7 +211,7 @@ Square by default: buttons, frames, sheets, inputs and the modal have 0 radius a
 - **Do** set every number in mono with tabular figures.
 - **Do** mark any unverified fact with a visible `{{CONFIRM}}` chip.
 - **Do** let signature display words crop at the viewport edge, but never so far that the meaning changes.
-- **Do** honour reduced motion with a fully static, complete page (the hero becomes a still on the door-open frame).
+- **Do** honour reduced motion with a fully static, complete page (the hero video becomes a still on the door-open frame).
 
 ### Don't:
 - **Don't** use gradient text, neon, or any glow that isn't gold light.
