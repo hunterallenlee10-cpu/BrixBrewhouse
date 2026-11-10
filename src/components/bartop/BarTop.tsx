@@ -155,7 +155,7 @@ export function BarTop() {
               ratio="4 / 3"
               tilt={-1.5}
               className="bt-print"
-              photos={[{ src: "/img/real/larry-meag-mural", alt: "Artist Larry Meag, brush in hand, in front of his mural of rolling farm fields and blue mountains", width: 648, height: 868, position: "50% 40%" }]}
+              photos={[{ src: "/img/real/larry-meag-mural", alt: "Artist Larry Meag, brush in hand, in front of his mural of rolling farm fields and blue mountains", width: 648, height: 868, position: "50% 40%", phonePosition: "50% 59%" }]}
             />
           </div>
         </div>

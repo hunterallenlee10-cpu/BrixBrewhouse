@@ -22,8 +22,12 @@ export function Illustrative({ children = "Illustrative render", className = "" 
   );
 }
 
-/** A real photo for a PhotoSlot. `src` has no extension: .avif + .webp sit side by side. */
-export type SlotPhoto = { src: string; alt: string; width: number; height: number; position?: string };
+/**
+ * A real photo for a PhotoSlot. `src` has no extension: .avif + .webp sit side by side.
+ * `position` is the object-position; `phonePosition` overrides it below 768px,
+ * where the prints are small and the caption covers more of them.
+ */
+export type SlotPhoto = { src: string; alt: string; width: number; height: number; position?: string; phonePosition?: string };
 
 /**
  * A framed print. Brass clips on the corners. Without `photos` it is a
@@ -78,8 +82,8 @@ export function PhotoSlot({
                     height={ph.height}
                     loading="lazy"
                     decoding="async"
-                    className="absolute inset-0 h-full w-full object-cover"
-                    style={{ objectPosition: ph.position ?? "50% 50%" }}
+                    className="absolute inset-0 h-full w-full object-cover [object-position:var(--pos-phone)] md:[object-position:var(--pos)]"
+                    style={{ "--pos": ph.position ?? "50% 50%", "--pos-phone": ph.phonePosition ?? ph.position ?? "50% 50%" } as CSSProperties}
                   />
                 </picture>
               ))}
