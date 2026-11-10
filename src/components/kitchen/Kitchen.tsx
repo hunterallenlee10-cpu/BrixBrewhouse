@@ -1,4 +1,4 @@
-import { BayLabel, PhotoSlot } from "@/components/ui/primitives";
+import { BayLabel } from "@/components/ui/primitives";
 import { MENU } from "@/lib/data";
 import { Chalkboard } from "./Chalkboard";
 import { Menu } from "./Menu";
@@ -44,7 +44,6 @@ export function Kitchen() {
 
           <div className="kit-introBoard">
             <Chalkboard />
-            <PhotoSlot label="Chef John" note="At the pass, in his kitchen" ratio="4 / 5" tilt={-3} className="kit-chefSlot" />
           </div>
         </div>
 
