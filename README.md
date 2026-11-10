@@ -34,3 +34,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Form emails
+
+The Large group and Private event forms email each submission to `info@brixbrewhouse.com` (see `src/app/actions.ts`) through [Resend](https://resend.com). Set these in Vercel → Project → Settings → Environment Variables:
+
+| Variable | Value |
+|---|---|
+| `RESEND_API_KEY` | API key from Resend. Without it, the forms tell guests to call or email instead. |
+| `FORMS_FROM_EMAIL` | Optional. Sender address, e.g. `Brix Brewhouse Website <website@brixbrewhouse.com>` (the default). Its domain must be verified in Resend. |
+
+Private event emails set the guest's address as reply-to, so hitting Reply answers them directly.

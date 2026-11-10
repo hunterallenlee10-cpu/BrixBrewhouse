@@ -78,7 +78,10 @@ export function Footer() {
             <span className="ml-3">© Brix Brewhouse</span>
           </p>
           <p className="max-w-[60ch] md:text-right">
-            Website Built and Operated by Lee Enterprises Unlimited
+            Website Built and Operated by{" "}
+            <a href="https://leeenterprisesunlimited.com" target="_blank" rel="noopener" className="text-text-2 underline underline-offset-4 hover:text-foam">
+              Lee Enterprises Unlimited
+            </a>
           </p>
         </div>
       </div>
