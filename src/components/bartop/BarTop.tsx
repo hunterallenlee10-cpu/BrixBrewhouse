@@ -132,9 +132,31 @@ export function BarTop() {
           </ul>
 
           <div data-prints className="bt-prints">
-            <PhotoSlot label="the bottle-cap bar" note="Lindsay's 40 hours, the real thing" ratio="4 / 3" tilt={-3.5} className="bt-print" />
-            <PhotoSlot label="Eli's Lounge woodwork" note="107 days of carpentry" ratio="4 / 5" tilt={2.5} className="bt-print" />
-            <PhotoSlot label="Larry Meag mural" note="The back wall, by the artist" ratio="4 / 3" tilt={-1.5} className="bt-print" />
+            <PhotoSlot
+              label="the bottle-cap bar"
+              note="Lindsay's 40 hours, the real thing"
+              ratio="4 / 3"
+              tilt={-3.5}
+              className="bt-print"
+              captionAt="top"
+              photos={[{ src: "/img/real/bottle-cap-bar", alt: "Brix's bar top, covered in bottle caps set under glass, with guests at a flight and a bartender behind the bar", width: 1156, height: 868 }]}
+            />
+            <PhotoSlot
+              label="Eli's Lounge woodwork"
+              note="107 days of carpentry"
+              ratio="4 / 5"
+              tilt={2.5}
+              className="bt-print"
+              photos={[{ src: "/img/real/elis-lounge", alt: "Eli's Lounge: exposed wood beams strung with lights over a pool table, high-top tables and a second bar", width: 648, height: 868, position: "50% 45%" }]}
+            />
+            <PhotoSlot
+              label="Larry Meag mural"
+              note="The back wall, by the artist"
+              ratio="4 / 3"
+              tilt={-1.5}
+              className="bt-print"
+              photos={[{ src: "/img/real/larry-meag-mural", alt: "Artist Larry Meag, brush in hand, in front of his mural of rolling farm fields and blue mountains", width: 648, height: 868, position: "50% 40%", phonePosition: "50% 59%" }]}
+            />
           </div>
         </div>
 
