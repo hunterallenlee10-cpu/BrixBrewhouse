@@ -7,6 +7,21 @@ import { HoursTable } from "./HoursTable";
 import { MapPanel } from "./MapPanel";
 import { RidgeVideo } from "./RidgeVideo";
 
+/** Real guest reviews, word for word from the public post. */
+const REVIEWS = [
+  {
+    quote: "This is an amazing place. Between the staff, food, and brews, you are absolutely bound to have an amazing time!",
+    name: "Jade D.",
+    source: "Yelp",
+  },
+  {
+    quote:
+      "I would highly recommend Brix Brewhouse. \u2026 They take pride in what they do and I love that everything is local and still has that local feel.",
+    name: "Lori R.",
+    source: "Facebook",
+  },
+];
+
 const GOOD_TO_KNOW = [
   "Family-friendly",
   "Wheelchair accessible",
@@ -114,15 +129,15 @@ export function Visit() {
           </div>
         </div>
 
-        {/* sample reviews: clearly templates, never presented as real */}
+        {/* real guest reviews, quoted word for word (an ellipsis marks text left out) */}
         <div className="mt-[clamp(4rem,8vw,6rem)] grid gap-4 md:grid-cols-2">
-          {[0, 1].map((i) => (
-            <figure key={i} className={`visit-sample p-6 md:p-8`} aria-label="Sample review placeholder">
-              <p className="t-mono text-[0.6875rem] text-gold">Sample: replace with a real guest review</p>
-              <blockquote className="t-serif mt-4 text-[clamp(1.4rem,2.4vw,1.9rem)] text-text-3">
-                [A real guest review goes here: two or three lines, quoted with permission.]
-              </blockquote>
-              <figcaption className="t-mono mt-5 text-[0.6875rem] text-text-3">[Guest name] · [Google or Facebook]</figcaption>
+          {REVIEWS.map((r) => (
+            <figure key={r.name} className={`visit-review p-6 md:p-8`}>
+              <p className="t-mono text-[0.6875rem] text-gold">Guest review</p>
+              <blockquote className="t-serif mt-4 text-[clamp(1.4rem,2.4vw,1.9rem)] text-foam">&ldquo;{r.quote}&rdquo;</blockquote>
+              <figcaption className="t-mono mt-5 text-[0.6875rem] text-text-2">
+                {r.name} · {r.source}
+              </figcaption>
             </figure>
           ))}
         </div>
