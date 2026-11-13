@@ -6,7 +6,7 @@ export type CapStory = {
   story: string;
   credit: string;
   color: { base: string; hi: string; lo: string; ink: string };
-  /** cut-out cap photo in /public/img/caps (illustrative render) */
+  /** cut-out cap photo in /public/img/caps (generated) */
   img: string;
   /** degrees to rotate the cap photo's hue, for a colour we have no photo of */
   hue?: number;

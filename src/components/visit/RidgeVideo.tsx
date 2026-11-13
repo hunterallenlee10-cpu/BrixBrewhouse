@@ -34,7 +34,7 @@ export function RidgeVideo({ className = "" }: { className?: string }) {
       loop
       playsInline
       preload="none"
-      aria-label="Illustrative render: Pocono ridgelines at golden hour, mist drifting through the valleys."
+      aria-label="Pocono ridgelines at golden hour, mist drifting through the valleys."
     >
       <source src="/video/ridge.webm" type="video/webm" />
       <source src="/video/ridge.mp4" type="video/mp4" />

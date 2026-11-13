@@ -390,7 +390,7 @@
     "overview": "The page is one building, walked room by room. You arrive at a closed bay door, are let in, and every section after that is a bay of the firehouse: the brewhouse, the bar top, the kitchen, Eli's Lounge, the run board, the street out front. Brix Black is the night the building stands in. Pour Gold is the only light: beer, Edison bulbs, active states, the glow leaking under the door. Fire Red is enamel and the single call to act. Everything else is a material the building is actually made of (brick, mortar, walnut, brushed stainless, bottle caps under glass) rendered as raster, never imitated with gradients.\n\nDensity is editorial: one idea per viewport, huge condensed civic type cropped by the viewport, long dark fields between rooms, and small mono labels carrying the data the way a brew sheet or dispatch log would. Motion is heavy and weighted, like a rolling door: things settle; they don't bounce.\n\nRejected outright: the craft-brewery default (centred beer photo over cream, three amenity cards, stock taproom gallery) and firehouse theme-park dressing (clip-art flames, Dalmatians, hose borders, grunge overload).",
     "keyCharacteristics": [
       "Dark ground at page scale; gold is light, red is enamel and the CTA.",
-      "Real materials as fields and objects, each a labelled illustrative raster.",
+      "Real materials as fields and objects, each a raster texture.",
       "Civic signage type, huge and edge-cropped; a warm italic serif for human moments; mono for data.",
       "Square corners and 1px hairlines; round only for round things (caps, dots); 10px only for enamel signs.",
       "Every unknown fact is a visible `{{CONFIRM}}` chip, never a guess."
@@ -408,7 +408,7 @@
       },
       {
         "name": "The Real Material Rule",
-        "body": "Brick, wood, steel, paper and caps are raster textures with an \"Illustrative render\" caption. CSS gradients may shade a material; they never stand in for one.",
+        "body": "Brick, wood, steel, paper and caps are raster textures. CSS gradients may shade a material; they never stand in for one.",
         "section": "colors"
       },
       {
@@ -434,7 +434,7 @@
     ],
     "dos": [
       "Do open every room with a stencil Bay Label and give it a real material from the building.",
-      "Do caption every generated visual \"Illustrative render\" (food: \"Illustrative, not the actual dish\") in mono at 11px or larger.",
+      "Don't caption generated visuals \"Illustrative render\": the owners had those labels removed. Swap generated images for real photos as they arrive.",
       "Do set every number in mono with tabular figures.",
       "Do mark any unverified fact with a visible `{{CONFIRM}}` chip.",
       "Do let signature display words crop at the viewport edge, but never so far that the meaning changes.",
