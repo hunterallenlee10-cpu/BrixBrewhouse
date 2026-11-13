@@ -1,15 +1,16 @@
 {
-  "_note": "Real guest reviews only, word for word from the public post (an ellipsis marks text left out). 'source' is where it was posted (Google, Yelp, Facebook). Optional: 'stars' (1-5) and 'photo', a path under /public such as /img/reviews/jade-d.webp, shown beside the quote.",
+  "_note": "Google reviews for the carousel. Paste each review's words into its \"text\" field exactly as written on Google; a review with empty text is skipped. Optional per review: \"photo\", a path under /public such as /img/reviews/carolyn.webp, shown at the top of the card. \"summary\" feeds the rating row above the cards.",
+  "summary": { "rating": 4.5, "count": 72, "source": "Google", "url": "https://www.google.com/search?q=Brix+Brewhouse+Brodheadsville+PA" },
   "reviews": [
-    {
-      "quote": "This is an amazing place. Between the staff, food, and brews, you are absolutely bound to have an amazing time!",
-      "name": "Jade D.",
-      "source": "Yelp"
-    },
-    {
-      "quote": "I would highly recommend Brix Brewhouse. … They take pride in what they do and I love that everything is local and still has that local feel.",
-      "name": "Lori R.",
-      "source": "Facebook"
-    }
+    { "name": "Carolyn Hanser", "stars": 5, "when": "5 months ago", "localGuide": true, "text": "" },
+    { "name": "G W", "stars": 5, "when": "2 months ago", "localGuide": true, "text": "" },
+    { "name": "Griffin Frank", "stars": 5, "when": "4 months ago", "localGuide": false, "text": "" },
+    { "name": "Stefanie Belcher", "stars": 5, "when": "4 months ago", "localGuide": true, "text": "" },
+    { "name": "Bill Gartrell", "stars": 5, "when": "5 months ago", "localGuide": true, "text": "" },
+    { "name": "Nicole Cheyanne", "stars": 5, "when": "5 months ago", "localGuide": false, "text": "" },
+    { "name": "Kevin", "stars": 5, "when": "4 months ago", "localGuide": true, "text": "" },
+    { "name": "daniel martin", "stars": 5, "when": "5 months ago", "localGuide": false, "text": "" },
+    { "name": "Adam Hager", "stars": 5, "when": "1 month ago", "localGuide": false, "text": "" },
+    { "name": "beerventurers", "stars": 4, "when": "3 months ago", "localGuide": true, "text": "" }
   ]
 }

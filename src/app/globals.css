@@ -7,6 +7,7 @@
 @import "../components/dispatch/dispatch.css";
 @import "../components/press/press.css";
 @import "../components/visit/visit.css";
+@import "../components/reviews/reviews.css";
 @import "../components/faq/faq.css";
 
 /* metric fallback for Big Shoulders: next/font has no override data for it, so a

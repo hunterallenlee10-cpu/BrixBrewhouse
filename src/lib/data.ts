@@ -49,8 +49,13 @@ export const EVENTS = events as {
   weekly: (CalendarEvent & { weekday: "SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" })[];
   events: (CalendarEvent & { date: string })[];
 };
-/** Real guest reviews, word for word. */
-export const REVIEWS = reviews as { reviews: { quote: string; name: string; source: string; stars?: number; photo?: string }[] };
+/** A guest review, word for word from where it was posted. `photo` is an optional path under /public. */
+export type Review = { name: string; stars: number; when: string; localGuide: boolean; text: string; photo?: string };
+export type ReviewSummary = { rating: number; count: number; source: string; url: string };
+const REVIEW_DATA = reviews as { summary: ReviewSummary; reviews: Review[] };
+/** Only reviews that have their words filled in; the rest wait in /data/reviews.json. */
+export const REVIEWS: Review[] = REVIEW_DATA.reviews.filter((r) => r.text.trim() !== "");
+export const REVIEW_SUMMARY: ReviewSummary = REVIEW_DATA.summary;
 export const FAQ = faq as { items: { q: string; a: string }[] };
 export const SPECIALS = specials as { todaysSpecial: string; soupOfTheDay: string; soupNote: string; tacoTuesday: string };
 

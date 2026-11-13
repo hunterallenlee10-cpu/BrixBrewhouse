@@ -7,7 +7,7 @@ for (const [k, vp] of [["d", { width: 1440, height: 900 }], ["m", { width: 390, 
   await ctx.addInitScript(() => sessionStorage.setItem("brix-21", "yes"));
   const p = await ctx.newPage();
   await p.goto("http://localhost:3000/", { waitUntil: "networkidle" });
-  await p.evaluate(([s, o]) => { const el = document.querySelector(s); el && el.scrollIntoView({ block: "start" }); scrollBy(0, Number(o)); }, [sel, off]);
+  await p.evaluate(([s, o]) => { document.querySelector(s)?.scrollIntoView({ block: "start" }); scrollBy(0, Number(o)); }, [sel, off]);
   await p.waitForTimeout(1500);
   await p.screenshot({ path: `${outp}-${k}.png` });
   await ctx.close();
