@@ -44,7 +44,8 @@ export function Nav() {
       <nav aria-label="Primary" className="wrap flex h-full items-center justify-between gap-4">
         <a href="#top" onClick={go("top")} className="flex shrink-0 items-center gap-3" aria-label="Brix Brewhouse, back to the door">
           <img src="/brand/brix-logo-white.svg" alt="" width={40} height={39} className="h-10 w-auto" />
-          <span className="t-display hidden text-[1.35rem] text-foam sm:inline">Brix Brewhouse</span>
+          {/* on narrow desktops the six links need the room, so the badge stands alone there */}
+          <span className="t-display hidden text-[1.35rem] text-foam sm:inline lg:hidden xl:inline">Brix Brewhouse</span>
         </a>
         <ul className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((l) => (
@@ -52,7 +53,7 @@ export function Nav() {
               <a
                 href={`#${l.id}`}
                 onClick={go(l.id)}
-                className="t-mono inline-flex h-11 items-center px-3 text-[0.72rem] text-foam/85 transition-colors hover:text-gold-hi"
+                className="t-mono inline-flex h-11 items-center whitespace-nowrap px-3 text-[0.72rem] text-foam/85 transition-colors hover:text-gold-hi"
               >
                 {l.label}
               </a>
