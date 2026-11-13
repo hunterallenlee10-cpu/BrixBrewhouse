@@ -19,8 +19,6 @@ type Ctx = {
   reducedMotion: boolean;
   lenis: React.RefObject<Lenis | null>;
   scrollTo: (target: string | number | HTMLElement, opts?: { duration?: number; offset?: number; easing?: (t: number) => number }) => void;
-  sound: boolean;
-  setSound: (on: boolean) => void;
 };
 
 const SiteCtx = createContext<Ctx | null>(null);
@@ -53,7 +51,6 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
   const gatePassed = useSyncExternalStore(subscribeGate, readGate, () => false);
   const [pour, setPour] = useState<{ open: boolean; tab: PourTab }>({ open: false, tab: "visit" });
   const reducedMotion = useSyncExternalStore(subscribeMotion, readMotion, () => false);
-  const [sound, setSoundState] = useState(false);
   const lenis = useRef<Lenis | null>(null);
   const opener = useRef<HTMLElement | null>(null);
 
@@ -138,16 +135,9 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
     [reducedMotion],
   );
 
-  const setSound = useCallback((on: boolean) => {
-    setSoundState(on);
-    try {
-      localStorage.setItem("brix-sound", on ? "on" : "off");
-    } catch {}
-  }, []);
-
   const value = useMemo(
-    () => ({ gatePassed, passGate, pour, openPour, closePour, reducedMotion, lenis, scrollTo, sound, setSound }),
-    [gatePassed, passGate, pour, openPour, closePour, reducedMotion, scrollTo, sound, setSound],
+    () => ({ gatePassed, passGate, pour, openPour, closePour, reducedMotion, lenis, scrollTo }),
+    [gatePassed, passGate, pour, openPour, closePour, reducedMotion, scrollTo],
   );
   return <SiteCtx.Provider value={value}>{children}</SiteCtx.Provider>;
 }
