@@ -61,7 +61,7 @@ export function ThreeMeanings() {
             className="mx-auto w-[min(100%,320px)]"
             photos={[
               { src: "/img/real/joe-elias", alt: "Joe Elias, co-founder, smiling in a Brix cap and a red Brix Brewhouse T-shirt", width: 752, height: 868, position: "50% 0%" },
-              { src: "/img/real/chris-pohorence", alt: "Chris Poherence, co-founder, hands on hips in front of the painted Brix sign", width: 900, height: 761, position: "38% 0%" },
+              { src: "/img/real/chris-poherence", alt: "Chris Poherence, co-founder, hands on hips in front of the painted Brix sign", width: 900, height: 761, position: "38% 0%" },
             ]}
           />
         </div>
