@@ -35,9 +35,9 @@ export default function Page() {
         <Hero />
         <ThreeMeanings />
         <Threshold />
-        <FlightBuilder />
-        <Threshold />
         <BarTop />
+        <Threshold />
+        <FlightBuilder />
         <Threshold />
         <Kitchen />
         <Threshold />

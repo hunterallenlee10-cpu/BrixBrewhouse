@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import { Camera } from "@phosphor-icons/react/dist/ssr";
 
-/** Stencilled bay marking that opens each room: "BAY 03 / THE BAR TOP". */
+/** Stencilled bay marking that opens each room: "BAY 02 / THE BAR TOP". */
 export function BayLabel({ n, children, className = "", tone = "gold" }: { n: string; children: ReactNode; className?: string; tone?: "gold" | "foam" | "ink" }) {
   const color = tone === "gold" ? "text-gold" : tone === "ink" ? "text-black" : "text-foam";
   return (

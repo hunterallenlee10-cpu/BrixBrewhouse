@@ -8,7 +8,7 @@ import { STORIES } from "./stories";
 type OrientationCtor = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<"granted" | "denied"> };
 
 /**
- * BAY 03. The whole room is the bar top: caps under glass, with a slow
+ * BAY 02. The whole room is the bar top: caps under glass, with a slow
  * specular glare that follows the cursor (or the phone's tilt) like light
  * sweeping across a glossy surface. Six highlighted caps flip to their stories.
  */
@@ -103,7 +103,7 @@ export function BarTop() {
   return (
     <section id="bar-top" aria-labelledby="bartop-title" className="relative overflow-hidden bg-black pt-[clamp(5rem,11vw,9rem)]">
       <div className="wrap relative z-10">
-        <BayLabel n="03">The bar top</BayLabel>
+        <BayLabel n="02">The bar top</BayLabel>
         <h2 id="bartop-title" className="t-serif mt-6 max-w-[15ch] pb-2 text-[clamp(2.8rem,7vw,6.4rem)] leading-[1.04] text-foam">
           Some breweries are built. <span className="text-gold-hi">This one was made.</span>
         </h2>
