@@ -14,7 +14,7 @@ Next.js (App Router) + TypeScript + Tailwind CSS v4, GSAP + ScrollTrigger, Lenis
 
 ## Users
 
-1. **The owners (first audience):** Joe Elias and Chris Pohorence, co-owners of Brix Brewhouse. They will open a concept link from Lee Enterprises Unlimited and decide whether to buy it. Success: they feel someone finally understood their place.
+1. **The owners (first audience):** Joe Elias and Chris Poherence, co-owners of Brix Brewhouse. They will open a concept link from Lee Enterprises Unlimited and decide whether to buy it. Success: they feel someone finally understood their place.
 2. **Guests (the site's real job):** locals and Pocono visitors, often on a phone, often hungry, deciding where to go tonight. They need hours, directions and the menu within seconds.
 3. **Groups and event planners:** people booking Eli's Lounge or calling ahead for large parties.
 
