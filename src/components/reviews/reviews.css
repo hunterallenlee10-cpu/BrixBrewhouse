@@ -51,6 +51,7 @@
   line-height: 1.5;
   color: var(--foam);
   overflow-wrap: anywhere;
+  white-space: pre-line; /* keep the line breaks a reviewer typed */
 }
 /* long reviews stop at six lines until opened */
 .rv-text[data-open="false"] {

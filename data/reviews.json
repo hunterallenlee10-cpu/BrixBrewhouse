@@ -1,16 +1,17 @@
 {
-  "_note": "Google reviews for the carousel. Paste each review's words into its \"text\" field exactly as written on Google; a review with empty text is skipped. Optional per review: \"photo\", a path under /public such as /img/reviews/carolyn.webp, shown at the top of the card. \"summary\" feeds the rating row above the cards.",
-  "summary": { "rating": 4.5, "count": 72, "source": "Google", "url": "https://www.google.com/search?q=Brix+Brewhouse+Brodheadsville+PA" },
+  "_note": "Google reviews for the carousel. Paste each review's words into its \"text\" field exactly as written on Google; a review with empty text is skipped. Use \\n for a line break inside a review. Optional per review: \"photo\", a path under /public such as /img/reviews/carolyn.webp, shown at the top of the card. \"summary\" feeds the rating row above the cards.",
+  "summary": {"rating": 4.5, "count": 72, "source": "Google", "url": "https://www.google.com/search?q=Brix+Brewhouse+Brodheadsville+PA"},
   "reviews": [
-    { "name": "Carolyn Hanser", "stars": 5, "when": "5 months ago", "localGuide": true, "text": "" },
-    { "name": "G W", "stars": 5, "when": "2 months ago", "localGuide": true, "text": "" },
-    { "name": "Griffin Frank", "stars": 5, "when": "4 months ago", "localGuide": false, "text": "" },
-    { "name": "Stefanie Belcher", "stars": 5, "when": "4 months ago", "localGuide": true, "text": "" },
-    { "name": "Bill Gartrell", "stars": 5, "when": "5 months ago", "localGuide": true, "text": "" },
-    { "name": "Nicole Cheyanne", "stars": 5, "when": "5 months ago", "localGuide": false, "text": "" },
-    { "name": "Kevin", "stars": 5, "when": "4 months ago", "localGuide": true, "text": "" },
-    { "name": "daniel martin", "stars": 5, "when": "5 months ago", "localGuide": false, "text": "" },
-    { "name": "Adam Hager", "stars": 5, "when": "1 month ago", "localGuide": false, "text": "" },
-    { "name": "beerventurers", "stars": 4, "when": "3 months ago", "localGuide": true, "text": "" }
+    {"name": "Carolyn Hanser", "stars": 5, "when": "5 months ago", "localGuide": true, "text": "Second time I’ve been here in the past week! First off, this is what we’ve been missing in the Poconos!!! Incredible beer, amazing space for friends, family, and to host events. That back room is awesome! I haven’t been here for the bands but I saw there’s a stage too. The Brix folks have thought through it all! Even my kids loved it and felt welcome. I can’t say enough great things… oh get the pretzel w/cheese and the chicken sandwich!"},
+    {"name": "G W", "stars": 5, "when": "2 months ago", "localGuide": true, "text": ""},
+    {"name": "Griffin Frank", "stars": 5, "when": "4 months ago", "localGuide": false, "text": "What a great spot! A firehouse converted to a brewery is genius. Beers are top quality. Food is great. The staff are absolutely incredible. Highly recommend!"},
+    {"name": "Stefanie Belcher", "stars": 5, "when": "4 months ago", "localGuide": true, "text": "Brix Brewhouse is a fantastic spot! The food was delicious, with great flavors and quality ingredients, and the atmosphere was amazing. Whether you’re stopping in for a meal, drinks, or to meet up with friends, the welcoming vibe makes it a place you’ll want to come back to. And Live Music!!\nHighly recommend checking it out!!!"},
+    {"name": "Bill Gartrell", "stars": 5, "when": "5 months ago", "localGuide": true, "text": "Fabulous opening for Brix! We have run into so many friends. The atmosphere, staff, food and drinks are outstanding! You have got to check it out!"},
+    {"name": "Nicole Cheyanne", "stars": 5, "when": "5 months ago", "localGuide": false, "text": "Great atmosphere for the whole family. Incredible brews and great food. Music nights are worth the hangout. Amber ale is the highlight."},
+    {"name": "Kevin", "stars": 5, "when": "4 months ago", "localGuide": true, "text": "Great atmosphere. Had the Hazy IPA with pulled pork over nachos. Class act!"},
+    {"name": "daniel martin", "stars": 5, "when": "5 months ago", "localGuide": false, "text": "Welcome to the neighborhood\nFriendly staff\nFood is very tasty and decent pricing\nI am looking forward for my return visit\nthank you brix\nKeep up the good work\nI think and I know you guys will do fabulous in our neighborhood"},
+    {"name": "Adam Hager", "stars": 5, "when": "1 month ago", "localGuide": false, "text": "This is amazing Brewery great atmosphere an personal touch, great personal inspired brews with great rotating delicious eats."},
+    {"name": "beerventurers", "stars": 4, "when": "3 months ago", "localGuide": true, "text": ""},
+    {"name": "raf kar", "stars": 5, "when": "5 months ago", "localGuide": true, "text": "Great News,\nBRIX now it’s open , great beer and hot food ."}
   ]
 }
