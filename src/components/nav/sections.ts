@@ -2,8 +2,8 @@
 export const ROOMS = [
   { id: "top", label: "The Door", short: "Door" },
   { id: "brix", label: "Three Meanings", short: "Brix" },
-  { id: "on-tap", label: "On Tap", short: "On Tap" },
   { id: "bar-top", label: "The Bar Top", short: "Bar Top" },
+  { id: "on-tap", label: "On Tap", short: "On Tap" },
   { id: "kitchen", label: "Kitchen", short: "Kitchen" },
   { id: "lounge", label: "Eli's Lounge", short: "Lounge" },
   { id: "garden", label: "Beer Garden", short: "Garden" },

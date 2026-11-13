@@ -23,7 +23,7 @@ function parseHash(): string[] | null {
   return ids.length ? ids : null;
 }
 
-/** BAY 02: pull four handles, build a flight. */
+/** BAY 03: pull four handles, build a flight. */
 export function FlightBuilder() {
   const { reducedMotion } = useSite();
   const [slots, setSlots] = useState<(string | null)[]>(() => Array(SIZE).fill(null));
@@ -94,7 +94,7 @@ export function FlightBuilder() {
       <div className="wrap">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <BayLabel n="02">On tap</BayLabel>
+            <BayLabel n="03">On tap</BayLabel>
             <h2 id="on-tap-title" className="t-display mt-4 text-[clamp(3.6rem,10vw,9rem)] text-foam">
               Build your flight
             </h2>
