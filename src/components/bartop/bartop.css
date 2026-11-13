@@ -107,19 +107,18 @@
     overflow: visible;
     margin: 0;
     padding: 0;
-    height: calc(var(--cap) * 3 + 12rem);
+    height: calc(var(--cap) * 2 + 9.5rem);
   }
   .bt-slot {
     position: absolute;
   }
-  /* seven caps in three loose rows: 3, 2, 2 */
-  .bt-slot[data-slot="0"] { left: 1%; top: 1rem; }
-  .bt-slot[data-slot="1"] { left: 36%; top: 0; }
-  .bt-slot[data-slot="2"] { left: calc(99% - var(--cap)); top: 3.5rem; }
-  .bt-slot[data-slot="3"] { left: 15%; top: calc(var(--cap) + 4.5rem); }
-  .bt-slot[data-slot="4"] { left: 54%; top: calc(var(--cap) + 6.75rem); }
-  .bt-slot[data-slot="5"] { left: 4%; bottom: 0; }
-  .bt-slot[data-slot="6"] { left: 43%; bottom: 1.25rem; }
+  /* six caps in two loose rows of three */
+  .bt-slot[data-slot="0"] { left: 1%; top: 2%; }
+  .bt-slot[data-slot="1"] { left: 36%; top: 0%; }
+  .bt-slot[data-slot="2"] { left: calc(99% - var(--cap)); top: 9%; }
+  .bt-slot[data-slot="3"] { left: 6%; bottom: 0%; }
+  .bt-slot[data-slot="4"] { left: 39%; bottom: 7%; }
+  .bt-slot[data-slot="5"] { left: calc(97% - var(--cap)); bottom: 2%; }
 }
 
 /* ---------- a cap ---------- */

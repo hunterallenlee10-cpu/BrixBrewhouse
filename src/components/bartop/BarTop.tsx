@@ -10,7 +10,7 @@ type OrientationCtor = typeof DeviceOrientationEvent & { requestPermission?: () 
 /**
  * BAY 03. The whole room is the bar top: caps under glass, with a slow
  * specular glare that follows the cursor (or the phone's tilt) like light
- * sweeping across a glossy surface. Seven highlighted caps flip to their stories.
+ * sweeping across a glossy surface. Six highlighted caps flip to their stories.
  */
 export function BarTop() {
   const [flipped, setFlipped] = useState<Set<string>>(() => new Set());

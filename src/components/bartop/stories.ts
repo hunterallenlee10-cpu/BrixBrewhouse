@@ -1,4 +1,4 @@
-// The seven highlighted caps. Every fact comes from the owners.
+// The six highlighted caps. Every fact comes from the owners.
 export type CapStory = {
   id: string;
   figure: string; // stamped on the cap face
@@ -39,15 +39,6 @@ export const STORIES: CapStory[] = [
     credit: "West End firehouse",
     color: { base: "#9fa4a9", hi: "#eef1f3", lo: "#4a4f54", ink: "#17181b" },
     img: "silver",
-  },
-  {
-    id: "doors",
-    figure: "5",
-    unit: "Bay doors",
-    story: "Glass now. Look through them and you'll see the brewhouse.",
-    credit: "The old bays",
-    color: { base: "#2c5b3c", hi: "#6fb486", lo: "#11281a", ink: "#f2f2f2" },
-    img: "green",
   },
   {
     id: "stage",
