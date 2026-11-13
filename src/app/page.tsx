@@ -15,6 +15,7 @@ const BeerGarden = dynamic(() => import("@/components/garden/BeerGarden").then((
 const DispatchBoard = dynamic(() => import("@/components/dispatch/DispatchBoard").then((m) => m.DispatchBoard));
 const Press = dynamic(() => import("@/components/press/Press").then((m) => m.Press));
 const Visit = dynamic(() => import("@/components/visit/Visit").then((m) => m.Visit));
+const Reviews = dynamic(() => import("@/components/reviews/Reviews").then((m) => m.Reviews));
 const Faq = dynamic(() => import("@/components/faq/Faq").then((m) => m.Faq));
 import { FinalCta } from "@/components/cta/FinalCta";
 import { Footer } from "@/components/footer/Footer";
@@ -22,7 +23,7 @@ import { PourModal } from "@/components/cta/PourModal";
 
 // Rooms below the fold are code-split so hydration runs in smaller pieces (still server-rendered).
 
-/** The building, room by room: door, bay 01-09, the street out front. */
+/** The building, room by room: door, bay 01-09, what guests say, the street out front. */
 export default function Page() {
   return (
     <SiteProvider>
@@ -50,6 +51,7 @@ export default function Page() {
         <Press />
         <Threshold />
         <Visit />
+        <Reviews />
         <Faq />
         <FinalCta />
       </main>

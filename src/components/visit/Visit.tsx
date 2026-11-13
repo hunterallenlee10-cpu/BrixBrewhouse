@@ -5,7 +5,6 @@ import { HOURS } from "@/lib/hours";
 import { SITE } from "@/lib/site";
 import { HoursTable } from "./HoursTable";
 import { MapPanel } from "./MapPanel";
-import { Reviews } from "./Reviews";
 import { RidgeVideo } from "./RidgeVideo";
 
 const GOOD_TO_KNOW = [
@@ -113,11 +112,6 @@ export function Visit() {
               ))}
             </ul>
           </div>
-        </div>
-
-        {/* real guest reviews, quoted word for word (an ellipsis marks text left out) */}
-        <div className="mt-[clamp(4rem,8vw,6rem)]">
-          <Reviews />
         </div>
       </div>
     </section>
