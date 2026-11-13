@@ -36,7 +36,7 @@ The only brewery inside the former West End Firehouse on Route 715, named three 
 
 - 16 rotating taps in Eli's Lounge, flights of four, growler and crowler fills, house Birch Beer on tap (non-alcoholic), Weyerbacher guest taps.
 - John's Chef Table kitchen; Taco Tuesday; daily chalkboard specials.
-- 21+ age gate required (brewery).
+- No age gate: the owners had the 21+ screen removed. The footer keeps the "Please enjoy responsibly. 21+." line.
 - No dogs (for now). Mostly first-come, first-served; call ahead for large groups.
 - Undecided / conflicting facts are shown as visible `{{CONFIRM}}` tokens (see implementation_kickstart.md).
 - Concept-site safety: `noindex` and a concept credit in the footer until purchased.

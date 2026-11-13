@@ -58,7 +58,6 @@
   --z-gauge: 35;
   --z-bar: 45;
   --z-modal: 80;
-  --z-gate: 90;
   --z-cursor: 100;
   --nav-h: 64px;
   color-scheme: dark;
@@ -313,11 +312,6 @@ textarea {
 @keyframes pulse {
   0% { transform: scale(0.6); opacity: 0.9; }
   100% { transform: scale(1.9); opacity: 0; }
-}
-
-/* gate is skipped before paint for returning guests */
-html[data-gate="passed"] .age-gate {
-  display: none;
 }
 
 /* ---------- bottle-cap cursor (desktop, pointer: fine) ---------- */

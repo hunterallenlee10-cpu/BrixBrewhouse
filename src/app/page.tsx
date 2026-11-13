@@ -1,8 +1,6 @@
 import { Threshold } from "@/components/ui/Threshold";
 import dynamic from "next/dynamic";
 import { SiteProvider } from "@/components/providers/SiteProvider";
-import { AgeGate } from "@/components/gate/AgeGate";
-import { LogoBadge } from "@/components/brand/LogoBadge";
 import { Nav } from "@/components/nav/Nav";
 import { BrixGauge } from "@/components/nav/BrixGauge";
 import { MobileBar } from "@/components/nav/MobileBar";
@@ -31,7 +29,6 @@ export default function Page() {
       <a href="#main" className="t-mono fixed left-3 top-3 z-[95] -translate-y-24 bg-gold px-4 py-3 text-[0.72rem] text-black focus:translate-y-0">
         Skip to content
       </a>
-      <AgeGate logo={<LogoBadge />} />
       <Nav />
       <BrixGauge />
       <main id="main">

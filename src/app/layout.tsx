@@ -118,9 +118,6 @@ const jsonLd = [
 
 const fontsReadyScript = `(function(){var d=document.documentElement,done=function(){d.classList.add('fonts-ready')};try{var f=getComputedStyle(d).getPropertyValue('--font-big-shoulders');if(!document.fonts||!f){done();return}document.fonts.load('800 100px '+f).then(done,done);setTimeout(done,2500)}catch(e){done()}})()`;
 
-// Runs before first paint: skip the gate for returning guests, flag reduced motion.
-const bootScript = `try{if(sessionStorage.getItem('brix-21')==='yes'){document.documentElement.dataset.gate='passed'}}catch(e){}`;
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -129,7 +126,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <link rel="preload" as="image" href="/img/video-poster.webp" fetchPriority="high" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>

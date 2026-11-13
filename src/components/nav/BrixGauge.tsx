@@ -16,15 +16,15 @@ const TICKS = Array.from({ length: 21 }, (_, i) => i); // 0..20 °Bx, decoration
  * Decorative + navigation only. It never claims a beer's actual reading.
  */
 export function BrixGauge() {
-  const { scrollTo, gatePassed } = useSite();
+  const { scrollTo } = useSite();
   const fill = useRef<HTMLDivElement>(null);
   const [marks, setMarks] = useState<{ id: string; label: string; at: number }[]>([]);
   const [active, setActive] = useState("top");
 
   const [ready, setReady] = useState(false);
-  // hidden behind the gate anyway: set up after it, in an idle slot (measuring forces a full layout)
+  // set up in an idle slot, not inside hydration (measuring forces a full layout)
   useEffect(() => {
-    if (!gatePassed || ready) return;
+    if (ready) return;
     const go = () => setReady(true);
     if (typeof window.requestIdleCallback === "function") {
       const id = window.requestIdleCallback(go, { timeout: 2000 });
@@ -32,7 +32,7 @@ export function BrixGauge() {
     }
     const t = window.setTimeout(go, 500);
     return () => window.clearTimeout(t);
-  }, [gatePassed, ready]);
+  }, [ready]);
 
   useEffect(() => {
     if (!ready) return;
@@ -96,7 +96,7 @@ export function BrixGauge() {
   return (
     <nav
       aria-label="Brix gauge: jump to a room"
-      className={`fixed right-4 top-1/2 hidden h-[64vh] w-12 -translate-y-1/2 transition-opacity duration-700 lg:block ${gatePassed ? "opacity-100" : "opacity-0"}`}
+      className={`fixed right-4 top-1/2 hidden h-[64vh] w-12 -translate-y-1/2 transition-opacity duration-700 lg:block ${ready ? "opacity-100" : "opacity-0"}`}
       style={{ zIndex: "var(--z-gauge)" as unknown as number }}
     >
       {/* tube */}
