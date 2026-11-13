@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useSite } from "@/components/providers/SiteProvider";
+import { whenIdle } from "@/lib/idle";
 import { TapHandleButton } from "@/components/ui/TapHandleButton";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { weekSummary } from "@/lib/hours";
@@ -76,24 +77,18 @@ const LOOP_BEFORE_END_S = 1.2;
  * The still (a frame of the same footage) is the LCP and covers the player
  * whenever the player is not cleanly playing, so nothing of YouTube's own
  * (title strip, spinner, pause shelf, end screen) is ever on show:
- * - nothing loads from YouTube while the age gate is up; the gate's "Yes" primes it
+ * - the player is only requested once the page has settled, so it never competes with the still
  * - the still lifts only once the video has been playing for a moment
  * - it loops by seeking back just before the end, not by letting the video finish
  * - off-screen it pauses behind the still, and the still lifts again after it resumes
  * - if it stalls, stops or fails, the still comes back
  */
 function HeroFootage() {
-  const { gatePassed } = useSite();
   const frame = useRef<HTMLIFrameElement>(null);
-  const [primed, setPrimed] = useState(false);
+  const [load, setLoad] = useState(false);
   const [shown, setShown] = useState(false);
-  const load = gatePassed || primed;
 
-  useEffect(() => {
-    const prime = () => setPrimed(true);
-    window.addEventListener("brix:prime", prime);
-    return () => window.removeEventListener("brix:prime", prime);
-  }, []);
+  useEffect(() => whenIdle(() => setLoad(true), 1500), []);
 
   useEffect(() => {
     const el = frame.current;

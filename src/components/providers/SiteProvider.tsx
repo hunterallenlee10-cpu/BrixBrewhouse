@@ -11,8 +11,6 @@ gsap.registerPlugin(ScrollTrigger);
 export type PourTab = "visit" | "group" | "event";
 
 type Ctx = {
-  gatePassed: boolean;
-  passGate: () => void;
   pour: { open: boolean; tab: PourTab };
   openPour: (tab?: PourTab, opener?: HTMLElement | null) => void;
   closePour: () => void;
@@ -32,13 +30,6 @@ export const useSite = () => {
 /** Heavy, weighted ease for doors (matches --ease-door). */
 export const doorEase = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-/* gate flag lives on <html data-gate> (set before paint for returning guests) */
-const GATE_EVENT = "brix:gate";
-const subscribeGate = (cb: () => void) => {
-  window.addEventListener(GATE_EVENT, cb);
-  return () => window.removeEventListener(GATE_EVENT, cb);
-};
-const readGate = () => document.documentElement.dataset.gate === "passed";
 const MOTION_Q = "(prefers-reduced-motion: reduce)";
 const subscribeMotion = (cb: () => void) => {
   const mq = window.matchMedia(MOTION_Q);
@@ -48,7 +39,6 @@ const subscribeMotion = (cb: () => void) => {
 const readMotion = () => window.matchMedia(MOTION_Q).matches;
 
 export function SiteProvider({ children }: { children: React.ReactNode }) {
-  const gatePassed = useSyncExternalStore(subscribeGate, readGate, () => false);
   const [pour, setPour] = useState<{ open: boolean; tab: PourTab }>({ open: false, tab: "visit" });
   const reducedMotion = useSyncExternalStore(subscribeMotion, readMotion, () => false);
   const lenis = useRef<Lenis | null>(null);
@@ -56,7 +46,7 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
 
   // Lenis smooth scroll driven by GSAP's ticker so ScrollTrigger stays in lockstep.
   useEffect(() => {
-    if (reducedMotion || !gatePassed) return; // nothing to scroll behind the gate
+    if (reducedMotion) return;
     // Lenis measures the page when it starts: do it in an idle slot, not inside hydration
     let l: Lenis | null = null;
     const tick = (t: number) => l?.raf(t * 1000);
@@ -73,10 +63,10 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
       l?.destroy();
       lenis.current = null;
     };
-  }, [reducedMotion, gatePassed]);
+  }, [reducedMotion]);
 
-  // Freeze scrolling while the gate or modal is up.
-  const locked = !gatePassed || pour.open;
+  // Freeze scrolling while the modal is up.
+  const locked = pour.open;
   useEffect(() => {
     const l = lenis.current;
     if (locked) {
@@ -87,14 +77,6 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
       document.documentElement.style.overflow = "";
     }
   }, [locked]);
-
-  const passGate = useCallback(() => {
-    try {
-      sessionStorage.setItem("brix-21", "yes");
-    } catch {}
-    document.documentElement.dataset.gate = "passed";
-    window.dispatchEvent(new Event(GATE_EVENT));
-  }, []);
 
   const openPour = useCallback((tab: PourTab = "visit", el?: HTMLElement | null) => {
     opener.current = el ?? (document.activeElement as HTMLElement | null);
@@ -136,8 +118,8 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
   );
 
   const value = useMemo(
-    () => ({ gatePassed, passGate, pour, openPour, closePour, reducedMotion, lenis, scrollTo }),
-    [gatePassed, passGate, pour, openPour, closePour, reducedMotion, scrollTo],
+    () => ({ pour, openPour, closePour, reducedMotion, lenis, scrollTo }),
+    [pour, openPour, closePour, reducedMotion, scrollTo],
   );
   return <SiteCtx.Provider value={value}>{children}</SiteCtx.Provider>;
 }
