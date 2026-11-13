@@ -396,7 +396,8 @@ body > footer {
     0 0.1em 0.6em rgb(0 0 0 / 0.6);
 }
 
-/* ---------- hero footage: a 16:9 player sized to cover the hero, like object-fit: cover ---------- */
+/* ---------- hero footage: a 16:9 player sized to cover the hero, like object-fit: cover ----------
+   Drawn 20% oversize, so the player's own top and bottom strips (title, logo) sit outside the hero. */
 .hero-footage {
   container-type: size;
 }
@@ -404,8 +405,8 @@ body > footer {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: max(100cqw, 177.78cqh);
-  height: max(100cqh, 56.25cqw);
+  width: max(120cqw, 213.34cqh);
+  height: max(120cqh, 67.5cqw);
   transform: translate(-50%, -50%);
   border: 0;
 }
