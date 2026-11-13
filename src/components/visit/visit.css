@@ -71,3 +71,58 @@
   border: 1px solid rgb(242 242 242 / 0.14);
   background: rgb(23 24 27 / 0.45);
 }
+/* the reviews carousel: one card on phones, two on tablets, three on wide screens */
+.visit-reviews {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.visit-reviews::-webkit-scrollbar {
+  display: none;
+}
+.visit-reviewSlide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+@media (min-width: 768px) {
+  .visit-reviewSlide {
+    flex-basis: calc((100% - 1rem) / 2);
+  }
+}
+@media (min-width: 1280px) {
+  /* with only a couple of reviews, two wide cards read better than a gap */
+  .visit-reviews:not([data-few]) .visit-reviewSlide {
+    flex-basis: calc((100% - 2rem) / 3);
+  }
+}
+.visit-reviewNav {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--line-strong);
+  color: var(--foam);
+  transition: border-color 0.3s var(--ease-soft), color 0.3s var(--ease-soft);
+}
+.visit-reviewNav:hover {
+  border-color: var(--pour-gold-hi);
+  color: var(--pour-gold-hi);
+}
+/* map lettering: a size up on phones, where the whole map is drawn smaller */
+.map-name {
+  font-size: 17px;
+}
+.map-fine {
+  font-size: 13px;
+}
+@media (max-width: 767px) {
+  .map-name {
+    font-size: 19px;
+  }
+  .map-fine {
+    font-size: 15px;
+  }
+}

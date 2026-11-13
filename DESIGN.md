@@ -195,7 +195,7 @@ Square by default: buttons, frames, sheets, inputs and the modal have 0 radius a
 - Red porcelain-enamel sign: Fire Red Deep field, a white keyline inset 6-8px, four screw heads, 10px corners, a stencil heading, and rows split by foam hairlines with diamond bullets. Used for house rules (Good to know).
 
 ### Photo Slot
-- A dark framed print with brass corner clips, a camera glyph and "Photo: [what goes here]". It is the honest placeholder wherever a real photo (people, the real bar top, Larry Meag's mural) must go. It is never filled with generated imagery.
+- A dark framed print with brass corner clips, a camera glyph and "Photo: [what goes here]". It is the honest placeholder wherever a real photo (people, the real bar top, Larry Meng's mural) must go. It is never filled with generated imagery.
 
 ### Bottle Cap
 - Photographed (generated, blank) caps cut out to alpha, 6 colours, with the stamped figure in stencil. The flip side is the liner raster with a cream liner disc carrying "LOG 0n", the story, and the credit. Each is a real toggle button whose accessible name holds the full story.
@@ -218,5 +218,5 @@ Square by default: buttons, frames, sheets, inputs and the modal have 0 radius a
 - **Don't** imitate a material with CSS (striped "wood", gradient "steel"); use the raster or leave it out.
 - **Don't** use red for UI beyond the gate "Yes" and the CTA; elsewhere it belongs to enamel signs and real red objects.
 - **Don't** round corners on UI; round only round objects, and 10px only on enamel.
-- **Don't** generate people, the real logo, Larry Meag's art, signage or text in imagery.
+- **Don't** generate people, the real logo, Larry Meng's art, signage or text in imagery.
 - **Don't** add fire-service clip art: flames, Dalmatians, hose borders, helmet icons.

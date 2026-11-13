@@ -21,9 +21,14 @@ describe("validation", () => {
   it("flags missing group fields", () => {
     expect(Object.keys(validateGroup(fd({})))).toEqual(["g-name", "g-phone", "g-size", "g-when"]);
   });
-  it("caps the lounge at 50", () => {
-    const e = validateEvent(fd({ "e-name": "A", "e-phone": "5702139298", "e-email": "a@b.co", "e-date": "2026-12-01", "e-guests": "51" }));
+  it("asks for a guest count on the event form", () => {
+    const e = validateEvent(fd({ "e-name": "A", "e-phone": "5702139298", "e-email": "a@b.co", "e-date": "2026-12-01", "e-guests": "0" }));
     expect(Object.keys(e)).toEqual(["e-guests"]);
+  });
+  it("accepts a repast", () => {
+    const d = fd({ "e-name": "A", "e-phone": "5702139298", "e-email": "a@b.co", "e-date": "2026-12-01", "e-guests": "60", "e-type": "Repast" });
+    expect(validateEvent(d)).toEqual({});
+    expect(buildEmail("event", d).subject).toContain("Repast for 60");
   });
 });
 

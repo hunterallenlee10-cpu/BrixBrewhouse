@@ -1,13 +1,13 @@
-import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, Play } from "@phosphor-icons/react/dist/ssr";
 import { BayLabel } from "@/components/ui/primitives";
 import { SITE } from "@/lib/site";
-import { LiteYouTube } from "./LiteYouTube";
 
 type Clip = (typeof SITE.press)[number];
 
-/** One framed clipping. Paraphrased summary only; the story lives on the outlet's site. */
+/** One framed clipping. Paraphrased summary only; the story or TV segment lives on the outlet's site. */
 function Clipping({ clip, tilt, size }: { clip: Clip; tilt: number; size: "lg" | "md" }) {
   const big = size === "lg";
+  const video = clip.cta === "Watch video";
   return (
     <article className="press-frame" style={{ transform: `rotate(${tilt}deg)` }}>
       <div className={`press-paper px-[clamp(1.1rem,2.6vw,2.4rem)] pb-[clamp(2rem,3.6vw,3.2rem)] pt-[clamp(1.1rem,2.2vw,2rem)]`}>
@@ -35,7 +35,8 @@ function Clipping({ clip, tilt, size }: { clip: Clip; tilt: number; size: "lg" |
           rel="noopener noreferrer"
           className={`press-link mt-6 inline-flex min-h-11 items-center gap-2 border-b-2 border-[#16130f] font-display text-[1.25rem] font-extrabold uppercase`}
         >
-          Read the story
+          {video ? <Play aria-hidden weight="fill" className="h-4 w-4" /> : null}
+          {clip.cta}
           <ArrowUpRight aria-hidden weight="bold" className={`press-arrow h-5 w-5`} />
           <span className="sr-only"> on {clip.outlet} (opens in a new tab)</span>
         </a>
@@ -49,27 +50,17 @@ export function Press() {
   return (
     <section id="press" aria-labelledby="press-title" className="section overflow-hidden bg-black">
       <div className="wrap">
-        <BayLabel n="07">Press</BayLabel>
+        <BayLabel n="08">Press</BayLabel>
         <h2 id="press-title" className="t-display mt-5 text-[clamp(3.6rem,11vw,10rem)] text-foam">
           They said it.
         </h2>
 
         <div className="mt-14 grid gap-12 md:mt-20 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-7">
-            <Clipping clip={times} tilt={-1.4} size="lg" />
+            <Clipping clip={wnep} tilt={-1.4} size="lg" />
           </div>
           <div className="md:col-span-5 md:mt-28">
-            <Clipping clip={wnep} tilt={1.8} size="md" />
-          </div>
-        </div>
-
-        <div className="mt-20 grid items-end gap-8 md:mt-28 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <p className="t-serif text-[clamp(1.9rem,3.6vw,3rem)] text-foam">See it for yourself.</p>
-            <p className="mt-4 max-w-[34ch] text-text-2">A walk through the firehouse, from the Brix Brewhouse YouTube channel.</p>
-          </div>
-          <div className="md:col-span-8">
-            <LiteYouTube id={SITE.youtubeId} title="Brix Brewhouse on YouTube" />
+            <Clipping clip={times} tilt={1.8} size="md" />
           </div>
         </div>
       </div>

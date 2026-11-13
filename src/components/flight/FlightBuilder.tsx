@@ -1,19 +1,19 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowCounterClockwise } from "@phosphor-icons/react";
 import { useSite } from "@/components/providers/SiteProvider";
 import { BayLabel, Illustrative } from "@/components/ui/primitives";
 import { TAPS, type Beer } from "@/lib/data";
 import { TapRail } from "./TapRail";
 import { Paddle, type PaddleHandle } from "./Paddle";
-import { FlightCard } from "./FlightCard";
+import { FlightActions } from "./FlightActions";
 import { Loops } from "./Loops";
 import { TapList } from "./TapList";
 
 const SIZE = TAPS.flightSize; // 4
-const ALL = [...TAPS.beers, TAPS.nonAlcoholic];
-const byId = (id: string) => ALL.find((b) => b.id === id);
+const BEERS = TAPS.beers;
+const byId = (id: string) => BEERS.find((b) => b.id === id);
 const pad = (n: number) => String(n).padStart(2, "0");
 
 function parseHash(): string[] | null {
@@ -27,12 +27,10 @@ function parseHash(): string[] | null {
 export function FlightBuilder() {
   const { reducedMotion } = useSite();
   const [slots, setSlots] = useState<(string | null)[]>(() => Array(SIZE).fill(null));
-  const [birch, setBirch] = useState(false);
   const [focus, setFocus] = useState<Beer>(TAPS.beers[3]);
   const [say, setSay] = useState("");
   const paddle = useRef<PaddleHandle>(null);
 
-  const beers = useMemo(() => (birch ? [...TAPS.beers, TAPS.nonAlcoholic] : TAPS.beers), [birch]);
   const filled = slots.filter(Boolean).length;
   const full = filled === SIZE;
   const flight = slots.map((id) => (id ? byId(id)! : null));
@@ -45,7 +43,6 @@ export function FlightBuilder() {
     const next = Array(SIZE).fill(null) as (string | null)[];
     ids.forEach((id, i) => (next[i] = id));
     setSlots(next);
-    if (ids.includes(TAPS.nonAlcoholic.id)) setBirch(true);
     next.forEach((id, i) => (id ? paddle.current?.pour(i, byId(id)!, true) : paddle.current?.drain(i, true)));
     setSay(`Shared flight loaded: ${ids.map((id) => byId(id)!.short).join(", ")}.`);
   }, []);
@@ -102,30 +99,14 @@ export function FlightBuilder() {
               Build your flight
             </h2>
             <p className="mt-3 max-w-[44ch] text-lg text-text-2">
-              A flight is four glasses. Nine taps rotate. Pull a handle and it pours into the next empty glass.
+              A flight is four glasses. {TAPS.totalTaps} taps rotate in Eli&rsquo;s Lounge. Pull a handle and it pours into the next empty glass.
             </p>
           </div>
-          <div className="flex flex-col items-start gap-3 md:items-end">
-            <p className="t-mono text-[0.68rem] text-text-2">
-              Taps rotate. Here&rsquo;s what&rsquo;s been pouring.
-            </p>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={birch}
-              onClick={() => setBirch((v) => !v)}
-              className="group inline-flex min-h-11 items-center gap-3 text-left text-sm text-foam"
-            >
-              <span aria-hidden className={`relative h-6 w-11 rounded-full border transition-colors ${birch ? "border-gold-hi bg-gold/30" : "border-line-strong bg-ink-2"}`}>
-                <span className={`absolute top-0.5 h-[18px] w-[18px] rounded-full transition-transform duration-300 ${birch ? "translate-x-[22px] bg-gold-hi" : "translate-x-0.5 bg-foam/70"}`} />
-              </span>
-              Show Birch Beer (non-alcoholic)
-            </button>
-          </div>
+          <p className="t-mono text-[0.68rem] text-text-2">Taps rotate. Here&rsquo;s what&rsquo;s been pouring.</p>
         </div>
 
         <div className="mt-12 md:mt-16">
-          <TapRail beers={beers} full={full} onPour={(b) => pour(b)} onFocusBeer={setFocus} />
+          <TapRail beers={BEERS} full={full} onPour={(b) => pour(b)} onFocusBeer={setFocus} />
         </div>
 
         <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-[1.45fr_0.55fr] lg:gap-14">
@@ -148,20 +129,18 @@ export function FlightBuilder() {
             </div>
           </div>
 
-          <BeerDetail beer={focus} />
+          {/* beside the paddle: the beer in hand, then what to do with the flight */}
+          <div className="flex flex-col border-t border-line pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-2">
+            <BeerDetail beer={focus} />
+            <FlightActions ids={slots.filter((id): id is string => id !== null)} size={SIZE} />
+          </div>
         </div>
 
         <p aria-live="polite" role="status" className="sr-only">
           {say}
         </p>
 
-        {full ? (
-          <div className="mt-12">
-            <FlightCard beers={flight as Beer[]} />
-          </div>
-        ) : null}
-
-        <TapList beers={beers} counts={counts} onAdd={pour} />
+        <TapList beers={BEERS} counts={counts} onAdd={pour} />
 
         {/* the rest of the bar: footnotes under the tap list, not more cards */}
         <dl className="flt-notes mt-14 grid gap-x-10 gap-y-5 border-t border-gold/35 pt-6 md:grid-cols-3">
@@ -176,7 +155,7 @@ export function FlightBuilder() {
           <div>
             <dt className="t-mono text-[0.72rem] text-gold"><span aria-hidden>&Dagger;&nbsp;</span>No beer?</dt>
             <dd className="mt-1.5 text-text-2">
-              <span className="text-foam">House-made Birch Beer,</span> a local favorite. Plus {TAPS.otherDrinks.join(", ").toLowerCase().replace(/, ([^,]*)$/, " and $1")}.
+              <span className="text-foam">House-made Birch Beer</span> is on tap and alcohol-free. Plus {TAPS.otherDrinks.join(", ").toLowerCase().replace(/, ([^,]*)$/, " and $1")}.
             </dd>
           </div>
         </dl>
@@ -186,15 +165,14 @@ export function FlightBuilder() {
 }
 
 function BeerDetail({ beer }: { beer: Beer }) {
-  const na = beer.kind === "na";
   return (
-    <aside aria-label="About this beer" className="flex flex-col border-t border-line pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-2">
-      <p className="t-mono text-[0.6875rem] text-gold">{beer.tap ? `Tap ${pad(beer.tap)} / ${beer.style}` : `Non-alcoholic / ${beer.style}`}</p>
+    <aside aria-label="About this beer" className="flex flex-col">
+      <p className="t-mono text-[0.6875rem] text-gold">{beer.tap ? `Tap ${pad(beer.tap)} / ${beer.style}` : beer.style}</p>
       <p className="t-display mt-2 text-[clamp(2.4rem,4vw,3.4rem)] text-foam">{beer.name}</p>
       <dl className="t-mono mt-5 grid grid-cols-3 gap-3 text-[0.6875rem]">
         {(
           [
-            ["ABV", na ? "0%" : beer.abv != null ? `${beer.abv}%` : "—"],
+            ["ABV", beer.abv != null ? `${beer.abv}%` : "—"],
             ["IBU", beer.ibu != null ? String(beer.ibu) : "—"],
             ["Color", beer.color ?? "—"],
           ] as const

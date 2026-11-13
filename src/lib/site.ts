@@ -10,11 +10,11 @@ export const SITE = {
   region: "PA",
   zip: "18322",
   formerly: "Formerly the West End Firehouse",
-  geo: { lat: 40.9595, lng: -75.4021 },
+  geo: { lat: 40.926, lng: -75.394 },
   directions:
     "https://maps.google.com/maps/dir/?api=1&destination=128+PA-715+Brodheadsville+PA+18322",
   mapEmbed:
-    "https://maps.google.com/maps?q=128+PA-715+Brodheadsville+PA+18322&z=14&output=embed",
+    "https://maps.google.com/maps?q=128+PA-715+Brodheadsville+PA+18322&z=10&output=embed",
   instagram: "https://www.instagram.com/Brixbrewhouse",
   facebook: "https://www.facebook.com/p/Brix-Brewhouse-61577748595637/",
   responsibility: "https://www.responsibility.org/",
@@ -27,7 +27,9 @@ export const SITE = {
       headline: "Historic firehouse in Brodheadsville to brew new adventures as Brix Brewhouse",
       byline: "Emily Kress",
       summary: "Before the first pour: how the old West End Firehouse on Route 715 was set to become a brewery.",
+      // the WNEP page opens on the TV segment, so the link is "Watch video"
       url: "https://www.wnep.com/article/news/local/monroe-county/historic-firehouse-brodheadsville-brew-adventures-brix-brewhouse-monroe-county/523-b598dd99-7728-4d96-bd4d-e3ab7055ba9c",
+      cta: "Watch video",
     },
     {
       outlet: "Times News",
@@ -37,6 +39,7 @@ export const SITE = {
       byline: "Lori R. Cooper",
       summary: "Inside the finished conversion: the beer, the flights and the kitchen that now fill the old West End headquarters.",
       url: "https://www.tnonline.com/20260815/flights-in-former-firehousewest-end-headquarters-transformed-to-brewery/",
+      cta: "Read the story",
     },
   ],
 } as const;

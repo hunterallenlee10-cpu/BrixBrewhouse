@@ -40,8 +40,8 @@ function TapHandle({ beer, full, onPour, onFocusBeer }: { beer: Beer; full: bool
   const lever = useRef<HTMLSpanElement>(null);
   const drag = useRef<{ y: number; moved: boolean; id: number } | null>(null);
   const suppressClick = useRef(false);
-  const na = beer.kind === "na";
-  const label = beer.tap ? `TAP ${pad(beer.tap)}` : "NA";
+  const noAlcohol = beer.abv === 0;
+  const label = `TAP ${pad(beer.tap ?? 0)}`;
 
   const pull = () => {
     const el = btn.current!;
@@ -85,7 +85,7 @@ function TapHandle({ beer, full, onPour, onFocusBeer }: { beer: Beer; full: bool
       data-cursor="cap"
       data-beer={beer.id}
       aria-disabled={full || undefined}
-      aria-label={`Pour ${beer.name}${beer.abv != null ? `, ${beer.abv}% ABV` : ""}${beer.ibu != null ? `, IBU ${beer.ibu}` : ""}${na ? ", non-alcoholic" : ""}`}
+      aria-label={`Pour ${beer.name}${beer.abv != null ? `, ${beer.abv}% ABV` : ""}${beer.ibu != null ? `, IBU ${beer.ibu}` : ""}${noAlcohol ? ", non-alcoholic" : ""}`}
       onClick={() => {
         if (suppressClick.current) {
           suppressClick.current = false;
@@ -112,8 +112,8 @@ function TapHandle({ beer, full, onPour, onFocusBeer }: { beer: Beer; full: bool
         <span className="text-gold">{label}</span>
         <span className="text-[0.6875rem] font-bold text-foam">{beer.short.toUpperCase()}</span>
         <span className="text-[0.6875rem] text-text-2">
-          {na ? (
-            "0% · NA"
+          {noAlcohol ? (
+            <span className="whitespace-nowrap">0% ABV</span>
           ) : (
             <>
               {/* phones: ABV over IBU so neighbouring handles never collide; desktop: one line */}

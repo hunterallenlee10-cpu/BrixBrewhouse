@@ -4,15 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { useSite } from "@/components/providers/SiteProvider";
 import { TapHandleButton } from "@/components/ui/TapHandleButton";
 import { StatusPill } from "@/components/ui/StatusPill";
-import { Illustrative } from "@/components/ui/primitives";
 import { weekSummary } from "@/lib/hours";
+import { SITE } from "@/lib/site";
 
 const hoursLine = weekSummary()
   .map((g) => `${g.days} ${g.time}`)
   .join(" · ");
 
-const VIDEO_LABEL =
-  "Illustrative render: a red firehouse bay door rolls up at dusk, the camera moves through steam past stainless tanks to a brass tap that pours a golden pint.";
+const POSTER = "/img/video-poster.webp";
+const POSTER_ALT = "Inside Brix Brewhouse: guests with pints walk a brick-lined hallway hung with local art.";
 
 export function Hero() {
   const { reducedMotion } = useSite();
@@ -20,17 +20,10 @@ export function Hero() {
   return (
     <section id="top" aria-label="Brix Brewhouse, a restored firehouse pouring again" className="relative min-h-[100svh] overflow-hidden bg-black">
       {reducedMotion ? (
-        // reduced motion: the bay door held open, no video
-        <picture>
-          <source media="(max-width: 767px)" srcSet="/frames/mobile/f_0090.webp" />
-          <img
-            src="/frames/desktop/f_0090.webp"
-            alt="Illustrative render: a red firehouse bay door rolled open at dusk, a glowing brewhouse inside."
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        </picture>
+        // reduced motion: a still from the footage, no video
+        <img src={POSTER} alt={POSTER_ALT} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
       ) : (
-        <HeroVideo />
+        <HeroFootage />
       )}
 
       {/* legibility: top and bottom shading */}
@@ -43,7 +36,7 @@ export function Hero() {
             A 1953 Firehouse. <span className="text-gold-hi">A New Pour.</span>
           </p>
           <p className="max-w-[44ch] text-lg text-foam/90 [text-shadow:0_2px_16px_rgb(0_0_0/0.7)]">
-            The walls hold stories. The taps pour something new. Small batch, brewed in-house, nine taps. Good beer isn&rsquo;t rushed.
+            The walls hold stories. The taps pour something new. Small batch, brewed in-house, 16 taps. Good beer isn&rsquo;t rushed.
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <TapHandleButton size="lg" />
@@ -55,81 +48,95 @@ export function Hero() {
           <Wordmark />
         </div>
       </div>
-
-      <Illustrative className="absolute right-4 top-[calc(var(--nav-h)+10px)] [text-shadow:0_1px_6px_rgb(0_0_0/0.9)]" />
     </section>
   );
 }
 
+/** YouTube's player reports its state over postMessage once it has been told someone is listening. */
+const YT_ORIGIN = "https://www.youtube-nocookie.com";
+const YT_PLAYING = 1;
+const command = (frame: HTMLIFrameElement | null, func: "playVideo" | "pauseVideo") =>
+  frame?.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args: [] }), YT_ORIGIN);
+const ytSrc = (id: string) =>
+  `${YT_ORIGIN}/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1`;
+
 /**
- * Silent background loop of the firehouse render.
- * - the poster stays up (it's the LCP) until the video is actually playing
- * - nothing is fetched while the age gate is up; the gate's "Yes" primes it
- * - portrait cut on narrow screens, paused while off-screen
+ * The real footage of Brix, playing silently behind the hero. It streams from
+ * the Brix Brewhouse YouTube channel until the original file is on hand.
+ * - the poster (a frame of the same footage) is the LCP and stays up until the video is actually playing
+ * - nothing loads from YouTube while the age gate is up; the gate's "Yes" primes it
+ * - sized to cover the hero like object-fit: cover, paused while off-screen
  */
-function HeroVideo() {
+function HeroFootage() {
   const { gatePassed } = useSite();
-  const ref = useRef<HTMLVideoElement>(null);
+  const frame = useRef<HTMLIFrameElement>(null);
+  const [primed, setPrimed] = useState(false);
   const [playing, setPlaying] = useState(false);
-  const loaded = useRef(false);
+  const ready = useRef(false); // the player takes commands only after its onReady
+  const onScreen = useRef(true);
+  const load = gatePassed || primed;
 
   useEffect(() => {
-    const v = ref.current;
-    if (!v) return;
-    const load = () => {
-      if (loaded.current) return;
-      loaded.current = true;
-      const kind = window.matchMedia("(max-width: 767px)").matches ? "mobile" : "desktop";
-      const webm = document.createElement("source");
-      webm.src = `/video/hero-${kind}.webm`;
-      webm.type = "video/webm";
-      const mp4 = document.createElement("source");
-      mp4.src = `/video/hero-${kind}.mp4`;
-      mp4.type = "video/mp4";
-      v.append(webm, mp4);
-      v.load();
-      v.play().catch(() => undefined);
+    const prime = () => setPrimed(true);
+    window.addEventListener("brix:prime", prime);
+    return () => window.removeEventListener("brix:prime", prime);
+  }, []);
+
+  // show the footage only once it is really playing, and after YouTube's title strip has faded
+  useEffect(() => {
+    if (!load) return;
+    let timer = 0;
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== YT_ORIGIN || e.source !== frame.current?.contentWindow || typeof e.data !== "string") return;
+      try {
+        const msg = JSON.parse(e.data) as { event?: string; info?: { playerState?: number } | null };
+        if (msg.event === "onReady") {
+          ready.current = true;
+          if (!onScreen.current) command(frame.current, "pauseVideo");
+        }
+        if (msg.info?.playerState === YT_PLAYING && !timer) timer = window.setTimeout(() => setPlaying(true), 3200);
+      } catch {}
     };
-    if (gatePassed) load();
-    window.addEventListener("brix:prime", load);
-    return () => window.removeEventListener("brix:prime", load);
-  }, [gatePassed]);
+    window.addEventListener("message", onMessage);
+    return () => {
+      window.removeEventListener("message", onMessage);
+      window.clearTimeout(timer);
+    };
+  }, [load]);
 
   // only play while on screen
   useEffect(() => {
-    const v = ref.current;
-    if (!v) return;
+    const el = frame.current;
+    if (!el) return;
     const io = new IntersectionObserver(([e]) => {
-      if (!loaded.current) return;
-      if (e.isIntersecting) v.play().catch(() => undefined);
-      else v.pause();
+      onScreen.current = e.isIntersecting;
+      if (ready.current) command(el, e.isIntersecting ? "playVideo" : "pauseVideo");
     });
-    io.observe(v);
+    io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [load]);
 
   return (
     <>
-      <video
-        ref={ref}
-        muted
-        loop
-        playsInline
-        autoPlay
-        preload="none"
-        aria-label={VIDEO_LABEL}
-        onPlaying={() => setPlaying(true)}
-        className="absolute inset-0 h-full w-full object-cover"
+      {load ? (
+        <div aria-hidden className="hero-footage pointer-events-none absolute inset-0 overflow-hidden">
+          <iframe
+            ref={frame}
+            src={ytSrc(SITE.youtubeId)}
+            title=""
+            tabIndex={-1}
+            allow="autoplay; encrypted-media"
+            referrerPolicy="strict-origin-when-cross-origin"
+            onLoad={() => frame.current?.contentWindow?.postMessage(JSON.stringify({ event: "listening", id: "hero", channel: "widget" }), YT_ORIGIN)}
+          />
+        </div>
+      ) : null}
+      <img
+        src={POSTER}
+        alt={playing ? "" : POSTER_ALT}
+        fetchPriority="high"
+        className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${playing ? "opacity-0" : "opacity-100"}`}
       />
-      <picture>
-        <source media="(max-width: 767px)" srcSet="/frames/mobile/poster.jpg" />
-        <img
-          src="/frames/desktop/poster.jpg"
-          alt=""
-          fetchPriority="high"
-          className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${playing ? "opacity-0" : "opacity-100"}`}
-        />
-      </picture>
     </>
   );
 }

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 const DAYS = 107;
 
 /**
- * 107 tally marks scratched into the board, one per day of Eli's carpentry.
+ * 107 tally marks scratched into the board, one per day of Joe Elias Sr.'s carpentry.
  * Groups of five (four strokes and a slash). Draws once when it scrolls in.
  */
 export function Tally() {

@@ -3,8 +3,7 @@
 export type InquiryKind = "group" | "event";
 export type Errors = Record<string, string>;
 
-export const EVENT_TYPES = ["Birthday", "Shower", "Team night", "Fundraiser", "Watch party", "Something else"];
-export const LOUNGE_CAPACITY = 50;
+export const EVENT_TYPES = ["Birthday", "Shower", "Repast", "Team night", "Fundraiser", "Watch party", "Something else"];
 
 const MAX_LEN = 2000;
 const str = (d: FormData, k: string) => String(d.get(k) ?? "").trim().slice(0, MAX_LEN);
@@ -30,7 +29,6 @@ export function validateEvent(d: FormData): Errors {
   if (!str(d, "e-date")) e["e-date"] = "Pick a date.";
   const n = Number(str(d, "e-guests"));
   if (!n || n < 1) e["e-guests"] = "How many guests?";
-  else if (n > LOUNGE_CAPACITY) e["e-guests"] = "Eli's Lounge seats 50. For a bigger crowd, give us a call.";
   return e;
 }
 

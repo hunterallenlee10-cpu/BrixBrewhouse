@@ -10,7 +10,7 @@ type OrientationCtor = typeof DeviceOrientationEvent & { requestPermission?: () 
 /**
  * BAY 03. The whole room is the bar top: caps under glass, with a slow
  * specular glare that follows the cursor (or the phone's tilt) like light
- * sweeping across a glossy surface. Six highlighted caps flip to their stories.
+ * sweeping across a glossy surface. Seven highlighted caps flip to their stories.
  */
 export function BarTop() {
   const [flipped, setFlipped] = useState<Set<string>>(() => new Set());
@@ -134,7 +134,7 @@ export function BarTop() {
           <div data-prints className="bt-prints">
             <PhotoSlot
               label="the bottle-cap bar"
-              note="Lindsay's 40 hours, the real thing"
+              note="Every cap set by hand by Lindsay Elias"
               ratio="4 / 3"
               tilt={-3.5}
               className="bt-print"
@@ -150,12 +150,12 @@ export function BarTop() {
               photos={[{ src: "/img/real/elis-lounge", alt: "Eli's Lounge: exposed wood beams strung with lights over a pool table, high-top tables and a second bar", width: 648, height: 868, position: "50% 45%" }]}
             />
             <PhotoSlot
-              label="Larry Meag mural"
+              label="Larry Meng mural"
               note="The back wall, by the artist"
               ratio="4 / 3"
               tilt={-1.5}
               className="bt-print"
-              photos={[{ src: "/img/real/larry-meag-mural", alt: "Artist Larry Meag, brush in hand, in front of his mural of rolling farm fields and blue mountains", width: 648, height: 868, position: "50% 40%", phonePosition: "50% 59%" }]}
+              photos={[{ src: "/img/real/larry-meng-mural", alt: "Artist Larry Meng, brush in hand, in front of his mural of rolling farm fields and blue mountains", width: 648, height: 868, position: "50% 40%", phonePosition: "50% 59%" }]}
             />
           </div>
         </div>

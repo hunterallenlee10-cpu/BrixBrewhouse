@@ -4,6 +4,7 @@ import menu from "../../data/menu.json";
 import events from "../../data/events.json";
 import faq from "../../data/faq.json";
 import specials from "../../data/specials.json";
+import reviews from "../../data/reviews.json";
 
 export type Beer = {
   id: string;
@@ -17,7 +18,7 @@ export type Beer = {
   liquid: string;
   foam?: string;
   haze: number;
-  kind: "house" | "rotating" | "na";
+  kind: "house" | "rotating";
   confirmed: boolean;
   description: string;
 };
@@ -27,7 +28,6 @@ export const TAPS = taps as unknown as {
   flightSize: number;
   totalTaps: number;
   beers: Beer[];
-  nonAlcoholic: Beer;
   guest: { name: string; description: string };
   toGo: string;
   otherDrinks: string[];
@@ -38,18 +38,21 @@ export const MENU = menu as unknown as {
   kitchenName: string;
   chef: { name: string; years: number; knownFor: string };
   kitchenHours: string;
-  kitchenHoursNote: string;
-  allDay: string;
   fanFavorite: { beer: string; dish: string; confirm: boolean };
   categories: { id: string; name: string; items: MenuItem[] }[];
 };
 
+export type CalendarEvent = { title: string; time?: string; description: string };
 export const EVENTS = events as {
-  rows: { event: string; day: string | null; status: string; confirmed: boolean }[];
-  play: string[];
+  /** YYYY-MM the calendar opens on before the visitor's own date is known */
+  month: string;
+  weekly: (CalendarEvent & { weekday: "SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" })[];
+  events: (CalendarEvent & { date: string })[];
 };
+/** Real guest reviews, word for word. */
+export const REVIEWS = reviews as { reviews: { quote: string; name: string; source: string; stars?: number; photo?: string }[] };
 export const FAQ = faq as { items: { q: string; a: string }[] };
 export const SPECIALS = specials as { todaysSpecial: string; soupOfTheDay: string; soupNote: string; tacoTuesday: string };
 
-export const beerById = (id: string) => [...TAPS.beers, TAPS.nonAlcoholic].find((b) => b.id === id);
+export const beerById = (id: string) => TAPS.beers.find((b) => b.id === id);
 export const price = (n: number) => (Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`);

@@ -13,6 +13,7 @@ const FlightBuilder = dynamic(() => import("@/components/flight/FlightBuilder").
 const BarTop = dynamic(() => import("@/components/bartop/BarTop").then((m) => m.BarTop));
 const Kitchen = dynamic(() => import("@/components/kitchen/Kitchen").then((m) => m.Kitchen));
 const ElisLounge = dynamic(() => import("@/components/lounge/ElisLounge").then((m) => m.ElisLounge));
+const BeerGarden = dynamic(() => import("@/components/garden/BeerGarden").then((m) => m.BeerGarden));
 const DispatchBoard = dynamic(() => import("@/components/dispatch/DispatchBoard").then((m) => m.DispatchBoard));
 const Press = dynamic(() => import("@/components/press/Press").then((m) => m.Press));
 const Visit = dynamic(() => import("@/components/visit/Visit").then((m) => m.Visit));
@@ -23,7 +24,7 @@ import { PourModal } from "@/components/cta/PourModal";
 
 // Rooms below the fold are code-split so hydration runs in smaller pieces (still server-rendered).
 
-/** The building, room by room: door, bay 01-08, the street out front. */
+/** The building, room by room: door, bay 01-09, the street out front. */
 export default function Page() {
   return (
     <SiteProvider>
@@ -44,6 +45,8 @@ export default function Page() {
         <Kitchen />
         <Threshold />
         <ElisLounge />
+        <Threshold />
+        <BeerGarden />
         <Threshold />
         <DispatchBoard />
         <Threshold />

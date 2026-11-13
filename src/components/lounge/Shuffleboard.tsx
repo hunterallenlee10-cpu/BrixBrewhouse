@@ -19,7 +19,7 @@ export function Shuffleboard() {
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
-          w.classList.add("dsp-slid");
+          w.classList.add("elx-slid");
           io.disconnect();
         }
       },
@@ -30,18 +30,18 @@ export function Shuffleboard() {
   }, []);
 
   return (
-    <div ref={wrap} className="dsp-gutter">
-      <div aria-hidden className="dsp-lane">
-        <span className="dsp-foul" />
-        <span className="dsp-zones">
+    <div ref={wrap} className="elx-gutter">
+      <div aria-hidden className="elx-lane">
+        <span className="elx-foul" />
+        <span className="elx-zones">
           {ZONES.map((n) => (
-            <span key={n} className="dsp-zone">
+            <span key={n} className="elx-zone">
               {n}
             </span>
           ))}
         </span>
-        <span className="dsp-run">
-          <span className="dsp-puck" />
+        <span className="elx-run">
+          <span className="elx-puck" />
         </span>
       </div>
     </div>

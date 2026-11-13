@@ -14,9 +14,9 @@ Next.js (App Router) + TypeScript + Tailwind CSS v4, GSAP + ScrollTrigger, Lenis
 
 ## Users
 
-1. **The owners (first audience):** Joe Elias and Chris Pohorenco, co-owners of Brix Brewhouse. They will open a concept link from Lee Enterprises Unlimited and decide whether to buy it. Success: they feel someone finally understood their place.
+1. **The owners (first audience):** Joe Elias and Chris Pohorence, co-owners of Brix Brewhouse. They will open a concept link from Lee Enterprises Unlimited and decide whether to buy it. Success: they feel someone finally understood their place.
 2. **Guests (the site's real job):** locals and Pocono visitors, often on a phone, often hungry, deciding where to go tonight. They need hours, directions and the menu within seconds.
-3. **Groups and event planners:** people booking Eli's Lounge (seats 50) or calling ahead for large parties.
+3. **Groups and event planners:** people booking Eli's Lounge or calling ahead for large parties.
 
 ## Product Purpose
 
@@ -24,7 +24,7 @@ Get people through the door of Brix Brewhouse, and tell the building's real stor
 
 ## Positioning
 
-The only brewery inside the former West End Firehouse on Route 715, named three ways at once: Brix (sugar in the wort), brick (Saylorsburg, the owners' hometown, was the country's biggest brick supplier in 1894), and the brick firehouse itself. Built by hand: Eli's 107 days of carpentry, Lindsay's 40 hours of bottle caps, Larry Meag's art, the firemen's shuffleboard still in play.
+The only brewery inside the former West End Firehouse on Route 715, named three ways at once: Brix (sugar in the wort), brick (Saylorsburg, the owners' hometown, was the country's biggest brick supplier in 1894), and the brick firehouse itself. Built by hand: 10,000+ hours of renovation over 10 months, Joe Elias Sr.'s ("Eli", Joe's father) 107 days of carpentry, Lindsay's bottle-cap bar top, Larry Meng's art, the firemen's 70+ year old shuffleboard still in play.
 
 ## Operating Context
 
@@ -34,7 +34,7 @@ The only brewery inside the former West End Firehouse on Route 715, named three 
 
 ## Capabilities and Constraints
 
-- Nine rotating taps, flights of four, growler and crowler fills, house Birch Beer (non-alcoholic), Weyerbacher guest taps.
+- 16 rotating taps in Eli's Lounge, flights of four, growler and crowler fills, house Birch Beer on tap (non-alcoholic), Weyerbacher guest taps.
 - John's Chef Table kitchen; Taco Tuesday; daily chalkboard specials.
 - 21+ age gate required (brewery).
 - No dogs (for now). Mostly first-come, first-served; call ahead for large groups.
@@ -51,7 +51,7 @@ The only brewery inside the former West End Firehouse on Route 715, named three 
 ## Evidence on Hand
 
 - Real: business facts, menu with prices, beer stats for six house beers, hours, address, phone, email, socials, two press articles (WNEP 2025, Times News 2026), one YouTube video.
-- Not on hand: photos of the owners, Chef John, Eli's woodwork, the bottle-cap bar, the Larry Meag mural, the real building. These are labelled photo slots.
+- Not on hand: photos of the owners, Chef John, Eli's woodwork, the bottle-cap bar, the Larry Meng mural, the real building. These are labelled photo slots.
 - Never fabricated: reviews, ratings, awards, beer stats, event days, prices, history. Two real guest reviews (Jade D. on Yelp, Lori R. on Facebook), quoted word for word; an ellipsis marks any text left out.
 - Generated imagery is illustration and is labelled "ILLUSTRATIVE RENDER" or "Illustrative, not the actual dish".
 
@@ -59,7 +59,7 @@ The only brewery inside the former West End Firehouse on Route 715, named three 
 
 1. Their stories, not ours: every fact traces to the brief; unknowns are visible.
 2. The door is always one tap away: hours, directions, call and menu beat every effect.
-3. Honor the hands that built it: Lindsay, Eli, Chef John and Larry Meag are named where their work lives.
+3. Honor the hands that built it: Lindsay, Joe Elias Sr., Chef John and Larry Meng are named where their work lives.
 4. Cinematic, never costume: the firehouse is a material and a rhythm, not a theme.
 
 ## Accessibility & Inclusion

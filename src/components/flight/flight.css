@@ -176,31 +176,3 @@
   70% { transform: translateX(-3px); }
   100% { transform: translateX(0); }
 }
-
-/* ---------- your flight: a brew sheet ---------- */
-.flt-sheet {
-  background:
-    repeating-linear-gradient(180deg, transparent 0 calc(2.6rem - 1px), rgb(242 242 242 / 0.07) calc(2.6rem - 1px) 2.6rem),
-    var(--ink-2);
-  border: 1px solid var(--line-strong);
-}
-.flt-meter {
-  position: relative;
-  height: 4.5rem;
-  border-bottom: 1px solid var(--line-strong);
-}
-.flt-pin {
-  position: absolute;
-  bottom: -5px;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-}
-.flt-pinDot {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  box-shadow: 0 0 0 2px var(--ink-2), 0 0 0 3px rgb(242 242 242 / 0.5);
-}

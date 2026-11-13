@@ -22,18 +22,14 @@ export function Kitchen() {
               house, many ingredients are locally sourced, and the specials go up on the chalkboard every day.
             </p>
             <p className="mt-4 max-w-[52ch] leading-relaxed text-text-2">
-              Dishes the press has written up: a creamy chicken buffalo soup, house-smoked pulled pork, a coffee and black pepper crusted
-              brisket and a Thai chicken wrap. Ask what&rsquo;s cooking today.
+              House favorites: a creamy chicken buffalo soup, house-smoked pulled pork, a coffee and black pepper crusted brisket and the
+              Brix Cheeseburger. Ask what&rsquo;s cooking today.
             </p>
 
             <dl className="kit-facts">
               <div>
                 <dt className="t-mono">Kitchen hours</dt>
                 <dd>{MENU.kitchenHours}</dd>
-              </div>
-              <div>
-                <dt className="t-mono">All day</dt>
-                <dd>{MENU.allDay}</dd>
               </div>
               <div>
                 <dt className="t-mono">Tuesdays</dt>

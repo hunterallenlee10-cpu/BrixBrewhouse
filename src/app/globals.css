@@ -395,3 +395,17 @@ body > footer {
     0.05em 0.06em 0 #120b03,
     0 0.1em 0.6em rgb(0 0 0 / 0.6);
 }
+
+/* ---------- hero footage: a 16:9 player sized to cover the hero, like object-fit: cover ---------- */
+.hero-footage {
+  container-type: size;
+}
+.hero-footage iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100cqw, 177.78cqh);
+  height: max(100cqh, 56.25cqw);
+  transform: translate(-50%, -50%);
+  border: 0;
+}
