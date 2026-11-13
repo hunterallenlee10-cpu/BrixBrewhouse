@@ -27,7 +27,7 @@ function Clipping({ clip, tilt, size }: { clip: Clip; tilt: number; size: "lg" |
         <h3 className={`press-headline mt-5 ${big ? "text-[clamp(1.6rem,2.6vw,2.5rem)]" : "text-[clamp(1.4rem,2vw,1.9rem)]"}`}>
           {clip.headline}
         </h3>
-        <p className="t-mono mt-4 text-[0.6875rem] text-[#3b342a]">Reported by {clip.byline}</p>
+        {clip.byline ? <p className="t-mono mt-4 text-[0.6875rem] text-[#3b342a]">Reported by {clip.byline}</p> : null}
         <p className="mt-4 max-w-[46ch] font-serif text-[1.08rem] italic leading-snug text-[#2a241c] md:text-[1.18rem]">{clip.summary}</p>
         <a
           href={clip.url}
@@ -38,7 +38,7 @@ function Clipping({ clip, tilt, size }: { clip: Clip; tilt: number; size: "lg" |
           {video ? <Play aria-hidden weight="fill" className="h-4 w-4" /> : null}
           {clip.cta}
           <ArrowUpRight aria-hidden weight="bold" className={`press-arrow h-5 w-5`} />
-          <span className="sr-only"> on {clip.outlet} (opens in a new tab)</span>
+          <span className="sr-only"> {video ? "from" : "on"} {clip.outlet} (opens in a new tab)</span>
         </a>
       </div>
     </article>

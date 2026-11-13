@@ -41,6 +41,7 @@ export function Visit() {
             <StatusPill tone="glass" />
           </div>
           <p className="t-mono mt-5 text-[0.68rem] text-text-2 md:mt-8">{HOURS.holidayNote}</p>
+          {HOURS.gameNights?.active ? <p className="t-mono mt-2 max-w-[60ch] text-[0.68rem] text-gold-hi">{HOURS.gameNights.note}</p> : null}
         </div>
 
         <div className="mt-[clamp(4rem,9vw,7rem)] grid gap-12 lg:grid-cols-12 lg:gap-10">

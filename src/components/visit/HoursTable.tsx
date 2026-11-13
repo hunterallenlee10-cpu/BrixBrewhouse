@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { HOURS, formatTime, zonedNow } from "@/lib/hours";
+import { HOURS, formatTime, isGameNight, zonedNow } from "@/lib/hours";
 
 const ORDER = [1, 2, 3, 4, 5, 6, 0]; // Monday first, the way people read a week
 
@@ -29,6 +29,7 @@ export function HoursTable() {
               </th>
               <td className={`tabular py-3 pr-3 text-right font-mono text-[0.95rem] ${on ? "text-foam" : "text-text-2"}`}>
                 {formatTime(h.open)} - {formatTime(h.close)}
+                {isGameNight(d) ? <span className="t-mono mt-1 block text-[0.6875rem] text-gold-hi">{HOURS.gameNights!.short}</span> : null}
               </td>
             </tr>
           );

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatTime, getStatus, statusText, weekSummary, zonedNow, type HoursConfig } from "./hours";
+import { formatTime, getStatus, isGameNight, statusText, weekSummary, zonedNow, type HoursConfig } from "./hours";
 
 // Helper: build a UTC instant from a New York wall-clock time with an explicit offset.
 const ny = (isoLocal: string, offset: "-04:00" | "-05:00") => new Date(`${isoLocal}${offset}`);
@@ -79,6 +79,34 @@ describe("past-midnight closes", () => {
     const s = getStatus(ny("2026-10-24T00:30:00", "-04:00"), cfg);
     expect(s.state).toBe("open");
     expect(statusText(s).rest).toBe("pouring until 1 AM");
+  });
+});
+
+describe("primetime football nights (Monday and Thursday)", () => {
+  it("Monday afternoon already shows last call, not the usual close", () => {
+    expect(statusText(getStatus(ny("2026-11-16T15:00:00", "-05:00")))).toEqual({ lead: "Open now", rest: "last call 10:30 PM" });
+  });
+  it("Thursday 9:45 PM is still open, past the usual 9 PM close", () => {
+    const s = getStatus(ny("2026-11-19T21:45:00", "-05:00"));
+    expect(s.state).toBe("open");
+    expect(statusText(s).rest).toBe("last call 10:30 PM");
+  });
+  it("Monday 10:30 PM is past last call", () => {
+    expect(statusText(getStatus(ny("2026-11-16T22:30:00", "-05:00")))).toEqual({ lead: "Closed", rest: "opens tomorrow 12 PM" });
+  });
+  it("Tuesday and Wednesday keep the usual 9 PM close", () => {
+    expect(getStatus(ny("2026-11-17T21:15:00", "-05:00")).state).toBe("closed");
+    expect(statusText(getStatus(ny("2026-11-18T20:00:00", "-05:00"))).rest).toBe("pouring until 9 PM");
+  });
+  it("switched off, Monday goes back to closing at 9 PM", () => {
+    const off: HoursConfig = {
+      timezone: "America/New_York",
+      holidayNote: "",
+      days: [0, 1, 2, 3, 4, 5, 6].map((d) => ({ day: d, label: String(d), open: "12:00", close: "21:00" })),
+      gameNights: { active: false, days: [1, 4], lastCall: "22:30", short: "", note: "" },
+    };
+    expect(isGameNight(1, off)).toBe(false);
+    expect(getStatus(ny("2026-11-16T21:45:00", "-05:00"), off).state).toBe("closed");
   });
 });
 

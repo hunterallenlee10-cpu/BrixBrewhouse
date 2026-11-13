@@ -38,6 +38,7 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
+              {HOURS.gameNights?.active ? <p className="mt-2 text-sm text-text-2">{HOURS.gameNights.short}, Mon and Thu.</p> : null}
               <p className="mt-2 text-sm text-text-3">{HOURS.holidayNote}</p>
             </div>
             <div>

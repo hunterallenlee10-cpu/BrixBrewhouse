@@ -35,7 +35,8 @@ export function ElisLounge() {
           <p className="measure mt-8 text-lg leading-relaxed text-text-2 md:text-xl">
             Eli&rsquo;s Lounge is the main bar at Brix, and every piece of carpentry in it was done by one man:{" "}
             <strong className="font-semibold text-foam">Joe Elias Sr.</strong>, nicknamed Eli, Joe&rsquo;s 75-year-old father. It took him{" "}
-            <strong className="font-semibold text-foam">107 days</strong>. Book it for your people and you&rsquo;re sitting inside his work.
+            <strong className="font-semibold text-foam">107 days</strong>. Book it for your people and you&rsquo;re sitting inside his work. It&rsquo;s our
+            private event space; you can reserve space anywhere else in the brewery too.
           </p>
 
           <ul className="elx-ledger mt-12 max-w-2xl" aria-label="Good for">
