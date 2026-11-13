@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { BayLabel, Illustrative, PhotoSlot } from "@/components/ui/primitives";
+import { BayLabel, PhotoSlot } from "@/components/ui/primitives";
 import { Cap } from "./Cap";
 import { STORIES } from "./stories";
 
@@ -159,10 +159,6 @@ export function BarTop() {
             />
           </div>
         </div>
-
-        <Illustrative className="absolute bottom-4 left-4 z-10 [text-shadow:0_1px_6px_rgb(0_0_0/0.9)] md:left-6">
-          Illustrative render. Real bar top in the photo slot.
-        </Illustrative>
       </div>
     </section>
   );
