@@ -445,7 +445,7 @@
       "Don't imitate a material with CSS (striped \"wood\", gradient \"steel\"); use the raster or leave it out.",
       "Don't use red for UI beyond the gate \"Yes\" and the CTA; elsewhere it belongs to enamel signs and real red objects.",
       "Don't round corners on UI; round only round objects, and 10px only on enamel.",
-      "Don't generate people, the real logo, Larry Meag's art, signage or text in imagery.",
+      "Don't generate people, the real logo, Larry Meng's art, signage or text in imagery.",
       "Don't add fire-service clip art: flames, Dalmatians, hose borders, helmet icons."
     ]
   }

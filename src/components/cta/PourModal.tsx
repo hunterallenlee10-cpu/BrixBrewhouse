@@ -346,7 +346,7 @@ function EventForm() {
     <form role="tabpanel" id="panel-event" aria-labelledby="tab-event" noValidate onSubmit={f.onSubmit} className="relative grid gap-4 sm:grid-cols-2">
       <Honeypot />
       <p className="text-text-2 sm:col-span-2">
-        Eli&rsquo;s Lounge seats 50 and was built by hand. Tell us what you&rsquo;re celebrating.
+        Eli&rsquo;s Lounge was built by hand by Joe Elias Sr. Tell us what you&rsquo;re planning.
       </p>
       <Field id="e-name" label="Name" error={f.errors["e-name"]}>
         <input id="e-name" name="e-name" autoComplete="name" className={field} {...f.aria("e-name")} />
@@ -367,8 +367,8 @@ function EventForm() {
       <Field id="e-date" label="Date" error={f.errors["e-date"]}>
         <input id="e-date" name="e-date" type="date" className={field} {...f.aria("e-date")} />
       </Field>
-      <Field id="e-guests" label="Guest count" error={f.errors["e-guests"]} hint="Up to 50 in Eli's Lounge.">
-        <input id="e-guests" name="e-guests" type="number" min={1} max={50} inputMode="numeric" className={field} {...f.aria("e-guests")} />
+      <Field id="e-guests" label="Guest count" error={f.errors["e-guests"]}>
+        <input id="e-guests" name="e-guests" type="number" min={1} inputMode="numeric" className={field} {...f.aria("e-guests")} />
       </Field>
       <div className="sm:col-span-2">
         <Field id="e-msg" label="Message (optional)">

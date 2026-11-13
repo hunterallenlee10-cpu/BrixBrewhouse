@@ -28,7 +28,7 @@ export function Cap({
   onToggle: () => void;
 }) {
   const c = story.color;
-  const long = story.figure.length > 3;
+  const fig = story.figure.length > 5 ? "bt-figWide" : story.figure.length > 3 ? "bt-figLong" : "bt-fig";
   return (
     <button
       type="button"
@@ -44,10 +44,10 @@ export function Cap({
       <span aria-hidden className="bt-ring" />
       <span aria-hidden className="bt-inner">
         {/* face: the cap as it sits in the bar top */}
-        <span className={`bt-face bt-front`}>
+        <span className={`bt-face bt-front`} style={story.hue ? ({ "--hue": `${story.hue}deg` } as React.CSSProperties) : undefined}>
           <CapPhoto name={story.img} />
           <span className="bt-stamp" style={{ color: c.ink }}>
-            <span className={`t-stencil ${long ? "bt-figLong" : "bt-fig"}`}>{story.figure}</span>
+            <span className={`t-stencil ${fig}`}>{story.figure}</span>
             <span className={`t-mono bt-unit`}>{story.unit}</span>
           </span>
         </span>

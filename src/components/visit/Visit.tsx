@@ -5,29 +5,15 @@ import { HOURS } from "@/lib/hours";
 import { SITE } from "@/lib/site";
 import { HoursTable } from "./HoursTable";
 import { MapPanel } from "./MapPanel";
+import { Reviews } from "./Reviews";
 import { RidgeVideo } from "./RidgeVideo";
-
-/** Real guest reviews, word for word from the public post. */
-const REVIEWS = [
-  {
-    quote: "This is an amazing place. Between the staff, food, and brews, you are absolutely bound to have an amazing time!",
-    name: "Jade D.",
-    source: "Yelp",
-  },
-  {
-    quote:
-      "I would highly recommend Brix Brewhouse. \u2026 They take pride in what they do and I love that everything is local and still has that local feel.",
-    name: "Lori R.",
-    source: "Facebook",
-  },
-];
 
 const GOOD_TO_KNOW = [
   "Family-friendly",
   "Wheelchair accessible",
   "Free Wi-Fi",
   "Outdoor seating (weather permitting)",
-  "Walk-ins welcome",
+  "Private event space",
   "No dogs (for now)",
   "Gift cards",
   "Merch",
@@ -46,7 +32,7 @@ export function Visit() {
       <div aria-hidden className={`visit-band visit-bandRight mat-brick`} />
 
       <div className="wrap relative pt-[clamp(6rem,14vw,11rem)]">
-        <BayLabel n="08">Visit</BayLabel>
+        <BayLabel n="09">Visit</BayLabel>
         <h2 id="visit-title" className="t-serif mt-6 max-w-[12ch] pb-2 text-[clamp(3.4rem,10vw,9.5rem)] leading-[1.02] text-foam [text-shadow:0_6px_50px_rgb(0_0_0/0.6)]">
           We&rsquo;ll save you a seat.
         </h2>
@@ -130,16 +116,8 @@ export function Visit() {
         </div>
 
         {/* real guest reviews, quoted word for word (an ellipsis marks text left out) */}
-        <div className="mt-[clamp(4rem,8vw,6rem)] grid gap-4 md:grid-cols-2">
-          {REVIEWS.map((r) => (
-            <figure key={r.name} className={`visit-review p-6 md:p-8`}>
-              <p className="t-mono text-[0.6875rem] text-gold">Guest review</p>
-              <blockquote className="t-serif mt-4 text-[clamp(1.4rem,2.4vw,1.9rem)] text-foam">&ldquo;{r.quote}&rdquo;</blockquote>
-              <figcaption className="t-mono mt-5 text-[0.6875rem] text-text-2">
-                {r.name} · {r.source}
-              </figcaption>
-            </figure>
-          ))}
+        <div className="mt-[clamp(4rem,8vw,6rem)]">
+          <Reviews />
         </div>
       </div>
     </section>

@@ -1,13 +1,8 @@
 {
-  "_note": "The dispatch board. Only Taco Tuesday has a confirmed day. Set 'day' to MON-SUN and 'status' when the owners confirm a schedule.",
-  "rows": [
-    { "event": "Taco Tuesday", "day": "TUE", "status": "EVERY WEEK", "confirmed": true },
-    { "event": "Live Music", "day": null, "status": "SEE FACEBOOK", "confirmed": false },
-    { "event": "Trivia", "day": null, "status": "SEE FACEBOOK", "confirmed": false },
-    { "event": "Karaoke", "day": null, "status": "SEE FACEBOOK", "confirmed": false },
-    { "event": "Open Mic", "day": null, "status": "SEE FACEBOOK", "confirmed": false },
-    { "event": "Watch Parties", "day": null, "status": "SEE FACEBOOK", "confirmed": false },
-    { "event": "Seasonal Events", "day": null, "status": "SEE FACEBOOK", "confirmed": false }
+  "_note": "The events calendar. 'month' (YYYY-MM) is the month the calendar opens on until the visitor's own date takes over. 'weekly' repeats every week on that weekday (SUN, MON, TUE, WED, THU, FRI, SAT). 'events' are one-off dates (YYYY-MM-DD). 'time' is optional, written the way it should read (\"7 PM\"). The description pops up when someone hovers over or taps the event.",
+  "month": "2026-11",
+  "weekly": [
+    { "title": "Taco Tuesday", "weekday": "TUE", "time": "", "description": "Every Tuesday at John's Chef Table." }
   ],
-  "play": ["Pool tables", "Cornhole", "The firemen's original shuffleboard"]
+  "events": []
 }

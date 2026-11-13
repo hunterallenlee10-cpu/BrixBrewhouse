@@ -11,7 +11,7 @@ export function TapList({ beers, counts, onAdd }: { beers: Beer[]; counts: Recor
     <div className="mt-16 md:mt-20">
       <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-2 border-b border-gold/35 pb-4">
         <h3 className="t-display text-[clamp(2.4rem,4.4vw,3.6rem)] text-foam">The tap list</h3>
-        <p className="t-mono pb-1 text-[0.6875rem] text-text-2">{beers.length} pouring · Add any of them to your flight</p>
+        <p className="t-mono pb-1 text-[0.6875rem] text-text-2">Taps rotate · Add any of them to your flight</p>
       </div>
       <ol className="grid gap-x-14 md:grid-cols-2">
         {beers.map((b) => (
@@ -23,10 +23,9 @@ export function TapList({ beers, counts, onAdd }: { beers: Beer[]; counts: Recor
 }
 
 function TapRow({ beer, count, onAdd }: { beer: Beer; count: number; onAdd: (b: Beer) => void }) {
-  const na = beer.kind === "na";
-  const label = beer.tap ? `Tap ${pad(beer.tap)}${beer.kind === "rotating" ? " · Rotating" : ""}` : "Non-alcoholic";
-  const known = na || beer.abv != null;
-  const stats = (na ? ["0% ABV", beer.color] : known ? [`${beer.abv}% ABV`, beer.ibu != null ? `IBU ${beer.ibu}` : null, beer.color] : ["Stats to come"]).filter(
+  const label = `Tap ${pad(beer.tap ?? 0)}${beer.kind === "rotating" ? " · Rotating" : ""}`;
+  const known = beer.abv != null;
+  const stats = (known ? [`${beer.abv}% ABV`, beer.ibu != null ? `IBU ${beer.ibu}` : null, beer.color] : ["Stats to come"]).filter(
     (v): v is string => Boolean(v),
   );
 

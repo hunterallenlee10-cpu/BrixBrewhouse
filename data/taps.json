@@ -2,7 +2,7 @@
   "_note": "Edit this file to change what's pouring. 'tap' is display order on the site, not a physical tap number. Unknown stats stay null and show as a dash. Set 'confirmed' to true once the owners verify a beer.",
   "updated": "{{CONFIRM}}",
   "flightSize": 4,
-  "totalTaps": 9,
+  "totalTaps": 16,
   "beers": [
     { "id": "pilsner-lager", "tap": 1, "name": "Light Pilsner Lager", "short": "Pilsner Lager", "style": "Pilsner Lager", "abv": 5.5, "ibu": 10, "color": "Pale Gold", "liquid": "#E9C45B", "haze": 0, "kind": "house", "confirmed": true,
       "description": "Premium pilsner malt, clean lager yeast, and restrained noble hops for a crisp, dry finish." },
@@ -21,16 +21,14 @@
     { "id": "hazy-ipa", "tap": 8, "name": "Hazy IPA", "short": "Hazy IPA", "style": "Hazy IPA", "abv": null, "ibu": null, "color": null, "liquid": "#E6B04A", "haze": 0.9, "kind": "rotating", "confirmed": false,
       "description": "Mentioned in press as a rotating pour. Ask your bartender." },
     { "id": "belgian-white", "tap": 9, "name": "Belgian White Ale", "short": "Belgian White", "style": "Belgian White Ale", "abv": null, "ibu": null, "color": null, "liquid": "#EBCB7A", "haze": 0.85, "kind": "rotating", "confirmed": false,
-      "description": "Mentioned in press as a rotating pour. Ask your bartender." }
+      "description": "Mentioned in press as a rotating pour. Ask your bartender." },
+    { "id": "birch-beer", "tap": 10, "name": "House-Made Birch Beer", "short": "Birch Beer", "style": "Birch Beer", "abv": 0, "ibu": null, "color": "Dark", "liquid": "#3A140C", "foam": "#E9D6C2", "haze": 0, "kind": "house", "confirmed": true,
+      "description": "A local favorite, made in-house and poured from the tap. No alcohol, all the foam." }
   ],
-  "nonAlcoholic": {
-    "id": "birch-beer", "name": "House-Made Birch Beer", "short": "Birch Beer", "style": "Non-alcoholic", "abv": 0, "ibu": null, "color": "Dark", "liquid": "#3A140C", "foam": "#E9D6C2", "haze": 0, "kind": "na", "confirmed": true,
-    "description": "A local favorite, made in-house. No alcohol, all the foam."
-  },
   "guest": {
     "name": "Weyerbacher",
     "description": "Guest taps from Pennsylvania favorite Weyerbacher."
   },
   "toGo": "Growler and crowler fills, depending on what's on tap.",
-  "otherDrinks": ["Water", "Soda", "Tea", "Lemonade", "Wine", "Canned beverages"]
+  "otherDrinks": ["Water", "Soda", "Tea", "Wine", "Canned beverages"]
 }

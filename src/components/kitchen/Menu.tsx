@@ -6,7 +6,8 @@ import { MENU, beerById, price, type MenuItem } from "@/lib/data";
 import { FOOD_PHOTOS } from "./foodPhotos";
 
 function Item({ item }: { item: MenuItem }) {
-  const pair = item.pairsWith ? beerById(item.pairsWith) : undefined;
+  // a beer id from taps.json, or a plain beer name for a pour that isn't on the tap list yet
+  const pair = item.pairsWith ? (beerById(item.pairsWith)?.short ?? item.pairsWith) : undefined;
   return (
     <li className={item.addon ? "kit-addon" : "kit-item"}>
       <div className="kit-row">
@@ -18,9 +19,9 @@ function Item({ item }: { item: MenuItem }) {
       {pair ? (
         <p className="kit-pairRow">
           <span className="kit-pair">
-            Pairs with <strong>{pair.short}</strong>
+            Pairs with <strong>{pair}</strong>
           </span>
-          <span className={`t-mono kit-pairNote`}>House suggestion</span>
+          <span className={`t-mono kit-pairNote`}>House pairing</span>
         </p>
       ) : null}
     </li>

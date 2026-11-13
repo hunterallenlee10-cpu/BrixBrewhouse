@@ -1,0 +1,15 @@
+{
+  "_note": "Real guest reviews only, word for word from the public post (an ellipsis marks text left out). 'source' is where it was posted (Google, Yelp, Facebook). Optional: 'stars' (1-5) and 'photo', a path under /public such as /img/reviews/jade-d.webp, shown beside the quote.",
+  "reviews": [
+    {
+      "quote": "This is an amazing place. Between the staff, food, and brews, you are absolutely bound to have an amazing time!",
+      "name": "Jade D.",
+      "source": "Yelp"
+    },
+    {
+      "quote": "I would highly recommend Brix Brewhouse. … They take pride in what they do and I love that everything is local and still has that local feel.",
+      "name": "Lori R.",
+      "source": "Facebook"
+    }
+  ]
+}

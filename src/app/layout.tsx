@@ -14,7 +14,7 @@ const caveat = Caveat({ subsets: ["latin"], weight: ["500", "700"], variable: "-
 
 const TITLE = "Brix Brewhouse | Craft Brewery in a Historic Firehouse | Brodheadsville, PA";
 const DESCRIPTION =
-  "A locally owned craft brewery inside the restored West End Firehouse on Route 715. Nine taps, flights of four, John's Chef Table kitchen and Eli's Lounge. Come pour one with us.";
+  "A locally owned craft brewery inside the restored West End Firehouse on Route 715. 16 taps, flights of four, John's Chef Table kitchen and Eli's Lounge. Come pour one with us.";
 
 // Link previews must resolve the OG image on whatever host serves this build:
 // the concept deployment (Vercel sets VERCEL_URL), or brixbrewhouse.com once it goes live.
@@ -130,8 +130,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
-        <link rel="preload" as="image" href="/frames/desktop/poster.jpg" media="(min-width: 768px)" fetchPriority="high" />
-        <link rel="preload" as="image" href="/frames/mobile/poster.jpg" media="(max-width: 767px)" fetchPriority="high" />
+        <link rel="preload" as="image" href="/img/video-poster.webp" fetchPriority="high" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body>

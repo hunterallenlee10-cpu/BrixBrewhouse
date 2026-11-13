@@ -6,6 +6,7 @@ export const ROOMS = [
   { id: "bar-top", label: "The Bar Top", short: "Bar Top" },
   { id: "kitchen", label: "Kitchen", short: "Kitchen" },
   { id: "lounge", label: "Eli's Lounge", short: "Lounge" },
+  { id: "garden", label: "Beer Garden", short: "Garden" },
   { id: "dispatch", label: "What's Happening", short: "Events" },
   { id: "press", label: "Press", short: "Press" },
   { id: "visit", label: "Visit", short: "Visit" },
