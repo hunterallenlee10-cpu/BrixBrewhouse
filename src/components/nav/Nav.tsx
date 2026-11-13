@@ -5,7 +5,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSite } from "@/components/providers/SiteProvider";
 import { whenIdle } from "@/lib/idle";
 import { TapHandleButton } from "@/components/ui/TapHandleButton";
-import { SoundToggle } from "./SoundToggle";
 import { NAV_LINKS } from "./sections";
 
 export function Nav() {
@@ -60,10 +59,7 @@ export function Nav() {
             </li>
           ))}
         </ul>
-        <div className="flex items-center gap-1 sm:gap-3">
-          <SoundToggle compact />
-          <TapHandleButton size="sm" className="hidden sm:inline-flex" />
-        </div>
+        <TapHandleButton size="sm" className="hidden sm:inline-flex" />
       </nav>
     </header>
   );

@@ -54,26 +54,39 @@ export function Hero() {
 
 /** YouTube's player reports its state over postMessage once it has been told someone is listening. */
 const YT_ORIGIN = "https://www.youtube-nocookie.com";
-const YT_PLAYING = 1;
-const command = (frame: HTMLIFrameElement | null, func: "playVideo" | "pauseVideo") =>
-  frame?.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args: [] }), YT_ORIGIN);
+const YT = { ended: 0, playing: 1, paused: 2, buffering: 3 } as const;
+type YtMessage = { event?: string; info?: { playerState?: number; currentTime?: number; duration?: number } | null };
+const command = (frame: HTMLIFrameElement | null, func: "playVideo" | "pauseVideo" | "seekTo", args: unknown[] = []) =>
+  frame?.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args }), YT_ORIGIN);
 const ytSrc = (id: string) =>
   `${YT_ORIGIN}/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1`;
+
+/** how long the footage must have been playing before it is shown: longer the first time, while the player settles */
+const SHOW_AFTER_FIRST_MS = 2500;
+const SHOW_AFTER_MS = 600;
+/** a stall longer than this goes back to the still rather than showing YouTube's spinner */
+const STALL_MS = 1500;
+/** jump back to the start this close to the end, so the player never reaches its end screen */
+const LOOP_BEFORE_END_S = 1.2;
 
 /**
  * The real footage of Brix, playing silently behind the hero. It streams from
  * the Brix Brewhouse YouTube channel until the original file is on hand.
- * - the poster (a frame of the same footage) is the LCP and stays up until the video is actually playing
+ *
+ * The still (a frame of the same footage) is the LCP and covers the player
+ * whenever the player is not cleanly playing, so nothing of YouTube's own
+ * (title strip, spinner, pause shelf, end screen) is ever on show:
  * - nothing loads from YouTube while the age gate is up; the gate's "Yes" primes it
- * - sized to cover the hero like object-fit: cover, paused while off-screen
+ * - the still lifts only once the video has been playing for a moment
+ * - it loops by seeking back just before the end, not by letting the video finish
+ * - off-screen it pauses behind the still, and the still lifts again after it resumes
+ * - if it stalls, stops or fails, the still comes back
  */
 function HeroFootage() {
   const { gatePassed } = useSite();
   const frame = useRef<HTMLIFrameElement>(null);
   const [primed, setPrimed] = useState(false);
-  const [playing, setPlaying] = useState(false);
-  const ready = useRef(false); // the player takes commands only after its onReady
-  const onScreen = useRef(true);
+  const [shown, setShown] = useState(false);
   const load = gatePassed || primed;
 
   useEffect(() => {
@@ -82,38 +95,80 @@ function HeroFootage() {
     return () => window.removeEventListener("brix:prime", prime);
   }, []);
 
-  // show the footage only once it is really playing, and after YouTube's title strip has faded
-  useEffect(() => {
-    if (!load) return;
-    let timer = 0;
-    const onMessage = (e: MessageEvent) => {
-      if (e.origin !== YT_ORIGIN || e.source !== frame.current?.contentWindow || typeof e.data !== "string") return;
-      try {
-        const msg = JSON.parse(e.data) as { event?: string; info?: { playerState?: number } | null };
-        if (msg.event === "onReady") {
-          ready.current = true;
-          if (!onScreen.current) command(frame.current, "pauseVideo");
-        }
-        if (msg.info?.playerState === YT_PLAYING && !timer) timer = window.setTimeout(() => setPlaying(true), 3200);
-      } catch {}
-    };
-    window.addEventListener("message", onMessage);
-    return () => {
-      window.removeEventListener("message", onMessage);
-      window.clearTimeout(timer);
-    };
-  }, [load]);
-
-  // only play while on screen
   useEffect(() => {
     const el = frame.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([e]) => {
-      onScreen.current = e.isIntersecting;
-      if (ready.current) command(el, e.isIntersecting ? "playVideo" : "pauseVideo");
+    if (!load || !el) return;
+    let ready = false; // the player takes commands only after its onReady
+    let onScreen = true;
+    let state = -1;
+    let duration = 0;
+    let everShown = false;
+    let visible = false;
+    let showTimer = 0;
+    let stallTimer = 0;
+
+    const hide = () => {
+      window.clearTimeout(showTimer);
+      showTimer = 0;
+      visible = false;
+      setShown(false);
+    };
+    const showSoon = () => {
+      if (visible || showTimer || !onScreen) return;
+      showTimer = window.setTimeout(
+        () => {
+          showTimer = 0;
+          visible = everShown = true;
+          setShown(true);
+        },
+        everShown ? SHOW_AFTER_MS : SHOW_AFTER_FIRST_MS,
+      );
+    };
+    const onState = (next: number) => {
+      state = next;
+      window.clearTimeout(stallTimer);
+      if (next === YT.playing) showSoon();
+      else if (next === YT.buffering) stallTimer = window.setTimeout(hide, STALL_MS);
+      else hide(); // ended, paused, unstarted, cued
+    };
+
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== YT_ORIGIN || e.source !== el.contentWindow || typeof e.data !== "string") return;
+      let msg: YtMessage;
+      try {
+        msg = JSON.parse(e.data) as YtMessage;
+      } catch {
+        return;
+      }
+      if (msg.event === "onReady") {
+        ready = true;
+        if (!onScreen) command(el, "pauseVideo");
+      }
+      const info = msg.info;
+      if (!info) return;
+      if (typeof info.duration === "number" && info.duration > 0) duration = info.duration;
+      if (typeof info.playerState === "number") onState(info.playerState);
+      if (typeof info.currentTime === "number" && duration > LOOP_BEFORE_END_S * 2 && info.currentTime >= duration - LOOP_BEFORE_END_S) {
+        command(el, "seekTo", [0, true]);
+      }
+    };
+    window.addEventListener("message", onMessage);
+
+    // only play while on screen; the still covers the pause and the resume
+    const io = new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      if (!onScreen) hide();
+      if (ready) command(el, onScreen ? "playVideo" : "pauseVideo");
+      if (onScreen && state === YT.playing) showSoon();
     });
     io.observe(el);
-    return () => io.disconnect();
+
+    return () => {
+      window.removeEventListener("message", onMessage);
+      io.disconnect();
+      window.clearTimeout(showTimer);
+      window.clearTimeout(stallTimer);
+    };
   }, [load]);
 
   return (
@@ -133,9 +188,10 @@ function HeroFootage() {
       ) : null}
       <img
         src={POSTER}
-        alt={playing ? "" : POSTER_ALT}
+        alt={shown ? "" : POSTER_ALT}
         fetchPriority="high"
-        className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${playing ? "opacity-0" : "opacity-100"}`}
+        data-footage={shown ? "playing" : "still"}
+        className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity ${shown ? "opacity-0 duration-1000" : "opacity-100 duration-200"}`}
       />
     </>
   );
