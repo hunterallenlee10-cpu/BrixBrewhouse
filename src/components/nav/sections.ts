@@ -17,6 +17,7 @@ export const NAV_LINKS = [
   { id: "on-tap", label: "On Tap" },
   { id: "kitchen", label: "Menu" },
   { id: "lounge", label: "Eli's Lounge" },
+  { id: "garden", label: "Beer Garden" },
   { id: "dispatch", label: "Events" },
   { id: "visit", label: "Visit" },
 ] as const;
