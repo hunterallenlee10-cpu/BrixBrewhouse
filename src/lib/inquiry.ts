@@ -4,6 +4,8 @@ export type InquiryKind = "group" | "event";
 export type Errors = Record<string, string>;
 
 export const EVENT_TYPES = ["Birthday", "Shower", "Repast", "Team night", "Fundraiser", "Watch party", "Something else"];
+/** Eli's Lounge is the only private room; space anywhere else in the brewery can be reserved. */
+export const EVENT_SPACES = ["Eli's Lounge (private)", "Reserved space elsewhere in the brewery", "Not sure yet"];
 
 const MAX_LEN = 2000;
 const str = (d: FormData, k: string) => String(d.get(k) ?? "").trim().slice(0, MAX_LEN);
@@ -83,17 +85,19 @@ export function buildEmail(kind: InquiryKind, d: FormData): InquiryEmail {
 
   const name = str(d, "e-name");
   const type = EVENT_TYPES.includes(str(d, "e-type")) ? str(d, "e-type") : "Something else";
+  const space = EVENT_SPACES.includes(str(d, "e-space")) ? str(d, "e-space") : "Not sure yet";
   const date = formatWhen(str(d, "e-date"));
   const email = str(d, "e-email");
   return {
-    subject: `Eli's Lounge inquiry: ${type} for ${str(d, "e-guests")}, ${date} (${name})`,
+    subject: `Event inquiry: ${type} for ${str(d, "e-guests")}, ${date} (${name})`,
     text:
-      "New private event inquiry for Eli's Lounge from the website.\n\n" +
+      "New event inquiry from the website.\n\n" +
       lines([
         ["Name", name],
         ["Phone", str(d, "e-phone")],
         ["Email", email],
         ["Event type", type],
+        ["Space", space],
         ["Date", date],
         ["Guests", str(d, "e-guests")],
         ["Message", str(d, "e-msg")],

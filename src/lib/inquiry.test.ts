@@ -42,9 +42,14 @@ describe("buildEmail", () => {
   });
   it("builds the event email with the guest as reply-to", () => {
     const m = buildEmail("event", fd({ "e-name": "Jo", "e-phone": "5705550100", "e-email": "jo@example.com", "e-type": "Birthday", "e-date": "2026-12-05", "e-guests": "30", "e-msg": "<b>hi</b>" }));
-    expect(m.subject).toBe("Eli's Lounge inquiry: Birthday for 30, Sat, Dec 5, 2026 (Jo)");
+    expect(m.subject).toBe("Event inquiry: Birthday for 30, Sat, Dec 5, 2026 (Jo)");
+    expect(m.text).toContain("Space: Not sure yet");
     expect(m.replyTo).toBe("jo@example.com");
     expect(m.text).toContain("Message: <b>hi</b>");
+  });
+  it("carries the chosen space", () => {
+    const m = buildEmail("event", fd({ "e-name": "Jo", "e-space": "Eli's Lounge (private)" }));
+    expect(m.text).toContain("Space: Eli's Lounge (private)");
   });
   it("falls back for an unknown event type", () => {
     expect(buildEmail("event", fd({ "e-type": "Rave" })).text).toContain("Event type: Something else");

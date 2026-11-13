@@ -22,13 +22,13 @@ export const SITE = {
   press: [
     {
       outlet: "WNEP",
-      date: "Aug 20, 2025",
-      iso: "2025-08-20",
-      headline: "Historic firehouse in Brodheadsville to brew new adventures as Brix Brewhouse",
-      byline: "Emily Kress",
-      summary: "Before the first pour: how the old West End Firehouse on Route 715 was set to become a brewery.",
-      // the WNEP page opens on the TV segment, so the link is "Watch video"
-      url: "https://www.wnep.com/article/news/local/monroe-county/historic-firehouse-brodheadsville-brew-adventures-brix-brewhouse-monroe-county/523-b598dd99-7728-4d96-bd4d-e3ab7055ba9c",
+      date: "May 15, 2026",
+      iso: "2026-05-15",
+      headline: "Brix Brewhouse opens in former West End Fire House",
+      byline: "",
+      summary: "The doors are open: WNEP visits the brewery now pouring inside the former West End Fire House on Route 715.",
+      // the owners' pick: WNEP's opening story, linked straight to the video
+      url: "https://www.youtube.com/watch?v=zEcAEdmJDk0",
       cta: "Watch video",
     },
     {

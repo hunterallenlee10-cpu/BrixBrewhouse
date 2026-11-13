@@ -2,6 +2,14 @@
   "_note": "24-hour times, America/New_York. 0 = Sunday. Close times past midnight would use values over 24:00 (e.g. 25:00 = 1 AM).",
   "timezone": "America/New_York",
   "holidayNote": "Holiday hours may vary.",
+  "gameNights": {
+    "_note": "Primetime football nights. On these days last call replaces the usual close in the open/closed status. Set \"active\" to false when the season ends.",
+    "active": true,
+    "days": [1, 4],
+    "lastCall": "22:30",
+    "short": "Football nights: last call 10:30 PM",
+    "note": "Monday and Thursday primetime football: last call 10:30 PM, open until the game is over."
+  },
   "days": [
     { "day": 0, "label": "Sunday", "open": "12:00", "close": "21:00" },
     { "day": 1, "label": "Monday", "open": "12:00", "close": "21:00" },

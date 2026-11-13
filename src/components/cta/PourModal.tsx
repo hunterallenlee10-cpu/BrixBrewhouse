@@ -4,10 +4,10 @@ import { useEffect, useId, useRef, useState, useTransition } from "react";
 import { MapPin, Phone, X } from "@phosphor-icons/react";
 import { useSite, type PourTab } from "@/components/providers/SiteProvider";
 import { StatusPill } from "@/components/ui/StatusPill";
-import { HOURS, formatTime, zonedNow } from "@/lib/hours";
+import { HOURS, formatTime, isGameNight, zonedNow } from "@/lib/hours";
 import { SITE } from "@/lib/site";
 import { sendInquiry } from "@/app/actions";
-import { EVENT_TYPES, validators, type Errors, type InquiryKind } from "@/lib/inquiry";
+import { EVENT_SPACES, EVENT_TYPES, validators, type Errors, type InquiryKind } from "@/lib/inquiry";
 
 const TABS: { id: PourTab; label: string }[] = [
   { id: "visit", label: "Visit" },
@@ -170,6 +170,7 @@ function VisitTab() {
                   </th>
                   <td className={`tabular py-1.5 pr-2 text-right ${on ? "text-foam" : "text-text-2"}`}>
                     {formatTime(h.open)} - {formatTime(h.close)}
+                    {isGameNight(d) ? <span className="t-mono block text-[0.6875rem] text-gold-hi">{HOURS.gameNights!.short}</span> : null}
                   </td>
                 </tr>
               );
@@ -332,7 +333,7 @@ function EventForm() {
     return (
       <div role="tabpanel" id="panel-event" aria-labelledby="tab-event">
         <Success
-          title="Eli's Lounge, penciled in."
+          title="Penciled in."
           body={
             <>
               Thanks. We&rsquo;ll be in touch soon to talk dates and options.
@@ -346,7 +347,7 @@ function EventForm() {
     <form role="tabpanel" id="panel-event" aria-labelledby="tab-event" noValidate onSubmit={f.onSubmit} className="relative grid gap-4 sm:grid-cols-2">
       <Honeypot />
       <p className="text-text-2 sm:col-span-2">
-        Eli&rsquo;s Lounge was built by hand by Joe Elias Sr. Tell us what you&rsquo;re planning.
+        Eli&rsquo;s Lounge, built by hand by Joe Elias Sr., is our private event space. You can also reserve space anywhere else in the brewery. Tell us what you&rsquo;re planning.
       </p>
       <Field id="e-name" label="Name" error={f.errors["e-name"]}>
         <input id="e-name" name="e-name" autoComplete="name" className={field} {...f.aria("e-name")} />
@@ -361,6 +362,13 @@ function EventForm() {
         <select id="e-type" name="e-type" className={field} defaultValue="Birthday">
           {EVENT_TYPES.map((t) => (
             <option key={t}>{t}</option>
+          ))}
+        </select>
+      </Field>
+      <Field id="e-space" label="Space">
+        <select id="e-space" name="e-space" className={field} defaultValue={EVENT_SPACES[0]}>
+          {EVENT_SPACES.map((s) => (
+            <option key={s}>{s}</option>
           ))}
         </select>
       </Field>

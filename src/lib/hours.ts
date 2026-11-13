@@ -3,10 +3,12 @@
 import hoursData from "../../data/hours.json";
 
 export type DayHours = { day: number; label: string; open: string; close: string };
-export type HoursConfig = { timezone: string; holidayNote: string; days: DayHours[] };
+/** Nights that run late for a game: last call replaces the usual close, and the doors stay open until the game ends. */
+export type GameNights = { active: boolean; days: number[]; lastCall: string; short: string; note: string };
+export type HoursConfig = { timezone: string; holidayNote: string; days: DayHours[]; gameNights?: GameNights };
 
 export type Status =
-  | { state: "open"; closesAt: string; day: number; label: string }
+  | { state: "open"; closesAt: string; day: number; label: string; lastCall?: boolean }
   | { state: "later-today"; opensAt: string; day: number; label: string }
   | { state: "closed"; opensAt: string; opensWhen: string; day: number; label: string };
 
@@ -30,6 +32,9 @@ export function zonedNow(now: Date, timeZone = HOURS.timezone): { day: number; m
   const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "0";
   return { day: WEEKDAY[get("weekday")], minutes: Number(get("hour")) * 60 + Number(get("minute")) };
 }
+
+/** True when that weekday (0 = Sunday) is a game night and game nights are switched on. */
+export const isGameNight = (day: number, cfg: HoursConfig = HOURS) => !!cfg.gameNights?.active && cfg.gameNights.days.includes(day);
 
 export const toMinutes = (hhmm: string) => {
   const [h, m] = hhmm.split(":").map(Number);
@@ -58,9 +63,11 @@ export function getStatus(now: Date, cfg: HoursConfig = HOURS): Status {
     return { state: "open", closesAt: yesterday.close, day: yesterday.day, label: yesterday.label };
   }
   const open = toMinutes(today.open);
-  const close = toMinutes(today.close);
-  if (minutes >= open && minutes < close) {
-    return { state: "open", closesAt: today.close, day, label: today.label };
+  // on a game night the bar pours until last call, past the usual close
+  const late = isGameNight(day, cfg) && toMinutes(cfg.gameNights!.lastCall) > toMinutes(today.close);
+  const closesAt = late ? cfg.gameNights!.lastCall : today.close;
+  if (minutes >= open && minutes < toMinutes(closesAt)) {
+    return { state: "open", closesAt, day, label: today.label, ...(late ? { lastCall: true } : {}) };
   }
   if (minutes < open) {
     return { state: "later-today", opensAt: today.open, day, label: today.label };
@@ -71,7 +78,7 @@ export function getStatus(now: Date, cfg: HoursConfig = HOURS): Status {
 
 /** The pill copy. Kept here so every surface says the same thing. */
 export function statusText(s: Status): { lead: string; rest: string } {
-  if (s.state === "open") return { lead: "Open now", rest: `pouring until ${formatTime(s.closesAt)}` };
+  if (s.state === "open") return { lead: "Open now", rest: s.lastCall ? `last call ${formatTime(s.closesAt)}` : `pouring until ${formatTime(s.closesAt)}` };
   if (s.state === "later-today") return { lead: "Opens today", rest: `at ${formatTime(s.opensAt)}` };
   return { lead: "Closed", rest: `opens ${s.opensWhen} ${formatTime(s.opensAt)}` };
 }
