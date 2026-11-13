@@ -51,7 +51,7 @@ export function ThreeMeanings() {
         {/* the founders line */}
         <div className="mt-[clamp(5rem,10vw,8rem)] grid items-end gap-12 md:grid-cols-[1.35fr_0.65fr] md:gap-16">
           <blockquote className="t-serif pb-1 text-[clamp(2rem,4.6vw,4.1rem)] leading-[1.12] text-foam">
-            Joe Elias and Chris Poherence met at their kids&rsquo; bus stop. Both had a passion for starting a brewery.{" "}
+            Joe Elias and Chris Pohorence met at their kids&rsquo; bus stop. Both had a passion for starting a brewery.{" "}
             <span className="text-gold-hi">Brix is what happened next.</span>
           </blockquote>
           <PhotoSlot
@@ -61,7 +61,7 @@ export function ThreeMeanings() {
             className="mx-auto w-[min(100%,320px)]"
             photos={[
               { src: "/img/real/joe-elias", alt: "Joe Elias, co-founder, smiling in a Brix cap and a red Brix Brewhouse T-shirt", width: 752, height: 868, position: "50% 0%" },
-              { src: "/img/real/chris-poherence", alt: "Chris Poherence, co-founder, hands on hips in front of the painted Brix sign", width: 900, height: 761, position: "38% 0%" },
+              { src: "/img/real/chris-pohorence", alt: "Chris Pohorence, co-founder, hands on hips in front of the painted Brix sign", width: 900, height: 761, position: "38% 0%" },
             ]}
           />
         </div>
