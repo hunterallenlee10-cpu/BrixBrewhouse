@@ -1,6 +1,6 @@
 import { TapHandleButton } from "@/components/ui/TapHandleButton";
 
-/** The last room: the street out front at night. The image is a generic illustration, not the real building. */
+/** The last room: the street out front at night. The image is a generated stand-in until the real photo arrives. */
 export function FinalCta() {
   return (
     <section aria-labelledby="final-title" className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-black">
@@ -10,7 +10,7 @@ export function FinalCta() {
         <source type="image/avif" srcSet="/img/night-exterior.avif" />
         <img
           src="/img/night-exterior.webp"
-          alt="Illustrative render of a brick taproom at night with glowing glass bay doors and string lights over a rain-slick lot. Not a photo of Brix."
+          alt="A brick taproom at night with glowing glass bay doors and string lights over a rain-slick lot."
           loading="lazy"
           decoding="async"
           className="absolute inset-0 -z-10 h-full w-full object-cover"

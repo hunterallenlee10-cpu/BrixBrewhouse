@@ -101,7 +101,7 @@ Rejected outright: the craft-brewery default (centred beer photo over cream, thr
 
 **Key Characteristics:**
 - Dark ground at page scale; gold is light, red is enamel and the CTA.
-- Real materials as fields and objects, each a labelled illustrative raster.
+- Real materials as fields and objects, each a raster texture.
 - Civic signage type, huge and edge-cropped; a warm italic serif for human moments; mono for data.
 - Square corners and 1px hairlines; round only for round things (caps, dots); 10px only for enamel signs.
 - Every unknown fact is a visible `{{CONFIRM}}` chip, never a guess.
@@ -131,7 +131,7 @@ A blackout palette with one warm light and one enamel red, plus the building's o
 
 **The Enamel Red Rule.** Red is for fire-service enamel, real red objects in the building (a bottle cap, a shuffleboard weight), and the single CTA. If it isn't a sign, an object, a gate "Yes", or "Pour One With Us", it isn't red.
 
-**The Real Material Rule.** Brick, wood, steel, paper and caps are raster textures with an "Illustrative render" caption. CSS gradients may shade a material; they never stand in for one.
+**The Real Material Rule.** Brick, wood, steel, paper and caps are raster textures. CSS gradients may shade a material; they never stand in for one.
 
 ## Typography
 
@@ -148,7 +148,7 @@ A blackout palette with one warm light and one enamel red, plus the building's o
 - **Stencil** (700, uppercase, 0.1em): "BAY 0n" numerals that open each room, and the enamel placard heading.
 - **Serif** (Fraunces italic 400, SOFT 100, WONK 1): human moments: the founders' story, room subtitles, "Come pour one with us."
 - **Body** (Manrope 400, 1rem/1.6, max ~62ch): all explanatory copy.
-- **Label** (JetBrains Mono, 0.6875-0.75rem, uppercase, 0.08em, tabular figures): tap specs ("TAP 04 / SESSION IPA / 5.9% / IBU 22"), dispatch rows, captions, the "Illustrative render" provenance line. Never below 11px.
+- **Label** (JetBrains Mono, 0.6875-0.75rem, uppercase, 0.08em, tabular figures): tap specs ("TAP 04 / SESSION IPA / 5.9% / IBU 22"), dispatch rows, captions. Never below 11px.
 
 ### Named Rules
 **The Brew Sheet Rule.** Numbers (ABV, IBU, times, dates, prices) are set in mono with tabular figures, like a brew log.
@@ -207,7 +207,7 @@ Square by default: buttons, frames, sheets, inputs and the modal have 0 radius a
 
 ### Do:
 - **Do** open every room with a stencil Bay Label and give it a real material from the building.
-- **Do** caption every generated visual "Illustrative render" (food: "Illustrative, not the actual dish") in mono at 11px or larger.
+- **Don't** caption generated visuals "Illustrative render": the owners had those labels removed. Swap generated images for real photos as they arrive.
 - **Do** set every number in mono with tabular figures.
 - **Do** mark any unverified fact with a visible `{{CONFIRM}}` chip.
 - **Do** let signature display words crop at the viewport edge, but never so far that the meaning changes.

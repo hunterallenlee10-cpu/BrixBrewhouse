@@ -53,7 +53,7 @@ The only brewery inside the former West End Firehouse on Route 715, named three 
 - Real: business facts, menu with prices, beer stats for six house beers, hours, address, phone, email, socials, two press articles (WNEP 2025, Times News 2026), one YouTube video.
 - Not on hand: photos of the owners, Chef John, Eli's woodwork, the bottle-cap bar, the Larry Meng mural, the real building. These are labelled photo slots.
 - Never fabricated: reviews, ratings, awards, beer stats, event days, prices, history. Two real guest reviews (Jade D. on Yelp, Lori R. on Facebook), quoted word for word; an ellipsis marks any text left out.
-- Generated imagery is illustration and is labelled "ILLUSTRATIVE RENDER" or "Illustrative, not the actual dish".
+- Generated imagery is no longer labelled on the site: the owners had the "illustrative render" captions removed. Swap generated images for real photos as they arrive.
 
 ## Product Principles
 

@@ -13,15 +13,6 @@ export function BayLabel({ n, children, className = "", tone = "gold" }: { n: st
   );
 }
 
-/** Tiny mono caption on every AI-generated visual. */
-export function Illustrative({ children = "Illustrative render", className = "" }: { children?: ReactNode; className?: string }) {
-  return (
-    <span className={`t-mono pointer-events-none select-none text-[0.6875rem] tracking-[0.14em] text-foam/70 ${className}`}>
-      {children}
-    </span>
-  );
-}
-
 /**
  * A real photo for a PhotoSlot. `src` has no extension: .avif + .webp sit side by side.
  * `position` is the object-position; `phonePosition` overrides it below 768px,

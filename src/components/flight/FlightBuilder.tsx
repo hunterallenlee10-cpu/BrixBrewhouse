@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowCounterClockwise } from "@phosphor-icons/react";
 import { useSite } from "@/components/providers/SiteProvider";
-import { BayLabel, Illustrative } from "@/components/ui/primitives";
+import { BayLabel } from "@/components/ui/primitives";
 import { TAPS, type Beer } from "@/lib/data";
 import { TapRail } from "./TapRail";
 import { Paddle, type PaddleHandle } from "./Paddle";
@@ -113,8 +113,7 @@ export function FlightBuilder() {
           <div className="relative">
             <Loops />
             <Paddle ref={paddle} slots={flight} reducedMotion={reducedMotion} onRemove={remove} />
-            <Illustrative className="mt-3 block">Background pours: illustrative render</Illustrative>
-            <div className="mt-2 flex items-center justify-between gap-4">
+            <div className="mt-3 flex items-center justify-between gap-4">
               <p className="t-mono text-[0.68rem] text-text-2">
                 <span className="text-gold-hi">{filled}</span> of {SIZE} poured
               </p>

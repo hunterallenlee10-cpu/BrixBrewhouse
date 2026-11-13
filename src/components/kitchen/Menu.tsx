@@ -39,7 +39,6 @@ function Photo({ id, dish }: { id: string; dish: string }) {
       </picture>
       <figcaption>
         <span className="kit-photoDish">{dish}</span>
-        {p.illustrative ? <span className={`t-mono kit-photoNote`}>Illustrative, not the actual dish</span> : null}
       </figcaption>
     </figure>
   );
