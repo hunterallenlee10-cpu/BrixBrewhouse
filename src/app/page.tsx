@@ -7,7 +7,7 @@ import { MobileBar } from "@/components/nav/MobileBar";
 import { CapCursor } from "@/components/ui/CapCursor";
 import { Hero } from "@/components/hero/Hero";
 import { ThreeMeanings } from "@/components/meanings/ThreeMeanings";
-const FlightBuilder = dynamic(() => import("@/components/flight/FlightBuilder").then((m) => m.FlightBuilder));
+import { OnTap } from "@/components/flight/OnTap";
 const BarTop = dynamic(() => import("@/components/bartop/BarTop").then((m) => m.BarTop));
 const Kitchen = dynamic(() => import("@/components/kitchen/Kitchen").then((m) => m.Kitchen));
 const ElisLounge = dynamic(() => import("@/components/lounge/ElisLounge").then((m) => m.ElisLounge));
@@ -38,7 +38,7 @@ export default function Page() {
         <Threshold />
         <BarTop />
         <Threshold />
-        <FlightBuilder />
+        <OnTap />
         <Threshold />
         <Kitchen />
         <Threshold />

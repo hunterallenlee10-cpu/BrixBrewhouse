@@ -12,22 +12,25 @@ import { Loops } from "./Loops";
 import { TapList } from "./TapList";
 
 const SIZE = TAPS.flightSize; // 4
-const BEERS = TAPS.beers;
-const byId = (id: string) => BEERS.find((b) => b.id === id);
 const pad = (n: number) => String(n).padStart(2, "0");
 
-function parseHash(): string[] | null {
+function parseHash(byId: (id: string) => Beer | undefined): string[] | null {
   const m = window.location.hash.match(/flight=([\w,-]+)/);
   if (!m) return null;
   const ids = m[1].split(",").slice(0, SIZE).filter((id) => byId(id));
   return ids.length ? ids : null;
 }
 
-/** BAY 03: pull four handles, build a flight. */
-export function FlightBuilder() {
+/**
+ * BAY 03: pull four handles, build a flight.
+ * `beers` is what's pouring: the owners' Google Sheet when it's connected, else /data/taps.json.
+ */
+export function FlightBuilder({ beers = TAPS.beers, live = false }: { beers?: Beer[]; live?: boolean }) {
+  const BEERS = beers;
+  const byId = useCallback((id: string) => beers.find((b) => b.id === id), [beers]);
   const { reducedMotion } = useSite();
   const [slots, setSlots] = useState<(string | null)[]>(() => Array(SIZE).fill(null));
-  const [focus, setFocus] = useState<Beer>(TAPS.beers[3]);
+  const [focus, setFocus] = useState<Beer>(beers[Math.min(3, beers.length - 1)]);
   const [say, setSay] = useState("");
   const paddle = useRef<PaddleHandle>(null);
 
@@ -38,14 +41,14 @@ export function FlightBuilder() {
 
   // shared link: #flight=a,b,c,d restores the same flight
   const restore = useCallback(() => {
-    const ids = parseHash();
+    const ids = parseHash(byId);
     if (!ids) return;
     const next = Array(SIZE).fill(null) as (string | null)[];
     ids.forEach((id, i) => (next[i] = id));
     setSlots(next);
     next.forEach((id, i) => (id ? paddle.current?.pour(i, byId(id)!, true) : paddle.current?.drain(i, true)));
     setSay(`Shared flight loaded: ${ids.map((id) => byId(id)!.short).join(", ")}.`);
-  }, []);
+  }, [byId]);
   useEffect(() => {
     const raf = requestAnimationFrame(restore); // after mount, so the paddle exists
     window.addEventListener("hashchange", restore);
@@ -102,7 +105,9 @@ export function FlightBuilder() {
               A flight is four glasses. {TAPS.totalTaps} taps rotate in Eli&rsquo;s Lounge. Pull a handle and it pours into the next empty glass.
             </p>
           </div>
-          <p className="t-mono text-[0.68rem] text-text-2">Taps rotate. Here&rsquo;s what&rsquo;s been pouring.</p>
+          <p className="t-mono text-[0.68rem] text-text-2">
+            {live ? <>Live from the bar. This list changes when the taps do.</> : <>Taps rotate. Here&rsquo;s what&rsquo;s been pouring.</>}
+          </p>
         </div>
 
         <div className="mt-12 md:mt-16">
