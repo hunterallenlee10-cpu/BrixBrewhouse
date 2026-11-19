@@ -14,8 +14,9 @@ export function sheetCsvUrl(input: string | undefined, tab = "Tap List"): string
   if (/^https?:\/\//.test(s) && (s.includes("/d/e/") || s.includes("output=csv") || !s.includes("/spreadsheets/d/"))) return s;
   const id = s.match(/\/spreadsheets\/d\/([\w-]+)/)?.[1] ?? (/^[\w-]{20,}$/.test(s) ? s : null);
   if (!id) return null;
-  // headers=0 keeps Google from merging the title rows into a header; the parser finds the real one
-  return `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&headers=0&sheet=${encodeURIComponent(tab)}`;
+  // Start at the header row (row 4, under the title and instructions) and tell Google it is the header.
+  // Without that, Google guesses, and drops the labels of number columns like "Tap #" and "ABV".
+  return `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&headers=1&range=A4:Z&sheet=${encodeURIComponent(tab)}`;
 }
 
 /** Minimal RFC 4180 CSV parser: quoted fields, doubled quotes, commas and newlines inside quotes. */
@@ -85,7 +86,8 @@ export function lookFor(text: string): Pick<Beer, "liquid" | "haze"> & { foam?: 
 /**
  * Turn the Tap List tab (as CSV rows) into beers. Finds the header row by its "Beer" and "On Tap?"
  * cells, so the title rows above it and any column reordering don't matter.
- * Stats the sheet doesn't carry (IBU, colour name) come from /data/taps.json when the names match.
+ * IBU, Color and Featured? are optional columns: when the sheet has one, a blank cell hides that stat.
+ * When it doesn't, a beer whose name matches one in /data/taps.json borrows that file's IBU and colour.
  */
 export function beersFromRows(rows: string[][], library: Beer[] = TAPS.beers): Beer[] {
   const h = rows.findIndex((r) => r.some((c) => norm(c) === "beer") && r.some((c) => norm(c).startsWith("on tap")));
@@ -100,6 +102,9 @@ export function beersFromRows(rows: string[][], library: Beer[] = TAPS.beers): B
     abv: col("abv"),
     desc: col("short website description", "description"),
     status: col("website status", "status"),
+    ibu: col("ibu"),
+    color: col("color", "colour"),
+    featured: col("featured"),
   };
   const cell = (r: string[], i: number) => (i >= 0 ? (r[i] ?? "").trim() : "");
   const byName = new Map(library.flatMap((b) => [[norm(b.name), b] as const, [norm(b.short), b] as const]));
@@ -123,6 +128,7 @@ export function beersFromRows(rows: string[][], library: Beer[] = TAPS.beers): B
       seen.add(id);
       const tapNo = parseInt(cell(r, at.tap), 10);
       const abv = parseAbv(cell(r, at.abv));
+      const ibu = parseInt(cell(r, at.ibu).replace(/[^0-9]/g, ""), 10);
       const description = cell(r, at.desc) || known?.description || (style ? `${style}. Ask your bartender for more.` : "Ask your bartender for more.");
       const look = known ? { liquid: known.liquid, haze: known.haze, foam: known.foam } : lookFor(`${name} ${style}`);
       return {
@@ -131,10 +137,11 @@ export function beersFromRows(rows: string[][], library: Beer[] = TAPS.beers): B
         name,
         short: known?.short ?? name,
         style: style || known?.style || "",
-        abv: abv ?? known?.abv ?? null,
-        ibu: known?.ibu ?? null,
-        color: known?.color ?? null,
+        abv: at.abv >= 0 ? abv : (known?.abv ?? null),
+        ibu: at.ibu >= 0 ? (Number.isFinite(ibu) ? ibu : null) : (known?.ibu ?? null),
+        color: at.color >= 0 ? cell(r, at.color) || null : (known?.color ?? null),
         ...look,
+        featured: norm(cell(r, at.featured)) === "yes",
         kind: known?.kind ?? "house",
         confirmed: true,
         description,
@@ -143,26 +150,47 @@ export function beersFromRows(rows: string[][], library: Beer[] = TAPS.beers): B
     .sort((a, b) => (a.tap ?? 0) - (b.tap ?? 0));
 }
 
-/**
- * What's pouring right now. Cached and re-read from the sheet in the background about once a minute,
- * so a change on the sheet shows on the site within a couple of minutes, without a redeploy.
- */
-export async function getLiveBeers(): Promise<{ beers: Beer[]; source: "sheet" | "file" }> {
-  "use cache";
-  cacheLife("minutes");
+class SheetError extends Error {}
 
+/**
+ * One read of the sheet, cached. It re-reads about once a minute; if a re-read fails it throws, and the
+ * cache keeps serving the last good copy for up to a week while it keeps retrying.
+ */
+async function readSheet(url: string): Promise<Beer[]> {
+  "use cache";
+  // revalidate: the server re-reads the sheet every minute. stale (the browser's reuse of a page it already has)
+  // stays at 5 minutes: anything shorter would pull the tap list out of the prerendered page.
+  cacheLife({ stale: 300, revalidate: 60, expire: 60 * 60 * 24 * 7 });
+
+  const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+  const type = res.headers.get("content-type") ?? "";
+  // a sheet that isn't shared answers with Google's sign-in page, not CSV
+  if (!res.ok || type.includes("text/html")) throw new SheetError(`tap sheet answered ${res.status} ${type}`);
+  const beers = beersFromRows(parseCsv(await res.text()));
+  if (!beers.length) throw new SheetError("tap sheet has no beers set to Yes / LIVE");
+  return beers;
+}
+
+export type TapSource =
+  /** read from the sheet (or its last good copy) */
+  | "sheet"
+  /** the sheet is connected but couldn't be read: showing /data/taps.json with an "ask your bartender" line */
+  | "fallback"
+  /** no sheet connected: /data/taps.json */
+  | "file";
+
+/** What's pouring right now, for every tap-driven part of the page. */
+export async function getLiveBeers(): Promise<{ beers: Beer[]; source: TapSource }> {
   const url = sheetCsvUrl(process.env.TAP_SHEET_ID, process.env.TAP_SHEET_TAB || "Tap List");
   if (!url) return { beers: TAPS.beers, source: "file" };
   try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-    const type = res.headers.get("content-type") ?? "";
-    // a sheet that isn't shared answers with Google's sign-in page, not CSV
-    if (!res.ok || type.includes("text/html")) throw new Error(`tap sheet answered ${res.status} ${type}`);
-    const beers = beersFromRows(parseCsv(await res.text()));
-    if (!beers.length) throw new Error("tap sheet has no beers set to Yes / LIVE");
-    return { beers, source: "sheet" };
+    return { beers: await readSheet(url), source: "sheet" };
   } catch (err) {
-    console.error("[taps] falling back to data/taps.json:", err);
-    return { beers: TAPS.beers, source: "file" };
+    console.error("[taps] sheet unreadable, showing data/taps.json:", err instanceof Error ? err.message : err);
+    return { beers: TAPS.beers, source: "fallback" };
   }
 }
+
+/** The beer for the featured panel: the one marked Featured? = Yes, else the lowest tap number. */
+export const featuredBeer = (beers: Beer[]) =>
+  beers.find((b) => b.featured) ?? [...beers].sort((a, b) => (a.tap ?? 99) - (b.tap ?? 99))[0];

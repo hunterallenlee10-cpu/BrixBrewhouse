@@ -3,44 +3,51 @@
 import { useEffect, useRef, useState } from "react";
 import { useSite } from "@/components/providers/SiteProvider";
 import { MENU, beerById, price, type MenuItem } from "@/lib/data";
-import { FOOD_PHOTOS } from "./foodPhotos";
+import { FOOD_PHOTOS, FoodPicture } from "./foodPhotos";
 
 function Item({ item }: { item: MenuItem }) {
   // a beer id from taps.json, or a plain beer name for a pour that isn't on the tap list yet
   const pair = item.pairsWith ? (beerById(item.pairsWith)?.short ?? item.pairsWith) : undefined;
+  const photo = item.image && FOOD_PHOTOS[item.image] ? item.image : null;
   return (
-    <li className={item.addon ? "kit-addon" : "kit-item"}>
-      <div className="kit-row">
-        <span className="kit-name">{item.addon ? `+ ${item.name}` : item.name}</span>
-        <span aria-hidden className="kit-leader" />
-        <span className={`tabular kit-price`}>{price(item.price)}</span>
+    <li className={item.addon ? "kit-addon" : photo ? "kit-item kit-hasThumb" : "kit-item"}>
+      {photo ? <FoodPicture id={photo} sizes="80px" className="kit-thumb" /> : null}
+      <div className="min-w-0">
+        <div className="kit-row">
+          <span className="kit-name">{item.addon ? `+ ${item.name}` : item.name}</span>
+          {item.price != null ? (
+            <>
+              <span aria-hidden className="kit-leader" />
+              <span className={`tabular kit-price`}>{price(item.price)}</span>
+            </>
+          ) : null}
+        </div>
+        {item.detail ? <p className="kit-detail">{item.detail}</p> : null}
+        {pair ? (
+          <p className="kit-pairRow">
+            <span className="kit-pair">
+              Pairs with <strong>{pair}</strong>
+            </span>
+            <span className={`t-mono kit-pairNote`}>House pairing</span>
+          </p>
+        ) : null}
       </div>
-      {item.detail ? <p className="kit-detail">{item.detail}</p> : null}
-      {pair ? (
-        <p className="kit-pairRow">
-          <span className="kit-pair">
-            Pairs with <strong>{pair}</strong>
-          </span>
-          <span className={`t-mono kit-pairNote`}>House pairing</span>
-        </p>
-      ) : null}
     </li>
   );
 }
 
-function Photo({ id, dish }: { id: string; dish: string }) {
-  const p = FOOD_PHOTOS[id];
-  if (!p) return null;
+/** A bold card for a signature dish (Guy's Burger): the photo large, the facts in one line. */
+function Feature({ item }: { item: MenuItem }) {
   return (
-    <figure className="kit-photo">
-      <picture>
-        <source srcSet={`${p.src}.avif`} type="image/avif" />
-        <img src={`${p.src}.webp`} alt={p.alt} width={900} height={1117} loading="lazy" decoding="async" />
-      </picture>
-      <figcaption>
-        <span className="kit-photoDish">{dish}</span>
-      </figcaption>
-    </figure>
+    <article className="kit-feature" aria-label={item.name}>
+      {item.image ? <FoodPicture id={item.image} sizes="(min-width: 1024px) 200px, 38vw" className="kit-featureImg" /> : null}
+      <div className="kit-featureText">
+        <p className="t-mono text-[0.6875rem] text-gold">House legend</p>
+        <p className="t-display mt-2 text-[clamp(2rem,3.2vw,2.6rem)] leading-[0.9] text-foam">{item.name}</p>
+        {item.detail ? <p className="mt-3 font-semibold leading-snug text-foam/90">{item.detail}</p> : null}
+        {item.price != null ? <p className="t-mono mt-3 text-[0.92rem] text-gold-hi">{price(item.price)}</p> : null}
+      </div>
+    </article>
   );
 }
 
@@ -128,7 +135,7 @@ export function Menu() {
 
       <div className="kit-columns">
         {MENU.categories.map((c) => {
-          const withPhoto = c.items.find((i) => i.image && FOOD_PHOTOS[i.image]);
+          const featured = c.items.filter((i) => i.featured);
           return (
             <section key={c.id} id={`menu-${c.id}`} aria-labelledby={`menu-h-${c.id}`} className="kit-category">
               <header className="kit-catHead">
@@ -137,14 +144,16 @@ export function Menu() {
                 </h4>
                 <span aria-hidden className="kit-catRule" />
               </header>
-              <div className={withPhoto ? "kit-withPhoto" : undefined}>
-                <ul className="kit-items">
-                  {c.items.map((i) => (
+              {featured.map((i) => (
+                <Feature key={i.name} item={i} />
+              ))}
+              <ul className="kit-items">
+                {c.items
+                  .filter((i) => !i.featured)
+                  .map((i) => (
                     <Item key={i.name} item={i} />
                   ))}
-                </ul>
-                {withPhoto ? <Photo id={withPhoto.image!} dish={withPhoto.name} /> : null}
-              </div>
+              </ul>
             </section>
           );
         })}

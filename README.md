@@ -48,16 +48,26 @@ Private event emails set the guest's address as reply-to, so hitting Reply answe
 
 ## Live tap list (Google Sheet)
 
-The "On tap" section reads the owners' Google Sheet (the **Tap List** tab) instead of `data/taps.json` once it's connected. Every row whose **Website Status** is `LIVE` (or, with no status column, whose **On Tap?** is `Yes`) shows on the site in **Tap #** order, using its Beer, Style, ABV and Short Website Description. The site re-reads the sheet about once a minute, so changes show up within a couple of minutes without a redeploy.
+The "On tap" section, the flight builder, the featured beer panel and the "N beers on tap" lines all read the **Tap List** tab of the owners' *Brix Website Management* sheet. Every row whose **Website Status** is `LIVE` shows, in **Tap #** order, with its Beer, Style, ABV, Short Website Description, IBU and Color. A blank cell hides that stat. **Featured? = Yes** picks the beer the panel opens on (none marked: the lowest tap). The server re-reads the sheet every minute, so an edit shows up within a minute or two. Nothing redeploys.
 
-1. In the sheet: **Share → General access → Anyone with the link → Viewer**. The site only reads it.
-2. In Vercel → Project → Settings → Environment Variables, add:
+Setup (once):
+
+1. The sheet must be readable by link: **Share → General access → Anyone with the link → Viewer**.
+2. In Vercel → Project → Settings → Environment Variables, set `TAP_SHEET_ID` to the sheet's link, then redeploy once.
 
 | Variable | Value |
 |---|---|
-| `TAP_SHEET_ID` | The sheet's link (or just its id). A "File → Share → Publish to web" CSV link works too. |
+| `TAP_SHEET_ID` | The sheet's link or id. A "Publish to web" CSV link also works. |
 | `TAP_SHEET_TAB` | Optional. Tab name, default `Tap List`. |
 
-3. Redeploy once so the variable takes effect.
+The site reads rows from row 4 (the header row) down. Rows 1–4 carry a warning-only protection so staff don't move them by accident.
 
-If the variable is missing, the sheet isn't shared, or nothing is set to Yes, the site quietly falls back to `data/taps.json`. A beer whose name matches one in `data/taps.json` keeps that file's IBU, colour and glass colour; any other beer gets a glass colour picked from its style.
+If a re-read fails, the site keeps the last good copy for up to a week. If there's no good copy, it shows `data/taps.json` with an "Ask your bartender for today's pours" line. With no `TAP_SHEET_ID`, it uses `data/taps.json` as before.
+
+## Food photos
+
+The real photos live in `assets/food` as received. `node scripts/encode-food.mjs` crops each to 4:5, applies one light warm grade and writes AVIF/WebP sizes to `public/img/food`. Menu items point at a photo with `"image"` in `data/menu.json` (keys in `src/components/kitchen/foodPhotos.tsx`). New items without a confirmed price have `"price": null`, which hides the price.
+
+## Virtual tour
+
+"Take the Virtual Tour" (closing section) and "Tour the taproom in 3D" (Visit) open Vivid Visuals' tour page (`SITE.virtualTour` in `src/lib/site.ts`) in a new tab. Clicks send a `virtual_tour_click` event when Vercel Web Analytics or a Google tag is on the page.

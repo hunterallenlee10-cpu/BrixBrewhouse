@@ -4,7 +4,6 @@ import { useRef } from "react";
 import type { Beer } from "@/lib/data";
 
 const pad = (n: number) => String(n).padStart(2, "0");
-const stat = (v: number | null, unit = "") => (v == null ? "—" : `${v}${unit}`);
 
 /**
  * One blank tap handle per beer. Click, tap or press Enter to pour.
@@ -116,10 +115,10 @@ function TapHandle({ beer, full, onPour, onFocusBeer }: { beer: Beer; full: bool
             <span className="whitespace-nowrap">0% ABV</span>
           ) : (
             <>
-              {/* phones: ABV over IBU so neighbouring handles never collide; desktop: one line */}
-              <span className="whitespace-nowrap">{stat(beer.abv, "%")}</span>
-              <span className="hidden lg:inline"> / </span>
-              <span className="block whitespace-nowrap lg:inline">IBU {stat(beer.ibu)}</span>
+              {/* only the stats we have; phones: ABV over IBU so neighbouring handles never collide; desktop: one line */}
+              {beer.abv != null ? <span className="whitespace-nowrap">{beer.abv}%</span> : null}
+              {beer.abv != null && beer.ibu != null ? <span className="hidden lg:inline"> / </span> : null}
+              {beer.ibu != null ? <span className="block whitespace-nowrap lg:inline">IBU {beer.ibu}</span> : null}
             </>
           )}
         </span>

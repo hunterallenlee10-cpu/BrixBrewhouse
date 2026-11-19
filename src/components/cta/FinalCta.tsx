@@ -1,4 +1,5 @@
 import { TapHandleButton } from "@/components/ui/TapHandleButton";
+import { VirtualTourButton } from "./VirtualTourButton";
 
 /** The last room: the street out front at night. The image is a generated stand-in until the real photo arrives. */
 export function FinalCta() {
@@ -26,8 +27,10 @@ export function FinalCta() {
           open.
         </h2>
         <p className="t-serif mt-6 text-[clamp(1.9rem,4vw,3.4rem)] text-gold-hi">Come pour one with us.</p>
-        <div className="mt-9">
-          <TapHandleButton size="lg" />
+        {/* phones: stacked full width, Pour on top; wider: side by side */}
+        <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+          <TapHandleButton size="lg" className="w-full justify-center sm:w-auto" />
+          <VirtualTourButton className="w-full sm:w-auto" />
         </div>
       </div>
     </section>

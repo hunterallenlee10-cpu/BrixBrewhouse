@@ -1,11 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSite } from "@/components/providers/SiteProvider";
 import { getStatus, statusText, type Status } from "@/lib/hours";
 
-/** Live open/closed pill computed in America/New_York from /data/hours.json. */
+/**
+ * Live open/closed pill computed in America/New_York from /data/hours.json.
+ * With the owners' sheet connected it also says how many beers are pouring, and the server-rendered
+ * text is that count, so the pill never shows a loading line.
+ */
 export function StatusPill({ className = "", tone = "dark" }: { className?: string; tone?: "dark" | "glass" }) {
+  const { tapCount } = useSite();
   const [status, setStatus] = useState<Status | null>(null);
+  const onTap = tapCount ? `${tapCount} beers on tap right now` : null;
   useEffect(() => {
     const tick = () => setStatus(getStatus(new Date()));
     tick();
@@ -27,9 +34,10 @@ export function StatusPill({ className = "", tone = "dark" }: { className?: stri
           <>
             <strong className={open ? "font-bold text-gold-hi" : "font-bold text-foam"}>{t.lead}</strong>
             <span className="text-text-2"> · {t.rest}</span>
+            {open && tapCount ? <span className="text-text-2"> · {tapCount} on tap</span> : null}
           </>
         ) : (
-          <span className="text-text-2">Checking the taps…</span>
+          <span className="text-text-2">{onTap ?? "Checking the taps…"}</span>
         )}
       </span>
     </p>

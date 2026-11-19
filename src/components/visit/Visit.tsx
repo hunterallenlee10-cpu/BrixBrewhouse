@@ -3,6 +3,7 @@ import { BayLabel } from "@/components/ui/primitives";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { HOURS } from "@/lib/hours";
 import { SITE } from "@/lib/site";
+import { TourLink } from "@/components/cta/VirtualTourButton";
 import { HoursTable } from "./HoursTable";
 import { MapPanel } from "./MapPanel";
 import { RidgeVideo } from "./RidgeVideo";
@@ -87,6 +88,7 @@ export function Visit() {
               <p className="text-sm text-text-3">
                 {SITE.email} · Large group? Call ahead and we&rsquo;ll do our best to make room.
               </p>
+              <TourLink className="self-start" />
             </div>
 
             <div>

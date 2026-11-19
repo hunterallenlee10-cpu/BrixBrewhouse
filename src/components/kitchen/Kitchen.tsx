@@ -2,6 +2,7 @@ import { BayLabel } from "@/components/ui/primitives";
 import { MENU } from "@/lib/data";
 import { Chalkboard } from "./Chalkboard";
 import { Menu } from "./Menu";
+import { PhotoStrip } from "./PhotoStrip";
 
 /** BAY 04. John's Chef Table: the chef, the chalkboard, the real menu. */
 export function Kitchen() {
@@ -50,6 +51,8 @@ export function Kitchen() {
           </p>
           <p className="mt-2 text-sm text-text-2">A crowd favorite in the press. Ask if it&rsquo;s on today.</p>
         </aside>
+
+        <PhotoStrip />
 
         <Menu />
       </div>

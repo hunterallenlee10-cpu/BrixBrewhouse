@@ -1,11 +1,7 @@
-// Encode chosen stills to WebP + AVIF for the site.
+// Encode chosen stills to WebP + AVIF for the site. (Food photos: see encode-food.mjs.)
 import sharp from "sharp";
 import { statSync } from "node:fs";
 const jobs = [
-  ["assets/raw/F1_a.png", "public/img/food-pretzel-board", 900],
-  ["assets/raw/F2_a.png", "public/img/food-birch-float", 900],
-  ["assets/raw/F3_a.png", "public/img/food-bbq-pork", 900],
-  ["assets/raw/F4_a.png", "public/img/food-chili-nachos", 900],
   ["assets/raw/N1_a.png", "public/img/night-exterior", 1920],
   ["assets/raw/N1p_a.png", "public/img/night-exterior-portrait", 900],
   ["assets/raw/H4_b.png", "public/img/pint-h4", 1920],

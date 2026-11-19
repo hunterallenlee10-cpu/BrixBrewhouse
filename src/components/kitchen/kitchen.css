@@ -308,18 +308,6 @@
   height: 1px;
   background: linear-gradient(90deg, rgb(214 158 20 / 0.5), transparent);
 }
-.kit-withPhoto {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 104px;
-  gap: 1.1rem;
-  align-items: start;
-}
-@media (min-width: 640px) {
-  .kit-withPhoto {
-    grid-template-columns: minmax(0, 1fr) 150px;
-    gap: 1.75rem;
-  }
-}
 .kit-items {
   display: grid;
   gap: 1rem;
@@ -386,21 +374,99 @@
   font-size: 0.6875rem;
   color: var(--text-3);
 }
-.kit-photo img {
+/* a menu line with its photo: a small 4:5 thumbnail at the left */
+.kit-hasThumb {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: start;
+}
+@media (min-width: 640px) {
+  .kit-hasThumb {
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 1.1rem;
+  }
+}
+.kit-thumb {
   width: 100%;
   height: auto;
-  aspect-ratio: 900 / 1117;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 12px 22px -14px rgb(0 0 0 / 0.9);
+}
+
+/* a signature dish: photo and facts side by side, framed in gold */
+.kit-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 1.5rem);
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  border: 1px solid rgb(214 158 20 / 0.55);
+  background: linear-gradient(135deg, rgb(214 158 20 / 0.1), transparent 60%);
+}
+.kit-featureImg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+/* "From John's Chef Table": a swipeable row of plates above the menu */
+.kit-strip {
+  margin-top: clamp(3.5rem, 7vw, 5.5rem);
+}
+.kit-stripRow {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(68vw, 300px);
+  gap: 0.9rem;
+  margin-top: 1.25rem;
+  margin-inline: calc(-1 * clamp(1rem, 4vw, 3rem));
+  padding-inline: clamp(1rem, 4vw, 3rem);
+  padding-bottom: 0.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: clamp(1rem, 4vw, 3rem);
+  scrollbar-width: none;
+}
+.kit-stripRow::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 640px) {
+  .kit-stripRow {
+    grid-auto-columns: 34vw;
+  }
+}
+@media (min-width: 1024px) {
+  .kit-stripRow {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+  }
+}
+.kit-stripCard {
+  scroll-snap-align: start;
+}
+.kit-stripImg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   border: 1px solid var(--line-strong);
   box-shadow: 0 18px 30px -16px rgb(0 0 0 / 0.9);
 }
-.kit-photo figcaption {
-  margin-top: 0.5rem;
-  display: grid;
-  gap: 0.2rem;
-}
-.kit-photoDish {
-  font-size: 0.74rem;
-  color: var(--text-2);
-  line-height: 1.3;
+.kit-stripCap {
+  margin-top: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--foam);
 }

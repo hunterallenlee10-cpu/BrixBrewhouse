@@ -5,6 +5,7 @@ import { ArrowCounterClockwise } from "@phosphor-icons/react";
 import { useSite } from "@/components/providers/SiteProvider";
 import { BayLabel } from "@/components/ui/primitives";
 import { TAPS, type Beer } from "@/lib/data";
+import type { TapSource } from "@/lib/tapSheet";
 import { TapRail } from "./TapRail";
 import { Paddle, type PaddleHandle } from "./Paddle";
 import { FlightActions } from "./FlightActions";
@@ -25,12 +26,13 @@ function parseHash(byId: (id: string) => Beer | undefined): string[] | null {
  * BAY 03: pull four handles, build a flight.
  * `beers` is what's pouring: the owners' Google Sheet when it's connected, else /data/taps.json.
  */
-export function FlightBuilder({ beers = TAPS.beers, live = false }: { beers?: Beer[]; live?: boolean }) {
+export function FlightBuilder({ beers = TAPS.beers, source = "file", featuredId }: { beers?: Beer[]; source?: TapSource; featuredId?: string }) {
   const BEERS = beers;
   const byId = useCallback((id: string) => beers.find((b) => b.id === id), [beers]);
   const { reducedMotion } = useSite();
   const [slots, setSlots] = useState<(string | null)[]>(() => Array(SIZE).fill(null));
-  const [focus, setFocus] = useState<Beer>(beers[Math.min(3, beers.length - 1)]);
+  // the featured panel opens on the sheet's Featured? beer, else the lowest tap
+  const [focus, setFocus] = useState<Beer>(() => beers.find((b) => b.id === featuredId) ?? beers[0]);
   const [say, setSay] = useState("");
   const paddle = useRef<PaddleHandle>(null);
 
@@ -106,7 +108,15 @@ export function FlightBuilder({ beers = TAPS.beers, live = false }: { beers?: Be
             </p>
           </div>
           <p className="t-mono text-[0.68rem] text-text-2">
-            {live ? <>Live from the bar. This list changes when the taps do.</> : <>Taps rotate. Here&rsquo;s what&rsquo;s been pouring.</>}
+            {source === "sheet" ? (
+              <>
+                <span className="text-gold-hi">{beers.length} beers on tap right now.</span> <span className="whitespace-nowrap">Live from the bar.</span>
+              </>
+            ) : source === "fallback" ? (
+              <>Ask your bartender for today&rsquo;s pours.</>
+            ) : (
+              <>Taps rotate. Here&rsquo;s what&rsquo;s been pouring.</>
+            )}
           </p>
         </div>
 
@@ -169,24 +179,27 @@ export function FlightBuilder({ beers = TAPS.beers, live = false }: { beers?: Be
 }
 
 function BeerDetail({ beer }: { beer: Beer }) {
+  // only the stats the sheet actually has; a blank cell hides its box
+  const all: [string, string | null][] = [
+    ["ABV", beer.abv != null ? `${beer.abv}%` : null],
+    ["IBU", beer.ibu != null ? String(beer.ibu) : null],
+    ["Color", beer.color],
+  ];
+  const stats = all.filter((s): s is [string, string] => Boolean(s[1]));
   return (
     <aside aria-label="About this beer" className="flex flex-col">
-      <p className="t-mono text-[0.6875rem] text-gold">{beer.tap ? `Tap ${pad(beer.tap)} / ${beer.style}` : beer.style}</p>
+      <p className="t-mono text-[0.6875rem] text-gold">{beer.tap ? `Tap ${pad(beer.tap)}${beer.style ? ` / ${beer.style}` : ""}` : beer.style}</p>
       <p className="t-display mt-2 text-[clamp(2.4rem,4vw,3.4rem)] text-foam">{beer.name}</p>
-      <dl className="t-mono mt-5 grid grid-cols-3 gap-3 text-[0.6875rem]">
-        {(
-          [
-            ["ABV", beer.abv != null ? `${beer.abv}%` : "—"],
-            ["IBU", beer.ibu != null ? String(beer.ibu) : "—"],
-            ["Color", beer.color ?? "—"],
-          ] as const
-        ).map(([k, v]) => (
-          <div key={k} className="border-t border-line pt-2">
-            <dt className="text-text-3">{k}</dt>
-            <dd className="mt-1 text-[0.78rem] normal-case tracking-normal text-foam">{v}</dd>
-          </div>
-        ))}
-      </dl>
+      {stats.length ? (
+        <dl className="t-mono mt-5 grid grid-cols-3 gap-3 text-[0.6875rem]">
+          {stats.map(([k, v]) => (
+            <div key={k} className="border-t border-line pt-2">
+              <dt className="text-text-3">{k}</dt>
+              <dd className="mt-1 text-[0.78rem] normal-case tracking-normal text-foam">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : null}
       <p className="mt-5 max-w-[38ch] text-text-2">{beer.description}</p>
       {!beer.confirmed ? (
         <p className="mt-3 text-sm text-text-2">

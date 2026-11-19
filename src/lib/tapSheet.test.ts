@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { beersFromRows, parseAbv, parseCsv, sheetCsvUrl } from "./tapSheet";
+import { beersFromRows, featuredBeer, parseAbv, parseCsv, sheetCsvUrl } from "./tapSheet";
 
 // The Tap List tab as Google's CSV export gives it (headers=0: every row, every cell quoted).
 const CSV = [
@@ -51,7 +51,7 @@ describe("tap sheet", () => {
   });
 
   it("helpers", () => {
-    const gviz = "https://docs.google.com/spreadsheets/d/1AbC_def-123456789012345/gviz/tq?tqx=out:csv&headers=0&sheet=Tap%20List";
+    const gviz = "https://docs.google.com/spreadsheets/d/1AbC_def-123456789012345/gviz/tq?tqx=out:csv&headers=1&range=A4:Z&sheet=Tap%20List";
     expect(sheetCsvUrl("https://docs.google.com/spreadsheets/d/1AbC_def-123456789012345/edit#gid=0")).toBe(gviz);
     expect(sheetCsvUrl("1AbC_def-123456789012345")).toBe(gviz);
     const pub = "https://docs.google.com/spreadsheets/d/e/2PACX-abc/pub?gid=0&single=true&output=csv";
@@ -60,5 +60,19 @@ describe("tap sheet", () => {
     expect(sheetCsvUrl("nope")).toBeNull();
     expect(parseAbv("4.5%")).toBe(4.5);
     expect(parseAbv("n/a")).toBeNull();
+  });
+
+  it("reads IBU, Color and Featured?, and a blank cell stays blank", () => {
+    const rows = [
+      ["Tap #", "Beer", "On Tap?", "Style", "ABV", "Short Website Description", "Website Status", "IBU", "Color", "Featured?"],
+      ["1", "Brown Ale", "Yes", "Brown Ale", "", "Malty.", "LIVE", "", "", "No"],
+      ["2", "Murphy Porter", "Yes", "Porter", "7.1%", "Roasty.", "LIVE", "32", "Jet Black", "Yes"],
+    ];
+    const [brown, porter] = beersFromRows(rows);
+    // "Brown Ale" matches data/taps.json, but the sheet's own blank cells win
+    expect([brown.abv, brown.ibu, brown.color]).toEqual([null, null, null]);
+    expect([porter.ibu, porter.color, porter.featured]).toEqual([32, "Jet Black", true]);
+    expect(featuredBeer([brown, porter]).name).toBe("Murphy Porter");
+    expect(featuredBeer([{ ...porter, featured: false, tap: 5 }, brown]).name).toBe("Brown Ale"); // none marked: lowest tap
   });
 });

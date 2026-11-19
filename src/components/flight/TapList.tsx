@@ -24,8 +24,8 @@ export function TapList({ beers, counts, onAdd }: { beers: Beer[]; counts: Recor
 
 function TapRow({ beer, count, onAdd }: { beer: Beer; count: number; onAdd: (b: Beer) => void }) {
   const label = `Tap ${pad(beer.tap ?? 0)}${beer.kind === "rotating" ? " · Rotating" : ""}`;
-  const known = beer.abv != null;
-  const stats = (known ? [`${beer.abv}% ABV`, beer.ibu != null ? `IBU ${beer.ibu}` : null, beer.color] : ["Stats to come"]).filter(
+  // only the stats we have; a beer with none shows no stats line at all
+  const stats = [beer.abv != null ? `${beer.abv}% ABV` : null, beer.ibu != null ? `IBU ${beer.ibu}` : null, beer.color].filter(
     (v): v is string => Boolean(v),
   );
 
@@ -38,7 +38,8 @@ function TapRow({ beer, count, onAdd }: { beer: Beer; count: number; onAdd: (b: 
           {count ? <span className="text-gold-hi"> · In your flight{count > 1 ? ` ×${count}` : ""}</span> : null}
         </p>
         <p className="t-display mt-1.5 text-[clamp(1.6rem,2.3vw,2rem)] leading-[0.95] text-foam">{beer.name}</p>
-        <p className={`t-mono mt-2 text-[0.6875rem] ${known ? "text-foam/85" : "text-text-3"}`}>
+        {stats.length ? (
+        <p className="t-mono mt-2 text-[0.6875rem] text-foam/85">
           {/* each stat stays whole; lines break only after a dot */}
           {stats.map((v, i) => (
             <span key={v}>
@@ -50,6 +51,7 @@ function TapRow({ beer, count, onAdd }: { beer: Beer; count: number; onAdd: (b: 
             </span>
           ))}
         </p>
+        ) : null}
         <p className="mt-2.5 max-w-[46ch] text-[0.95rem] leading-relaxed text-text-2">{beer.description}</p>
       </div>
       <button
