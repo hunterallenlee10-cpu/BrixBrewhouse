@@ -17,7 +17,7 @@
       { "name": "House Salad", "price": 6 },
       { "name": "Arugula Salad", "price": 12, "detail": "Arugula, Pears, Candied Walnuts, Goat Cheese, Balsamic" },
       { "name": "Caesar Salad", "price": 12 },
-      { "name": "Beet Salad", "price": null, "detail": "Diced Beets Layered with Goat Cheese, Arugula, Candied Walnuts" },
+      { "name": "Beet Salad", "price": null, "detail": "Diced Beets Layered with Goat Cheese, Arugula, Candied Walnuts", "image": "beet-salad" },
       { "name": "Spinach Salad", "price": null, "detail": "Spinach, Grilled Chicken, Bacon, Hard-Boiled Egg, Shaved Parmesan, Red Onion", "image": "spinach-salad" },
       { "name": "Add Smoked Chicken", "price": 5, "addon": true },
       { "name": "House Made Chili and Cheese", "price": 6 },
