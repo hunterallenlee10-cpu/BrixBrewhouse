@@ -19,6 +19,8 @@ export const SITE = {
   facebook: "https://www.facebook.com/p/Brix-Brewhouse-61577748595637/",
   responsibility: "https://www.responsibility.org/",
   youtubeId: "SU_3pZM1ZmU",
+  // the 3D tour Vivid Visuals made; their page embeds the SuperSplat scene (https://superspl.at/s?id=88ee6b2c)
+  virtualTour: "https://www.vividvisuals.media/brix",
   press: [
     {
       outlet: "WNEP",

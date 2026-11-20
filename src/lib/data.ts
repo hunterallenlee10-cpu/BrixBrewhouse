@@ -21,6 +21,8 @@ export type Beer = {
   kind: "house" | "rotating";
   confirmed: boolean;
   description: string;
+  /** "Featured? = Yes" on the sheet: the beer the On Tap panel opens on */
+  featured?: boolean;
 };
 
 export const TAPS = taps as unknown as {
@@ -33,7 +35,7 @@ export const TAPS = taps as unknown as {
   otherDrinks: string[];
 };
 
-export type MenuItem = { name: string; price: number; detail?: string; pairsWith?: string; image?: string; addon?: boolean };
+export type MenuItem = { name: string; price: number | null; featured?: boolean; detail?: string; pairsWith?: string; image?: string; addon?: boolean };
 export const MENU = menu as unknown as {
   kitchenName: string;
   chef: { name: string; years: number; knownFor: string };

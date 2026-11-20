@@ -5,6 +5,7 @@ import { ArrowCounterClockwise } from "@phosphor-icons/react";
 import { useSite } from "@/components/providers/SiteProvider";
 import { BayLabel } from "@/components/ui/primitives";
 import { TAPS, type Beer } from "@/lib/data";
+import type { TapSource } from "@/lib/tapSheet";
 import { TapRail } from "./TapRail";
 import { Paddle, type PaddleHandle } from "./Paddle";
 import { FlightActions } from "./FlightActions";
@@ -12,22 +13,26 @@ import { Loops } from "./Loops";
 import { TapList } from "./TapList";
 
 const SIZE = TAPS.flightSize; // 4
-const BEERS = TAPS.beers;
-const byId = (id: string) => BEERS.find((b) => b.id === id);
 const pad = (n: number) => String(n).padStart(2, "0");
 
-function parseHash(): string[] | null {
+function parseHash(byId: (id: string) => Beer | undefined): string[] | null {
   const m = window.location.hash.match(/flight=([\w,-]+)/);
   if (!m) return null;
   const ids = m[1].split(",").slice(0, SIZE).filter((id) => byId(id));
   return ids.length ? ids : null;
 }
 
-/** BAY 03: pull four handles, build a flight. */
-export function FlightBuilder() {
+/**
+ * BAY 03: pull four handles, build a flight.
+ * `beers` is what's pouring: the owners' Google Sheet when it's connected, else /data/taps.json.
+ */
+export function FlightBuilder({ beers = TAPS.beers, source = "file", featuredId }: { beers?: Beer[]; source?: TapSource; featuredId?: string }) {
+  const BEERS = beers;
+  const byId = useCallback((id: string) => beers.find((b) => b.id === id), [beers]);
   const { reducedMotion } = useSite();
   const [slots, setSlots] = useState<(string | null)[]>(() => Array(SIZE).fill(null));
-  const [focus, setFocus] = useState<Beer>(TAPS.beers[3]);
+  // the featured panel opens on the sheet's Featured? beer, else the lowest tap
+  const [focus, setFocus] = useState<Beer>(() => beers.find((b) => b.id === featuredId) ?? beers[0]);
   const [say, setSay] = useState("");
   const paddle = useRef<PaddleHandle>(null);
 
@@ -38,14 +43,14 @@ export function FlightBuilder() {
 
   // shared link: #flight=a,b,c,d restores the same flight
   const restore = useCallback(() => {
-    const ids = parseHash();
+    const ids = parseHash(byId);
     if (!ids) return;
     const next = Array(SIZE).fill(null) as (string | null)[];
     ids.forEach((id, i) => (next[i] = id));
     setSlots(next);
     next.forEach((id, i) => (id ? paddle.current?.pour(i, byId(id)!, true) : paddle.current?.drain(i, true)));
     setSay(`Shared flight loaded: ${ids.map((id) => byId(id)!.short).join(", ")}.`);
-  }, []);
+  }, [byId]);
   useEffect(() => {
     const raf = requestAnimationFrame(restore); // after mount, so the paddle exists
     window.addEventListener("hashchange", restore);
@@ -102,7 +107,17 @@ export function FlightBuilder() {
               A flight is four glasses. {TAPS.totalTaps} taps rotate in Eli&rsquo;s Lounge. Pull a handle and it pours into the next empty glass.
             </p>
           </div>
-          <p className="t-mono text-[0.68rem] text-text-2">Taps rotate. Here&rsquo;s what&rsquo;s been pouring.</p>
+          <p className="t-mono text-[0.68rem] text-text-2">
+            {source === "sheet" ? (
+              <>
+                <span className="text-gold-hi">{beers.length} beers on tap right now.</span> <span className="whitespace-nowrap">Live from the bar.</span>
+              </>
+            ) : source === "fallback" ? (
+              <>Ask your bartender for today&rsquo;s pours.</>
+            ) : (
+              <>Taps rotate. Here&rsquo;s what&rsquo;s been pouring.</>
+            )}
+          </p>
         </div>
 
         <div className="mt-12 md:mt-16">
@@ -164,24 +179,27 @@ export function FlightBuilder() {
 }
 
 function BeerDetail({ beer }: { beer: Beer }) {
+  // only the stats the sheet actually has; a blank cell hides its box
+  const all: [string, string | null][] = [
+    ["ABV", beer.abv != null ? `${beer.abv}%` : null],
+    ["IBU", beer.ibu != null ? String(beer.ibu) : null],
+    ["Color", beer.color],
+  ];
+  const stats = all.filter((s): s is [string, string] => Boolean(s[1]));
   return (
     <aside aria-label="About this beer" className="flex flex-col">
-      <p className="t-mono text-[0.6875rem] text-gold">{beer.tap ? `Tap ${pad(beer.tap)} / ${beer.style}` : beer.style}</p>
+      <p className="t-mono text-[0.6875rem] text-gold">{beer.tap ? `Tap ${pad(beer.tap)}${beer.style ? ` / ${beer.style}` : ""}` : beer.style}</p>
       <p className="t-display mt-2 text-[clamp(2.4rem,4vw,3.4rem)] text-foam">{beer.name}</p>
-      <dl className="t-mono mt-5 grid grid-cols-3 gap-3 text-[0.6875rem]">
-        {(
-          [
-            ["ABV", beer.abv != null ? `${beer.abv}%` : "—"],
-            ["IBU", beer.ibu != null ? String(beer.ibu) : "—"],
-            ["Color", beer.color ?? "—"],
-          ] as const
-        ).map(([k, v]) => (
-          <div key={k} className="border-t border-line pt-2">
-            <dt className="text-text-3">{k}</dt>
-            <dd className="mt-1 text-[0.78rem] normal-case tracking-normal text-foam">{v}</dd>
-          </div>
-        ))}
-      </dl>
+      {stats.length ? (
+        <dl className="t-mono mt-5 grid grid-cols-3 gap-3 text-[0.6875rem]">
+          {stats.map(([k, v]) => (
+            <div key={k} className="border-t border-line pt-2">
+              <dt className="text-text-3">{k}</dt>
+              <dd className="mt-1 text-[0.78rem] normal-case tracking-normal text-foam">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : null}
       <p className="mt-5 max-w-[38ch] text-text-2">{beer.description}</p>
       {!beer.confirmed ? (
         <p className="mt-3 text-sm text-text-2">

@@ -7,7 +7,8 @@ import { MobileBar } from "@/components/nav/MobileBar";
 import { CapCursor } from "@/components/ui/CapCursor";
 import { Hero } from "@/components/hero/Hero";
 import { ThreeMeanings } from "@/components/meanings/ThreeMeanings";
-const FlightBuilder = dynamic(() => import("@/components/flight/FlightBuilder").then((m) => m.FlightBuilder));
+import { OnTap } from "@/components/flight/OnTap";
+import { getLiveBeers } from "@/lib/tapSheet";
 const BarTop = dynamic(() => import("@/components/bartop/BarTop").then((m) => m.BarTop));
 const Kitchen = dynamic(() => import("@/components/kitchen/Kitchen").then((m) => m.Kitchen));
 const ElisLounge = dynamic(() => import("@/components/lounge/ElisLounge").then((m) => m.ElisLounge));
@@ -24,9 +25,11 @@ import { PourModal } from "@/components/cta/PourModal";
 // Rooms below the fold are code-split so hydration runs in smaller pieces (still server-rendered).
 
 /** The building, room by room: door, bay 01-09, what guests say, the street out front. */
-export default function Page() {
+export default async function Page() {
+  // the tap count for the status pills; the list itself is read again (from the same cache) in <OnTap />
+  const { beers, source } = await getLiveBeers();
   return (
-    <SiteProvider>
+    <SiteProvider tapCount={source === "sheet" ? beers.length : undefined}>
       <a href="#main" className="t-mono fixed left-3 top-3 z-[95] -translate-y-24 bg-gold px-4 py-3 text-[0.72rem] text-black focus:translate-y-0">
         Skip to content
       </a>
@@ -38,7 +41,7 @@ export default function Page() {
         <Threshold />
         <BarTop />
         <Threshold />
-        <FlightBuilder />
+        <OnTap />
         <Threshold />
         <Kitchen />
         <Threshold />

@@ -3,6 +3,7 @@ import { Big_Shoulders, Big_Shoulders_Stencil, Caveat, Fraunces, JetBrains_Mono,
 import { SITE } from "@/lib/site";
 import { HOURS } from "@/lib/hours";
 import { FAQ, MENU } from "@/lib/data";
+import { FOOD_PHOTOS, photoSrc } from "@/components/kitchen/foodPhotos";
 import "./globals.css";
 
 const bigShoulders = Big_Shoulders({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-big-shoulders", display: "swap", adjustFontFallback: false });
@@ -94,6 +95,8 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "Menu",
     name: MENU.kitchenName,
+    url: `${SITE.url}/#menu`,
+    image: `${SITE.url}${photoSrc("guys-burger", 1000, "webp")}`,
     hasMenuSection: MENU.categories.map((c) => ({
       "@type": "MenuSection",
       name: c.name,
@@ -101,7 +104,9 @@ const jsonLd = [
         "@type": "MenuItem",
         name: i.name,
         ...(i.detail ? { description: i.detail } : {}),
-        offers: { "@type": "Offer", price: i.price.toFixed(2), priceCurrency: "USD" },
+        ...(i.image && FOOD_PHOTOS[i.image] ? { image: `${SITE.url}${photoSrc(i.image, FOOD_PHOTOS[i.image].widths.at(-1)!, "webp")}` } : {}),
+        // no price until the owners confirm one
+        ...(i.price != null ? { offers: { "@type": "Offer", price: i.price.toFixed(2), priceCurrency: "USD" } } : {}),
       })),
     })),
   },

@@ -16,6 +16,8 @@ type Ctx = {
   closePour: () => void;
   reducedMotion: boolean;
   lenis: React.RefObject<Lenis | null>;
+  /** beers on tap right now, when the owners' sheet is connected */
+  tapCount?: number;
   scrollTo: (target: string | number | HTMLElement, opts?: { duration?: number; offset?: number; easing?: (t: number) => number }) => void;
 };
 
@@ -38,7 +40,8 @@ const subscribeMotion = (cb: () => void) => {
 };
 const readMotion = () => window.matchMedia(MOTION_Q).matches;
 
-export function SiteProvider({ children }: { children: React.ReactNode }) {
+/** `tapCount`: beers on tap right now, from the owners' sheet (undefined when the sheet isn't connected). */
+export function SiteProvider({ children, tapCount }: { children: React.ReactNode; tapCount?: number }) {
   const [pour, setPour] = useState<{ open: boolean; tab: PourTab }>({ open: false, tab: "visit" });
   const reducedMotion = useSyncExternalStore(subscribeMotion, readMotion, () => false);
   const lenis = useRef<Lenis | null>(null);
@@ -118,8 +121,8 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
   );
 
   const value = useMemo(
-    () => ({ pour, openPour, closePour, reducedMotion, lenis, scrollTo }),
-    [pour, openPour, closePour, reducedMotion, scrollTo],
+    () => ({ pour, openPour, closePour, reducedMotion, lenis, scrollTo, tapCount }),
+    [pour, openPour, closePour, reducedMotion, scrollTo, tapCount],
   );
   return <SiteCtx.Provider value={value}>{children}</SiteCtx.Provider>;
 }

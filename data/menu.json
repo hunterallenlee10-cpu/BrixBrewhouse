@@ -1,12 +1,13 @@
 {
-  "_note": "Prices in US dollars. 'pairsWith' is the owners' pairing: a beer id from taps.json, or a plain beer name if that beer isn't in taps.json yet.",
+  "_note": "Prices in US dollars; a price of null hides the price until the owners confirm it. 'pairsWith' is the owners' pairing: a beer id from taps.json, or a plain beer name if that beer isn't in taps.json yet. 'image' is a key in src/components/kitchen/foodPhotos.tsx (real photos only). 'featured' gives the item a big photo card at the top of its section.",
   "kitchenName": "John's Chef Table",
   "chef": { "name": "John Kiley", "years": 24, "knownFor": "his soups" },
   "kitchenHours": "Until 9 PM daily.",
   "fanFavorite": { "beer": "Pale Ale", "dish": "Maryland Crabcake Pretzel", "confirm": true },
   "categories": [
     { "id": "beer-bites", "name": "Beer Bites", "items": [
-      { "name": "Beer Cheese Pretzel Board", "price": 20, "detail": "Garlic Twisted Pretzel, Smoked Cheddar, Pepper Jack, Smoked Kielbasa, Pickles, Grapes, Candied Walnuts, Beer Cheese, Brown Mustard", "pairsWith": "brown-ale", "image": "F1" },
+      { "name": "Beer Cheese Pretzel Board", "price": 20, "detail": "Garlic Twisted Pretzel, Smoked Cheddar, Pepper Jack, Smoked Kielbasa, Pickles, Grapes, Candied Walnuts, Beer Cheese, Brown Mustard", "pairsWith": "brown-ale", "image": "beer-cheese-pretzel-board" },
+      { "name": "Crab Pretzel", "price": null, "detail": "Soft Pretzel Baked with Crab Dip, Melted Cheddar and Scallions", "image": "crab-pretzel" },
       { "name": "Apple Ridge Farm Pretzel", "price": 6 },
       { "name": "Beer Cheese", "price": 1 },
       { "name": "Pickle on a Stick", "price": 3 },
@@ -16,6 +17,8 @@
       { "name": "House Salad", "price": 6 },
       { "name": "Arugula Salad", "price": 12, "detail": "Arugula, Pears, Candied Walnuts, Goat Cheese, Balsamic" },
       { "name": "Caesar Salad", "price": 12 },
+      { "name": "Beet Salad", "price": null, "detail": "Diced Beets Layered with Goat Cheese, Arugula, Candied Walnuts" },
+      { "name": "Spinach Salad", "price": null, "detail": "Spinach, Grilled Chicken, Bacon, Hard-Boiled Egg, Shaved Parmesan, Red Onion", "image": "spinach-salad" },
       { "name": "Add Smoked Chicken", "price": 5, "addon": true },
       { "name": "House Made Chili and Cheese", "price": 6 },
       { "name": "Mac and Cheese", "price": 5 },
@@ -23,13 +26,16 @@
       { "name": "Soup and House Salad", "price": 11 }
     ]},
     { "id": "bigger-bites", "name": "Bigger Bites", "items": [
-      { "name": "Smoked BBQ Pork Sandwich", "price": 14, "detail": "With Beer Cheese, Side and Pickle", "pairsWith": "Cream Ale", "image": "F3" },
+      { "name": "Guy's Burger", "price": null, "detail": "2.5 lbs. Double Cheese, Double Bacon, Two Eggs", "image": "guys-burger", "featured": true },
+      { "name": "Bacon Burger", "price": null, "detail": "Bacon, Lettuce and Tomato on a Brioche Bun, Side/Pickle", "image": "bacon-burger" },
+      { "name": "Philly Cheesesteak", "price": null, "detail": "Shaved Steak, Onions and Cheese on a Toasted Roll, Side/Pickle", "image": "philly-cheesesteak" },
+      { "name": "Smoked BBQ Pork Sandwich", "price": 14, "detail": "With Beer Cheese, Side and Pickle", "pairsWith": "Cream Ale" },
       { "name": "Smoked Chicken Sandwich", "price": 14, "detail": "Roasted Red Pepper, Provolone, Garlic Pesto, Side/Pickle" },
       { "name": "BBQ Chicken Bacon Flatbread", "price": 12 }
     ]},
     { "id": "nachos", "name": "Nachos", "items": [
       { "name": "Nachos and Cheese", "price": 6 },
-      { "name": "Beef Chili Nachos and Cheese", "price": 10, "pairsWith": "American Pale Ale", "image": "F4" },
+      { "name": "Beef Chili Nachos and Cheese", "price": 10, "pairsWith": "American Pale Ale" },
       { "name": "Pulled Pork Nachos and Cheese", "price": 10 }
     ]},
     { "id": "hot-dogs", "name": "Hot Dogs", "items": [
@@ -41,7 +47,7 @@
       { "name": "Hot Dog and Mac and Cheese", "price": 7 }
     ]},
     { "id": "dessert", "name": "Dessert", "items": [
-      { "name": "Birch Beer Float", "price": 8, "detail": "Kids $6", "image": "F2" },
+      { "name": "Birch Beer Float", "price": 8, "detail": "Kids $6" },
       { "name": "Warm Apple Crisp with Ice Cream", "price": 9 }
     ]}
   ]
