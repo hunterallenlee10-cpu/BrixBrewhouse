@@ -20,7 +20,7 @@ export function PhotoStrip() {
           return (
             <li key={k} className="kit-stripCard">
               <figure>
-                <FoodPicture id={k} sizes="(min-width: 1024px) 20vw, (min-width: 640px) 34vw, 68vw" className="kit-stripImg" />
+                <FoodPicture id={k} sizes="(min-width: 1024px) 17vw, (min-width: 640px) 34vw, 68vw" className="kit-stripImg" />
                 {item ? (
                   <figcaption className="kit-stripCap">
                     <span>{item.name}</span>

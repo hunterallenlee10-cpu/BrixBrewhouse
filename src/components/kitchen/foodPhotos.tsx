@@ -27,6 +27,10 @@ export const FOOD_PHOTOS: Record<string, FoodPhoto> = {
     alt: "Spinach Salad at Brix Brewhouse: spinach with grilled chicken, bacon, hard-boiled egg, shaved Parmesan and red onion.",
     widths: [480, 960, 1280],
   },
+  "beet-salad": {
+    alt: "Beet Salad at Brix Brewhouse: a stack of diced beets layered with goat cheese, on arugula with candied walnuts and a beet vinaigrette.",
+    widths: [480, 960, 1280],
+  },
   "bacon-burger": {
     alt: "Bacon Burger at Brix Brewhouse: bacon, lettuce and tomato on a brioche bun, with pasta salad and a pickle.",
     widths: [480, 728],
@@ -34,7 +38,7 @@ export const FOOD_PHOTOS: Record<string, FoodPhoto> = {
 };
 
 /** The order of the "From John's Chef Table" strip: the strongest shots, Guy's Burger and the board first. */
-export const STRIP = ["guys-burger", "beer-cheese-pretzel-board", "crab-pretzel", "philly-cheesesteak", "spinach-salad"];
+export const STRIP = ["guys-burger", "beer-cheese-pretzel-board", "beet-salad", "crab-pretzel", "philly-cheesesteak", "spinach-salad"];
 
 export const photoSrc = (key: string, w: number, ext: "avif" | "webp") => `/img/food/${key}-${w}.${ext}`;
 export const srcSet = (key: string, ext: "avif" | "webp") =>
