@@ -88,6 +88,15 @@ const jsonLd = [
       opens: d.open,
       closes: d.close,
     })),
+    // all-day closures: opens and closes both at midnight means closed that date
+    specialOpeningHoursSpecification: (HOURS.closures ?? []).map((c) => ({
+      "@type": "OpeningHoursSpecification",
+      name: c.label,
+      validFrom: c.date,
+      validThrough: c.date,
+      opens: "00:00",
+      closes: "00:00",
+    })),
     sameAs: [SITE.instagram, SITE.facebook],
     hasMenu: `${SITE.url}/#kitchen`,
   },

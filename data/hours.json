@@ -1,7 +1,10 @@
 {
-  "_note": "24-hour times, America/New_York. 0 = Sunday. Close times past midnight would use values over 24:00 (e.g. 25:00 = 1 AM).",
+  "_note": "24-hour times, America/New_York. 0 = Sunday. Close times past midnight would use values over 24:00 (e.g. 25:00 = 1 AM). \"closures\" lists single dates (YYYY-MM-DD) the taproom is closed all day.",
   "timezone": "America/New_York",
   "holidayNote": "Holiday hours may vary.",
+  "closures": [
+    { "date": "2026-11-26", "label": "Thanksgiving" }
+  ],
   "gameNights": {
     "_note": "Primetime football nights. On these days last call replaces the usual close in the open/closed status. Set \"active\" to false when the season ends.",
     "active": true,
