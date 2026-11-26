@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState, useTransition } from "react";
 import { MapPin, Phone, X } from "@phosphor-icons/react";
 import { useSite, type PourTab } from "@/components/providers/SiteProvider";
 import { StatusPill } from "@/components/ui/StatusPill";
-import { HOURS, formatTime, isGameNight, zonedNow } from "@/lib/hours";
+import { HOURS, closureToday, formatTime, isGameNight, zonedNow } from "@/lib/hours";
 import { SITE } from "@/lib/site";
 import { sendInquiry } from "@/app/actions";
 import { EVENT_SPACES, EVENT_TYPES, validators, type Errors, type InquiryKind } from "@/lib/inquiry";
@@ -137,6 +137,7 @@ export function PourModal() {
 function VisitTab() {
   // the modal only ever renders on the client, after a click
   const [today] = useState(() => zonedNow(new Date()).day);
+  const [closed] = useState(() => closureToday(new Date()));
   return (
     <div role="tabpanel" id="panel-visit" aria-labelledby="tab-visit" className="grid gap-6 md:grid-cols-[1fr_1.1fr]">
       <div className="flex flex-col gap-4">
@@ -169,8 +170,8 @@ function VisitTab() {
                     {on ? <span className="t-mono ml-2 text-[0.6875rem]">Today</span> : null}
                   </th>
                   <td className={`tabular py-1.5 pr-2 text-right ${on ? "text-foam" : "text-text-2"}`}>
-                    {formatTime(h.open)} - {formatTime(h.close)}
-                    {isGameNight(d) ? <span className="t-mono block text-[0.6875rem] text-gold-hi">{HOURS.gameNights!.short}</span> : null}
+                    {on && closed ? `Closed · ${closed.label}` : `${formatTime(h.open)} - ${formatTime(h.close)}`}
+                    {isGameNight(d) && !(on && closed) ? <span className="t-mono block text-[0.6875rem] text-gold-hi">{HOURS.gameNights!.short}</span> : null}
                   </td>
                 </tr>
               );

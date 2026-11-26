@@ -1,15 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { HOURS, formatTime, isGameNight, zonedNow } from "@/lib/hours";
+import { HOURS, closureToday, formatTime, isGameNight, zonedNow, type Closure } from "@/lib/hours";
 
 const ORDER = [1, 2, 3, 4, 5, 6, 0]; // Monday first, the way people read a week
 
 /** Weekly hours from /data/hours.json with today's row lit (America/New_York). */
 export function HoursTable() {
   const [today, setToday] = useState(-1);
+  const [closed, setClosed] = useState<Closure | undefined>();
   useEffect(() => {
-    const tick = () => setToday(zonedNow(new Date()).day);
+    const tick = () => {
+      const now = new Date();
+      setToday(zonedNow(now).day);
+      setClosed(closureToday(now));
+    };
     tick();
     const id = window.setInterval(tick, 60_000);
     return () => window.clearInterval(id);
@@ -28,8 +33,8 @@ export function HoursTable() {
                 {on ? <span className="t-mono ml-3 align-[0.2em] text-[0.6875rem] text-gold-hi">Today</span> : null}
               </th>
               <td className={`tabular py-3 pr-3 text-right font-mono text-[0.95rem] ${on ? "text-foam" : "text-text-2"}`}>
-                {formatTime(h.open)} - {formatTime(h.close)}
-                {isGameNight(d) ? <span className="t-mono mt-1 block text-[0.6875rem] text-gold-hi">{HOURS.gameNights!.short}</span> : null}
+                {on && closed ? `Closed · ${closed.label}` : `${formatTime(h.open)} - ${formatTime(h.close)}`}
+                {isGameNight(d) && !(on && closed) ? <span className="t-mono mt-1 block text-[0.6875rem] text-gold-hi">{HOURS.gameNights!.short}</span> : null}
               </td>
             </tr>
           );

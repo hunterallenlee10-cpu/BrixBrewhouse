@@ -110,6 +110,21 @@ describe("primetime football nights (Monday and Thursday)", () => {
   });
 });
 
+describe("all-day closures", () => {
+  it("Thanksgiving 2026 is closed all day, even mid-afternoon on a football Thursday", () => {
+    const s = getStatus(ny("2026-11-26T15:00:00", "-05:00"));
+    expect(s.state).toBe("closed");
+    expect(statusText(s)).toEqual({ lead: "Closed for Thanksgiving", rest: "opens tomorrow 12 PM" });
+  });
+  it("is closed in the morning too, not 'opens today'", () => {
+    expect(getStatus(ny("2026-11-26T09:00:00", "-05:00")).state).toBe("closed");
+  });
+  it("the day before and the day after run as usual", () => {
+    expect(statusText(getStatus(ny("2026-11-25T21:30:00", "-05:00")))).toEqual({ lead: "Closed", rest: "opens Friday 12 PM" });
+    expect(statusText(getStatus(ny("2026-11-27T13:00:00", "-05:00")))).toEqual({ lead: "Open now", rest: "pouring until 11 PM" });
+  });
+});
+
 describe("weekSummary", () => {
   it("groups the real week", () => {
     expect(weekSummary()).toEqual([
